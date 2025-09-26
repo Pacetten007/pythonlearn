@@ -1,0 +1,235 @@
+/* Импорт шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Темная тема (основная) */
+:root {
+  /* Фоновые цвета */
+  --bg-primary: #0D1117; /* Основной темный фон */
+  --bg-secondary: #161B22; /* Карточки и панели */
+  --bg-tertiary: #21262D; /* Блоки кода и формы */
+  --bg-hover: #30363D; /* Hover состояния */
+
+  /* Текст */
+  --text-primary: #F0F6FC; /* Основной белый текст */
+  --text-secondary: #8B949E; /* Вторичный серый текст */
+  --text-muted: #6E7681; /* Приглушенный текст */
+
+  /* Акцентные цвета */
+  --accent-primary: #58A6FF; /* Основной синий (кнопки, ссылки) */
+  --accent-success: #3FB950; /* Зеленый (успех, прогресс) */
+  --accent-warning: #D29922; /* Желтый (предупреждения) */
+  --accent-error: #F85149; /* Красный (ошибки) */
+  --accent-purple: #A5A3FF; /* Фиолетовый (достижения) */
+
+  /* Синтаксис Python */
+  --syntax-keyword: #FF7B72; /* def, if, for, while */
+  --syntax-string: #A5D6FF; /* "строки" */
+  --syntax-comment: #8B949E; /* # комментарии */
+  --syntax-number: #79C0FF; /* 123, 45.6 */
+  --syntax-variable: #FFA657; /* переменные */
+  --syntax-function: #D2A8FF; /* функции */
+
+  /* Границы */
+  --border-primary: #30363D;
+  --border-secondary: #21262D;
+
+  /* Семейства шрифтов */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-code: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+
+  /* Размеры текста */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+
+  /* Интерлиньяж */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  /* Тени для глубины */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Радиусы скругления */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.375rem; /* 6px */
+  --radius-lg: 0.5rem; /* 8px */
+  --radius-xl: 0.75rem; /* 12px */
+  --radius-2xl: 1rem; /* 16px */
+  --radius-full: 9999px;
+
+  /* Z-index слои */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+
+  /* Переходы */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+}
+
+/* Светлая тема */
+:root[data-theme="light"] {
+  /* Фоновые цвета */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F6F8FA;
+  --bg-tertiary: #F1F3F4;
+  --bg-hover: #EAEEF2;
+
+  /* Текст */
+  --text-primary: #24292F;
+  --text-secondary: #656D76;
+  --text-muted: #8C959F;
+
+  /* Акцентные цвета */
+  --accent-primary: #0969DA;
+  --accent-success: #1A7F37;
+  --accent-warning: #9A6700;
+  --accent-error: #CF222E;
+  --accent-purple: #8250DF;
+
+  /* Синтаксис Python для светлой темы */
+  --syntax-keyword: #D73A49;
+  --syntax-string: #032F62;
+  --syntax-comment: #6A737D;
+  --syntax-number: #005CC5;
+  --syntax-variable: #E36209;
+  --syntax-function: #6F42C1;
+
+  /* Границы */
+  --border-primary: #D0D7DE;
+  --border-secondary: #D8DEE4;
+
+  /* Тени для светлой темы */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Базовые стили для тем */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Утилитарные классы для типографики */
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+.leading-tight { line-height: var(--leading-tight); }
+.leading-normal { line-height: var(--leading-normal); }
+.leading-relaxed { line-height: var(--leading-relaxed); }
+
+/* Цветовые утилиты */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+
+.text-accent { color: var(--accent-primary); }
+.text-success { color: var(--accent-success); }
+.text-warning { color: var(--accent-warning); }
+.text-error { color: var(--accent-error); }
+.text-purple { color: var(--accent-purple); }
+
+/* Фоновые утилиты */
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-tertiary { background-color: var(--bg-tertiary); }
+
+.bg-accent { background-color: var(--accent-primary); }
+.bg-success { background-color: var(--accent-success); }
+.bg-warning { background-color: var(--accent-warning); }
+.bg-error { background-color: var(--accent-error); }
+.bg-purple { background-color: var(--accent-purple); }
+
+/* Утилиты для кода */
+.font-mono {
+  font-family: var(--font-code);
+}
+
+.syntax-keyword { color: var(--syntax-keyword); }
+.syntax-string { color: var(--syntax-string); }
+.syntax-comment { color: var(--syntax-comment); }
+.syntax-number { color: var(--syntax-number); }
+.syntax-variable { color: var(--syntax-variable); }
+.syntax-function { color: var(--syntax-function); }
+
+/* Утилиты границ */
+.border-primary { border-color: var(--border-primary); }
+.border-secondary { border-color: var(--border-secondary); }
+
+/* Утилиты теней */
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+
+/* Утилиты скругления */
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-2xl { border-radius: var(--radius-2xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* Утилиты переходов */
+.transition-fast { transition: all var(--transition-fast); }
+.transition-normal { transition: all var(--transition-normal); }
+.transition-slow { transition: all var(--transition-slow); }
+
+/* Специальные эффекты для геймификации */
+@keyframes pulse-success {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 0 10px rgba(63, 185, 80, 0);
+  }
+}
+
+@keyframes pulse-achievement {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(165, 163, 255, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 0 10px rgba(165, 163, 255, 0);
+  }
+}
+
+.pulse-success {
+  animation: pulse-success 2s infinite;
+}
+
+.pulse-achievement {
+  animation: pulse-achievement 2s infinite;
+}
