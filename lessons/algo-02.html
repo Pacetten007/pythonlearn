@@ -83,41 +83,36 @@
 
                 <div class="diagram">
                     <svg class="diagram-svg" width="100%" height="600" viewBox="0 0 800 600" style="max-width: 600px;">
-                        <!-- Начало/Конец (овал) -->
-                        <ellipse cx="150" cy="50" rx="100" ry="35" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
-                        <text x="150" y="55" text-anchor="middle" font-size="16" fill="#2c3e50">Начало/Конец</text>
-
-                        <text x="300" y="55" text-anchor="start" font-size="14" fill="#7f8c8d">Овал - начало или конец программы</text>
-
-                        <!-- Процесс (прямоугольник) -->
-                        <rect x="50" y="120" width="200" height="60" fill="#d4edda" stroke="#27ae60" stroke-width="2" rx="5"/>
-                        <text x="150" y="155" text-anchor="middle" font-size="16" fill="#2c3e50">Действие</text>
-
-                        <text x="300" y="155" text-anchor="start" font-size="14" fill="#7f8c8d">Прямоугольник - выполнение действия</text>
-
-                        <!-- Ввод/Вывод (параллелограмм) -->
-                        <path d="M 70 220 L 250 220 L 230 280 L 50 280 Z" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
-                        <text x="150" y="255" text-anchor="middle" font-size="16" fill="#2c3e50">Ввод/Вывод</text>
-
-                        <text x="300" y="255" text-anchor="start" font-size="14" fill="#7f8c8d">Параллелограмм - ввод или вывод</text>
-
-                        <!-- Условие (ромб) -->
-                        <path d="M 150 320 L 250 380 L 150 440 L 50 380 Z" fill="#f8d7da" stroke="#e74c3c" stroke-width="2"/>
-                        <text x="150" y="385" text-anchor="middle" font-size="16" fill="#2c3e50">Условие?</text>
-
-                        <text x="300" y="385" text-anchor="start" font-size="14" fill="#7f8c8d">Ромб - проверка условия (да/нет)</text>
-
-                        <!-- Стрелки -->
-                        <path d="M 150 480 L 150 540" stroke="#34495e" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                        <text x="180" y="515" font-size="14" fill="#7f8c8d">Стрелки показывают</text>
-                        <text x="180" y="535" font-size="14" fill="#7f8c8d">направление выполнения</text>
-
-                        <!-- Определение маркера стрелки -->
                         <defs>
                             <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-                                <polygon points="0 0, 10 5, 0 10" fill="#34495e"/>
+                                <polygon points="0 0, 10 5, 0 10" fill="#1e293b"/>
                             </marker>
                         </defs>
+
+                        <!-- Начало/Конец (овал) -->
+                        <ellipse cx="150" cy="50" rx="100" ry="35" fill="#dbeafe" stroke="#6366f1" stroke-width="3"/>
+                        <text x="150" y="58" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Начало/Конец</text>
+                        <text x="300" y="58" text-anchor="start" font-size="14" fill="#64748b">Овал - начало или конец программы</text>
+
+                        <!-- Процесс (прямоугольник) -->
+                        <rect x="50" y="120" width="200" height="60" fill="#d1fae5" stroke="#10b981" stroke-width="3" rx="8"/>
+                        <text x="150" y="158" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Действие</text>
+                        <text x="300" y="158" text-anchor="start" font-size="14" fill="#64748b">Прямоугольник - выполнение действия</text>
+
+                        <!-- Ввод/Вывод (параллелограмм) -->
+                        <path d="M 70 220 L 250 220 L 230 280 L 50 280 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+                        <text x="150" y="258" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Ввод/Вывод</text>
+                        <text x="300" y="258" text-anchor="start" font-size="14" fill="#64748b">Параллелограмм - ввод или вывод</text>
+
+                        <!-- Условие (ромб) -->
+                        <path d="M 150 320 L 250 380 L 150 440 L 50 380 Z" fill="#fee2e2" stroke="#ef4444" stroke-width="3"/>
+                        <text x="150" y="388" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Условие?</text>
+                        <text x="300" y="388" text-anchor="start" font-size="14" fill="#64748b">Ромб - проверка условия (да/нет)</text>
+
+                        <!-- Стрелки -->
+                        <path d="M 150 480 L 150 540" stroke="#1e293b" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                        <text x="180" y="515" font-size="14" fill="#64748b">Стрелки показывают</text>
+                        <text x="180" y="535" font-size="14" fill="#64748b">направление выполнения</text>
                     </svg>
                 </div>
 
@@ -128,54 +123,56 @@
                     <svg class="diagram-svg" width="100%" height="500" viewBox="0 0 400 500" style="max-width: 400px;">
                         <defs>
                             <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-                                <polygon points="0 0, 10 5, 0 10" fill="#34495e"/>
+                                <polygon points="0 0, 10 5, 0 10" fill="#1e293b"/>
                             </marker>
                         </defs>
 
                         <!-- Начало -->
-                        <ellipse cx="200" cy="40" rx="80" ry="30" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
-                        <text x="200" y="48" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">НАЧАЛО</text>
+                        <ellipse cx="200" cy="40" rx="80" ry="30" fill="#dbeafe" stroke="#6366f1" stroke-width="3"/>
+                        <text x="200" y="48" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
 
                         <!-- Стрелка 1 -->
-                        <path d="M 200 70 L 200 100" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+                        <path d="M 200 70 L 200 100" stroke="#1e293b" stroke-width="3" marker-end="url(#arrow)"/>
 
                         <!-- Ввод числа -->
-                        <path d="M 120 100 L 280 100 L 260 140 L 100 140 Z" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
-                        <text x="190" y="125" text-anchor="middle" font-size="14" fill="#2c3e50">Ввести число n</text>
+                        <path d="M 120 100 L 280 100 L 260 140 L 100 140 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+                        <text x="190" y="126" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">Ввести число n</text>
 
                         <!-- Стрелка 2 -->
-                        <path d="M 200 140 L 200 180" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+                        <path d="M 200 140 L 200 180" stroke="#1e293b" stroke-width="3" marker-end="url(#arrow)"/>
 
                         <!-- Условие -->
-                        <path d="M 200 180 L 300 240 L 200 300 L 100 240 Z" fill="#f8d7da" stroke="#e74c3c" stroke-width="2"/>
-                        <text x="200" y="245" text-anchor="middle" font-size="14" fill="#2c3e50">n > 0?</text>
+                        <path d="M 200 180 L 300 240 L 200 300 L 100 240 Z" fill="#fee2e2" stroke="#ef4444" stroke-width="3"/>
+                        <text x="200" y="246" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">n > 0?</text>
 
                         <!-- Да - влево -->
-                        <text x="120" y="230" font-size="12" fill="#27ae60" font-weight="bold">Да</text>
-                        <path d="M 100 240 L 40 240 L 40 340 L 100 340" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+                        <text x="120" y="228" font-size="13" fill="#10b981" font-weight="bold">Да</text>
+                        <path d="M 100 240 L 40 240 L 40 340 L 100 340" stroke="#1e293b" stroke-width="3" marker-end="url(#arrow)"/>
 
                         <!-- Вывод "Положительное" -->
-                        <path d="M 100 340 L 200 340 L 190 370 L 90 370 Z" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
-                        <text x="145" y="360" text-anchor="middle" font-size="12" fill="#2c3e50">Вывести "Положительное"</text>
+                        <path d="M 100 340 L 200 340 L 190 370 L 90 370 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+                        <text x="145" y="361" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">Вывести</text>
+                        <text x="145" y="375" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">"Положительное"</text>
 
                         <!-- Нет - вправо -->
-                        <text x="260" y="230" font-size="12" fill="#e74c3c" font-weight="bold">Нет</text>
-                        <path d="M 300 240 L 360 240 L 360 340 L 300 340" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+                        <text x="265" y="228" font-size="13" fill="#ef4444" font-weight="bold">Нет</text>
+                        <path d="M 300 240 L 360 240 L 360 340 L 300 340" stroke="#1e293b" stroke-width="3" marker-end="url(#arrow)"/>
 
                         <!-- Вывод "Не положительное" -->
-                        <path d="M 300 340 L 210 340 L 200 370 L 290 370 Z" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
-                        <text x="250" y="360" text-anchor="middle" font-size="11" fill="#2c3e50">Вывести "Не положительное"</text>
+                        <path d="M 300 340 L 210 340 L 200 370 L 290 370 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+                        <text x="250" y="361" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Вывести</text>
+                        <text x="250" y="375" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">"Не положительное"</text>
 
                         <!-- Сходящиеся стрелки -->
-                        <path d="M 145 370 L 145 400 L 200 400" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
-                        <path d="M 245 370 L 245 400 L 200 400" stroke="#34495e" stroke-width="2"/>
+                        <path d="M 145 370 L 145 400 L 200 400" stroke="#1e293b" stroke-width="3" marker-end="url(#arrow)"/>
+                        <path d="M 245 370 L 245 400 L 200 400" stroke="#1e293b" stroke-width="3"/>
 
                         <!-- Конец -->
-                        <ellipse cx="200" cy="450" rx="80" ry="30" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
-                        <text x="200" y="458" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">КОНЕЦ</text>
+                        <ellipse cx="200" cy="450" rx="80" ry="30" fill="#dbeafe" stroke="#6366f1" stroke-width="3"/>
+                        <text x="200" y="458" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
 
                         <!-- Стрелка к концу -->
-                        <path d="M 200 400 L 200 420" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+                        <path d="M 200 400 L 200 420" stroke="#1e293b" stroke-width="3" marker-end="url(#arrow)"/>
                     </svg>
                 </div>
 
