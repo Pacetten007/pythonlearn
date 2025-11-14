@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Первая программа на Python - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-01">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Содержание курса</h2>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Основы алгоритмики</h3>
+            <ul>
+                <li><a href="algo-01.html">Что такое алгоритм?</a></li>
+                <li><a href="algo-02.html">Блок-схемы</a></li>
+                <li><a href="algo-03.html">Линейные алгоритмы</a></li>
+                <li><a href="algo-04.html">Ветвления</a></li>
+                <li><a href="algo-05.html">Циклы</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Введение в Python</h3>
+            <ul>
+                <li><a href="python-01.html">Первая программа</a></li>
+                <li><a href="python-02.html">Переменные</a></li>
+                <li><a href="python-03.html">Типы данных</a></li>
+                <li><a href="python-04.html">Ввод и вывод</a></li>
+                <li><a href="python-05.html">Условия if-else</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Циклы в Python</h3>
+            <ul>
+                <li><a href="python-06.html">Цикл while</a></li>
+                <li><a href="python-07.html">Цикл for</a></li>
+                <li><a href="python-08.html">Работа со списками</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Функции</h3>
+            <ul>
+                <li><a href="python-09.html">Создание функций</a></li>
+                <li><a href="python-10.html">Параметры и возврат значений</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 6: Первая программа на Python</h1>
+                <div class="lesson-meta">Введение в Python • 15 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Знакомство с Python</h2>
+                <p>Поздравляем! Теперь, когда ты понимаешь основы алгоритмики, пора начать программировать на настоящем языке программирования - <strong>Python</strong>!</p>
+
+                <p><strong>Python</strong> - один из самых популярных и простых языков программирования. Его используют для создания игр, веб-сайтов, приложений и даже для работы с искусственным интеллектом!</p>
+
+                <h2>Первая программа: "Hello, World!"</h2>
+                <p>Традиция программирования - начинать с программы, которая выводит на экран "Hello, World!" (Привет, мир!). Давай напишем такую программу на Python:</p>
+
+                <div class="code-block">
+                    <pre>print("Hello, World!")</pre>
+                </div>
+
+                <p>Это всё! Всего одна строка кода. Функция <code>print()</code> выводит текст на экран.</p>
+
+                <div class="note">
+                    <h4>Что такое print()?</h4>
+                    <p><code>print()</code> - это встроенная функция Python, которая выводит информацию на экран. То, что мы хотим вывести, пишем в скобках.</p>
+                </div>
+
+                <h2>Попробуй сам!</h2>
+                <p>Ниже находится интерактивный редактор кода. Нажми кнопку "Запустить", чтобы увидеть результат:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>Выводим разные сообщения</h2>
+                <p>Ты можешь вывести любой текст, который захочешь. Главное - заключить его в кавычки:</p>
+
+                <div class="code-block">
+                    <pre>print("Привет!")
+print("Меня зовут Python")
+print("Я учусь программировать")</pre>
+                </div>
+
+                <p>Когда в программе несколько строк с <code>print()</code>, каждая выводится на новой строке.</p>
+
+                <div class="warning">
+                    <h4>Важно!</h4>
+                    <p>Текст должен быть в кавычках! Можно использовать двойные "текст" или одинарные 'текст' кавычки.</p>
+                    <p>Если забудешь кавычки, Python выдаст ошибку.</p>
+                </div>
+
+                <h2>Попробуй сам - Задание 1</h2>
+                <p>Измени код ниже так, чтобы программа вывела твоё имя:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Задание: Выведи своё имя</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false">print("Твоё имя")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>Несколько команд print()</h2>
+                <p>Попробуй написать программу, которая выведет:</p>
+                <ul>
+                    <li>Твоё имя</li>
+                    <li>Твой возраст</li>
+                    <li>Твоё любимое занятие</li>
+                </ul>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Задание: Расскажи о себе</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Напиши свой код здесь
+print("Меня зовут ...")
+</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <h4>Что такое #?</h4>
+                    <p>Строки, начинающиеся с символа <code>#</code>, называются <strong>комментариями</strong>. Python их игнорирует. Комментарии нужны, чтобы объяснить, что делает код.</p>
+                </div>
+
+                <h2>Проверь себя!</h2>
+
+                <div class="quiz-container">
+                    <h3>Тест к уроку</h3>
+
+                    <div class="question">
+                        <h4>Вопрос 1: Какая функция используется для вывода текста на экран?</h4>
+                        <ul class="options">
+                            <li>
+                                <label>
+                                    <input type="radio" name="q1" data-correct="false">
+                                    write()
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q1" data-correct="true" data-explanation="Верно! print() выводит текст на экран.">
+                                    print()
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q1" data-correct="false">
+                                    show()
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что выведет код: print("Python")?</h4>
+                        <ul class="options">
+                            <li>
+                                <label>
+                                    <input type="radio" name="q2" data-correct="true" data-explanation="Точно! Выведется слово Python без кавычек.">
+                                    Python
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q2" data-correct="false">
+                                    "Python"
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q2" data-correct="false">
+                                    Ошибку
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Для чего используется символ #?</h4>
+                        <ul class="options">
+                            <li>
+                                <label>
+                                    <input type="radio" name="q3" data-correct="false">
+                                    Для вывода текста
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q3" data-correct="true" data-explanation="Правильно! # создаёт комментарий, который Python игнорирует.">
+                                    Для комментариев
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q3" data-correct="false">
+                                    Для создания переменных
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <button class="btn-secondary" id="show-results">Показать результаты</button>
+                    <div class="quiz-results"></div>
+                </div>
+
+                <h2>Итоги урока</h2>
+                <p>Теперь ты знаешь:</p>
+                <ul>
+                    <li>Как написать первую программу на Python</li>
+                    <li>Как использовать функцию <code>print()</code></li>
+                    <li>Что текст нужно заключать в кавычки</li>
+                    <li>Как писать комментарии с помощью #</li>
+                </ul>
+
+                <p>В следующем уроке мы научимся работать с переменными!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="algo-05.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-02.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Python для школьников © 2024</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блок-схемы - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-lesson-id="algo-02">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Содержание курса</h2>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Основы алгоритмики</h3>
+            <ul>
+                <li><a href="algo-01.html">Что такое алгоритм?</a></li>
+                <li><a href="algo-02.html">Блок-схемы</a></li>
+                <li><a href="algo-03.html">Линейные алгоритмы</a></li>
+                <li><a href="algo-04.html">Ветвления</a></li>
+                <li><a href="algo-05.html">Циклы</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Введение в Python</h3>
+            <ul>
+                <li><a href="python-01.html">Первая программа</a></li>
+                <li><a href="python-02.html">Переменные</a></li>
+                <li><a href="python-03.html">Типы данных</a></li>
+                <li><a href="python-04.html">Ввод и вывод</a></li>
+                <li><a href="python-05.html">Условия if-else</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Циклы в Python</h3>
+            <ul>
+                <li><a href="python-06.html">Цикл while</a></li>
+                <li><a href="python-07.html">Цикл for</a></li>
+                <li><a href="python-08.html">Работа со списками</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Функции</h3>
+            <ul>
+                <li><a href="python-09.html">Создание функций</a></li>
+                <li><a href="python-10.html">Параметры и возврат значений</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 2: Блок-схемы</h1>
+                <div class="lesson-meta">Основы алгоритмики • 15 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Что такое блок-схема?</h2>
+                <p><strong>Блок-схема</strong> — это графическое представление алгоритма. Вместо текста мы используем специальные фигуры (блоки), которые показывают, что должна делать программа.</p>
+
+                <p>Блок-схемы помогают:</p>
+                <ul>
+                    <li>Наглядно увидеть логику программы</li>
+                    <li>Обнаружить ошибки до написания кода</li>
+                    <li>Объяснить алгоритм другим людям</li>
+                    <li>Продумать решение задачи</li>
+                </ul>
+
+                <h2>Основные элементы блок-схем</h2>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="600" viewBox="0 0 800 600" style="max-width: 600px;">
+                        <!-- Начало/Конец (овал) -->
+                        <ellipse cx="150" cy="50" rx="100" ry="35" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
+                        <text x="150" y="55" text-anchor="middle" font-size="16" fill="#2c3e50">Начало/Конец</text>
+
+                        <text x="300" y="55" text-anchor="start" font-size="14" fill="#7f8c8d">Овал - начало или конец программы</text>
+
+                        <!-- Процесс (прямоугольник) -->
+                        <rect x="50" y="120" width="200" height="60" fill="#d4edda" stroke="#27ae60" stroke-width="2" rx="5"/>
+                        <text x="150" y="155" text-anchor="middle" font-size="16" fill="#2c3e50">Действие</text>
+
+                        <text x="300" y="155" text-anchor="start" font-size="14" fill="#7f8c8d">Прямоугольник - выполнение действия</text>
+
+                        <!-- Ввод/Вывод (параллелограмм) -->
+                        <path d="M 70 220 L 250 220 L 230 280 L 50 280 Z" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
+                        <text x="150" y="255" text-anchor="middle" font-size="16" fill="#2c3e50">Ввод/Вывод</text>
+
+                        <text x="300" y="255" text-anchor="start" font-size="14" fill="#7f8c8d">Параллелограмм - ввод или вывод</text>
+
+                        <!-- Условие (ромб) -->
+                        <path d="M 150 320 L 250 380 L 150 440 L 50 380 Z" fill="#f8d7da" stroke="#e74c3c" stroke-width="2"/>
+                        <text x="150" y="385" text-anchor="middle" font-size="16" fill="#2c3e50">Условие?</text>
+
+                        <text x="300" y="385" text-anchor="start" font-size="14" fill="#7f8c8d">Ромб - проверка условия (да/нет)</text>
+
+                        <!-- Стрелки -->
+                        <path d="M 150 480 L 150 540" stroke="#34495e" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <text x="180" y="515" font-size="14" fill="#7f8c8d">Стрелки показывают</text>
+                        <text x="180" y="535" font-size="14" fill="#7f8c8d">направление выполнения</text>
+
+                        <!-- Определение маркера стрелки -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0 0, 10 5, 0 10" fill="#34495e"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <h2>Пример блок-схемы</h2>
+                <p>Давай создадим блок-схему для алгоритма: <strong>"Определить, является ли число положительным"</strong></p>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="500" viewBox="0 0 400 500" style="max-width: 400px;">
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0 0, 10 5, 0 10" fill="#34495e"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="200" cy="40" rx="80" ry="30" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
+                        <text x="200" y="48" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">НАЧАЛО</text>
+
+                        <!-- Стрелка 1 -->
+                        <path d="M 200 70 L 200 100" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Ввод числа -->
+                        <path d="M 120 100 L 280 100 L 260 140 L 100 140 Z" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
+                        <text x="190" y="125" text-anchor="middle" font-size="14" fill="#2c3e50">Ввести число n</text>
+
+                        <!-- Стрелка 2 -->
+                        <path d="M 200 140 L 200 180" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Условие -->
+                        <path d="M 200 180 L 300 240 L 200 300 L 100 240 Z" fill="#f8d7da" stroke="#e74c3c" stroke-width="2"/>
+                        <text x="200" y="245" text-anchor="middle" font-size="14" fill="#2c3e50">n > 0?</text>
+
+                        <!-- Да - влево -->
+                        <text x="120" y="230" font-size="12" fill="#27ae60" font-weight="bold">Да</text>
+                        <path d="M 100 240 L 40 240 L 40 340 L 100 340" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Вывод "Положительное" -->
+                        <path d="M 100 340 L 200 340 L 190 370 L 90 370 Z" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
+                        <text x="145" y="360" text-anchor="middle" font-size="12" fill="#2c3e50">Вывести "Положительное"</text>
+
+                        <!-- Нет - вправо -->
+                        <text x="260" y="230" font-size="12" fill="#e74c3c" font-weight="bold">Нет</text>
+                        <path d="M 300 240 L 360 240 L 360 340 L 300 340" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Вывод "Не положительное" -->
+                        <path d="M 300 340 L 210 340 L 200 370 L 290 370 Z" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
+                        <text x="250" y="360" text-anchor="middle" font-size="11" fill="#2c3e50">Вывести "Не положительное"</text>
+
+                        <!-- Сходящиеся стрелки -->
+                        <path d="M 145 370 L 145 400 L 200 400" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+                        <path d="M 245 370 L 245 400 L 200 400" stroke="#34495e" stroke-width="2"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="200" cy="450" rx="80" ry="30" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
+                        <text x="200" y="458" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">КОНЕЦ</text>
+
+                        <!-- Стрелка к концу -->
+                        <path d="M 200 400 L 200 420" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)"/>
+                    </svg>
+                </div>
+
+                <div class="note">
+                    <h4>Обрати внимание!</h4>
+                    <p>В блок-схеме видно, что после проверки условия программа может пойти двумя разными путями. Это называется <strong>ветвлением</strong>.</p>
+                </div>
+
+                <h2>Как читать блок-схему?</h2>
+                <ol>
+                    <li>Начинай с блока "НАЧАЛО"</li>
+                    <li>Следуй по стрелкам</li>
+                    <li>В ромбах (условиях) выбирай путь "Да" или "Нет"</li>
+                    <li>Дойди до блока "КОНЕЦ"</li>
+                </ol>
+
+                <h2>Проверь себя!</h2>
+
+                <div class="quiz-container">
+                    <h3>Тест к уроку</h3>
+
+                    <div class="question">
+                        <h4>Вопрос 1: Какая фигура используется для обозначения начала или конца программы?</h4>
+                        <ul class="options">
+                            <li>
+                                <label>
+                                    <input type="radio" name="q1" data-correct="false">
+                                    Прямоугольник
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q1" data-correct="true" data-explanation="Верно! Овал используется для начала и конца.">
+                                    Овал
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q1" data-correct="false">
+                                    Ромб
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Какая фигура обозначает проверку условия?</h4>
+                        <ul class="options">
+                            <li>
+                                <label>
+                                    <input type="radio" name="q2" data-correct="false">
+                                    Параллелограмм
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q2" data-correct="true" data-explanation="Точно! Ромб используется для условий с ответами Да/Нет.">
+                                    Ромб
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q2" data-correct="false">
+                                    Круг
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Для чего нужны блок-схемы?</h4>
+                        <ul class="options">
+                            <li>
+                                <label>
+                                    <input type="radio" name="q3" data-correct="false">
+                                    Чтобы украсить тетрадь
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Блок-схемы помогают визуализировать логику программы.">
+                                    Чтобы наглядно показать логику алгоритма
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q3" data-correct="false">
+                                    Чтобы запутать программистов
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <button class="btn-secondary" id="show-results">Показать результаты</button>
+                    <div class="quiz-results"></div>
+                </div>
+
+                <h2>Задание для практики</h2>
+                <div class="note">
+                    <h4>Практическое задание</h4>
+                    <p>Нарисуй блок-схему для алгоритма: "Проверить, можно ли идти на улицу"</p>
+                    <p>Условие: Если идёт дождь, взять зонт. Иначе выйти без зонта.</p>
+                    <p>Подсказка: используй ромб для проверки условия "Идёт дождь?"</p>
+                </div>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="algo-01.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="algo-03.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Python для школьников © 2024</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

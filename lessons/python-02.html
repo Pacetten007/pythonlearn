@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Переменные - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-02">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Содержание курса</h2>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Основы алгоритмики</h3>
+            <ul>
+                <li><a href="algo-01.html">Что такое алгоритм?</a></li>
+                <li><a href="algo-02.html">Блок-схемы</a></li>
+                <li><a href="algo-03.html">Линейные алгоритмы</a></li>
+                <li><a href="algo-04.html">Ветвления</a></li>
+                <li><a href="algo-05.html">Циклы</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Введение в Python</h3>
+            <ul>
+                <li><a href="python-01.html">Первая программа</a></li>
+                <li><a href="python-02.html">Переменные</a></li>
+                <li><a href="python-03.html">Типы данных</a></li>
+                <li><a href="python-04.html">Ввод и вывод</a></li>
+                <li><a href="python-05.html">Условия if-else</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Циклы в Python</h3>
+            <ul>
+                <li><a href="python-06.html">Цикл while</a></li>
+                <li><a href="python-07.html">Цикл for</a></li>
+                <li><a href="python-08.html">Работа со списками</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <h3>Функции</h3>
+            <ul>
+                <li><a href="python-09.html">Создание функций</a></li>
+                <li><a href="python-10.html">Параметры и возврат значений</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 7: Переменные</h1>
+                <div class="lesson-meta">Введение в Python • 20 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Что такое переменные?</h2>
+                <p><strong>Переменная</strong> - это "ящик" в памяти компьютера, где мы можем хранить данные. Каждая переменная имеет имя, по которому мы к ней обращаемся.</p>
+
+                <p>Представь, что у тебя есть коробка с надписью "возраст". В эту коробку ты можешь положить число, например, 14. Потом ты всегда можешь посмотреть, что в коробке "возраст".</p>
+
+                <h2>Создание переменных</h2>
+                <p>В Python создать переменную очень просто:</p>
+
+                <div class="code-block">
+                    <pre>name = "Алексей"
+age = 14
+city = "Москва"</pre>
+                </div>
+
+                <p>Мы создали три переменные:</p>
+                <ul>
+                    <li><code>name</code> - хранит имя (текст)</li>
+                    <li><code>age</code> - хранит возраст (число)</li>
+                    <li><code>city</code> - хранит город (текст)</li>
+                </ul>
+
+                <div class="note">
+                    <h4>Важно!</h4>
+                    <p>Знак <code>=</code> в программировании означает <strong>присваивание</strong>, а не равенство! Читается как "присвоить значение переменной".</p>
+                    <p>Например: <code>age = 14</code> читается как "переменной age присваиваем значение 14".</p>
+                </div>
+
+                <h2>Использование переменных</h2>
+                <p>После создания переменной мы можем использовать её значение:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Пример: Использование переменных</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false">name = "Алексей"
+age = 14
+
+print("Привет! Меня зовут")
+print(name)
+print("Мне лет:")
+print(age)</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>Правила именования переменных</h2>
+                <p>При выборе имени для переменной нужно соблюдать правила:</p>
+
+                <ul>
+                    <li>Имя может содержать буквы, цифры и знак подчёркивания _</li>
+                    <li>Имя должно начинаться с буквы или _</li>
+                    <li>Имя не может начинаться с цифры</li>
+                    <li>Имя чувствительно к регистру (age и Age - разные переменные)</li>
+                    <li>Нельзя использовать зарезервированные слова (print, if, for и т.д.)</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre># Правильные имена
+name = "Мария"
+user_age = 15
+number1 = 100
+
+# Неправильные имена
+# 1name = "Петя"     # Начинается с цифры!
+# user-age = 20      # Содержит дефис!
+# print = 5          # Это зарезервированное слово!</pre>
+                </div>
+
+                <div class="warning">
+                    <h4>Совет!</h4>
+                    <p>Давай переменным понятные имена! Вместо <code>x</code> лучше написать <code>age</code> (возраст) или <code>score</code> (счёт). Так код будет понятнее.</p>
+                </div>
+
+                <h2>Изменение значений переменных</h2>
+                <p>Переменные можно изменять. Новое значение просто перезаписывает старое:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Пример: Изменение переменной</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false">score = 0
+print("Начальный счёт:")
+print(score)
+
+score = 10
+print("Новый счёт:")
+print(score)
+
+score = 25
+print("Обновлённый счёт:")
+print(score)</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>Арифметика с переменными</h2>
+                <p>С переменными, хранящими числа, можно выполнять математические операции:</p>
+
+                <div class="code-block">
+                    <pre>a = 10
+b = 5
+
+sum_ab = a + b      # Сложение
+diff = a - b        # Вычитание
+product = a * b     # Умножение
+quotient = a / b    # Деление
+
+print(sum_ab)       # Выведет: 15
+print(diff)         # Выведет: 5
+print(product)      # Выведет: 50
+print(quotient)     # Выведет: 2.0</pre>
+                </div>
+
+                <h2>Попробуй сам!</h2>
+                <p>Создай переменные для своего имени, возраста и любимого предмета. Выведи их на экран:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Задание: Создай свои переменные</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Создай переменные
+my_name = "Твоё имя"
+my_age = 0
+favorite_subject = "Предмет"
+
+# Выведи их
+print(my_name)
+print(my_age)
+print(favorite_subject)</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>Задача: Калькулятор</h2>
+                <p>Напиши программу-калькулятор, которая складывает два числа:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Задание: Калькулятор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Создай две переменные с числами
+number1 = 25
+number2 = 17
+
+# Сложи их и сохрани в переменную result
+result = number1 + number2
+
+# Выведи результат
+print("Сумма:")
+print(result)</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>Проверь себя!</h2>
+
+                <div class="quiz-container">
+                    <h3>Тест к уроку</h3>
+
+                    <div class="question">
+                        <h4>Вопрос 1: Что делает знак = в Python?</h4>
+                        <ul class="options">
+                            <li>
+                                <label>
+                                    <input type="radio" name="q1" data-correct="false">
+                                    Проверяет равенство
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q1" data-correct="true" data-explanation="Верно! Знак = присваивает значение переменной.">
+                                    Присваивает значение переменной
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q1" data-correct="false">
+                                    Складывает числа
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Какое имя переменной НЕПРАВИЛЬНОЕ?</h4>
+                        <ul class="options">
+                            <li>
+                                <label>
+                                    <input type="radio" name="q2" data-correct="false">
+                                    user_name
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Имя не может начинаться с цифры.">
+                                    2users
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q2" data-correct="false">
+                                    _age
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что выведет этот код?<br>x = 5<br>x = 10<br>print(x)</h4>
+                        <ul class="options">
+                            <li>
+                                <label>
+                                    <input type="radio" name="q3" data-correct="false">
+                                    5
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q3" data-correct="true" data-explanation="Точно! Новое значение 10 перезаписало старое 5.">
+                                    10
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="q3" data-correct="false">
+                                    15
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <button class="btn-secondary" id="show-results">Показать результаты</button>
+                    <div class="quiz-results"></div>
+                </div>
+
+                <h2>Итоги урока</h2>
+                <p>Теперь ты знаешь:</p>
+                <ul>
+                    <li>Что такое переменные и зачем они нужны</li>
+                    <li>Как создавать и использовать переменные</li>
+                    <li>Правила именования переменных</li>
+                    <li>Как изменять значения переменных</li>
+                    <li>Как выполнять арифметические операции с переменными</li>
+                </ul>
+
+                <p>В следующем уроке мы изучим разные типы данных в Python!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-01.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-03.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Python для школьников © 2024</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
