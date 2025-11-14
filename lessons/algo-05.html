@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 5: Циклические алгоритмы - Python для школьников</title>
+    <title>Урок 5: Циклы - Python для школьников</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body data-lesson-id="algo-05">
@@ -19,7 +19,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -217,56 +217,501 @@
     <main class="container">
         <div class="lesson-container">
             <div class="lesson-header">
-                <h1>Урок 5: Циклические алгоритмы</h1>
+                <h1>Урок 5: Циклы</h1>
                 <div class="lesson-meta">Основы алгоритмики • 20 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке мы изучим <strong>повторение действий</strong>. Это важная тема для программирования и подготовки к ОГЭ/ЕГЭ.</p>
+                <h2>Введение</h2>
+                <p>Представь, что тебе нужно написать слово "Привет" 100 раз. Будешь писать 100 строк кода? Или мама попросила вымыть 20 тарелок. Будешь описывать действие "вымыть тарелку" 20 раз подряд? Конечно, нет!</p>
 
-                <h2>Что такое Циклы?</h2>
-                <p><strong>Циклы</strong> - фундаментальная концепция в информатике.</p>
+                <p>Когда нужно повторить одно и то же действие много раз, мы используем <strong>циклы</strong>. Цикл - это конструкция алгоритма, которая позволяет выполнять одни и те же действия несколько раз, не переписывая их заново.</p>
+
+                <p>В этом уроке мы изучим два основных типа циклов: цикл <strong>while</strong> (пока) и цикл <strong>for</strong> (для). Циклы - мощнейший инструмент программирования, без них не обойдется ни одна серьезная программа!</p>
+
+                <h2>Что такое цикл?</h2>
+                <p><strong>Цикл</strong> - это алгоритмическая конструкция, которая позволяет повторять одни и те же действия (тело цикла) несколько раз до тех пор, пока выполняется определенное условие или пока не пройдет заданное количество повторений.</p>
+
+                <div class="info-block">
+                    <h4>Простыми словами</h4>
+                    <p>Цикл - это как беговая дорожка: ты повторяешь одни и те же движения (бег), пока не достигнешь цели (время, дистанция или пока не устанешь).</p>
+                </div>
+
+                <h2>Примеры циклов из жизни</h2>
+
+                <div class="example-block">
+                    <h4>Пример 1: Подметание пола</h4>
+                    <p><strong>Действие:</strong> Подметать</p>
+                    <p><strong>Условие продолжения:</strong> Пока пол грязный</p>
+                    <p>Ты повторяешь движения веником, пока не увидишь, что пол чистый. Не знаешь заранее, сколько движений понадобится!</p>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример 2: Отжимания</h4>
+                    <p><strong>Действие:</strong> Сделать одно отжимание</p>
+                    <p><strong>Количество повторений:</strong> 10 раз</p>
+                    <p>Ты точно знаешь, сколько раз нужно повторить действие - 10 раз.</p>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример 3: Чтение книги</h4>
+                    <p><strong>Действие:</strong> Прочитать страницу</p>
+                    <p><strong>Условие продолжения:</strong> Пока книга не закончилась</p>
+                    <p>Ты читаешь страницу за страницей, пока не дойдешь до конца книги.</p>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример 4: Накопление денег</h4>
+                    <p><strong>Действие:</strong> Откладывать 100 рублей в копилку</p>
+                    <p><strong>Условие продолжения:</strong> Пока в копилке меньше 1000 рублей</p>
+                    <p>Каждую неделю откладываешь деньги, пока не наберется нужная сумма.</p>
+                </div>
+
+                <h2>Два типа циклов</h2>
+
+                <h3>1. Цикл while (пока) - Цикл с условием</h3>
+                <p>Цикл while выполняется, <strong>пока условие истинно</strong>. Мы не знаем заранее, сколько раз повторится цикл - это зависит от условия.</p>
+
+                <div class="info-block">
+                    <h4>Структура цикла while:</h4>
+                    <pre>
+ПОКА условие истинно ДЕЛАЙ
+  Действие 1
+  Действие 2
+  ...
+КОНЕЦ_ЦИКЛА</pre>
+                </div>
 
                 <div class="diagram">
-                    <svg class="diagram-svg" width="100%" height="300" viewBox="0 0 400 300" style="max-width: 400px;">
+                    <svg class="diagram-svg" width="100%" height="550" viewBox="0 0 550 550" style="max-width: 550px;">
                         <defs>
                             <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
                                 <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
                             </marker>
                         </defs>
-                        <ellipse cx="200" cy="40" rx="70" ry="25" fill="#dbeafe" stroke="#6366f1" stroke-width="2"/>
-                        <text x="200" y="48" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
-                        <path d="M 200 65 L 200 95" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
-                        <rect x="130" y="95" width="140" height="50" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
-                        <text x="200" y="125" text-anchor="middle" font-size="12" fill="#1e293b">Обработка</text>
-                        <path d="M 200 145 L 200 175" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
-                        <ellipse cx="200" cy="205" rx="70" ry="25" fill="#dbeafe" stroke="#6366f1" stroke-width="2"/>
-                        <text x="200" y="213" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+
+                        <!-- Начало -->
+                        <ellipse cx="275" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="275" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 275 55 L 275 100" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Инициализация -->
+                        <rect x="195" y="100" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="275" y="127" text-anchor="middle" font-size="13" fill="#1e293b">счетчик = 1</text>
+
+                        <path d="M 275 145 L 275 190" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Условие цикла -->
+                        <polygon points="275,190 395,260 275,330 155,260" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="275" y="250" text-anchor="middle" font-size="13" fill="#1e293b">счетчик ≤ 10?</text>
+
+                        <!-- Нет - выход из цикла -->
+                        <path d="M 155 260 L 60 260 L 60 470 L 275 470" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="100" y="255" font-size="12" font-weight="bold" fill="#dc2626">Нет (выход)</text>
+
+                        <!-- Да - тело цикла -->
+                        <path d="M 275 330 L 275 370" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="240" y="350" font-size="12" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Действие в цикле -->
+                        <path d="M 185 370 L 225 370 L 365 410 L 325 410 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="275" y="395" text-anchor="middle" font-size="13" fill="#1e293b">Вывести счетчик</text>
+
+                        <path d="M 275 410 L 275 440" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Изменение счетчика -->
+                        <rect x="165" y="440" width="220" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="275" y="467" text-anchor="middle" font-size="13" fill="#1e293b">счетчик = счетчик + 1</text>
+
+                        <!-- Возврат к условию (стрелка назад) -->
+                        <path d="M 385 462 L 490 462 L 490 260 L 395 260" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="500" y="360" font-size="11" fill="#4b5563">назад</text>
+
+                        <path d="M 275 470 L 275 505" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="275" cy="525" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="275" y="532" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
                     </svg>
                 </div>
 
-                <h2>Основные понятия</h2>
-                <ul>
-                    <li>Принципы работы алгоритма</li>
-                    <li>Применение на практике</li>
-                    <li>Типовые задачи</li>
-                </ul>
+                <div class="example-block">
+                    <h4>Как работает этот алгоритм:</h4>
+                    <ol>
+                        <li>Устанавливаем счетчик = 1</li>
+                        <li>Проверяем: 1 ≤ 10? Да → выводим 1, увеличиваем счетчик до 2</li>
+                        <li>Проверяем: 2 ≤ 10? Да → выводим 2, увеличиваем счетчик до 3</li>
+                        <li>... и так далее ...</li>
+                        <li>Проверяем: 10 ≤ 10? Да → выводим 10, увеличиваем счетчик до 11</li>
+                        <li>Проверяем: 11 ≤ 10? Нет → выходим из цикла</li>
+                    </ol>
+                    <p><strong>Результат:</strong> Выведены числа от 1 до 10</p>
+                </div>
+
+                <h3>2. Цикл for (для) - Цикл со счетчиком</h3>
+                <p>Цикл for используется, когда мы <strong>заранее знаем количество повторений</strong>. Это цикл с автоматическим счетчиком.</p>
+
+                <div class="info-block">
+                    <h4>Структура цикла for:</h4>
+                    <pre>
+ДЛЯ счетчик ОТ начало ДО конец ДЕЛАЙ
+  Действие 1
+  Действие 2
+  ...
+КОНЕЦ_ЦИКЛА</pre>
+                </div>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="600" viewBox="0 0 550 600" style="max-width: 550px;">
+                        <defs>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="275" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="275" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 275 55 L 275 100" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Ввод N -->
+                        <path d="M 185 100 L 225 100 L 365 145 L 325 145 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="275" y="127" text-anchor="middle" font-size="13" fill="#1e293b">Введи N</text>
+
+                        <path d="M 275 145 L 275 190" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Инициализация цикла -->
+                        <rect x="170" y="190" width="210" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="275" y="217" text-anchor="middle" font-size="13" fill="#1e293b">i = 1, сумма = 0</text>
+
+                        <path d="M 275 235 L 275 280" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Условие цикла -->
+                        <polygon points="275,280 395,350 275,420 155,350" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="275" y="345" text-anchor="middle" font-size="13" fill="#1e293b">i ≤ N?</text>
+
+                        <!-- Нет - выход -->
+                        <path d="M 155 350 L 60 350 L 60 520 L 275 520" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                        <text x="100" y="345" font-size="12" font-weight="bold" fill="#dc2626">Нет (выход)</text>
+
+                        <!-- Да - тело цикла -->
+                        <path d="M 275 420 L 275 460" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                        <text x="240" y="440" font-size="12" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Действие: добавить к сумме -->
+                        <rect x="155" y="460" width="240" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="275" y="487" text-anchor="middle" font-size="13" fill="#1e293b">сумма = сумма + i</text>
+
+                        <!-- Увеличение i -->
+                        <path d="M 395 482 L 490 482 L 490 350 L 395 350" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                        <text x="500" y="420" font-size="11" fill="#4b5563">i = i+1</text>
+
+                        <!-- Вывод результата -->
+                        <path d="M 185 520 L 225 520 L 365 560 L 325 560 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="275" y="545" text-anchor="middle" font-size="13" fill="#1e293b">Выведи сумму</text>
+
+                        <path d="M 275 560 L 275 570" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="275" cy="585" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="275" y="592" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <div class="example-block">
+                    <h4>Как работает этот алгоритм (пример: N = 5):</h4>
+                    <ol>
+                        <li>i=1: сумма = 0 + 1 = 1</li>
+                        <li>i=2: сумма = 1 + 2 = 3</li>
+                        <li>i=3: сумма = 3 + 3 = 6</li>
+                        <li>i=4: сумма = 6 + 4 = 10</li>
+                        <li>i=5: сумма = 10 + 5 = 15</li>
+                        <li>i=6: 6 ≤ 5? Нет → выход, выводим сумму = 15</li>
+                    </ol>
+                    <p><strong>Результат:</strong> Сумма чисел от 1 до 5 равна 15</p>
+                </div>
+
+                <h2>Разница между while и for</h2>
+
+                <div class="info-block">
+                    <h4>Цикл while (пока)</h4>
+                    <ul>
+                        <li><strong>Когда использовать:</strong> Когда НЕ знаем заранее, сколько раз повторится цикл</li>
+                        <li><strong>Условие:</strong> Проверяется ПЕРЕД каждой итерацией</li>
+                        <li><strong>Пример:</strong> Копать яму, пока не достигнешь глубины 2 метра</li>
+                        <li><strong>Опасность:</strong> Если условие всегда истинно, получится бесконечный цикл!</li>
+                    </ul>
+                </div>
+
+                <div class="info-block">
+                    <h4>Цикл for (для)</h4>
+                    <ul>
+                        <li><strong>Когда использовать:</strong> Когда ЗНАЕМ точное количество повторений</li>
+                        <li><strong>Счетчик:</strong> Автоматически увеличивается на каждой итерации</li>
+                        <li><strong>Пример:</strong> Написать слово "Python" 50 раз</li>
+                        <li><strong>Преимущество:</strong> Не может стать бесконечным (у него есть конец)</li>
+                    </ul>
+                </div>
+
+                <h2>Пример: Поиск четных чисел</h2>
+                <p>Найдем все четные числа от 1 до 20 и выведем их.</p>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="700" viewBox="0 0 600 700" style="max-width: 600px;">
+                        <defs>
+                            <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="300" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="300" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 300 55 L 300 100" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Инициализация -->
+                        <rect x="220" y="100" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="300" y="127" text-anchor="middle" font-size="13" fill="#1e293b">i = 1</text>
+
+                        <path d="M 300 145 L 300 190" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Условие цикла -->
+                        <polygon points="300,190 420,260 300,330 180,260" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="300" y="255" text-anchor="middle" font-size="13" fill="#1e293b">i ≤ 20?</text>
+
+                        <!-- Нет - выход -->
+                        <path d="M 180 260 L 80 260 L 80 630 L 300 630" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="110" y="255" font-size="12" font-weight="bold" fill="#dc2626">Нет</text>
+
+                        <!-- Да - проверка четности -->
+                        <path d="M 300 330 L 300 380" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="265" y="360" font-size="12" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Условие: четное? -->
+                        <polygon points="300,380 420,440 300,500 180,440" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="300" y="430" text-anchor="middle" font-size="12" fill="#1e293b">i делится на 2</text>
+                        <text x="300" y="448" text-anchor="middle" font-size="12" fill="#1e293b">без остатка?</text>
+
+                        <!-- Да - вывести -->
+                        <path d="M 420 440 L 500 440 L 500 530" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="435" y="435" font-size="11" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Вывод числа -->
+                        <path d="M 450 530 L 485 530 L 560 565 L 525 565 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="505" y="552" text-anchor="middle" font-size="11" fill="#1e293b">Вывести i</text>
+
+                        <path d="M 505 565 L 505 590 L 300 590" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Нет - пропустить -->
+                        <path d="M 180 440 L 120 440 L 120 590 L 300 590" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="135" y="435" font-size="11" font-weight="bold" fill="#dc2626">Нет</text>
+
+                        <!-- Увеличение i -->
+                        <rect x="200" y="590" width="200" height="40" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="300" y="615" text-anchor="middle" font-size="13" fill="#1e293b">i = i + 1</text>
+
+                        <!-- Возврат к условию цикла -->
+                        <path d="M 400 610 L 520 610 L 520 260 L 420 260" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="530" y="440" font-size="11" fill="#4b5563">назад</text>
+
+                        <path d="M 300 630 L 300 660" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="300" cy="680" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="300" y="687" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <div class="example-block">
+                    <h4>Результат выполнения:</h4>
+                    <p>Будут выведены числа: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20</p>
+                    <p>Нечетные числа (1, 3, 5, 7, ...) будут пропущены!</p>
+                </div>
+
+                <h2>Бесконечные циклы и как их избежать</h2>
+
+                <div class="info-block">
+                    <h4>Что такое бесконечный цикл?</h4>
+                    <p>Это цикл, который никогда не заканчивается, потому что условие выхода никогда не становится ложным.</p>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример ПЛОХОГО цикла (бесконечный):</h4>
+                    <pre>
+счетчик = 1
+ПОКА счетчик ≤ 10 ДЕЛАЙ
+  Вывести счетчик
+  // ОШИБКА: забыли увеличить счетчик!
+КОНЕЦ_ЦИКЛА</pre>
+                    <p><strong>Проблема:</strong> счетчик всегда равен 1, условие всегда истинно → бесконечный цикл!</p>
+                </div>
+
+                <div class="info-block">
+                    <h4>Как избежать бесконечных циклов:</h4>
+                    <ul>
+                        <li><strong>Всегда изменяй переменную</strong> в условии внутри цикла</li>
+                        <li><strong>Проверь условие выхода:</strong> убедись, что оно рано или поздно станет ложным</li>
+                        <li><strong>Используй счетчик:</strong> для подсчета итераций и выхода при превышении лимита</li>
+                        <li><strong>Предпочитай for вместо while</strong> когда это возможно - в for бесконечный цикл сложнее создать</li>
+                    </ul>
+                </div>
+
+                <h2>Управление циклами: break и continue</h2>
+
+                <h3>Команда break (прервать)</h3>
+                <p>Немедленно выходит из цикла, даже если условие еще истинно.</p>
+
+                <div class="example-block">
+                    <h4>Пример: Поиск числа в последовательности</h4>
+                    <pre>
+ВВОД искомое
+ДЛЯ i ОТ 1 ДО 100 ДЕЛАЙ
+  ВВОД число
+  ЕСЛИ число = искомое ТО
+    ВЫВОД "Найдено на позиции", i
+    BREAK  (выход из цикла)
+  КОНЕЦ_ЕСЛИ
+КОНЕЦ_ЦИКЛА</pre>
+                    <p>Как только нашли число, сразу выходим - не нужно проверять остальные!</p>
+                </div>
+
+                <h3>Команда continue (продолжить)</h3>
+                <p>Пропускает остаток текущей итерации и переходит к следующей.</p>
+
+                <div class="example-block">
+                    <h4>Пример: Вывод только положительных чисел</h4>
+                    <pre>
+ДЛЯ i ОТ -5 ДО 5 ДЕЛАЙ
+  ЕСЛИ i ≤ 0 ТО
+    CONTINUE  (пропустить эту итерацию)
+  КОНЕЦ_ЕСЛИ
+  ВЫВОД i
+КОНЕЦ_ЦИКЛА</pre>
+                    <p>Будут выведены только: 1, 2, 3, 4, 5. Отрицательные и ноль пропускаются!</p>
+                </div>
+
+                <h2>Задания для практики</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Таблица умножения</h4>
+                    <p>Создай алгоритм, который выводит таблицу умножения на 5 (от 5×1 до 5×10).</p>
+                    <p><strong>Подсказка:</strong> Используй цикл for от 1 до 10, на каждой итерации вычисляй 5 × i!</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Факториал числа</h4>
+                    <p>Факториал числа n (обозначается n!) - это произведение всех чисел от 1 до n.</p>
+                    <p>Например: 5! = 1 × 2 × 3 × 4 × 5 = 120</p>
+                    <p>Составь алгоритм вычисления факториала введенного числа.</p>
+                    <p><strong>Подсказка:</strong> Используй переменную результат = 1, умножай ее на каждое число от 1 до n!</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Угадай число</h4>
+                    <p>Компьютер загадал число от 1 до 100. Пользователь вводит свои догадки, компьютер отвечает "больше", "меньше" или "угадал".</p>
+                    <p>Составь алгоритм этой игры с использованием цикла while.</p>
+                    <p><strong>Подсказка:</strong> Цикл продолжается, пока число не угадано!</p>
+                </div>
 
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Для чего нужны алгоритмы?</h4>
+                        <h4>Вопрос 1: Что такое цикл в алгоритме?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Для решения задач</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Для украшения</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это линейный алгоритм.">Последовательное выполнение действий один раз</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Цикл - это повторение одних и тех же действий.">Многократное повторение одних и тех же действий</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это ветвление.">Выбор между двумя путями выполнения</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, цикл - это про повторение, не про одновременность.">Одновременное выполнение нескольких действий</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Какой цикл использовать, если НЕ знаешь заранее количество повторений?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Верно! Цикл while продолжается, пока условие истинно.">while (пока)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, for используется когда количество повторений известно.">for (для)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, if - это не цикл, а условие.">if (если)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Оба можно использовать, но while более естественен для такой ситуации.">Оба подходят одинаково</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что будет выведено: i=1; ПОКА i≤3 ДЕЛАЙ: Вывести i; i=i+1</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, только 1 было бы, если бы не увеличивали i.">1</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, проверь условие: когда i=4, цикл прекращается.">1 2 3 4</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! i принимает значения 1, 2, 3. При i=4 условие 4≤3 ложно.">1 2 3</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, начинаем с i=1, а не с i=0.">0 1 2 3</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что произойдет, если в цикле while забыть изменить переменную в условии?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, цикл не выполнится ни разу только если условие сразу ложно.">Цикл не выполнится ни разу</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, цикл выполнится не 1 раз, а бесконечно много раз!">Цикл выполнится ровно один раз</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Верно! Если условие всегда истинно, цикл никогда не закончится.">Получится бесконечный цикл</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, программа не завершится, а зависнет в бесконечном цикле.">Программа завершится с ошибкой</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Алгоритм: сумма=0; ДЛЯ i ОТ 1 ДО 4: сумма=сумма+i. Чему равна сумма?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, 4 было бы, если бы мы просто присваивали i, а не суммировали.">4</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, пересчитай: 1+2+3+4 = ?">8</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! 0+1=1, 1+2=3, 3+3=6, 6+4=10.">10</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, откуда 15? Цикл идет от 1 до 4, а не до 5!">15</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Циклы - одна из важнейших тем на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 - анализ алгоритмов с циклами</li>
+                        <li><strong>ОГЭ:</strong> Задание 8 - исполнение циклического алгоритма</li>
+                        <li><strong>ОГЭ:</strong> Задание 14 - написание программы с циклами</li>
+                        <li><strong>ЕГЭ:</strong> Задание 6 - формальное исполнение циклов</li>
+                        <li><strong>ЕГЭ:</strong> Задание 8 - анализ программ с циклами</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-25 - почти все требуют использования циклов!</li>
+                    </ul>
+                    <p>Понимание циклов критически важно для программирования!</p>
+                </div>
+
+                <h2>Резюме</h2>
+                <ul>
+                    <li><strong>Цикл</strong> - повторение действий несколько раз</li>
+                    <li><strong>Цикл while (пока):</strong> выполняется, пока условие истинно. Количество повторений заранее неизвестно</li>
+                    <li><strong>Цикл for (для):</strong> выполняется заданное количество раз. Имеет автоматический счетчик</li>
+                    <li>В блок-схеме цикл изображается <strong>стрелкой назад</strong> к условию проверки</li>
+                    <li><strong>Бесконечный цикл</strong> возникает, если условие выхода никогда не становится ложным</li>
+                    <li><strong>break</strong> - выход из цикла досрочно</li>
+                    <li><strong>continue</strong> - пропуск текущей итерации, переход к следующей</li>
+                    <li>Примеры: счет до N, сумма чисел, поиск четных, таблица умножения</li>
+                </ul>
+
+                <p>Поздравляю! Ты завершил изучение основ алгоритмики! Теперь ты знаешь три основных типа алгоритмов: <strong>линейные</strong> (последовательность), <strong>ветвления</strong> (выбор) и <strong>циклы</strong> (повторение). Это фундамент программирования - из этих трех конструкций можно построить любой алгоритм!</p>
+
+                <p>В следующем модуле мы начнем писать настоящие программы на Python, применяя все то, что ты узнал!</p>
             </div>
 
             <div class="lesson-nav">

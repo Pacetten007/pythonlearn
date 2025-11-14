@@ -19,7 +19,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -222,51 +222,455 @@
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке мы изучим <strong>последовательное выполнение</strong>. Это важная тема для программирования и подготовки к ОГЭ/ЕГЭ.</p>
+                <h2>Введение</h2>
+                <p>Представь, что ты готовишь бутерброд. Ты берешь хлеб, намазываешь масло, кладешь колбасу - все действия выполняешь строго по порядку, одно за другим. Ты не можешь съесть бутерброд до того, как его приготовишь! Такая последовательность действий называется <strong>линейным алгоритмом</strong>.</p>
 
-                <h2>Что такое Линейные алгоритмы?</h2>
-                <p><strong>Линейные алгоритмы</strong> - фундаментальная концепция в информатике.</p>
+                <p>Линейные алгоритмы - это самый простой тип алгоритмов. В них нет развилок, нет повторений - только четкая последовательность действий от начала до конца. Но не думай, что они слишком простые! Многие реальные задачи решаются именно линейными алгоритмами.</p>
+
+                <p>В этом уроке мы подробно изучим, что такое линейные алгоритмы, как их составлять и где они применяются. Понимание линейных алгоритмов - это фундамент для изучения более сложных алгоритмов!</p>
+
+                <h2>Что такое линейный алгоритм?</h2>
+                <p><strong>Линейный алгоритм</strong> - это алгоритм, в котором все действия выполняются последовательно, одно за другим, от начала до конца, без всяких проверок условий и повторений.</p>
+
+                <div class="info-block">
+                    <h4>Простыми словами</h4>
+                    <p>Линейный алгоритм - это как прямая дорога: идешь только вперед, никуда не сворачиваешь и не возвращаешься назад. Каждый шаг выполняется ровно один раз, в строгом порядке.</p>
+                </div>
+
+                <h3>Главные признаки линейного алгоритма</h3>
+                <ul>
+                    <li><strong>Последовательность:</strong> Действия выполняются строго по порядку</li>
+                    <li><strong>Однократность:</strong> Каждое действие выполняется ровно один раз</li>
+                    <li><strong>Нет условий:</strong> Алгоритм не проверяет никаких "если"</li>
+                    <li><strong>Нет повторений:</strong> Ничего не делается в цикле</li>
+                    <li><strong>Один путь:</strong> От начала до конца - только одна дорога</li>
+                </ul>
+
+                <h2>Примеры линейных алгоритмов из жизни</h2>
+
+                <div class="example-block">
+                    <h4>Пример 1: Утренние сборы в школу</h4>
+                    <ol>
+                        <li>Проснуться по будильнику</li>
+                        <li>Встать с кровати</li>
+                        <li>Пойти в ванную</li>
+                        <li>Умыться и почистить зубы</li>
+                        <li>Причесаться</li>
+                        <li>Одеться</li>
+                        <li>Позавтракать</li>
+                        <li>Собрать рюкзак</li>
+                        <li>Надеть обувь</li>
+                        <li>Выйти из дома</li>
+                    </ol>
+                    <p><strong>Почему это линейный алгоритм?</strong> Все действия выполняются последовательно, каждое - один раз. Нет проверок типа "если проспал - пропусти завтрак".</p>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример 2: Следование рецепту (простой омлет)</h4>
+                    <ol>
+                        <li>Возьми 2 яйца</li>
+                        <li>Разбей яйца в миску</li>
+                        <li>Добавь 50 мл молока</li>
+                        <li>Посоли по вкусу</li>
+                        <li>Взбей венчиком до однородности</li>
+                        <li>Разогрей сковороду</li>
+                        <li>Налей масло на сковороду</li>
+                        <li>Вылей яичную смесь на сковороду</li>
+                        <li>Жарь 3 минуты</li>
+                        <li>Переложи на тарелку</li>
+                    </ol>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример 3: Решение простого уравнения 3x + 5 = 20</h4>
+                    <ol>
+                        <li>Запиши уравнение: 3x + 5 = 20</li>
+                        <li>Вычти 5 из обеих частей: 3x = 15</li>
+                        <li>Раздели обе части на 3: x = 5</li>
+                        <li>Запиши ответ: x = 5</li>
+                    </ol>
+                </div>
+
+                <h2>Блок-схема линейного алгоритма</h2>
+                <p>Давай посмотрим, как линейный алгоритм выглядит на блок-схеме. Это просто цепочка прямоугольников (действий), соединенных стрелками:</p>
 
                 <div class="diagram">
-                    <svg class="diagram-svg" width="100%" height="300" viewBox="0 0 400 300" style="max-width: 400px;">
+                    <svg class="diagram-svg" width="100%" height="550" viewBox="0 0 500 550" style="max-width: 500px;">
                         <defs>
                             <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
                                 <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
                             </marker>
                         </defs>
-                        <ellipse cx="200" cy="40" rx="70" ry="25" fill="#dbeafe" stroke="#6366f1" stroke-width="2"/>
-                        <text x="200" y="48" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
-                        <path d="M 200 65 L 200 95" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
-                        <rect x="130" y="95" width="140" height="50" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
-                        <text x="200" y="125" text-anchor="middle" font-size="12" fill="#1e293b">Обработка</text>
-                        <path d="M 200 145 L 200 175" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
-                        <ellipse cx="200" cy="205" rx="70" ry="25" fill="#dbeafe" stroke="#6366f1" stroke-width="2"/>
-                        <text x="200" y="213" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+
+                        <!-- Начало -->
+                        <ellipse cx="250" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 250 55 L 250 85" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Действие 1 -->
+                        <rect x="170" y="85" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="112" text-anchor="middle" font-size="13" fill="#1e293b">Шаг 1</text>
+
+                        <path d="M 250 130 L 250 160" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Действие 2 -->
+                        <rect x="170" y="160" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="187" text-anchor="middle" font-size="13" fill="#1e293b">Шаг 2</text>
+
+                        <path d="M 250 205 L 250 235" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Действие 3 -->
+                        <rect x="170" y="235" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="262" text-anchor="middle" font-size="13" fill="#1e293b">Шаг 3</text>
+
+                        <path d="M 250 280 L 250 310" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Действие 4 -->
+                        <rect x="170" y="310" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="337" text-anchor="middle" font-size="13" fill="#1e293b">Шаг 4</text>
+
+                        <path d="M 250 355 L 250 385" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Действие 5 -->
+                        <rect x="170" y="385" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="412" text-anchor="middle" font-size="13" fill="#1e293b">Шаг 5</text>
+
+                        <path d="M 250 430 L 250 460" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Действие 6 -->
+                        <rect x="170" y="460" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="487" text-anchor="middle" font-size="13" fill="#1e293b">Шаг 6</text>
+
+                        <path d="M 250 505 L 250 515" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="250" cy="535" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="542" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
                     </svg>
                 </div>
 
-                <h2>Основные понятия</h2>
-                <ul>
-                    <li>Принципы работы алгоритма</li>
-                    <li>Применение на практике</li>
-                    <li>Типовые задачи</li>
-                </ul>
+                <p>Видишь? Никаких ромбов (условий), никаких стрелок назад (циклов) - только прямая линия от начала до конца!</p>
+
+                <h2>Пример 1: Вычисление площади прямоугольника</h2>
+                <p>Давай создадим линейный алгоритм для вычисления площади прямоугольника. Нам нужно ввести длину и ширину, перемножить их и вывести результат.</p>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="450" viewBox="0 0 500 450" style="max-width: 500px;">
+                        <defs>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="250" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 250 55 L 250 85" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Ввод длины -->
+                        <path d="M 160 85 L 200 85 L 340 130 L 300 130 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="250" y="112" text-anchor="middle" font-size="13" fill="#1e293b">Введи длину a</text>
+
+                        <path d="M 250 130 L 250 160" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Ввод ширины -->
+                        <path d="M 160 160 L 200 160 L 340 205 L 300 205 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="250" y="187" text-anchor="middle" font-size="13" fill="#1e293b">Введи ширину b</text>
+
+                        <path d="M 250 205 L 250 235" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Вычисление -->
+                        <rect x="170" y="235" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="262" text-anchor="middle" font-size="13" fill="#1e293b">S = a × b</text>
+
+                        <path d="M 250 280 L 250 310" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Вывод -->
+                        <path d="M 160 310 L 200 310 L 340 355 L 300 355 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="250" y="337" text-anchor="middle" font-size="13" fill="#1e293b">Выведи S</text>
+
+                        <path d="M 250 355 L 250 385" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="250" cy="410" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="417" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <div class="info-block">
+                    <h4>Псевдокод этого алгоритма:</h4>
+                    <pre>
+НАЧАЛО
+  ВВОД a
+  ВВОД b
+  S ← a × b
+  ВЫВОД S
+КОНЕЦ</pre>
+                </div>
+
+                <h2>Пример 2: Конвертация температуры</h2>
+                <p>Создадим алгоритм для преобразования температуры из градусов Цельсия в градусы Фаренгейта по формуле: F = C × 1.8 + 32</p>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="450" viewBox="0 0 500 450" style="max-width: 500px;">
+                        <defs>
+                            <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="250" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 250 55 L 250 85" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Ввод C -->
+                        <path d="M 140 85 L 180 85 L 360 130 L 320 130 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="250" y="112" text-anchor="middle" font-size="13" fill="#1e293b">Введи температуру C</text>
+
+                        <path d="M 250 130 L 250 160" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Вычисление -->
+                        <rect x="150" y="160" width="200" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="187" text-anchor="middle" font-size="13" fill="#1e293b">F = C × 1.8 + 32</text>
+
+                        <path d="M 250 205 L 250 235" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Вывод -->
+                        <path d="M 140 235 L 180 235 L 360 280 L 320 280 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="250" y="262" text-anchor="middle" font-size="13" fill="#1e293b">Выведи F</text>
+
+                        <path d="M 250 280 L 250 310" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="250" cy="335" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="342" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример выполнения:</h4>
+                    <p>Если ввести C = 20:</p>
+                    <ol>
+                        <li>Вводим C = 20</li>
+                        <li>Вычисляем F = 20 × 1.8 + 32 = 36 + 32 = 68</li>
+                        <li>Выводим F = 68</li>
+                    </ol>
+                    <p>Получается, что 20°C = 68°F</p>
+                </div>
+
+                <h2>Пример 3: Обмен значений двух переменных</h2>
+                <p>Это классическая задача! Представь, что у тебя две чашки: в одной чай, в другой - кофе. Как поменять их содержимое местами? Нужна третья чашка!</p>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="550" viewBox="0 0 500 550" style="max-width: 500px;">
+                        <defs>
+                            <marker id="arrowhead4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="250" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 250 55 L 250 85" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- Ввод A -->
+                        <path d="M 160 85 L 200 85 L 340 130 L 300 130 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="250" y="112" text-anchor="middle" font-size="13" fill="#1e293b">Введи A</text>
+
+                        <path d="M 250 130 L 250 160" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- Ввод B -->
+                        <path d="M 160 160 L 200 160 L 340 205 L 300 205 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="250" y="187" text-anchor="middle" font-size="13" fill="#1e293b">Введи B</text>
+
+                        <path d="M 250 205 L 250 235" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- temp = A -->
+                        <rect x="170" y="235" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="262" text-anchor="middle" font-size="13" fill="#1e293b">temp = A</text>
+
+                        <path d="M 250 280 L 250 310" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- A = B -->
+                        <rect x="170" y="310" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="337" text-anchor="middle" font-size="13" fill="#1e293b">A = B</text>
+
+                        <path d="M 250 355 L 250 385" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- B = temp -->
+                        <rect x="170" y="385" width="160" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="250" y="412" text-anchor="middle" font-size="13" fill="#1e293b">B = temp</text>
+
+                        <path d="M 250 430 L 250 460" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- Вывод -->
+                        <path d="M 150 460 L 190 460 L 350 505 L 310 505 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="250" y="487" text-anchor="middle" font-size="13" fill="#1e293b">Выведи A и B</text>
+
+                        <path d="M 250 505 L 250 515" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="250" cy="535" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="542" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пошаговое выполнение с числами:</h4>
+                    <p>Начальные значения: A = 5, B = 10</p>
+                    <ol>
+                        <li>temp = A → temp = 5 (сохранили значение A)</li>
+                        <li>A = B → A = 10 (теперь в A значение B)</li>
+                        <li>B = temp → B = 5 (теперь в B старое значение A)</li>
+                    </ol>
+                    <p><strong>Результат:</strong> A = 10, B = 5 - значения поменялись местами!</p>
+                </div>
+
+                <h2>Характеристики линейных алгоритмов</h2>
+
+                <div class="info-block">
+                    <h4>Преимущества</h4>
+                    <ul>
+                        <li><strong>Простота:</strong> Легко понять и написать</li>
+                        <li><strong>Предсказуемость:</strong> Всегда выполняется одинаково</li>
+                        <li><strong>Быстрота:</strong> Нет лишних проверок и повторений</li>
+                        <li><strong>Надежность:</strong> Сложно ошибиться в последовательности</li>
+                    </ul>
+                </div>
+
+                <div class="info-block">
+                    <h4>Ограничения</h4>
+                    <ul>
+                        <li><strong>Нет гибкости:</strong> Не может реагировать на разные ситуации</li>
+                        <li><strong>Нет повторений:</strong> Если нужно что-то сделать 100 раз - придется писать 100 строк</li>
+                        <li><strong>Одно решение:</strong> Не может выбирать между разными вариантами</li>
+                    </ul>
+                    <p>Но не переживай! В следующих уроках мы изучим ветвления (для выбора) и циклы (для повторений)!</p>
+                </div>
+
+                <h2>Задания для практики</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Периметр прямоугольника</h4>
+                    <p>Составь блок-схему и псевдокод линейного алгоритма для вычисления периметра прямоугольника.</p>
+                    <p><strong>Формула:</strong> P = 2 × (a + b), где a - длина, b - ширина</p>
+                    <p><strong>Подсказка:</strong> Нужны 2 ввода (a и b), 1 вычисление и 1 вывод!</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Средний балл</h4>
+                    <p>Создай линейный алгоритм, который вводит оценки по трем предметам и выводит средний балл.</p>
+                    <p><strong>Подсказка:</strong> Средний балл = (оценка1 + оценка2 + оценка3) / 3</p>
+                    <p>Пример: оценки 5, 4, 5 → средний балл 4.67</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Стоимость покупки</h4>
+                    <p>Магазин продает яблоки по 50 рублей за килограмм. Составь алгоритм, который:</p>
+                    <ol>
+                        <li>Вводит количество килограммов</li>
+                        <li>Вычисляет общую стоимость</li>
+                        <li>Вычисляет сдачу, если покупатель дал 500 рублей</li>
+                        <li>Выводит стоимость и сдачу</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Это линейный алгоритм - все действия выполняются последовательно!</p>
+                </div>
 
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Для чего нужны алгоритмы?</h4>
+                        <h4>Вопрос 1: Что такое линейный алгоритм?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Для решения задач</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Для украшения</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно! Линейный алгоритм - это последовательность действий без условий и циклов.">Алгоритм, в котором действия выполняются строго по порядку, без условий и повторений</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это алгоритм с ветвлением. В линейном алгоритме нет условий!">Алгоритм, который проверяет условия и выбирает путь выполнения</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это циклический алгоритм. Линейный не имеет повторений!">Алгоритм, который повторяет действия несколько раз</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, линейный алгоритм выполняет каждое действие ровно один раз!">Алгоритм, который может пропускать некоторые шаги</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Какая фигура НЕ используется в блок-схеме линейного алгоритма?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, овал используется для начала и конца любого алгоритма.">Овал (начало/конец)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, прямоугольник - основная фигура для действий в линейном алгоритме.">Прямоугольник (действие)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Ромб используется для условий, а в линейном алгоритме условий нет!">Ромб (условие)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, параллелограмм используется для ввода и вывода данных.">Параллелограмм (ввод/вывод)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько раз выполняется каждое действие в линейном алгоритме?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, 0 раз означает, что действие не выполняется вообще.">0 раз</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Верно! В линейном алгоритме каждое действие выполняется ровно один раз.">Ровно 1 раз</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, многократное выполнение - это циклы, которых нет в линейном алгоритме.">Много раз</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, линейный алгоритм предсказуем - каждое действие выполняется строго один раз.">Зависит от ситуации</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Почему при обмене значений двух переменных нужна третья (временная) переменная?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, быстрота здесь не причина. С временной переменной может быть даже медленнее.">Чтобы алгоритм работал быстрее</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Точно! Если сразу A = B, то старое значение A потеряется. Нужно сохранить его в temp.">Чтобы не потерять одно из значений при замене</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, на самом деле третья переменная не обязательна (есть другие способы), но это самый понятный способ.">Потому что иначе алгоритм не будет работать вообще</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, компьютер может работать с двумя переменными, но мы потеряем данные без временной переменной.">Потому что компьютер не может работать с двумя переменными одновременно</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Алгоритм: НАЧАЛО → Ввод X → Y = X + 5 → Z = Y × 2 → Вывод Z → КОНЕЦ. Что выведется при X = 3?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, это было бы просто X + 5. Но еще есть умножение на 2!">8</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, проверь порядок действий: сначала сложение, потом умножение.">11</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Y = 3 + 5 = 8, затем Z = 8 × 2 = 16. Алгоритм выводит Z.">16</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, откуда такое число? Пересчитай шаг за шагом: X=3, Y=X+5, Z=Y×2.">13</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Линейные алгоритмы - базовая тема для экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 - выполнение линейных алгоритмов, вычисление значений</li>
+                        <li><strong>ЕГЭ:</strong> Задания 6, 12 - анализ простых алгоритмов, часто линейных</li>
+                        <li><strong>Программирование:</strong> Задания 24-25 часто начинаются с линейной обработки данных</li>
+                    </ul>
+                    <p>Понимание линейных алгоритмов - основа для изучения более сложных алгоритмических конструкций!</p>
+                </div>
+
+                <h2>Резюме</h2>
+                <ul>
+                    <li><strong>Линейный алгоритм</strong> - последовательность действий без условий и повторений</li>
+                    <li>Все действия выполняются <strong>строго по порядку</strong>, каждое - <strong>ровно один раз</strong></li>
+                    <li>В блок-схеме линейного алгоритма - только прямоугольники (действия), параллелограммы (ввод/вывод) и овалы (начало/конец)</li>
+                    <li>Линейные алгоритмы просты, надежны и предсказуемы</li>
+                    <li>Примеры: вычисление площади, конвертация температуры, обмен значений переменных</li>
+                    <li>Ограничение: не могут принимать решения или повторять действия</li>
+                </ul>
+
+                <p>Отлично! Теперь ты понимаешь линейные алгоритмы. В следующем уроке мы изучим <strong>ветвления</strong> - алгоритмы, которые умеют выбирать разные пути в зависимости от условий!</p>
             </div>
 
             <div class="lesson-nav">
