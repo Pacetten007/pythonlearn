@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Сворачивание/разворачивание модулей
+    initCollapsibleModules();
+
     // Инициализация Python редактора (если есть на странице)
     initPythonEditor();
 
@@ -50,6 +53,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // Отображение пройденных уроков
     updateCompletedLessons();
 });
+
+// Сворачиваемые модули в навигации
+function initCollapsibleModules() {
+    const lessonGroups = document.querySelectorAll('.lesson-group');
+
+    lessonGroups.forEach((group, index) => {
+        const header = group.querySelector('.lesson-group-header');
+        if (!header) return;
+
+        // Сворачиваем все модули кроме первого
+        if (index > 0) {
+            group.classList.add('collapsed');
+        }
+
+        header.addEventListener('click', function() {
+            group.classList.toggle('collapsed');
+        });
+    });
+}
 
 // Python интерпретатор с использованием Skulpt
 function initPythonEditor() {
