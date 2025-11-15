@@ -545,74 +545,34 @@ while counter < 10:
 # Выведет: 1, 2, 3, 4, 6, 8, 9, 10 (без 5 и 7)</pre>
                 </div>
 
-                <h2>Интерактивный редактор</h2>
+                <h2>Попробуй сам!</h2>
                 <p>Попробуй разные примеры циклов. Измени начальные значения и условия!</p>
 
-                <div class="code-editor">
-                    <textarea id="code-input" rows="15"># Пример 1: Обратный отсчет
-print("=== Обратный отсчет ===")
-countdown = 5
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Цикл while - счёт от 1 до 5
+count = 1
+while count <= 5:
+    print(f"Число: {count}")
+    count = count + 1
 
-while countdown > 0:
-    print(countdown)
-    countdown -= 1
+print("Цикл завершён!")
 
-print("Пуск!")
-print()
-
-# Пример 2: Сумма чисел
-print("=== Сумма от 1 до 10 ===")
-counter = 1
+# Сумма чисел от 1 до 10
 total = 0
-
-while counter <= 10:
-    total += counter
-    counter += 1
+number = 1
+while number <= 10:
+    total = total + number
+    number = number + 1
 
 print(f"Сумма: {total}")
-print()
-
-# Пример 3: Факториал
-print("=== Факториал 6 ===")
-n = 6
-counter = 1
-factorial = 1
-
-while counter <= n:
-    factorial *= counter
-    counter += 1
-
-print(f"{n}! = {factorial}")
-print()
-
-# Пример 4: Только четные числа
-print("=== Четные числа от 2 до 10 ===")
-number = 2
-
-while number <= 10:
-    print(number)
-    number += 2
-print()
-
-# Пример 5: Степени двойки
-print("=== Степени 2 (до 1000) ===")
-power = 1
-
-while power <= 1000:
-    print(power)
-    power *= 2
-
-print()
-
-# Пример 6: Использование break
-print("=== Поиск первого числа > 50 ===")
-number = 1
-
-while number <= 100:
-    if number > 50:
-        print(f"Первое число больше 50: {number}")
-        break
-    number += 1</textarea>
+</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>

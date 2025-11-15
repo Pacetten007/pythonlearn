@@ -621,78 +621,41 @@ else:
     print("Дверь заперта изнутри!")</pre>
                 </div>
 
-                <h2>Интерактивный редактор</h2>
-                <p>Попробуй примеры с логическими операциями. Измени значения переменных и посмотри, как меняется результат!</p>
+                <h2>Попробуй сам!</h2>
+                <p>Поэкспериментируй с логическими операциями. Измени значения переменных и посмотри, как меняется результат!</p>
 
-                <div class="code-editor">
-                    <textarea id="code-input" rows="15"># Пример 1: and
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Логические операторы - попробуй изменить значения!
 age = 20
 has_license = True
 
+# Оператор and
 if age >= 18 and has_license:
-    print("✓ Можешь водить машину")
+    print("Можешь водить машину")
 else:
-    print("✗ Не можешь водить")
+    print("Нельзя водить")
 
-print()  # Пустая строка
-
-# Пример 2: or
+# Оператор or
 is_weekend = True
 is_holiday = False
 
 if is_weekend or is_holiday:
-    print("✓ Сегодня можно отдыхать!")
+    print("Выходной день!")
 else:
-    print("✗ Пора на работу/учебу")
+    print("Рабочий день")
 
-print()
-
-# Пример 3: not
+# Оператор not
 is_raining = False
-
 if not is_raining:
-    print("✓ Хорошая погода для прогулки!")
-else:
-    print("✗ Лучше взять зонт")
-
-print()
-
-# Пример 4: Комбинация
-score = 85
-
-if score >= 0 and score <= 100:
-    if score >= 90:
-        print("Оценка: Отлично!")
-    elif score >= 70:
-        print("Оценка: Хорошо!")
-    else:
-        print("Оценка: Удовлетворительно")
-else:
-    print("Ошибка: недопустимый балл")
-
-print()
-
-# Пример 5: Сложное условие
-username = "admin"
-password = "12345"
-is_active = True
-
-if (username == "admin" and password == "12345") and is_active:
-    print("✓ Вход выполнен успешно!")
-else:
-    print("✗ Доступ запрещен")
-
-print()
-
-# Пример 6: Проверка диапазона
-temperature = 22
-
-if temperature >= 18 and temperature <= 25:
-    print("Комфортная температура")
-elif temperature < 18:
-    print("Холодно")
-else:
-    print("Жарко")</textarea>
+    print("Можно идти гулять!")
+</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>

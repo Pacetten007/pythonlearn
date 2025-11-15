@@ -540,70 +540,33 @@ if not found:
     print(f"{target} не найден")</pre>
                 </div>
 
-                <h2>Интерактивный редактор</h2>
+                <h2>Попробуй сам!</h2>
                 <p>Попробуй разные варианты range() и вложенных циклов!</p>
 
-                <div class="code-editor">
-                    <textarea id="code-input" rows="15"># Пример 1: Простой цикл
-print("=== Числа от 1 до 5 ===")
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Цикл for - числа от 1 до 5
 for i in range(1, 6):
-    print(i)
+    print(f"Число: {i}")
 
-print()
-
-# Пример 2: С шагом
-print("=== Четные от 0 до 10 ===")
-for i in range(0, 11, 2):
-    print(i, end=" ")
-
-print("\n")
-
-# Пример 3: Обратный отсчет
-print("=== Обратный отсчет ===")
-for i in range(5, 0, -1):
-    print(i)
-print("Пуск!")
-
-print()
-
-# Пример 4: Сумма
-print("=== Сумма от 1 до 100 ===")
+# Сумма чисел от 1 до 10
 total = 0
-for i in range(1, 101):
-    total += i
+for i in range(1, 11):
+    total = total + i
+
 print(f"Сумма: {total}")
 
-print()
-
-# Пример 5: Треугольник
-print("=== Треугольник ===")
-for i in range(1, 6):
-    for j in range(i):
-        print("*", end="")
-    print()
-
-print()
-
-# Пример 6: Таблица умножения на 7
-print("=== Таблица умножения на 7 ===")
+# Таблица умножения на 5
 for i in range(1, 11):
-    print(f"7 × {i} = {7 * i}")
-
-print()
-
-# Пример 7: Квадраты
-print("=== Квадраты от 1 до 10 ===")
-for i in range(1, 11):
-    print(f"{i}² = {i**2}")
-
-print()
-
-# Пример 8: Вложенные циклы - координаты
-print("=== Координаты 3x3 ===")
-for x in range(1, 4):
-    for y in range(1, 4):
-        print(f"({x},{y})", end=" ")
-    print()</textarea>
+    result = 5 * i
+    print(f"5 × {i} = {result}")
+</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
