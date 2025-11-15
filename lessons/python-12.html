@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 17: Списки - Методы - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-12">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,50 +220,793 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 17: Списки - Методы</h1>
-                <div class="lesson-meta">Структуры данных • 25 минут</div>
+                <div class="lesson-meta">Структуры данных • 50 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>В прошлом уроке мы научились создавать списки и работать с их элементами. Но настоящая мощь списков - в их методах! Методы позволяют легко добавлять и удалять элементы, сортировать список, находить элементы и многое другое.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>В этом уроке изучим все основные методы списков, которые используются в реальной разработке и на экзаменах.</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Добавление элементов: <code>append()</code>, <code>insert()</code>, <code>extend()</code></li>
+                        <li>Удаление элементов: <code>remove()</code>, <code>pop()</code>, <code>clear()</code></li>
+                        <li>Поиск элементов: <code>index()</code>, <code>count()</code></li>
+                        <li>Сортировка: <code>sort()</code>, <code>sorted()</code>, <code>reverse()</code></li>
+                        <li>Копирование списков: <code>copy()</code></li>
+                        <li>Оператор <code>+</code> для объединения списков</li>
+                        <li>Разницу между методами, изменяющими список, и функциями, возвращающими новый</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
+                <h2>Добавление элементов</h2>
+
+                <h3>1. append() - добавить в конец</h3>
+                <p>Метод <code>append()</code> добавляет элемент в конец списка:</p>
+
+                <div class="code-block">
+                    <pre># append() - добавить элемент в конец
+fruits = ["яблоко", "банан"]
+print(fruits)  # ['яблоко', 'банан']
+
+fruits.append("апельсин")
+print(fruits)  # ['яблоко', 'банан', 'апельсин']
+
+fruits.append("киви")
+print(fruits)  # ['яблоко', 'банан', 'апельсин', 'киви']
+
+# Можно добавлять разные типы
+numbers = [1, 2, 3]
+numbers.append(4)
+numbers.append(5)
+print(numbers)  # [1, 2, 3, 4, 5]</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Важно:</h4>
+                    <p><code>append()</code> изменяет исходный список и не возвращает ничего (возвращает <code>None</code>). Это называется "изменение на месте" (in-place modification).</p>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - append() не возвращает новый список!
+fruits = ["яблоко"]
+result = fruits.append("банан")
+print(result)  # None (не список!)
+
+# ПРАВИЛЬНО - просто вызываем метод
+fruits = ["яблоко"]
+fruits.append("банан")
+print(fruits)  # ['яблоко', 'банан']</pre>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                </div>
+
+                <h3>2. insert() - вставить на позицию</h3>
+                <p>Метод <code>insert(index, item)</code> вставляет элемент на указанную позицию:</p>
+
+                <div class="code-block">
+                    <pre># insert(индекс, элемент) - вставить на позицию
+fruits = ["яблоко", "банан", "апельсин"]
+print(fruits)  # ['яблоко', 'банан', 'апельсин']
+
+# Вставить на позицию 1 (между яблоком и бананом)
+fruits.insert(1, "груша")
+print(fruits)  # ['яблоко', 'груша', 'банан', 'апельсин']
+
+# Вставить в начало (индекс 0)
+fruits.insert(0, "киви")
+print(fruits)  # ['киви', 'яблоко', 'груша', 'банан', 'апельсин']
+
+# Вставить в конец (большой индекс)
+fruits.insert(100, "манго")  # Если индекс больше длины - добавит в конец
+print(fruits)  # ['киви', 'яблоко', 'груша', 'банан', 'апельсин', 'манго']</pre>
+                </div>
+
+                <h3>3. extend() - добавить несколько элементов</h3>
+                <p>Метод <code>extend()</code> добавляет все элементы из другого списка:</p>
+
+                <div class="code-block">
+                    <pre># extend() - добавить несколько элементов из списка
+fruits = ["яблоко", "банан"]
+more_fruits = ["апельсин", "киви", "груша"]
+
+fruits.extend(more_fruits)
+print(fruits)  # ['яблоко', 'банан', 'апельсин', 'киви', 'груша']
+
+# Можно расширить любым итерируемым объектом
+numbers = [1, 2, 3]
+numbers.extend([4, 5, 6])
+print(numbers)  # [1, 2, 3, 4, 5, 6]
+
+# Разница extend() и append()
+list1 = [1, 2]
+list1.append([3, 4])  # Добавляет список КАК ОДИН элемент
+print(list1)  # [1, 2, [3, 4]] - список внутри списка!
+
+list2 = [1, 2]
+list2.extend([3, 4])  # Добавляет элементы ИЗ списка
+print(list2)  # [1, 2, 3, 4]</pre>
+                </div>
+
+                <h3>4. Оператор + для объединения</h3>
+                <p>Оператор <code>+</code> создает новый список из двух списков:</p>
+
+                <div class="code-block">
+                    <pre># Оператор + - объединение списков
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+result = list1 + list2
+print(result)  # [1, 2, 3, 4, 5, 6]
+
+# Исходные списки не изменились!
+print(list1)  # [1, 2, 3]
+print(list2)  # [4, 5, 6]
+
+# Можно объединять много списков
+fruits = ["яблоко"] + ["банан", "киви"] + ["груша"]
+print(fruits)  # ['яблоко', 'банан', 'киви', 'груша']
+
+# Оператор += - то же, что extend()
+numbers = [1, 2, 3]
+numbers += [4, 5]  # Изменяет numbers
+print(numbers)  # [1, 2, 3, 4, 5]</pre>
+                </div>
+
+                <h2>Удаление элементов</h2>
+
+                <h3>1. remove() - удалить по значению</h3>
+                <p>Метод <code>remove()</code> удаляет первое вхождение элемента:</p>
+
+                <div class="code-block">
+                    <pre># remove(элемент) - удалить первое вхождение
+fruits = ["яблоко", "банан", "апельсин", "банан"]
+print(fruits)  # ['яблоко', 'банан', 'апельсин', 'банан']
+
+fruits.remove("банан")  # Удалит ПЕРВЫЙ "банан"
+print(fruits)  # ['яблоко', 'апельсин', 'банан']
+
+fruits.remove("яблоко")
+print(fruits)  # ['апельсин', 'банан']
+
+# ВАЖНО: если элемента нет - будет ошибка!
+# fruits.remove("киви")  # ValueError: 'киви' is not in list
+
+# Безопасное удаление - проверка перед удалением
+if "киви" in fruits:
+    fruits.remove("киви")
+else:
+    print("Элемента 'киви' нет в списке")</pre>
+                </div>
+
+                <h3>2. pop() - удалить и вернуть элемент</h3>
+                <p>Метод <code>pop()</code> удаляет элемент по индексу и возвращает его значение:</p>
+
+                <div class="code-block">
+                    <pre># pop() - удалить и вернуть последний элемент
+fruits = ["яблоко", "банан", "апельсин"]
+
+last = fruits.pop()  # Удаляет и возвращает последний
+print(last)    # апельсин
+print(fruits)  # ['яблоко', 'банан']
+
+# pop(индекс) - удалить элемент на позиции
+fruits = ["яблоко", "банан", "апельсин", "киви"]
+item = fruits.pop(1)  # Удалить элемент с индексом 1
+print(item)    # банан
+print(fruits)  # ['яблоко', 'апельсин', 'киви']
+
+# pop(0) - удалить первый элемент
+first = fruits.pop(0)
+print(first)   # яблоко
+print(fruits)  # ['апельсин', 'киви']
+
+# Практика: обработка очереди (FIFO - First In, First Out)
+queue = [1, 2, 3, 4, 5]
+while queue:
+    item = queue.pop(0)  # Берем из начала
+    print(f"Обработан: {item}")</pre>
+                </div>
+
+                <h3>3. clear() - очистить весь список</h3>
+                <p>Метод <code>clear()</code> удаляет все элементы:</p>
+
+                <div class="code-block">
+                    <pre># clear() - удалить все элементы
+fruits = ["яблоко", "банан", "апельсин"]
+print(fruits)  # ['яблоко', 'банан', 'апельсин']
+
+fruits.clear()
+print(fruits)  # []
+
+# Это то же самое, что fruits = [], но работает по-другому:
+# clear() очищает существующий список
+# fruits = [] создает новый пустой список</pre>
+                </div>
+
+                <h3>4. del - удаление через ключевое слово</h3>
+                <p>Оператор <code>del</code> может удалять элементы и срезы:</p>
+
+                <div class="code-block">
+                    <pre># del - удалить элемент или срез
+fruits = ["яблоко", "банан", "апельсин", "киви", "груша"]
+
+# Удалить элемент по индексу
+del fruits[1]
+print(fruits)  # ['яблоко', 'апельсин', 'киви', 'груша']
+
+# Удалить срез
+del fruits[1:3]  # Удалит индексы 1 и 2
+print(fruits)  # ['яблоко', 'груша']
+
+# Удалить весь список (переменная перестанет существовать!)
+# del fruits
+# print(fruits)  # NameError: name 'fruits' is not defined</pre>
+                </div>
+
+                <h2>Поиск элементов</h2>
+
+                <h3>1. index() - найти позицию элемента</h3>
+                <p>Метод <code>index()</code> возвращает индекс первого вхождения элемента:</p>
+
+                <div class="code-block">
+                    <pre># index(элемент) - найти индекс первого вхождения
+fruits = ["яблоко", "банан", "апельсин", "банан"]
+
+pos = fruits.index("банан")
+print(pos)  # 1 (первое вхождение)
+
+pos = fruits.index("апельсин")
+print(pos)  # 2
+
+# ВАЖНО: если элемента нет - ошибка!
+# pos = fruits.index("киви")  # ValueError: 'киви' is not in list
+
+# Безопасный поиск
+if "киви" in fruits:
+    pos = fruits.index("киви")
+    print(f"Киви на позиции {pos}")
+else:
+    print("Киви нет в списке")
+
+# index() с начальной и конечной позицией
+numbers = [1, 2, 3, 2, 4, 2, 5]
+pos = numbers.index(2, 2)  # Искать с индекса 2
+print(pos)  # 3 (первое вхождение после индекса 2)</pre>
+                </div>
+
+                <h3>2. count() - подсчитать количество</h3>
+                <p>Метод <code>count()</code> возвращает количество вхождений элемента:</p>
+
+                <div class="code-block">
+                    <pre># count(элемент) - подсчитать количество вхождений
+numbers = [1, 2, 3, 2, 4, 2, 5, 2]
+
+count_2 = numbers.count(2)
+print(count_2)  # 4
+
+count_5 = numbers.count(5)
+print(count_5)  # 1
+
+count_9 = numbers.count(9)
+print(count_9)  # 0 (если элемента нет, возвращает 0)
+
+# Практика: подсчет оценок
+grades = [5, 4, 5, 3, 5, 4, 5, 4, 3, 5]
+print(f"Пятерок: {grades.count(5)}")     # 5
+print(f"Четверок: {grades.count(4)}")    # 3
+print(f"Троек: {grades.count(3)}")       # 2
+print(f"Двоек: {grades.count(2)}")       # 0</pre>
+                </div>
+
+                <h2>Сортировка и изменение порядка</h2>
+
+                <h3>1. sort() - сортировать на месте</h3>
+                <p>Метод <code>sort()</code> сортирует список на месте (изменяет исходный список):</p>
+
+                <div class="code-block">
+                    <pre># sort() - сортировка по возрастанию
+numbers = [5, 2, 8, 1, 9, 3]
+print(numbers)  # [5, 2, 8, 1, 9, 3]
+
+numbers.sort()
+print(numbers)  # [1, 2, 3, 5, 8, 9] - изменился!
+
+# sort(reverse=True) - по убыванию
+numbers = [5, 2, 8, 1, 9, 3]
+numbers.sort(reverse=True)
+print(numbers)  # [9, 8, 5, 3, 2, 1]
+
+# Сортировка строк (по алфавиту)
+fruits = ["банан", "яблоко", "апельсин", "груша"]
+fruits.sort()
+print(fruits)  # ['апельсин', 'банан', 'груша', 'яблоко']
+
+# ВАЖНО: sort() не возвращает список!
+numbers = [3, 1, 2]
+result = numbers.sort()
+print(result)  # None (не список!)
+print(numbers)  # [1, 2, 3] - но numbers изменился</pre>
+                </div>
+
+                <h3>2. sorted() - вернуть отсортированную копию</h3>
+                <p>Функция <code>sorted()</code> возвращает новый отсортированный список (не изменяет исходный):</p>
+
+                <div class="code-block">
+                    <pre># sorted() - создать отсортированную копию
+numbers = [5, 2, 8, 1, 9, 3]
+sorted_numbers = sorted(numbers)
+
+print(numbers)         # [5, 2, 8, 1, 9, 3] - НЕ изменился!
+print(sorted_numbers)  # [1, 2, 3, 5, 8, 9] - новый список
+
+# sorted(reverse=True) - по убыванию
+desc = sorted(numbers, reverse=True)
+print(desc)  # [9, 8, 5, 3, 2, 1]
+
+# Сравнение sort() и sorted()
+# sort() - изменяет список, возвращает None
+# sorted() - не изменяет список, возвращает новый</pre>
+                </div>
+
+                <h3>3. reverse() - перевернуть список</h3>
+                <p>Метод <code>reverse()</code> переворачивает список на месте:</p>
+
+                <div class="code-block">
+                    <pre># reverse() - перевернуть список
+numbers = [1, 2, 3, 4, 5]
+print(numbers)  # [1, 2, 3, 4, 5]
+
+numbers.reverse()
+print(numbers)  # [5, 4, 3, 2, 1]
+
+fruits = ["яблоко", "банан", "апельсин"]
+fruits.reverse()
+print(fruits)  # ['апельсин', 'банан', 'яблоко']
+
+# Альтернатива - срез [::-1] (создает новый список)
+numbers = [1, 2, 3, 4, 5]
+reversed_numbers = numbers[::-1]
+print(numbers)           # [1, 2, 3, 4, 5] - не изменился
+print(reversed_numbers)  # [5, 4, 3, 2, 1] - новый список</pre>
+                </div>
+
+                <h2>Копирование списков</h2>
+                <p>Важная тема! Простое присваивание НЕ копирует список:</p>
+
+                <div class="warning-block">
+                    <h4>Ловушка: присваивание - это не копирование!</h4>
+                    <div class="code-block">
+                        <pre># ПРОБЛЕМА: простое присваивание
+list1 = [1, 2, 3]
+list2 = list1  # list2 ССЫЛАЕТСЯ на тот же список!
+
+list2[0] = 999
+print(list1)  # [999, 2, 3] - изменился и list1!
+print(list2)  # [999, 2, 3]
+
+# Обе переменные указывают на ОДИН список в памяти!</pre>
+                    </div>
+                </div>
+
+                <h3>Способы копирования:</h3>
+
+                <div class="code-block">
+                    <pre># 1. copy() - метод списка
+list1 = [1, 2, 3]
+list2 = list1.copy()
+list2[0] = 999
+print(list1)  # [1, 2, 3] - НЕ изменился
+print(list2)  # [999, 2, 3]
+
+# 2. Срез [:] - копирует весь список
+list1 = [1, 2, 3]
+list2 = list1[:]
+list2[0] = 999
+print(list1)  # [1, 2, 3] - НЕ изменился
+
+# 3. list() - конструктор списка
+list1 = [1, 2, 3]
+list2 = list(list1)
+list2[0] = 999
+print(list1)  # [1, 2, 3] - НЕ изменился
+
+# Все три способа создают НЕЗАВИСИМУЮ копию!</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Список задач (To-Do List)</h3>
+                <div class="code-block">
+                    <pre># Менеджер задач
+tasks = []
+
+# Добавление задач
+tasks.append("Сделать домашку по математике")
+tasks.append("Почитать книгу")
+tasks.append("Позвонить другу")
+print("Задачи:", tasks)
+
+# Вставить срочную задачу в начало
+tasks.insert(0, "СРОЧНО: Подготовиться к контрольной!")
+print("После вставки:", tasks)
+
+# Удалить выполненную задачу
+tasks.remove("Почитать книгу")
+print("После удаления:", tasks)
+
+# Показать количество задач
+print(f"Осталось задач: {len(tasks)}")</pre>
+                </div>
+
+                <h3>Пример 2: Топ игроков (сортировка)</h3>
+                <div class="code-block">
+                    <pre># Рейтинг игроков (очки)
+scores = [450, 320, 780, 590, 410]
+names = ["Иван", "Мария", "Петр", "Анна", "Олег"]
+
+print("До сортировки:")
+for i in range(len(names)):
+    print(f"{names[i]}: {scores[i]}")
+
+# Найти победителя (максимум)
+max_score = max(scores)
+winner_index = scores.index(max_score)
+print(f"\nПобедитель: {names[winner_index]} ({max_score} очков)")
+
+# Топ-3 игрока (отсортировать по убыванию)
+sorted_scores = sorted(scores, reverse=True)
+print("\nТоп-3 результата:", sorted_scores[:3])</pre>
+                </div>
+
+                <h3>Пример 3: Фильтр списка</h3>
+                <div class="code-block">
+                    <pre># Удалить все четные числа из списка
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print("Исходный:", numbers)
+
+# Способ 1: создать новый список
+odd_numbers = []
+for num in numbers:
+    if num % 2 != 0:  # Нечетное
+        odd_numbers.append(num)
+print("Нечетные:", odd_numbers)
+
+# Способ 2: удалять из копии
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+for num in numbers[:]:  # Перебираем КОПИЮ!
+    if num % 2 == 0:  # Четное
+        numbers.remove(num)
+print("После удаления четных:", numbers)</pre>
+                </div>
+
+                <h3>Пример 4: Объединение списков</h3>
+                <div class="code-block">
+                    <pre># Объединение списков покупок
+groceries1 = ["молоко", "хлеб", "яйца"]
+groceries2 = ["сыр", "масло"]
+groceries3 = ["яблоки", "бананы"]
+
+# Способ 1: оператор +
+all_groceries = groceries1 + groceries2 + groceries3
+print("Все покупки (способ 1):", all_groceries)
+
+# Способ 2: extend()
+all_groceries = []
+all_groceries.extend(groceries1)
+all_groceries.extend(groceries2)
+all_groceries.extend(groceries3)
+print("Все покупки (способ 2):", all_groceries)
+
+print(f"Всего товаров: {len(all_groceries)}")</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
+                <div class="editor-container">
+                    <h4>Попробуй сам!</h4>
+                    <textarea id="code-editor" class="code-editor"># Пример 1: Добавление элементов
+fruits = ["яблоко", "банан"]
+print("Начало:", fruits)
+fruits.append("апельсин")
+fruits.insert(1, "киви")
+fruits.extend(["груша", "манго"])
+print("После добавлений:", fruits)
+print()
+
+# Пример 2: Удаление элементов
+numbers = [1, 2, 3, 4, 5, 6]
+print("Начало:", numbers)
+numbers.remove(3)
+last = numbers.pop()
+print(f"Удален последний: {last}")
+print("После удалений:", numbers)
+print()
+
+# Пример 3: Поиск
+colors = ["красный", "синий", "зеленый", "синий", "желтый"]
+print("Цвета:", colors)
+print(f"Позиция 'синий': {colors.index('синий')}")
+print(f"Количество 'синий': {colors.count('синий')}")
+print()
+
+# Пример 4: Сортировка
+scores = [85, 92, 78, 95, 88, 73]
+print("Оценки:", scores)
+print("Отсортированные:", sorted(scores))
+print("Топ-3:", sorted(scores, reverse=True)[:3])
+print()
+
+# Пример 5: Копирование
+list1 = [1, 2, 3]
+list2 = list1        # Ссылка (не копия!)
+list3 = list1.copy()  # Настоящая копия
+list2[0] = 999
+list3[0] = 777
+print("list1:", list1)  # [999, 2, 3] - изменился!
+print("list2:", list2)  # [999, 2, 3]
+print("list3:", list3)  # [777, 2, 3] - независим
+print()
+
+# Пример 6: Комплексная операция
+tasks = ["математика", "физика", "русский"]
+print("Задачи:", tasks)
+tasks.insert(0, "СРОЧНО: химия")
+tasks.append("история")
+tasks.sort()
+print("Отсортированные задачи:", tasks)
+print(f"Всего заданий: {len(tasks)}")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Менеджер оценок</h4>
+                    <p>Создай программу для управления оценками:</p>
+                    <ol>
+                        <li>Начни с пустого списка оценок</li>
+                        <li>Добавь 5 оценок с помощью <code>append()</code></li>
+                        <li>Найди и выведи среднюю оценку</li>
+                        <li>Найди количество пятерок</li>
+                        <li>Удали самую низкую оценку (используй <code>min()</code> и <code>remove()</code>)</li>
+                        <li>Отсортируй оставшиеся оценки по убыванию</li>
+                        <li>Выведи итоговый список</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>min()</code> для поиска минимума, <code>count()</code> для подсчета</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Удаление дубликатов</h4>
+                    <p>Создай программу для удаления повторяющихся элементов:</p>
+                    <ol>
+                        <li>Создай список с повторяющимися числами: <code>[1, 2, 2, 3, 4, 4, 4, 5, 5]</code></li>
+                        <li>Создай новый пустой список <code>unique</code></li>
+                        <li>Пройдись по исходному списку</li>
+                        <li>Для каждого элемента: если его еще нет в <code>unique</code>, добавь его</li>
+                        <li>Выведи список уникальных элементов</li>
+                        <li>Отсортируй результат</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>in</code> для проверки и <code>append()</code> для добавления</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Список покупок с приоритетами</h4>
+                    <p>Создай программу управления списком покупок:</p>
+                    <ol>
+                        <li>Создай список покупок: <code>["молоко", "хлеб", "яблоки"]</code></li>
+                        <li>Добавь срочную покупку в начало: "лекарство"</li>
+                        <li>Добавь 2 обычных покупки в конец</li>
+                        <li>Выведи список с номерами (1, 2, 3...)</li>
+                        <li>Найди позицию "хлеб" в списке</li>
+                        <li>Купили "молоко" - удали его из списка</li>
+                        <li>Выведи сколько осталось покупок</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>insert(0, ...)</code>, <code>index()</code>, <code>remove()</code></p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Использование результата append()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - append() возвращает None!
+fruits = ["яблоко"]
+fruits = fruits.append("банан")  # fruits теперь None!
+print(fruits)  # None
+
+# ПРАВИЛЬНО - просто вызвать метод
+fruits = ["яблоко"]
+fruits.append("банан")
+print(fruits)  # ['яблоко', 'банан']</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Путаница append() и extend()</h4>
+                    <div class="code-block">
+                        <pre># append() добавляет элемент КАК ЕСТЬ
+list1 = [1, 2]
+list1.append([3, 4])
+print(list1)  # [1, 2, [3, 4]] - список внутри!
+
+# extend() добавляет элементы ИЗ списка
+list2 = [1, 2]
+list2.extend([3, 4])
+print(list2)  # [1, 2, 3, 4] - правильно!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: remove() несуществующего элемента</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - элемента может не быть
+fruits = ["яблоко", "банан"]
+# fruits.remove("киви")  # ValueError!
+
+# ПРАВИЛЬНО - проверка перед удалением
+if "киви" in fruits:
+    fruits.remove("киви")
+else:
+    print("Элемента нет")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Изменение списка во время перебора</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - изменяем список во время for
+numbers = [1, 2, 3, 4, 5]
+for num in numbers:
+    if num % 2 == 0:
+        numbers.remove(num)  # Может пропустить элементы!
+
+# ПРАВИЛЬНО - перебрать копию
+numbers = [1, 2, 3, 4, 5]
+for num in numbers[:]:  # [:] создает копию
+    if num % 2 == 0:
+        numbers.remove(num)
+print(numbers)  # [1, 3, 5]</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Путаница sort() и sorted()</h4>
+                    <div class="code-block">
+                        <pre># sort() изменяет список, возвращает None
+numbers = [3, 1, 2]
+result = numbers.sort()
+print(result)   # None (не список!)
+print(numbers)  # [1, 2, 3] (изменился)
+
+# sorted() возвращает новый список
+numbers = [3, 1, 2]
+result = sorted(numbers)
+print(result)   # [1, 2, 3] (новый список)
+print(numbers)  # [3, 1, 2] (не изменился)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Копирование через присваивание</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - это не копия!
+list1 = [1, 2, 3]
+list2 = list1  # Обе переменные указывают на ОДИН список!
+list2[0] = 999
+print(list1)  # [999, 2, 3] - изменился!
+
+# ПРАВИЛЬНО - настоящее копирование
+list1 = [1, 2, 3]
+list2 = list1.copy()  # Или list1[:] или list(list1)
+list2[0] = 999
+print(list1)  # [1, 2, 3] - НЕ изменился!</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет этот код?<br><code>lst = [1, 2]; result = lst.append(3); print(result)</code></h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! append() не возвращает список.">[1, 2, 3]</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! append() изменяет список на месте и возвращает None.">None</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! append() не возвращает новый элемент.">3</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Код выполнится без ошибки.">Ошибка</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: В чем разница между <code>append([1, 2])</code> и <code>extend([1, 2])</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Оба метода что-то добавляют.">Нет разницы</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! append() добавляет список как один элемент, extend() - элементы из списка.">append добавляет список как один элемент, extend - элементы списка</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! append() тоже изменяет исходный список.">append создает новый список, extend изменяет</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! extend() добавляет элементы, а не возвращает их.">extend возвращает добавленные элементы</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Какой метод изменяет исходный список при сортировке?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! sorted() возвращает новый список.">sorted()</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! sort() сортирует список на месте.">sort()</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! reverse() только переворачивает, не сортирует.">reverse()</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Оба изменяют список.">Оба</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Как правильно скопировать список?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Это создает ссылку на тот же список, не копию.">list2 = list1</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! copy() создает независимую копию списка.">list2 = list1.copy()</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Такого метода нет.">list2 = list1.clone()</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! sort() сортирует, не копирует.">list2 = list1.sort()</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что делает <code>pop(0)</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! pop(0) удаляет и возвращает первый элемент.">Удаляет и возвращает первый элемент</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это делает pop() без аргументов или pop(-1).">Удаляет и возвращает последний элемент</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! pop() всегда удаляет элемент.">Только возвращает первый, не удаляет</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! pop(0) работает корректно.">Вызывает ошибку</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Методы списков критически важны для экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ программ с методами списков), Задание 14 (написание программы с обработкой списков)</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-27 (программирование с динамическими структурами данных)</li>
+                        <li>Часто встречаются задачи на:
+                            <ul>
+                                <li>Добавление и удаление элементов (append, remove, pop)</li>
+                                <li>Поиск элементов (index, count)</li>
+                                <li>Сортировку данных (sort, sorted)</li>
+                                <li>Изменение списка "на месте" vs создание нового</li>
+                            </ul>
+                        </li>
+                        <li>Важно понимать разницу между методами, изменяющими список (append, sort) и возвращающими новый (sorted, +)</li>
+                        <li>Частая ловушка: попытка использовать результат метода, который возвращает None</li>
+                        <li>Знание методов списков необходимо для реализации алгоритмов сортировки и поиска</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Добавление:</strong> <code>append()</code> - в конец, <code>insert()</code> - на позицию, <code>extend()</code> - несколько</li>
+                    <li><strong>Удаление:</strong> <code>remove()</code> - по значению, <code>pop()</code> - по индексу и вернуть, <code>clear()</code> - все</li>
+                    <li><strong>Поиск:</strong> <code>index()</code> - найти позицию, <code>count()</code> - подсчитать количество</li>
+                    <li><strong>Сортировка:</strong> <code>sort()</code> - на месте, <code>sorted()</code> - новый список</li>
+                    <li><strong>Переворот:</strong> <code>reverse()</code> - на месте, <code>[::-1]</code> - новый список</li>
+                    <li><strong>Копирование:</strong> <code>copy()</code>, <code>[:]</code>, <code>list()</code> - создают независимую копию</li>
+                    <li><strong>Объединение:</strong> <code>+</code> - создает новый, <code>extend()</code> - изменяет исходный</li>
+                    <li><strong>На месте vs новый:</strong> методы <code>sort()</code>, <code>reverse()</code> изменяют список; функции <code>sorted()</code>, срезы создают новый</li>
+                    <li><strong>Возвращают None:</strong> <code>append()</code>, <code>extend()</code>, <code>insert()</code>, <code>remove()</code>, <code>sort()</code>, <code>reverse()</code>, <code>clear()</code></li>
+                    <li><strong>Возвращают значение:</strong> <code>pop()</code>, <code>index()</code>, <code>count()</code></li>
+                </ul>
+
+                <p>Превосходно! Теперь ты владеешь всеми основными методами работы со списками! В следующем уроке изучим вложенные списки (списки внутри списков) - двумерные массивы и матрицы.</p>
             </div>
 
             <div class="lesson-nav">

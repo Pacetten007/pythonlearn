@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 16: Списки - Основы - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-11">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,50 +220,732 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 16: Списки - Основы</h1>
-                <div class="lesson-meta">Структуры данных • 25 минут</div>
+                <div class="lesson-meta">Структуры данных • 45 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Представь, что тебе нужно хранить оценки за неделю: понедельник - 5, вторник - 4, среда - 5... Создавать переменную для каждого дня? <code>day1 = 5, day2 = 4, day3 = 5...</code> Неудобно! Для таких задач в Python есть <strong>списки</strong> (lists).</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Список - это упорядоченная коллекция элементов. Как список покупок, плейлист музыки или список твоих друзей в соцсети. Все элементы хранятся вместе под одним именем!</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Создание списков разных типов</li>
+                        <li>Доступ к элементам по индексу (как в строках!)</li>
+                        <li>Срезы списков (slicing)</li>
+                        <li>Изменение элементов (списки ИЗМЕНЯЕМЫЕ!)</li>
+                        <li>Длина списка: <code>len()</code></li>
+                        <li>Проверка принадлежности: <code>in</code> и <code>not in</code></li>
+                        <li>Перебор элементов в цикле</li>
+                        <li>Разница между списками и строками</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
+                <h2>Зачем нужны списки?</h2>
+                <p>Сравни два подхода к хранению оценок:</p>
+
+                <div class="code-block">
+                    <pre># БЕЗ списков - много переменных
+grade1 = 5
+grade2 = 4
+grade3 = 5
+grade4 = 3
+grade5 = 4
+average = (grade1 + grade2 + grade3 + grade4 + grade5) / 5
+print(average)  # 4.2
+
+# СО списком - одна переменная!
+grades = [5, 4, 5, 3, 4]
+average = sum(grades) / len(grades)
+print(average)  # 4.2</pre>
+                </div>
+
+                <p>Список гораздо удобнее! Можно легко добавлять оценки, находить максимум, сортировать и многое другое.</p>
+
+                <h2>Создание списков</h2>
+                <p>Список создается с помощью квадратных скобок <code>[]</code>. Элементы разделяются запятыми:</p>
+
+                <div class="code-block">
+                    <pre># Список чисел
+numbers = [1, 2, 3, 4, 5]
+print(numbers)  # [1, 2, 3, 4, 5]
+
+# Список строк
+fruits = ["яблоко", "банан", "апельсин"]
+print(fruits)  # ['яблоко', 'банан', 'апельсин']
+
+# Список может содержать разные типы данных!
+mixed = [1, "текст", 3.14, True]
+print(mixed)  # [1, 'текст', 3.14, True]
+
+# Пустой список
+empty = []
+print(empty)  # []</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Особенности списков:</h4>
+                    <ul>
+                        <li><strong>Упорядоченные:</strong> элементы имеют строгий порядок (индексы)</li>
+                        <li><strong>Изменяемые:</strong> можно менять элементы после создания</li>
+                        <li><strong>Разнотипные:</strong> можно хранить числа, строки, другие списки вместе</li>
+                        <li><strong>Динамические:</strong> размер списка может меняться (добавлять/удалять)</li>
+                    </ul>
+                </div>
+
+                <h2>Индексация списков</h2>
+                <p>Как и в строках, каждый элемент списка имеет индекс (номер). Python считает с 0!</p>
+
+                <div class="code-block">
+                    <pre># Доступ к элементам по индексу
+fruits = ["яблоко", "банан", "апельсин", "груша"]
+
+# Индексы:  0          1        2           3
+
+print(fruits[0])   # яблоко (первый элемент)
+print(fruits[1])   # банан (второй элемент)
+print(fruits[3])   # груша (последний элемент)
+
+# Схема индексов:
+#  яблоко  банан  апельсин  груша
+#    0       1       2        3    (положительные индексы)
+#   -4      -3      -2       -1    (отрицательные индексы)</pre>
+                </div>
+
+                <h3>Отрицательные индексы</h3>
+                <p>Отрицательные индексы считают с конца списка (как в строках):</p>
+
+                <div class="code-block">
+                    <pre>fruits = ["яблоко", "банан", "апельсин", "груша"]
+
+print(fruits[-1])   # груша (последний элемент)
+print(fruits[-2])   # апельсин (предпоследний)
+print(fruits[-4])   # яблоко (первый = fruits[0])
+
+# Это очень удобно, когда нужен последний элемент!
+scores = [10, 20, 30, 40, 50]
+last_score = scores[-1]
+print(last_score)  # 50</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка: IndexError</h4>
+                    <p>Обращение к несуществующему индексу вызовет ошибку!</p>
+                    <div class="code-block">
+                        <pre>fruits = ["яблоко", "банан", "апельсин"]  # Индексы: 0, 1, 2
+
+# print(fruits[5])  # IndexError! Индекса 5 не существует
+# print(fruits[3])  # IndexError! Последний индекс - 2
+
+# Безопасная проверка
+if len(fruits) > 5:
+    print(fruits[5])
+else:
+    print("Элемента с индексом 5 нет")</pre>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                </div>
+
+                <h2>Срезы списков (Slicing)</h2>
+                <p>Срезы позволяют получить часть списка. Синтаксис точно такой же, как у строк!</p>
+
+                <div class="info-block">
+                    <h4>Синтаксис срезов:</h4>
+                    <ul>
+                        <li><code>list[start:end]</code> - от start до end-1 (end НЕ включается!)</li>
+                        <li><code>list[:end]</code> - с начала до end-1</li>
+                        <li><code>list[start:]</code> - от start до конца</li>
+                        <li><code>list[:]</code> - весь список (копия)</li>
+                        <li><code>list[start:end:step]</code> - с шагом step</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <pre># Срезы списков
+numbers = [10, 20, 30, 40, 50, 60, 70]
+
+# [start:end] - от start до end-1
+print(numbers[1:4])    # [20, 30, 40] (индексы 1, 2, 3)
+print(numbers[0:3])    # [10, 20, 30]
+
+# [:end] - с начала до end-1
+print(numbers[:3])     # [10, 20, 30] (первые 3 элемента)
+
+# [start:] - от start до конца
+print(numbers[4:])     # [50, 60, 70] (с 4-го до конца)
+
+# [:] - весь список (создает копию!)
+copy = numbers[:]
+print(copy)  # [10, 20, 30, 40, 50, 60, 70]
+
+# Последние 3 элемента
+print(numbers[-3:])    # [50, 60, 70]</pre>
+                </div>
+
+                <h3>Срезы с шагом</h3>
+                <p>Третий параметр среза - шаг. Можно брать каждый второй элемент или перевернуть список!</p>
+
+                <div class="code-block">
+                    <pre>numbers = [10, 20, 30, 40, 50, 60]
+
+# Каждый второй элемент
+print(numbers[::2])     # [10, 30, 50] (индексы 0, 2, 4)
+
+# Каждый второй с 1-го индекса
+print(numbers[1::2])    # [20, 40, 60] (индексы 1, 3, 5)
+
+# Переворот списка (шаг -1)
+print(numbers[::-1])    # [60, 50, 40, 30, 20, 10]
+
+# Практика: первые 3 элемента в обратном порядке
+print(numbers[2::-1])   # [30, 20, 10]</pre>
+                </div>
+
+                <h2>Изменение элементов списка</h2>
+                <p><strong>Важное отличие от строк:</strong> списки ИЗМЕНЯЕМЫЕ (mutable)! Можно менять отдельные элементы:</p>
+
+                <div class="code-block">
+                    <pre># Списки можно изменять!
+fruits = ["яблоко", "банан", "апельсин"]
+print(fruits)  # ['яблоко', 'банан', 'апельсин']
+
+# Изменить элемент по индексу
+fruits[0] = "груша"
+print(fruits)  # ['груша', 'банан', 'апельсин']
+
+fruits[2] = "киви"
+print(fruits)  # ['груша', 'банан', 'киви']
+
+# Можно изменять несколько элементов
+numbers = [1, 2, 3, 4, 5]
+numbers[1] = 20
+numbers[3] = 40
+print(numbers)  # [1, 20, 3, 40, 5]</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Сравнение: строки vs списки</h4>
+                    <div class="code-block">
+                        <pre># Строки НЕИЗМЕНЯЕМЫЕ (immutable)
+text = "Python"
+# text[0] = "J"  # TypeError! Нельзя изменить символ
+
+# Списки ИЗМЕНЯЕМЫЕ (mutable)
+letters = ["P", "y", "t", "h", "o", "n"]
+letters[0] = "J"  # Можно!
+print(letters)  # ['J', 'y', 't', 'h', 'o', 'n']</pre>
+                    </div>
+                </div>
+
+                <h2>Длина списка: len()</h2>
+                <p>Функция <code>len()</code> возвращает количество элементов в списке:</p>
+
+                <div class="code-block">
+                    <pre># Длина списка
+fruits = ["яблоко", "банан", "апельсин"]
+print(len(fruits))  # 3
+
+numbers = [10, 20, 30, 40, 50]
+print(len(numbers))  # 5
+
+# Пустой список
+empty = []
+print(len(empty))  # 0
+
+# Применение: получить последний индекс
+last_index = len(fruits) - 1
+print(fruits[last_index])  # апельсин</pre>
+                </div>
+
+                <h2>Проверка принадлежности</h2>
+                <p>Операторы <code>in</code> и <code>not in</code> проверяют, есть ли элемент в списке:</p>
+
+                <div class="code-block">
+                    <pre># Проверка: есть ли элемент в списке?
+fruits = ["яблоко", "банан", "апельсин"]
+
+# Оператор in
+print("банан" in fruits)      # True
+print("киви" in fruits)        # False
+
+# Оператор not in
+print("киви" not in fruits)    # True
+print("яблоко" not in fruits)  # False
+
+# Применение в условиях
+if "банан" in fruits:
+    print("Есть банан!")
+else:
+    print("Банана нет")
+
+# С числами
+numbers = [1, 2, 3, 4, 5]
+if 3 in numbers:
+    print("Число 3 найдено!")  # Выведется</pre>
+                </div>
+
+                <h2>Перебор элементов списка</h2>
+                <p>Список удобно перебирать в цикле <code>for</code>:</p>
+
+                <h3>Способ 1: Перебор элементов напрямую</h3>
+                <div class="code-block">
+                    <pre># Перебор элементов
+fruits = ["яблоко", "банан", "апельсин"]
+
+for fruit in fruits:
+    print(fruit)
+
+# Вывод:
+# яблоко
+# банан
+# апельсин
+
+# Можно обрабатывать элементы
+numbers = [1, 2, 3, 4, 5]
+for num in numbers:
+    print(num * 2)  # Умножаем каждый на 2
+
+# Вывод: 2, 4, 6, 8, 10</pre>
+                </div>
+
+                <h3>Способ 2: Перебор с индексами</h3>
+                <div class="code-block">
+                    <pre># Перебор с индексами
+fruits = ["яблоко", "банан", "апельсин"]
+
+for i in range(len(fruits)):
+    print(f"{i}: {fruits[i]}")
+
+# Вывод:
+# 0: яблоко
+# 1: банан
+# 2: апельсин
+
+# Это полезно, когда нужен и индекс, и значение
+scores = [85, 90, 78, 92]
+for i in range(len(scores)):
+    print(f"Оценка {i+1}: {scores[i]}")</pre>
+                </div>
+
+                <h3>Способ 3: enumerate() - индекс и элемент</h3>
+                <div class="code-block">
+                    <pre># enumerate() - получить индекс и элемент
+fruits = ["яблоко", "банан", "апельсин"]
+
+for i, fruit in enumerate(fruits):
+    print(f"{i}: {fruit}")
+
+# Вывод:
+# 0: яблоко
+# 1: банан
+# 2: апельсин
+
+# Можно начать с другого индекса
+for i, fruit in enumerate(fruits, start=1):
+    print(f"Фрукт #{i}: {fruit}")
+
+# Вывод:
+# Фрукт #1: яблоко
+# Фрукт #2: банан
+# Фрукт #3: апельсин</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Список оценок</h3>
+                <div class="code-block">
+                    <pre># Анализ оценок студента
+grades = [5, 4, 5, 3, 4, 5, 4]
+
+# Статистика
+total = sum(grades)
+average = total / len(grades)
+maximum = max(grades)
+minimum = min(grades)
+
+print(f"Всего оценок: {len(grades)}")
+print(f"Сумма: {total}")
+print(f"Средний балл: {average:.2f}")
+print(f"Максимум: {maximum}")
+print(f"Минимум: {minimum}")
+
+# Подсчет пятерок
+count_5 = grades.count(5)
+print(f"Пятерок: {count_5}")</pre>
+                </div>
+
+                <h3>Пример 2: Список покупок</h3>
+                <div class="code-block">
+                    <pre># Список покупок
+shopping_list = ["молоко", "хлеб", "яйца", "сыр"]
+
+print("Список покупок:")
+for i, item in enumerate(shopping_list, start=1):
+    print(f"{i}. {item}")
+
+# Проверка
+item = "хлеб"
+if item in shopping_list:
+    print(f"{item} есть в списке")
+else:
+    print(f"{item} нужно добавить")</pre>
+                </div>
+
+                <h3>Пример 3: Топ-5 фильмов</h3>
+                <div class="code-block">
+                    <pre># Топ-5 любимых фильмов
+movies = [
+    "Матрица",
+    "Начало",
+    "Интерстеллар",
+    "Бойцовский клуб",
+    "Зеленая миля"
+]
+
+print("Мои топ-5 фильмов:")
+for i, movie in enumerate(movies, start=1):
+    print(f"{i}. {movie}")
+
+# Первый и последний
+print(f"\nСамый любимый: {movies[0]}")
+print(f"Последний в топе: {movies[-1]}")</pre>
+                </div>
+
+                <h3>Пример 4: Температура за неделю</h3>
+                <div class="code-block">
+                    <pre># Температура за неделю (градусы Цельсия)
+temperatures = [22, 24, 23, 25, 26, 24, 23]
+days = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
+
+print("Температура за неделю:")
+for i in range(len(days)):
+    print(f"{days[i]}: {temperatures[i]}°C")
+
+# Средняя температура
+avg_temp = sum(temperatures) / len(temperatures)
+print(f"\nСредняя температура: {avg_temp:.1f}°C")
+
+# Самый жаркий день
+max_temp = max(temperatures)
+max_day_index = temperatures.index(max_temp)
+print(f"Самый жаркий день: {days[max_day_index]} ({max_temp}°C)")</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
+                <div class="editor-container">
+                    <h4>Попробуй сам!</h4>
+                    <textarea id="code-editor" class="code-editor"># Пример 1: Создание и доступ к элементам
+fruits = ["яблоко", "банан", "апельсин", "груша", "киви"]
+print("Список фруктов:", fruits)
+print("Первый фрукт:", fruits[0])
+print("Последний фрукт:", fruits[-1])
+print("Всего фруктов:", len(fruits))
+print()
+
+# Пример 2: Срезы
+numbers = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+print("Числа:", numbers)
+print("Первые 3:", numbers[:3])
+print("Последние 3:", numbers[-3:])
+print("Каждый второй:", numbers[::2])
+print("В обратном порядке:", numbers[::-1])
+print()
+
+# Пример 3: Изменение элементов
+grades = [3, 4, 3, 5, 4]
+print("Оценки до:", grades)
+grades[0] = 5  # Исправили первую оценку
+grades[2] = 4  # Исправили третью оценку
+print("Оценки после:", grades)
+print()
+
+# Пример 4: Проверка принадлежности
+colors = ["красный", "синий", "зеленый", "желтый"]
+print("Цвета:", colors)
+print("Есть синий?", "синий" in colors)
+print("Есть черный?", "черный" in colors)
+print()
+
+# Пример 5: Перебор списка
+print("Перебор с enumerate:")
+scores = [85, 92, 78, 95, 88]
+for i, score in enumerate(scores, start=1):
+    print(f"Попытка {i}: {score} баллов")
+print()
+
+# Пример 6: Анализ данных
+temperatures = [22, 24, 19, 21, 25, 23, 20]
+print(f"Температуры: {temperatures}")
+print(f"Средняя: {sum(temperatures) / len(temperatures):.1f}°C")
+print(f"Максимум: {max(temperatures)}°C")
+print(f"Минимум: {min(temperatures)}°C")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Анализатор списка чисел</h4>
+                    <p>Создай программу для анализа списка чисел:</p>
+                    <ol>
+                        <li>Создай список из 10 произвольных чисел</li>
+                        <li>Выведи:
+                            <ul>
+                                <li>Весь список</li>
+                                <li>Первый и последний элемент</li>
+                                <li>Элементы с четными индексами</li>
+                                <li>Список в обратном порядке</li>
+                            </ul>
+                        </li>
+                        <li>Вычисли и выведи:
+                            <ul>
+                                <li>Сумму всех элементов</li>
+                                <li>Среднее значение</li>
+                                <li>Максимум и минимум</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй срезы <code>[::2]</code>, функции <code>sum()</code>, <code>max()</code>, <code>min()</code></p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Расписание уроков</h4>
+                    <p>Создай программу с расписанием уроков:</p>
+                    <ol>
+                        <li>Создай список из 5-6 предметов (например, математика, русский, физика...)</li>
+                        <li>Выведи расписание с номерами уроков (начиная с 1)</li>
+                        <li>Запроси у пользователя название предмета</li>
+                        <li>Проверь, есть ли этот предмет в расписании</li>
+                        <li>Если есть - скажи каким по счету уроком он идет</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>in</code> для проверки и <code>index()</code> для поиска позиции</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Корректор оценок</h4>
+                    <p>Создай программу-корректор оценок:</p>
+                    <ol>
+                        <li>Создай список с оценками студента (5-7 оценок)</li>
+                        <li>Выведи текущие оценки с номерами</li>
+                        <li>Посчитай и выведи текущий средний балл</li>
+                        <li>Запроси номер оценки для исправления (1, 2, 3...)</li>
+                        <li>Запроси новую оценку</li>
+                        <li>Измени оценку в списке</li>
+                        <li>Выведи обновленный список и новый средний балл</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Помни, что индексы начинаются с 0, а номера с 1!</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Выход за границы списка</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО
+fruits = ["яблоко", "банан", "апельсин"]  # Индексы: 0, 1, 2
+# print(fruits[3])  # IndexError! Индекса 3 нет
+
+# ПРАВИЛЬНО - проверка
+if len(fruits) > 3:
+    print(fruits[3])
+else:
+    print("Элемента с индексом 3 нет")
+
+# Или используй отрицательный индекс для последнего
+print(fruits[-1])  # апельсин</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Забыли, что индексы начинаются с 0</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - считаем с 1
+days = ["Пн", "Вт", "Ср", "Чт", "Пт"]
+# first_day = days[1]  # Это будет "Вт", а не "Пн"!
+
+# ПРАВИЛЬНО - индексы с 0
+first_day = days[0]   # Пн
+second_day = days[1]  # Вт
+
+# Запомни: индекс = номер - 1</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Путаница в срезах [start:end]</h4>
+                    <div class="code-block">
+                        <pre># end НЕ включается!
+numbers = [10, 20, 30, 40, 50]
+
+# Хочу первые 3 элемента (10, 20, 30)
+print(numbers[0:3])  # ПРАВИЛЬНО: [10, 20, 30]
+# print(numbers[0:2])  # НЕПРАВИЛЬНО: [10, 20] (только 2!)
+
+# Запомни: numbers[0:3] дает элементы 0, 1, 2 (3 не включен!)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Сравнение списка и строки</h4>
+                    <div class="code-block">
+                        <pre># Это разные типы!
+list1 = ["a", "b", "c"]
+string1 = "abc"
+
+print(list1 == string1)  # False! Это разные типы
+
+# Преобразования
+list_from_string = list(string1)
+print(list_from_string)  # ['a', 'b', 'c']
+
+string_from_list = "".join(list1)
+print(string_from_list)  # abc</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Изменение списка во время перебора</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - изменяем список во время перебора
+numbers = [1, 2, 3, 4, 5]
+# for num in numbers:
+#     if num == 3:
+#         numbers.remove(num)  # Может дать неожиданные результаты!
+
+# ПРАВИЛЬНО - создать копию
+numbers = [1, 2, 3, 4, 5]
+for num in numbers[:]:  # Перебираем копию
+    if num == 3:
+        numbers.remove(num)
+print(numbers)  # [1, 2, 4, 5]</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Копирование списка через присваивание</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - это не копия!
+list1 = [1, 2, 3]
+list2 = list1  # list2 ссылается на тот же список!
+list2[0] = 999
+print(list1)  # [999, 2, 3] - изменился и list1!
+
+# ПРАВИЛЬНО - создать реальную копию
+list1 = [1, 2, 3]
+list2 = list1[:]  # Или list1.copy()
+list2[0] = 999
+print(list1)  # [1, 2, 3] - не изменился
+print(list2)  # [999, 2, 3]</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет <code>print([1, 2, 3, 4, 5][2])</code>?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Индекс 2 - это третий элемент, не второй.">2</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Индекс 2 - это третий элемент (индексы с 0).">3</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это было бы [2:3].">[2, 3]</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Индекс 2 существует.">Ошибка</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что выведет <code>print([10, 20, 30, 40][1:3])</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это было бы [:2].">[10, 20]</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Индексы 1, 2 (3 не включается).">[20, 30]</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Индекс 3 не включается в срез.">[20, 30, 40]</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это было бы [-2:].">[30, 40]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: В чем главное отличие списков от строк?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! И строки, и списки можно перебирать.">Списки можно перебирать в цикле</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Списки изменяемые (mutable), строки - нет.">Списки можно изменять после создания</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! И у строк, и у списков есть индексы с 0.">У списков индексы начинаются с 1</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! len() работает и со строками, и со списками.">Только у списков есть len()</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что делает оператор <code>in</code> со списком?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Это делает метод index().">Возвращает индекс элемента</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! in проверяет наличие элемента (True/False).">Проверяет, есть ли элемент в списке</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Это делает метод count().">Подсчитывает количество вхождений</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Это делает метод append().">Добавляет элемент в список</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как получить последний элемент списка <code>nums</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Индекс len(nums) выходит за границы (последний - это len(nums)-1).">nums[len(nums)]</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Отрицательный индекс -1 - это последний элемент.">nums[-1]</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это даст срез последних элементов (список), а не один элемент.">nums[-1:]</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это даст первый элемент.">nums[0]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Списки (массивы) - одна из ключевых тем на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ программ с массивами), Задание 12 (обработка последовательностей), Задание 14 (программирование с массивами)</li>
+                        <li><strong>ЕГЭ:</strong> Задание 16 (рекурсия и массивы), Задания 24-27 (обработка массивов, поиск, сортировка)</li>
+                        <li>На экзаменах часто встречаются задачи на:
+                            <ul>
+                                <li>Поиск максимума/минимума в списке</li>
+                                <li>Подсчет элементов с условием</li>
+                                <li>Изменение элементов списка</li>
+                                <li>Работу с индексами и срезами</li>
+                                <li>Обработку последовательностей чисел</li>
+                            </ul>
+                        </li>
+                        <li>Важно знать индексацию (с 0!) и разницу списков и строк</li>
+                        <li>Часто проверяется умение работать со срезами и изменять элементы</li>
+                        <li>Списки - основа для алгоритмов сортировки и поиска (будут в следующих модулях)</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Создание:</strong> <code>my_list = [элемент1, элемент2, ...]</code></li>
+                    <li><strong>Индексация:</strong> <code>my_list[0]</code> - первый, <code>my_list[-1]</code> - последний</li>
+                    <li><strong>Срезы:</strong> <code>my_list[start:end]</code> - от start до end-1</li>
+                    <li><strong>Длина:</strong> <code>len(my_list)</code> - количество элементов</li>
+                    <li><strong>Изменение:</strong> <code>my_list[i] = новое_значение</code></li>
+                    <li><strong>Проверка:</strong> <code>элемент in my_list</code> - True/False</li>
+                    <li><strong>Перебор:</strong> <code>for item in my_list:</code> или <code>for i, item in enumerate(my_list):</code></li>
+                    <li><strong>Функции:</strong> <code>sum()</code>, <code>max()</code>, <code>min()</code> для анализа</li>
+                    <li><strong>Изменяемость:</strong> списки можно менять (в отличие от строк!)</li>
+                    <li><strong>Разнотипность:</strong> список может содержать разные типы данных</li>
+                </ul>
+
+                <p>Отлично! Ты освоил основы работы со списками - одной из самых важных структур данных в Python! В следующем уроке изучим методы списков для добавления, удаления и сортировки элементов.</p>
             </div>
 
             <div class="lesson-nav">

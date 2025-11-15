@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 19: Кортежи (tuple) - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <title>Урок 19: Кортежи (Tuples) - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-14">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -218,51 +219,751 @@
     <main class="container">
         <div class="lesson-container">
             <div class="lesson-header">
-                <h1>Урок 19: Кортежи (tuple)</h1>
-                <div class="lesson-meta">Структуры данных • 20 минут</div>
+                <h1>Урок 19: Кортежи (Tuples)</h1>
+                <div class="lesson-meta">Структуры данных • 40 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Кортеж (tuple) - это как список, но <strong>неизменяемый</strong> (immutable)! После создания кортежа ты не можешь изменить, добавить или удалить его элементы. Зачем это нужно? Для защиты данных, которые не должны меняться: координаты точки, RGB цвет, дата рождения, размеры экрана.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Кортежи работают быстрее списков и занимают меньше памяти. Их можно использовать как ключи в словарях (списки - нельзя!). Это важная структура данных в Python!</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Создание кортежей (круглые скобки или без них)</li>
+                        <li>Важность запятой для одноэлементного кортежа!</li>
+                        <li>Зачем использовать кортежи вместо списков</li>
+                        <li>Доступ к элементам (как в списках)</li>
+                        <li>Почему нельзя изменять элементы</li>
+                        <li>Методы кортежей: count() и index()</li>
+                        <li>Распаковка кортежей и обмен значений</li>
+                        <li>Когда использовать кортеж, а когда список</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
+                <h2>Создание кортежей</h2>
+                <p>Кортежи создаются с помощью круглых скобок <code>()</code> или просто через запятую:</p>
+
+                <div class="code-block">
+                    <pre># Создание кортежа с круглыми скобками
+point = (10, 20)
+print(point)  # (10, 20)
+print(type(point))  # <class 'tuple'>
+
+# Кортеж из разных типов данных
+person = ("Иван", 16, "Москва")
+print(person)  # ('Иван', 16, 'Москва')
+
+# Создание без скобок (тоже кортеж!)
+coordinates = 5, 15, 25
+print(coordinates)  # (5, 15, 25)
+print(type(coordinates))  # <class 'tuple'>
+
+# Пустой кортеж
+empty = ()
+print(empty)  # ()
+print(len(empty))  # 0</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>ВАЖНО: Кортеж из одного элемента!</h4>
+                    <p>Для создания кортежа с одним элементом ОБЯЗАТЕЛЬНА запятая после элемента!</p>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - это НЕ кортеж!
+not_tuple = (5)
+print(type(not_tuple))  # <class 'int'> - это просто число в скобках!
+
+# ПРАВИЛЬНО - кортеж с одним элементом
+single_tuple = (5,)  # Запятая обязательна!
+print(type(single_tuple))  # <class 'tuple'>
+print(single_tuple)  # (5,)
+
+# Или без скобок
+single_tuple = 5,
+print(type(single_tuple))  # <class 'tuple'>
+
+# Еще примеры одноэлементных кортежей
+name_tuple = ("Иван",)  # С запятой - кортеж
+colors = ("red",)       # С запятой - кортеж</pre>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                </div>
+
+                <h2>Зачем нужны кортежи?</h2>
+                <p>Может показаться, что списки удобнее (можно менять). Но у кортежей есть важные преимущества:</p>
+
+                <div class="info-block">
+                    <h4>Преимущества кортежей:</h4>
+                    <ul>
+                        <li><strong>Защита данных:</strong> невозможно случайно изменить важные данные</li>
+                        <li><strong>Скорость:</strong> кортежи работают быстрее списков</li>
+                        <li><strong>Память:</strong> занимают меньше места в памяти</li>
+                        <li><strong>Ключи словарей:</strong> можно использовать как ключи (списки нельзя!)</li>
+                        <li><strong>Множественное присваивание:</strong> удобно возвращать несколько значений из функции</li>
+                        <li><strong>Константы:</strong> когда данные не должны меняться (дни недели, месяцы и т.д.)</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <pre># Примеры использования кортежей
+
+# 1. Координаты (не должны меняться)
+point = (100, 200)
+
+# 2. RGB цвет (фиксированные значения)
+red = (255, 0, 0)
+green = (0, 255, 0)
+
+# 3. Дата (день, месяц, год не меняются)
+birthday = (15, 3, 2008)
+
+# 4. Размеры экрана
+screen_size = (1920, 1080)
+
+# 5. Константы дней недели
+weekdays = ("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс")
+
+# 6. Версия программы
+version = (2, 1, 5)  # версия 2.1.5</pre>
+                </div>
+
+                <h2>Доступ к элементам кортежа</h2>
+                <p>Доступ к элементам кортежа точно такой же, как у списков:</p>
+
+                <div class="code-block">
+                    <pre># Индексация кортежа
+fruits = ("яблоко", "банан", "апельсин", "груша")
+
+print(fruits[0])   # яблоко (первый элемент)
+print(fruits[1])   # банан
+print(fruits[-1])  # груша (последний элемент)
+print(fruits[-2])  # апельсин
+
+# Срезы
+print(fruits[1:3])   # ('банан', 'апельсин')
+print(fruits[:2])    # ('яблоко', 'банан')
+print(fruits[2:])    # ('апельсин', 'груша')
+print(fruits[::-1])  # ('груша', 'апельсин', 'банан', 'яблоко')
+
+# Длина кортежа
+print(len(fruits))  # 4
+
+# Проверка принадлежности
+print("банан" in fruits)  # True
+print("киви" in fruits)   # False</pre>
+                </div>
+
+                <h2>Неизменяемость кортежей</h2>
+                <p>Главное отличие от списков - кортежи НЕЛЬЗЯ изменить после создания:</p>
+
+                <div class="code-block">
+                    <pre># Кортеж нельзя изменить
+point = (10, 20)
+
+# Попытка изменить элемент
+# point[0] = 999  # TypeError: 'tuple' object does not support item assignment
+
+# Нельзя добавлять элементы
+# point.append(30)  # AttributeError: 'tuple' object has no attribute 'append'
+
+# Нельзя удалять элементы
+# del point[0]  # TypeError: 'tuple' object doesn't support item deletion
+
+# НО можно создать новый кортеж
+point = (100, 200)  # Переприсвоили переменную - это разрешено
+print(point)  # (100, 200)
+
+# Список для сравнения (изменяемый)
+my_list = [10, 20]
+my_list[0] = 999  # Можно изменить
+print(my_list)  # [999, 20]</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Внимание: кортеж со списком внутри</h4>
+                    <div class="code-block">
+                        <pre># Кортеж может содержать изменяемые объекты
+mixed = (1, 2, [3, 4])
+
+# Сам кортеж изменить нельзя
+# mixed[0] = 999  # TypeError!
+
+# НО можно изменить список внутри кортежа!
+mixed[2][0] = 999  # Это разрешено
+print(mixed)  # (1, 2, [999, 4])
+
+# Кортеж защищает свою структуру, но не содержимое изменяемых объектов</pre>
+                    </div>
+                </div>
+
+                <h2>Методы кортежей</h2>
+                <p>У кортежей всего 2 метода (у списков их было много!). Это потому, что кортеж неизменяемый:</p>
+
+                <h3>1. count() - подсчитать количество</h3>
+                <div class="code-block">
+                    <pre># count(элемент) - сколько раз встречается элемент
+numbers = (1, 2, 3, 2, 4, 2, 5, 2)
+
+count_2 = numbers.count(2)
+print(count_2)  # 4 (число 2 встречается 4 раза)
+
+count_5 = numbers.count(5)
+print(count_5)  # 1
+
+count_9 = numbers.count(9)
+print(count_9)  # 0 (элемента нет)
+
+# Практика: подсчет цветов
+colors = ("red", "blue", "red", "green", "red", "blue")
+print(f"Красных: {colors.count('red')}")    # 3
+print(f"Синих: {colors.count('blue')}")     # 2
+print(f"Зеленых: {colors.count('green')}")  # 1</pre>
+                </div>
+
+                <h3>2. index() - найти позицию</h3>
+                <div class="code-block">
+                    <pre># index(элемент) - индекс первого вхождения
+fruits = ("яблоко", "банан", "апельсин", "банан")
+
+pos = fruits.index("банан")
+print(pos)  # 1 (первое вхождение)
+
+pos = fruits.index("апельсин")
+print(pos)  # 2
+
+# ВАЖНО: если элемента нет - ошибка!
+# pos = fruits.index("киви")  # ValueError!
+
+# Безопасный поиск
+if "киви" in fruits:
+    pos = fruits.index("киви")
+else:
+    print("Элемента 'киви' нет в кортеже")</pre>
+                </div>
+
+                <h2>Распаковка кортежей</h2>
+                <p>Одна из самых полезных возможностей кортежей - распаковка (unpacking):</p>
+
+                <div class="code-block">
+                    <pre># Распаковка кортежа в переменные
+point = (10, 20)
+x, y = point  # Распаковка!
+print(f"x = {x}, y = {y}")  # x = 10, y = 20
+
+# Распаковка данных о человеке
+person = ("Иван", 16, "Москва")
+name, age, city = person
+print(f"{name}, {age} лет, город {city}")
+
+# Обмен значений переменных (классический трюк Python!)
+a = 5
+b = 10
+print(f"До: a = {a}, b = {b}")
+
+# В других языках нужна временная переменная
+# В Python - одна строка!
+a, b = b, a
+print(f"После: a = {a}, b = {b}")  # a = 10, b = 5
+
+# Распаковка RGB цвета
+color = (255, 128, 64)
+red, green, blue = color
+print(f"R: {red}, G: {green}, B: {blue}")
+
+# Распаковка с игнорированием элементов
+person = ("Иван", 16, "Москва", "ivanov@mail.ru")
+name, age, _, email = person  # _ означает "игнорируем"
+print(f"{name}: {email}")</pre>
+                </div>
+
+                <h3>Распаковка с оператором *</h3>
+                <div class="code-block">
+                    <pre># Распаковка с "остатком"
+numbers = (1, 2, 3, 4, 5)
+first, *rest = numbers  # * собирает остальные элементы в список!
+print(first)  # 1
+print(rest)   # [2, 3, 4, 5] - это список!
+
+# Первый и последний элементы
+numbers = (10, 20, 30, 40, 50)
+first, *middle, last = numbers
+print(first)   # 10
+print(middle)  # [20, 30, 40] - список
+print(last)    # 50
+
+# Практика: разделить на части
+data = (1, 2, 3, 4, 5, 6, 7, 8, 9)
+head, *body, tail = data
+print(f"Начало: {head}, конец: {tail}, середина: {body}")</pre>
+                </div>
+
+                <h2>Преобразования между кортежами и списками</h2>
+                <div class="code-block">
+                    <pre># Из списка в кортеж
+my_list = [1, 2, 3, 4, 5]
+my_tuple = tuple(my_list)
+print(my_tuple)  # (1, 2, 3, 4, 5)
+print(type(my_tuple))  # <class 'tuple'>
+
+# Из кортежа в список
+my_tuple = (10, 20, 30)
+my_list = list(my_tuple)
+print(my_list)  # [10, 20, 30]
+print(type(my_list))  # <class 'list'>
+
+# Из строки в кортеж
+text = "Python"
+letters = tuple(text)
+print(letters)  # ('P', 'y', 't', 'h', 'o', 'n')
+
+# Практика: отсортировать кортеж
+numbers = (5, 2, 8, 1, 9)
+sorted_list = sorted(numbers)  # sorted() возвращает список!
+print(sorted_list)  # [1, 2, 5, 8, 9]
+
+# Чтобы получить отсортированный кортеж
+sorted_tuple = tuple(sorted(numbers))
+print(sorted_tuple)  # (1, 2, 5, 8, 9)</pre>
+                </div>
+
+                <h2>Когда использовать кортеж, а когда список?</h2>
+                <div class="info-block">
+                    <h4>Используй кортеж когда:</h4>
+                    <ul>
+                        <li>Данные не должны меняться (константы, координаты, даты)</li>
+                        <li>Нужен ключ для словаря (списки нельзя использовать как ключи)</li>
+                        <li>Возвращаешь несколько значений из функции</li>
+                        <li>Нужна максимальная производительность</li>
+                        <li>Защита от случайного изменения данных</li>
+                    </ul>
+
+                    <h4>Используй список когда:</h4>
+                    <ul>
+                        <li>Данные будут меняться (добавление, удаление, изменение)</li>
+                        <li>Нужны методы списков (append, remove, sort и т.д.)</li>
+                        <li>Количество элементов не фиксировано</li>
+                        <li>Работаешь с коллекцией однотипных элементов</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <pre># Примеры правильного выбора
+
+# КОРТЕЖ - фиксированные координаты
+start_position = (0, 0)
+end_position = (100, 100)
+
+# СПИСОК - изменяемый список игроков
+players = ["Иван", "Мария"]
+players.append("Петр")  # Можем добавлять
+
+# КОРТЕЖ - RGB цвет (3 фиксированных значения)
+background_color = (255, 255, 255)
+
+# СПИСОК - изменяемый список оценок
+grades = [5, 4, 5]
+grades.append(4)  # Добавляем оценку
+
+# КОРТЕЖ - размеры окна (не меняются после создания)
+window_size = (1920, 1080)
+
+# СПИСОК - история действий (постоянно растет)
+history = []
+history.append("Открыл файл")
+history.append("Изменил текст")</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Координаты точек</h3>
+                <div class="code-block">
+                    <pre># Работа с координатами точек
+point1 = (10, 20)
+point2 = (30, 40)
+point3 = (50, 60)
+
+# Вычислить расстояние между точками
+x1, y1 = point1
+x2, y2 = point2
+
+distance_x = abs(x2 - x1)
+distance_y = abs(y2 - y1)
+print(f"Расстояние: Δx={distance_x}, Δy={distance_y}")
+
+# Список точек треугольника
+triangle = [(0, 0), (10, 0), (5, 10)]
+print("Координаты треугольника:")
+for i, point in enumerate(triangle):
+    x, y = point
+    print(f"Точка {i+1}: ({x}, {y})")</pre>
+                </div>
+
+                <h3>Пример 2: Данные о студентах</h3>
+                <div class="code-block">
+                    <pre># База данных студентов (кортежи - данные не меняются!)
+students = [
+    ("Иван Иванов", 16, "10А", 4.5),
+    ("Мария Петрова", 15, "9Б", 4.8),
+    ("Петр Сидоров", 17, "11В", 4.2)
+]
+
+# Вывести информацию о студентах
+print("Список студентов:")
+for student in students:
+    name, age, class_name, gpa = student  # Распаковка
+    print(f"{name}, {age} лет, класс {class_name}, средний балл: {gpa}")
+
+# Найти студента с наивысшим баллом
+best_student = max(students, key=lambda s: s[3])
+name, age, class_name, gpa = best_student
+print(f"\nЛучший студент: {name} (балл {gpa})")</pre>
+                </div>
+
+                <h3>Пример 3: Даты и время</h3>
+                <div class="code-block">
+                    <pre># Работа с датами (кортежи идеальны для дат!)
+birthday = (15, 3, 2008)  # день, месяц, год
+day, month, year = birthday
+
+months = ("янв", "фев", "мар", "апр", "май", "июн",
+          "июл", "авг", "сен", "окт", "ноя", "дек")
+
+print(f"Дата рождения: {day} {months[month-1]} {year}")
+
+# Сравнение дат
+date1 = (15, 3, 2008)
+date2 = (20, 5, 2007)
+
+# Кортежи можно сравнивать!
+if date1 > date2:
+    print("Первая дата позже")
+else:
+    print("Вторая дата позже")</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
+                <div class="editor-container">
+                    <h4>Попробуй сам!</h4>
+                    <textarea id="code-editor" class="code-editor"># Пример 1: Создание кортежей
+point = (10, 20)
+person = ("Иван", 16, "Москва")
+empty = ()
+single = (5,)  # Запятая обязательна!
+
+print("Точка:", point)
+print("Человек:", person)
+print("Пустой кортеж:", empty)
+print("Один элемент:", single)
+print()
+
+# Пример 2: Доступ и срезы
+fruits = ("яблоко", "банан", "апельсин", "груша", "киви")
+print("Первый фрукт:", fruits[0])
+print("Последний фрукт:", fruits[-1])
+print("Первые три:", fruits[:3])
+print("В обратном порядке:", fruits[::-1])
+print()
+
+# Пример 3: Методы кортежей
+numbers = (1, 2, 3, 2, 4, 2, 5)
+print(f"Двоек в кортеже: {numbers.count(2)}")
+print(f"Позиция первой тройки: {numbers.index(3)}")
+print()
+
+# Пример 4: Распаковка
+coordinates = (100, 200)
+x, y = coordinates
+print(f"x = {x}, y = {y}")
+
+# Обмен значений
+a, b = 5, 10
+print(f"До обмена: a = {a}, b = {b}")
+a, b = b, a
+print(f"После обмена: a = {a}, b = {b}")
+print()
+
+# Пример 5: Распаковка с *
+numbers = (1, 2, 3, 4, 5, 6)
+first, *middle, last = numbers
+print(f"Первый: {first}, последний: {last}, середина: {middle}")
+print()
+
+# Пример 6: Преобразования
+my_list = [10, 20, 30]
+my_tuple = tuple(my_list)
+print(f"Список: {my_list}, тип: {type(my_list)}")
+print(f"Кортеж: {my_tuple}, тип: {type(my_tuple)}")
+print()
+
+# Пример 7: RGB цвета
+red = (255, 0, 0)
+green = (0, 255, 0)
+blue = (0, 0, 255)
+
+print("Цвета:")
+for color_name, color_value in [("Красный", red), ("Зеленый", green), ("Синий", blue)]:
+    r, g, b = color_value
+    print(f"{color_name}: R={r}, G={g}, B={b}")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: База данных городов</h4>
+                    <p>Создай программу для работы с данными о городах:</p>
+                    <ol>
+                        <li>Создай список кортежей: (название, население, площадь)</li>
+                        <li>Добавь данные о 5 городах России</li>
+                        <li>Выведи все города с их данными</li>
+                        <li>Найди город с максимальным населением</li>
+                        <li>Вычисли плотность населения для каждого города (население/площадь)</li>
+                        <li>Отсортируй города по населению</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй распаковку кортежей и функцию max()</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Координаты точек</h4>
+                    <p>Создай программу для работы с точками на плоскости:</p>
+                    <ol>
+                        <li>Создай кортежи для 4 точек (вершины квадрата)</li>
+                        <li>Выведи координаты всех точек</li>
+                        <li>Найди центр квадрата (среднее всех x и всех y)</li>
+                        <li>Создай новый квадрат, сдвинутый на 10 единиц вправо и вверх</li>
+                        <li>Проверь какая точка ближе всего к началу координат (0, 0)</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй распаковку x, y = point и формулу расстояния</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Обработка дат</h4>
+                    <p>Создай программу для работы с датами:</p>
+                    <ol>
+                        <li>Создай кортеж с твоей датой рождения (день, месяц, год)</li>
+                        <li>Создай кортеж дней в каждом месяце (31, 28, 31, 30...)</li>
+                        <li>Вычисли сколько дней прошло с начала года до твоего дня рождения</li>
+                        <li>Создай список из 5 дат (кортежей) в порядке возрастания</li>
+                        <li>Найди самую раннюю и самую позднюю дату</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Кортежи можно сравнивать напрямую!</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли запятую в одноэлементном кортеже</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - это не кортеж!
+single = (5)
+print(type(single))  # <class 'int'> - просто число!
+
+# ПРАВИЛЬНО - кортеж с одним элементом
+single = (5,)  # Запятая обязательна!
+print(type(single))  # <class 'tuple'>
+
+# Или без скобок, но с запятой
+single = 5,
+print(type(single))  # <class 'tuple'></pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Попытка изменить кортеж</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - кортеж неизменяемый!
+point = (10, 20)
+# point[0] = 999  # TypeError!
+
+# ПРАВИЛЬНО - создать новый кортеж
+point = (999, 20)  # Переприсваивание разрешено
+print(point)  # (999, 20)
+
+# Или преобразовать в список, изменить, обратно в кортеж
+point = (10, 20)
+temp_list = list(point)
+temp_list[0] = 999
+point = tuple(temp_list)
+print(point)  # (999, 20)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Путаница в распаковке</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - количество переменных не совпадает!
+point = (10, 20, 30)
+# x, y = point  # ValueError! 3 значения, 2 переменные
+
+# ПРАВИЛЬНО - количество переменных совпадает
+x, y, z = point
+print(f"x={x}, y={y}, z={z}")
+
+# Или используй * для остатка
+x, *rest = point
+print(f"x={x}, остальное={rest}")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Использование методов списка</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - у кортежа нет метода append!
+numbers = (1, 2, 3)
+# numbers.append(4)  # AttributeError!
+
+# ПРАВИЛЬНО - создать новый кортеж
+numbers = numbers + (4,)  # Конкатенация
+print(numbers)  # (1, 2, 3, 4)
+
+# Или преобразовать в список
+numbers = (1, 2, 3)
+numbers_list = list(numbers)
+numbers_list.append(4)
+numbers = tuple(numbers_list)
+print(numbers)  # (1, 2, 3, 4)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Путаница кортежа и скобок в выражениях</h4>
+                    <div class="code-block">
+                        <pre># Скобки в математическом выражении
+result = (2 + 3) * 4
+print(result)  # 20 (это число, не кортеж!)
+print(type(result))  # <class 'int'>
+
+# Кортеж нужна запятая
+result = (2 + 3,) * 4
+print(result)  # (5, 5, 5, 5) - кортеж повторился 4 раза
+print(type(result))  # <class 'tuple'></pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Сортировка кортежа</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - у кортежа нет метода sort!
+numbers = (5, 2, 8, 1)
+# numbers.sort()  # AttributeError!
+
+# ПРАВИЛЬНО - sorted() возвращает список
+sorted_list = sorted(numbers)
+print(sorted_list)  # [1, 2, 5, 8] - это список!
+
+# Если нужен кортеж
+sorted_tuple = tuple(sorted(numbers))
+print(sorted_tuple)  # (1, 2, 5, 8) - кортеж</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет <code>x = (5); print(type(x))</code>?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Без запятой это не кортеж, а просто число в скобках."><class 'tuple'></label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Без запятой (5) - это просто число в скобках, не кортеж!"><class 'int'></label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Строкой это не является."><class 'str'></label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Код выполнится без ошибки.">Ошибка</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: В чем главное отличие кортежа от списка?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! И кортежи, и списки упорядочены.">Кортеж неупорядочен</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Кортежи неизменяемые (immutable), списки изменяемые (mutable).">Кортеж неизменяемый</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! И кортежи, и списки могут содержать разные типы.">Кортеж содержит только одинтипные данные</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! У кортежа есть 2 метода: count() и index().">У кортежа нет методов</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Какие методы есть у кортежей?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! У кортежей нет метода append (он только у списков).">append(), remove(), count()</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! У кортежей только 2 метода: count() и index().">count(), index()</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! У кортежей нет метода sort.">sort(), reverse()</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! У кортежей есть методы count() и index().">Нет методов</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что произойдет: <code>t = (1, 2, 3); t[0] = 999</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Кортеж неизменяемый, элементы менять нельзя.">t станет (999, 2, 3)</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Кортежи неизменяемые, попытка изменить вызовет TypeError.">TypeError</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Будет ошибка TypeError, не ValueError.">ValueError</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Код вызовет ошибку.">Ничего, элемент просто не изменится</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как обменять значения переменных a и b в Python?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это не обмен, а просто присваивание b переменной a.">a = b</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это стандартный способ в других языках, но в Python есть проще.">temp = a; a = b; b = temp</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! В Python можно обменять значения одной строкой через распаковку кортежа.">a, b = b, a</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Такого метода swap() нет.">a.swap(b)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Кортежи встречаются на экзаменах реже списков, но знать их важно:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ программ с кортежами), понимание неизменяемости</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-27 (работа с различными структурами данных)</li>
+                        <li>Важные темы для экзаменов:
+                            <ul>
+                                <li>Понимание разницы между изменяемыми и неизменяемыми типами</li>
+                                <li>Распаковка кортежей и множественное присваивание</li>
+                                <li>Использование кортежей как ключей словарей</li>
+                                <li>Преобразования между кортежами и списками</li>
+                                <li>Сравнение кортежей (лексикографическое)</li>
+                            </ul>
+                        </li>
+                        <li>Частая ловушка: забыть запятую в одноэлементном кортеже</li>
+                        <li>Понимание что кортеж неизменяемый, но может содержать изменяемые объекты</li>
+                        <li>Знание что у кортежей только 2 метода (в отличие от списков)</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Кортеж:</strong> неизменяемая (immutable) последовательность элементов</li>
+                    <li><strong>Создание:</strong> <code>(1, 2, 3)</code> или <code>1, 2, 3</code> или <code>tuple([1, 2, 3])</code></li>
+                    <li><strong>Один элемент:</strong> <code>(5,)</code> - запятая обязательна!</li>
+                    <li><strong>Доступ:</strong> как у списков - <code>t[0]</code>, <code>t[-1]</code>, <code>t[1:3]</code></li>
+                    <li><strong>Неизменяемость:</strong> нельзя менять, добавлять, удалять элементы</li>
+                    <li><strong>Методы:</strong> только <code>count()</code> и <code>index()</code></li>
+                    <li><strong>Распаковка:</strong> <code>x, y = (10, 20)</code> или <code>first, *rest = tuple</code></li>
+                    <li><strong>Обмен:</strong> <code>a, b = b, a</code> - через кортеж!</li>
+                    <li><strong>Когда использовать:</strong> константы, координаты, ключи словарей, возврат из функций</li>
+                    <li><strong>Преобразование:</strong> <code>tuple(list)</code> и <code>list(tuple)</code></li>
+                </ul>
+
+                <p>Отлично! Теперь ты знаешь когда использовать неизменяемые кортежи, а когда изменяемые списки! В следующем уроке изучим множества - коллекции уникальных элементов.</p>
             </div>
 
             <div class="lesson-nav">

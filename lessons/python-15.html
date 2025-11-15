@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 20: Множества (set) - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <title>Урок 20: Множества (Sets) - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-15">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -218,51 +219,665 @@
     <main class="container">
         <div class="lesson-container">
             <div class="lesson-header">
-                <h1>Урок 20: Множества (set)</h1>
-                <div class="lesson-meta">Структуры данных • 25 минут</div>
+                <h1>Урок 20: Множества (Sets)</h1>
+                <div class="lesson-meta">Структуры данных • 40 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Множество (set) - это коллекция <strong>уникальных</strong> элементов без определенного порядка. Представь корзину с разноцветными шариками - каждый цвет встречается только один раз, и порядок не важен. Множества идеально подходят для удаления дубликатов, поиска общих элементов и проверки принадлежности!</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Множества работают очень быстро (проверка <code>x in set</code> мгновенная!) и поддерживают математические операции: объединение, пересечение, разность - как на уроках математики!</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Создание множеств (фигурные скобки, но не для пустого!)</li>
+                        <li>Свойства: неупорядоченность, уникальность, изменяемость</li>
+                        <li>Методы: add(), remove(), discard(), pop(), clear()</li>
+                        <li>Операции множеств: объединение |, пересечение &, разность -, симметричная разность ^</li>
+                        <li>Практическое применение: удаление дубликатов, поиск общих элементов</li>
+                        <li>Проверка подмножеств и надмножеств</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
+                <h2>Создание множеств</h2>
+                <p>Множества создаются с помощью фигурных скобок <code>{}</code> или функции <code>set()</code>:</p>
+
+                <div class="code-block">
+                    <pre># Создание множества с фигурными скобками
+colors = {"red", "green", "blue"}
+print(colors)  # {'green', 'red', 'blue'} - порядок может быть любым!
+print(type(colors))  # <class 'set'>
+
+# Множество чисел
+numbers = {1, 2, 3, 4, 5}
+print(numbers)  # {1, 2, 3, 4, 5}
+
+# Множество с разными типами
+mixed = {1, "text", 3.14, True}
+print(mixed)  # {1, 3.14, 'text'} - True исчез (True == 1)!
+
+# Создание из списка (убирает дубликаты!)
+my_list = [1, 2, 2, 3, 3, 3, 4]
+my_set = set(my_list)
+print(my_set)  # {1, 2, 3, 4} - дубликаты удалились!
+
+# Из строки (каждый символ - элемент)
+letters = set("Hello")
+print(letters)  # {'l', 'H', 'e', 'o'} - дубликаты 'l' убраны</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>ВАЖНО: Пустое множество!</h4>
+                    <p>Для создания пустого множества используй <code>set()</code>, НЕ <code>{}</code>!</p>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - это не множество!
+empty = {}
+print(type(empty))  # <class 'dict'> - это пустой словарь!
+
+# ПРАВИЛЬНО - пустое множество
+empty_set = set()
+print(type(empty_set))  # <class 'set'>
+print(empty_set)  # set()
+
+# Потом можно добавлять элементы
+empty_set.add(1)
+empty_set.add(2)
+print(empty_set)  # {1, 2}</pre>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                </div>
+
+                <h2>Свойства множеств</h2>
+                
+                <h3>1. Неупорядоченность</h3>
+                <p>Множества не хранят порядок элементов - они оптимизированы для быстрого поиска!</p>
+
+                <div class="code-block">
+                    <pre># Порядок элементов непредсказуем
+numbers = {5, 2, 8, 1, 9}
+print(numbers)  # Может быть {1, 2, 5, 8, 9} или другой порядок
+
+# Нет индексации!
+# print(numbers[0])  # TypeError! У множеств нет индексов
+
+# Нет срезов!
+# print(numbers[1:3])  # TypeError!</pre>
+                </div>
+
+                <h3>2. Уникальность элементов</h3>
+                <p>Каждый элемент встречается только один раз - дубликаты автоматически удаляются:</p>
+
+                <div class="code-block">
+                    <pre># Дубликаты автоматически удаляются
+numbers = {1, 2, 2, 3, 3, 3, 4, 4, 4, 4}
+print(numbers)  # {1, 2, 3, 4} - все дубликаты исчезли!
+
+# Добавление существующего элемента ничего не делает
+numbers.add(2)  # 2 уже есть
+print(numbers)  # {1, 2, 3, 4} - не изменилось
+
+# Практика: удаление дубликатов из списка
+my_list = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5]
+unique = list(set(my_list))
+print(unique)  # [1, 2, 3, 4, 5]</pre>
+                </div>
+
+                <h3>3. Изменяемость (mutable)</h3>
+                <p>Можно добавлять и удалять элементы после создания:</p>
+
+                <div class="code-block">
+                    <pre># Множество изменяемое
+fruits = {"apple", "banana"}
+fruits.add("orange")  # Добавить
+print(fruits)  # {'apple', 'banana', 'orange'}
+
+fruits.remove("banana")  # Удалить
+print(fruits)  # {'apple', 'orange'}
+
+# НО элементы множества должны быть неизменяемыми (hashable)
+# valid_set = {1, "text", (1, 2)}  # OK: числа, строки, кортежи
+# invalid_set = {[1, 2]}  # TypeError! Списки нельзя (они изменяемые)</pre>
+                </div>
+
+                <h2>Методы множеств</h2>
+
+                <h3>Добавление элементов</h3>
+                <div class="code-block">
+                    <pre># add() - добавить один элемент
+colors = {"red", "green"}
+colors.add("blue")
+print(colors)  # {'red', 'green', 'blue'}
+
+colors.add("red")  # Уже есть - ничего не произойдет
+print(colors)  # {'red', 'green', 'blue'}
+
+# update() - добавить несколько элементов
+colors.update(["yellow", "purple"])
+print(colors)  # {'red', 'green', 'blue', 'yellow', 'purple'}
+
+# Можно передать любую итерируемую структуру
+colors.update("RGB")  # Добавит 'R', 'G', 'B'
+print(colors)  # Теперь есть 'R', 'G', 'B'</pre>
+                </div>
+
+                <h3>Удаление элементов</h3>
+                <div class="code-block">
+                    <pre># remove() - удалить элемент (ошибка, если нет)
+fruits = {"apple", "banana", "orange"}
+fruits.remove("banana")
+print(fruits)  # {'apple', 'orange'}
+
+# fruits.remove("kiwi")  # KeyError! Элемента нет
+
+# discard() - удалить элемент (без ошибки, если нет)
+fruits.discard("apple")
+print(fruits)  # {'orange'}
+
+fruits.discard("kiwi")  # Нет ошибки!
+print(fruits)  # {'orange'}
+
+# pop() - удалить и вернуть произвольный элемент
+numbers = {1, 2, 3, 4, 5}
+removed = numbers.pop()  # Удалит случайный элемент
+print(f"Удален: {removed}")
+print(f"Осталось: {numbers}")
+
+# clear() - удалить все элементы
+colors = {"red", "green", "blue"}
+colors.clear()
+print(colors)  # set()</pre>
+                </div>
+
+                <h2>Операции над множествами</h2>
+                <p>Множества поддерживают математические операции из теории множеств:</p>
+
+                <h3>1. Объединение (Union) - |</h3>
+                <p>Все элементы из обоих множеств (без дубликатов):</p>
+
+                <div class="code-block">
+                    <pre># Объединение множеств
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+# Оператор |
+union1 = set1 | set2
+print(union1)  # {1, 2, 3, 4, 5, 6}
+
+# Метод union()
+union2 = set1.union(set2)
+print(union2)  # {1, 2, 3, 4, 5, 6}
+
+# Практика: объединить списки без дубликатов
+list1 = [1, 2, 3]
+list2 = [3, 4, 5]
+combined = list(set(list1) | set(list2))
+print(combined)  # [1, 2, 3, 4, 5]</pre>
+                </div>
+
+                <h3>2. Пересечение (Intersection) - &</h3>
+                <p>Только элементы, которые есть в обоих множествах:</p>
+
+                <div class="code-block">
+                    <pre># Пересечение множеств
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+# Оператор &
+intersection1 = set1 & set2
+print(intersection1)  # {3, 4} - общие элементы
+
+# Метод intersection()
+intersection2 = set1.intersection(set2)
+print(intersection2)  # {3, 4}
+
+# Практика: найти общих друзей
+alice_friends = {"Bob", "Charlie", "Diana"}
+bob_friends = {"Alice", "Charlie", "Eve"}
+common = alice_friends & bob_friends
+print(f"Общие друзья: {common}")  # {'Charlie'}</pre>
+                </div>
+
+                <h3>3. Разность (Difference) - -</h3>
+                <p>Элементы из первого множества, которых нет во втором:</p>
+
+                <div class="code-block">
+                    <pre># Разность множеств
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+# Оператор -
+diff1 = set1 - set2
+print(diff1)  # {1, 2} - есть в set1, но нет в set2
+
+diff2 = set2 - set1
+print(diff2)  # {5, 6} - есть в set2, но нет в set1
+
+# Метод difference()
+diff3 = set1.difference(set2)
+print(diff3)  # {1, 2}
+
+# Практика: кто прочитал только первую книгу?
+book1_readers = {"Alice", "Bob", "Charlie"}
+book2_readers = {"Bob", "Diana", "Eve"}
+only_book1 = book1_readers - book2_readers
+print(only_book1)  # {'Alice', 'Charlie'}</pre>
+                </div>
+
+                <h3>4. Симметричная разность (Symmetric Difference) - ^</h3>
+                <p>Элементы, которые есть только в одном из множеств (не в обоих):</p>
+
+                <div class="code-block">
+                    <pre># Симметричная разность
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+# Оператор ^
+sym_diff1 = set1 ^ set2
+print(sym_diff1)  # {1, 2, 5, 6} - не общие элементы
+
+# Метод symmetric_difference()
+sym_diff2 = set1.symmetric_difference(set2)
+print(sym_diff2)  # {1, 2, 5, 6}
+
+# То же самое, что (set1 - set2) | (set2 - set1)
+manual = (set1 - set2) | (set2 - set1)
+print(manual)  # {1, 2, 5, 6}</pre>
+                </div>
+
+                <h2>Проверки подмножеств и надмножеств</h2>
+                <div class="code-block">
+                    <pre># issubset() - является ли подмножеством?
+set1 = {1, 2, 3}
+set2 = {1, 2, 3, 4, 5}
+
+print(set1.issubset(set2))  # True (set1 ⊆ set2)
+print(set2.issubset(set1))  # False
+
+# Оператор <=
+print(set1 <= set2)  # True
+
+# issuperset() - является ли надмножеством?
+print(set2.issuperset(set1))  # True (set2 ⊇ set1)
+print(set1.issuperset(set2))  # False
+
+# Оператор >=
+print(set2 >= set1)  # True
+
+# isdisjoint() - нет общих элементов?
+set3 = {6, 7, 8}
+print(set1.isdisjoint(set3))  # True (нет общих)
+print(set1.isdisjoint(set2))  # False (есть общие)</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Удаление дубликатов</h3>
+                <div class="code-block">
+                    <pre># Удалить повторяющиеся элементы из списка
+numbers = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5]
+print(f"С дубликатами: {numbers}")
+
+unique_numbers = list(set(numbers))
+print(f"Уникальные: {unique_numbers}")
+
+# Сохранить порядок при удалении дубликатов
+def unique_ordered(items):
+    seen = set()
+    result = []
+    for item in items:
+        if item not in seen:
+            seen.add(item)
+            result.append(item)
+    return result
+
+numbers = [5, 2, 8, 2, 5, 1, 8]
+print(unique_ordered(numbers))  # [5, 2, 8, 1] - порядок сохранен</pre>
+                </div>
+
+                <h3>Пример 2: Общие элементы двух списков</h3>
+                <div class="code-block">
+                    <pre># Найти общие элементы
+students_math = ["Alice", "Bob", "Charlie", "Diana"]
+students_physics = ["Bob", "Diana", "Eve", "Frank"]
+
+# Множества делают это легко!
+common = set(students_math) & set(students_physics)
+print(f"Учатся и на математике, и на физике: {common}")
+# {'Bob', 'Diana'}
+
+# Кто только на математике?
+only_math = set(students_math) - set(students_physics)
+print(f"Только математика: {only_math}")
+# {'Alice', 'Charlie'}
+
+# Все студенты
+all_students = set(students_math) | set(students_physics)
+print(f"Всего студентов: {len(all_students)}")</pre>
+                </div>
+
+                <h3>Пример 3: Проверка уникальности пароля</h3>
+                <div class="code-block">
+                    <pre># Проверить что все символы пароля уникальны
+password = "python123"
+unique_chars = set(password)
+
+if len(unique_chars) == len(password):
+    print("Все символы уникальны")
+else:
+    print("Есть повторяющиеся символы")
+    # Найти дубликаты
+    duplicates = []
+    seen = set()
+    for char in password:
+        if char in seen:
+            duplicates.append(char)
+        seen.add(char)
+    print(f"Дубликаты: {set(duplicates)}")</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
+                <div class="editor-container">
+                    <h4>Попробуй сам!</h4>
+                    <textarea id="code-editor" class="code-editor"># Пример 1: Создание множеств
+colors = {"red", "green", "blue"}
+numbers = {1, 2, 3, 4, 5}
+from_list = set([1, 2, 2, 3, 3, 3])  # Дубликаты удалятся
+print("Цвета:", colors)
+print("Числа:", numbers)
+print("Из списка:", from_list)
+print()
+
+# Пример 2: Удаление дубликатов
+duplicates = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+unique = list(set(duplicates))
+print(f"Было: {duplicates}")
+print(f"Стало: {unique}")
+print()
+
+# Пример 3: Методы множеств
+fruits = {"apple", "banana"}
+fruits.add("orange")
+fruits.remove("banana")
+print("Фрукты:", fruits)
+print()
+
+# Пример 4: Объединение
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+print(f"Множество 1: {set1}")
+print(f"Множество 2: {set2}")
+print(f"Объединение: {set1 | set2}")
+print(f"Пересечение: {set1 & set2}")
+print(f"Разность: {set1 - set2}")
+print(f"Симметричная разность: {set1 ^ set2}")
+print()
+
+# Пример 5: Общие друзья
+alice_friends = {"Bob", "Charlie", "Diana"}
+bob_friends = {"Alice", "Charlie", "Eve"}
+print(f"Друзья Alice: {alice_friends}")
+print(f"Друзья Bob: {bob_friends}")
+print(f"Общие друзья: {alice_friends & bob_friends}")
+print(f"Все вместе: {alice_friends | bob_friends}")
+print()
+
+# Пример 6: Проверка подмножества
+small = {1, 2}
+big = {1, 2, 3, 4, 5}
+print(f"Малое: {small}")
+print(f"Большое: {big}")
+print(f"Малое подмножество большого? {small.issubset(big)}")
+print(f"Большое надмножество малого? {big.issuperset(small)}")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Анализ текста</h4>
+                    <p>Создай программу для анализа двух текстов:</p>
+                    <ol>
+                        <li>Создай две строки с произвольным текстом</li>
+                        <li>Преобразуй каждую в множество символов (без пробелов)</li>
+                        <li>Найди какие буквы есть в обоих текстах</li>
+                        <li>Найди какие буквы только в первом тексте</li>
+                        <li>Найди какие буквы только во втором тексте</li>
+                        <li>Выведи общее количество уникальных букв в обоих текстах</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй set(text) и операции &, -, |</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Сравнение списков</h4>
+                    <p>Создай программу для сравнения покупок:</p>
+                    <ol>
+                        <li>Создай список покупок Алисы: ["молоко", "хлеб", "яйца", "сыр"]</li>
+                        <li>Создай список покупок Боба: ["хлеб", "масло", "яйца", "рыба"]</li>
+                        <li>Найди что купили оба (пересечение)</li>
+                        <li>Найди что купила только Алиса</li>
+                        <li>Найди что купил только Боб</li>
+                        <li>Найди все уникальные покупки вместе</li>
+                        <li>Проверь является ли список Алисы подмножеством всех покупок</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Преобразуй списки в множества и используй операции</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Фильтр уникальных</h4>
+                    <p>Создай программу для обработки данных:</p>
+                    <ol>
+                        <li>Создай список чисел с дубликатами: [5, 2, 8, 2, 5, 1, 8, 3]</li>
+                        <li>Удали дубликаты сохранив порядок первого появления</li>
+                        <li>Создай функцию is_unique(items) которая проверяет все ли элементы уникальны</li>
+                        <li>Создай функцию find_duplicates(items) которая возвращает множество дубликатов</li>
+                        <li>Протестируй функции на разных списках</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй set для проверки уникальности</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Пустое множество через {}</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - это словарь!
+empty = {}
+print(type(empty))  # <class 'dict'>
+
+# ПРАВИЛЬНО - пустое множество
+empty_set = set()
+print(type(empty_set))  # <class 'set'></pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Попытка индексации</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - у множеств нет индексов!
+numbers = {1, 2, 3, 4, 5}
+# print(numbers[0])  # TypeError!
+
+# ПРАВИЛЬНО - перебор в цикле
+for num in numbers:
+    print(num)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Добавление изменяемых элементов</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - список нельзя добавить в множество!
+# my_set = {[1, 2, 3]}  # TypeError!
+
+# ПРАВИЛЬНО - использовать кортежи
+my_set = {(1, 2, 3), (4, 5, 6)}  # OK
+print(my_set)  # {(1, 2, 3), (4, 5, 6)}</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: remove() несуществующего элемента</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - элемента может не быть
+colors = {"red", "green"}
+# colors.remove("blue")  # KeyError!
+
+# ПРАВИЛЬНО - использовать discard()
+colors.discard("blue")  # Нет ошибки!
+
+# Или проверить перед удалением
+if "blue" in colors:
+    colors.remove("blue")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Путаница в операциях</h4>
+                    <div class="code-block">
+                        <pre># Путаница & и |
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+
+# & - пересечение (AND - оба множества)
+print(set1 & set2)  # {3} - общие элементы
+
+# | - объединение (OR - хотя бы одно)
+print(set1 | set2)  # {1, 2, 3, 4, 5} - все элементы
+
+# Запомни: & = меньше, | = больше</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Потеря порядка при преобразовании</h4>
+                    <div class="code-block">
+                        <pre># Множество не сохраняет порядок!
+numbers = [5, 2, 8, 1, 3]
+unique = list(set(numbers))  # Порядок может измениться!
+print(unique)  # Например: [1, 2, 3, 5, 8] - НЕ как в исходном списке
+
+# Сохранить порядок - не использовать set напрямую
+def unique_ordered(items):
+    seen = set()
+    result = []
+    for item in items:
+        if item not in seen:
+            seen.add(item)
+            result.append(item)
+    return result
+
+print(unique_ordered(numbers))  # [5, 2, 8, 1, 3] - порядок сохранен</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет <code>print({1, 2, 2, 3, 3, 3})</code>?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Множества автоматически удаляют дубликаты.">{1, 2, 2, 3, 3, 3}</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Множества хранят только уникальные элементы.">{1, 2, 3}</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Будет множество, не список.">[1, 2, 3]</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Код выполнится без ошибки.">Ошибка</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Как создать пустое множество?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это создаст пустой словарь, не множество.">empty = {}</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Только set() создает пустое множество.">empty = set()</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это создаст множество с пустым кортежем внутри.">empty = {()}</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Такого синтаксиса нет.">empty = set{}</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что делает операция <code>{1, 2, 3} & {2, 3, 4}</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это делает оператор | (объединение).">Объединение: {1, 2, 3, 4}</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Оператор & - пересечение (общие элементы).">Пересечение: {2, 3}</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это делает оператор - (разность).">Разность: {1}</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Оператор & работает со множествами.">Ошибка</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Можно ли добавить список в множество?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Список изменяемый (mutable), его нельзя добавить в множество.">Да, можно</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Элементы множества должны быть неизменяемыми (hashable).">Нет, будет TypeError</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Попытка добавить список вызовет ошибку.">Да, но список станет кортежем</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Можно добавить кортеж, но не список.">Да, если список пустой</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: В чем разница между remove() и discard()?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Оба метода удаляют элементы.">remove() удаляет, discard() нет</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! remove() вызывает ошибку если элемента нет, discard() нет.">remove() вызывает KeyError если элемента нет, discard() нет</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! discard() тоже удаляет элемент.">discard() возвращает удаленный элемент</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Есть разница в обработке отсутствующего элемента.">Нет разницы</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Множества важны для решения задач на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ программ), использование множеств для оптимизации</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-27 (эффективная обработка данных с множествами)</li>
+                        <li>Применение на экзаменах:
+                            <ul>
+                                <li>Удаление дубликатов из последовательностей</li>
+                                <li>Поиск общих элементов в коллекциях</li>
+                                <li>Быстрая проверка принадлежности (x in set - O(1)!)</li>
+                                <li>Операции теории множеств (объединение, пересечение)</li>
+                                <li>Оптимизация алгоритмов через использование множеств</li>
+                            </ul>
+                        </li>
+                        <li>Важно понимать что множества неупорядоченные (нет индексов)</li>
+                        <li>Знать что элементы должны быть неизменяемыми (hashable)</li>
+                        <li>Использовать множества для O(1) проверки принадлежности вместо O(n) в списке</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Множество:</strong> коллекция уникальных неупорядоченных элементов</li>
+                    <li><strong>Создание:</strong> <code>{1, 2, 3}</code> или <code>set([1, 2, 3])</code></li>
+                    <li><strong>Пустое множество:</strong> <code>set()</code>, НЕ <code>{}</code> (это словарь!)</li>
+                    <li><strong>Свойства:</strong> уникальность, неупорядоченность, изменяемость</li>
+                    <li><strong>Добавление:</strong> <code>add()</code>, <code>update()</code></li>
+                    <li><strong>Удаление:</strong> <code>remove()</code> (с ошибкой), <code>discard()</code> (без ошибки), <code>pop()</code>, <code>clear()</code></li>
+                    <li><strong>Объединение:</strong> <code>set1 | set2</code> или <code>union()</code></li>
+                    <li><strong>Пересечение:</strong> <code>set1 & set2</code> или <code>intersection()</code></li>
+                    <li><strong>Разность:</strong> <code>set1 - set2</code> или <code>difference()</code></li>
+                    <li><strong>Симметричная разность:</strong> <code>set1 ^ set2</code> или <code>symmetric_difference()</code></li>
+                    <li><strong>Применение:</strong> удаление дубликатов, поиск общих элементов, быстрая проверка принадлежности</li>
+                </ul>
+
+                <p>Отлично! Теперь ты знаешь как использовать множества для эффективной работы с уникальными элементами! В следующем уроке изучим словари - коллекции пар ключ-значение.</p>
             </div>
 
             <div class="lesson-nav">

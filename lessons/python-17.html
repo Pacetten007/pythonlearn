@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 22: Словари (dict) - Методы - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <title>Урок 22: Словари - Методы - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-17">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -218,51 +219,741 @@
     <main class="container">
         <div class="lesson-container">
             <div class="lesson-header">
-                <h1>Урок 22: Словари (dict) - Методы</h1>
-                <div class="lesson-meta">Структуры данных • 25 минут</div>
+                <h1>Урок 22: Словари - Методы</h1>
+                <div class="lesson-meta">Структуры данных • 50 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>В прошлом уроке мы освоили основы словарей. Теперь изучим продвинутые методы! Узнаем как объединять словари, создавать их с помощью comprehension, работать с вложенными структурами и решать практические задачи: подсчет слов, группировка данных, обратный поиск.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Словари - одна из самых мощных структур в Python. Зная их методы, ты сможешь эффективно решать сложные задачи на экзаменах и в реальных проектах!</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Методы просмотра: keys(), values(), items()</li>
+                        <li>Объединение словарей: update()</li>
+                        <li>Удаление с возвратом: pop(), popitem()</li>
+                        <li>Безопасная установка: setdefault()</li>
+                        <li>Копирование: copy()</li>
+                        <li>Dictionary comprehension (генераторы словарей)</li>
+                        <li>Вложенные словари (словари внутри словарей)</li>
+                        <li>Практические паттерны: счетчик, группировка, обратный словарь</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
-                    </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                <h2>Методы просмотра</h2>
+
+                <h3>1. keys() - получить все ключи</h3>
+                <div class="code-block">
+                    <pre># keys() - возвращает все ключи
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+keys = student.keys()
+print(keys)  # dict_keys(['name', 'age', 'grade'])
+print(type(keys))  # <class 'dict_keys'>
+
+# Преобразовать в список
+keys_list = list(student.keys())
+print(keys_list)  # ['name', 'age', 'grade']
+
+# Перебор ключей
+for key in student.keys():
+    print(f"{key}: {student[key]}")
+
+# Практика: получить все названия предметов
+grades = {"математика": 5, "русский": 4, "физика": 5}
+subjects = list(grades.keys())
+print(f"Предметы: {subjects}")</pre>
+                </div>
+
+                <h3>2. values() - получить все значения</h3>
+                <div class="code-block">
+                    <pre># values() - возвращает все значения
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+values = student.values()
+print(values)  # dict_values(['Иван', 16, 10])
+
+# Преобразовать в список
+values_list = list(student.values())
+print(values_list)  # ['Иван', 16, 10]
+
+# Операции со значениями
+grades = {"математика": 5, "русский": 4, "физика": 5, "химия": 3}
+all_grades = list(grades.values())
+print(f"Все оценки: {all_grades}")
+print(f"Средний балл: {sum(grades.values()) / len(grades):.2f}")
+print(f"Максимум: {max(grades.values())}")
+print(f"Минимум: {min(grades.values())}")</pre>
+                </div>
+
+                <h3>3. items() - получить пары ключ-значение</h3>
+                <div class="code-block">
+                    <pre># items() - возвращает пары (key, value)
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+items = student.items()
+print(items)  # dict_items([('name', 'Иван'), ('age', 16), ('grade', 10)])
+
+# Преобразовать в список кортежей
+items_list = list(student.items())
+print(items_list)  # [('name', 'Иван'), ('age', 16), ('grade', 10)]
+
+# Самый частый способ использования - в цикле
+for key, value in student.items():
+    print(f"{key} = {value}")
+
+# Практика: вывод словаря в красивом виде
+prices = {"хлеб": 30, "молоко": 65, "яйца": 90}
+print("Прайс-лист:")
+for product, price in prices.items():
+    print(f"  {product:10} : {price:3} руб.")</pre>
+                </div>
+
+                <h2>Объединение словарей</h2>
+
+                <h3>update() - добавить элементы из другого словаря</h3>
+                <div class="code-block">
+                    <pre># update() - объединить словари
+dict1 = {"a": 1, "b": 2}
+dict2 = {"c": 3, "d": 4}
+
+dict1.update(dict2)
+print(dict1)  # {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+
+# Если ключи совпадают - перезаписываются
+dict1 = {"a": 1, "b": 2}
+dict2 = {"b": 20, "c": 3}  # "b" есть в обоих
+dict1.update(dict2)
+print(dict1)  # {'a': 1, 'b': 20, 'c': 3} - "b" перезаписан!
+
+# Можно передать список кортежей
+student = {"name": "Иван", "age": 16}
+student.update([("grade", 10), ("city", "Москва")])
+print(student)  # {'name': 'Иван', 'age': 16, 'grade': 10, 'city': 'Москва'}
+
+# Можно передать именованные аргументы
+student.update(school="Школа №1", class_letter="А")
+print(student)</pre>
+                </div>
+
+                <div class="code-block">
+                    <pre># Практика: объединение конфигураций
+default_config = {
+    "theme": "light",
+    "language": "ru",
+    "notifications": True
+}
+
+user_config = {
+    "theme": "dark",  # Переопределить
+    "font_size": 14   # Добавить новое
+}
+
+# Объединить (user_config переопределяет default_config)
+final_config = default_config.copy()
+final_config.update(user_config)
+print(final_config)
+# {'theme': 'dark', 'language': 'ru', 'notifications': True, 'font_size': 14}</pre>
+                </div>
+
+                <h2>Удаление элементов с возвратом</h2>
+
+                <h3>1. pop(key, default) - удалить и вернуть значение</h3>
+                <div class="code-block">
+                    <pre># pop(key) - удалить и вернуть значение
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+age = student.pop("age")
+print(f"Удалили возраст: {age}")  # 16
+print(student)  # {'name': 'Иван', 'grade': 10}
+
+# pop(key, default) - не вызовет ошибку если ключа нет
+city = student.pop("city", "Неизвестно")
+print(city)  # Неизвестно (ключа не было)
+
+# Без default вызовет KeyError
+# result = student.pop("phone")  # KeyError!</pre>
+                </div>
+
+                <h3>2. popitem() - удалить и вернуть последнюю пару</h3>
+                <div class="code-block">
+                    <pre># popitem() - удалить и вернуть последнюю пару
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+item = student.popitem()  # Удалит последнюю добавленную пару
+print(f"Удалена пара: {item}")  # ('grade', 10)
+print(student)  # {'name': 'Иван', 'age': 16}
+
+# Еще раз
+item = student.popitem()
+print(f"Удалена пара: {item}")  # ('age', 16)
+print(student)  # {'name': 'Иван'}
+
+# Практика: обработка очереди задач
+tasks = {"task1": "важно", "task2": "средне", "task3": "низко"}
+while tasks:
+    task_name, priority = tasks.popitem()
+    print(f"Выполняю {task_name} (приоритет: {priority})")</pre>
+                </div>
+
+                <h2>Безопасная установка значения</h2>
+
+                <h3>setdefault() - установить если ключа нет</h3>
+                <div class="code-block">
+                    <pre># setdefault(key, default) - вернуть значение или установить default
+student = {"name": "Иван", "age": 16}
+
+# Ключ есть - вернет существующее значение
+name = student.setdefault("name", "Неизвестно")
+print(name)  # Иван (ключ был)
+print(student)  # {'name': 'Иван', 'age': 16} - не изменился
+
+# Ключа нет - установит default и вернет его
+grade = student.setdefault("grade", 10)
+print(grade)  # 10 (новое значение)
+print(student)  # {'name': 'Иван', 'age': 16, 'grade': 10} - добавлен ключ!
+
+# Сравнение с get()
+# get() - только читает, не меняет словарь
+# setdefault() - читает, и если нет - создает
+
+# Практика: группировка данных
+data = [("apple", "fruit"), ("carrot", "vegetable"), ("banana", "fruit")]
+groups = {}
+for item, category in data:
+    # Если категории нет - создаст пустой список
+    groups.setdefault(category, []).append(item)
+
+print(groups)
+# {'fruit': ['apple', 'banana'], 'vegetable': ['carrot']}</pre>
+                </div>
+
+                <h2>Копирование словаря</h2>
+                <div class="code-block">
+                    <pre># copy() - создать поверхностную копию
+original = {"a": 1, "b": 2, "c": 3}
+
+# Простое присваивание - НЕ копия!
+not_copy = original
+not_copy["a"] = 999
+print(original)  # {'a': 999, ...} - изменился!
+
+# copy() - настоящая копия
+original = {"a": 1, "b": 2, "c": 3}
+real_copy = original.copy()
+real_copy["a"] = 999
+print(original)  # {'a': 1, 'b': 2, 'c': 3} - НЕ изменился!
+print(real_copy)  # {'a': 999, 'b': 2, 'c': 3}
+
+# Альтернатива - dict()
+another_copy = dict(original)
+
+# ВАЖНО: copy() делает поверхностную копию!
+original = {"list": [1, 2, 3], "num": 5}
+shallow = original.copy()
+shallow["list"][0] = 999  # Изменяем список внутри!
+print(original)  # {'list': [999, 2, 3], ...} - список изменился!
+
+# Для глубокого копирования нужен copy.deepcopy()
+import copy
+deep = copy.deepcopy(original)</pre>
+                </div>
+
+                <h2>Dictionary Comprehension</h2>
+                <p>Создание словарей с помощью генераторов (как list comprehension, но для словарей):</p>
+
+                <div class="code-block">
+                    <pre># Синтаксис: {key: value for item in iterable}
+
+# Пример 1: Квадраты чисел
+squares = {x: x**2 for x in range(1, 6)}
+print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Пример 2: Из двух списков
+keys = ["a", "b", "c"]
+values = [1, 2, 3]
+dictionary = {k: v for k, v in zip(keys, values)}
+print(dictionary)  # {'a': 1, 'b': 2, 'c': 3}
+
+# Пример 3: С условием
+numbers = [1, 2, 3, 4, 5, 6]
+even_squares = {x: x**2 for x in numbers if x % 2 == 0}
+print(even_squares)  # {2: 4, 4: 16, 6: 36}
+
+# Пример 4: Обработка строк
+words = ["apple", "banana", "cat"]
+lengths = {word: len(word) for word in words}
+print(lengths)  # {'apple': 5, 'banana': 6, 'cat': 3}
+
+# Пример 5: Инвертировать словарь (поменять ключи и значения)
+original = {"a": 1, "b": 2, "c": 3}
+inverted = {v: k for k, v in original.items()}
+print(inverted)  # {1: 'a', 2: 'b', 3: 'c'}</pre>
+                </div>
+
+                <h2>Вложенные словари</h2>
+                <p>Словари могут содержать другие словари (как вложенные списки):</p>
+
+                <div class="code-block">
+                    <pre># Вложенный словарь - словарь внутри словаря
+students = {
+    "Иван": {
+        "age": 16,
+        "grade": 10,
+        "grades": {"математика": 5, "русский": 4}
+    },
+    "Мария": {
+        "age": 15,
+        "grade": 9,
+        "grades": {"математика": 5, "русский": 5}
+    }
+}
+
+# Доступ к вложенным значениям
+print(students["Иван"]["age"])  # 16
+print(students["Иван"]["grades"]["математика"])  # 5
+
+# Изменение вложенных значений
+students["Мария"]["age"] = 16
+students["Мария"]["grades"]["физика"] = 5
+
+# Перебор вложенного словаря
+for name, info in students.items():
+    print(f"\nСтудент: {name}")
+    print(f"  Возраст: {info['age']}")
+    print(f"  Класс: {info['grade']}")
+    print("  Оценки:")
+    for subject, grade in info["grades"].items():
+        print(f"    {subject}: {grade}")</pre>
+                </div>
+
+                <h2>Практические паттерны</h2>
+
+                <h3>Паттерн 1: Счетчик слов</h3>
+                <div class="code-block">
+                    <pre># Подсчитать частоту слов в тексте
+text = "apple banana apple orange banana apple banana orange apple"
+
+# Способ 1: С проверкой
+word_count = {}
+for word in text.split():
+    if word in word_count:
+        word_count[word] += 1
+    else:
+        word_count[word] = 1
+
+# Способ 2: С get()
+word_count = {}
+for word in text.split():
+    word_count[word] = word_count.get(word, 0) + 1
+
+# Способ 3: С setdefault()
+word_count = {}
+for word in text.split():
+    word_count.setdefault(word, 0)
+    word_count[word] += 1
+
+print(word_count)  # {'apple': 4, 'banana': 3, 'orange': 2}
+
+# Самое частое слово
+most_common = max(word_count, key=word_count.get)
+print(f"Самое частое: {most_common} ({word_count[most_common]} раз)")</pre>
+                </div>
+
+                <h3>Паттерн 2: Группировка данных</h3>
+                <div class="code-block">
+                    <pre># Сгруппировать студентов по классам
+students = [
+    ("Иван", 10),
+    ("Мария", 9),
+    ("Петр", 10),
+    ("Анна", 9),
+    ("Олег", 11)
+]
+
+# Группировка
+by_grade = {}
+for name, grade in students:
+    by_grade.setdefault(grade, []).append(name)
+
+print(by_grade)
+# {10: ['Иван', 'Петр'], 9: ['Мария', 'Анна'], 11: ['Олег']}
+
+# Вывод по группам
+for grade, names in sorted(by_grade.items()):
+    print(f"Класс {grade}: {', '.join(names)}")</pre>
+                </div>
+
+                <h3>Паттерн 3: Обратный словарь</h3>
+                <div class="code-block">
+                    <pre># Создать обратный словарь (reverse lookup)
+eng_rus = {
+    "apple": "яблоко",
+    "book": "книга",
+    "cat": "кошка"
+}
+
+# Создать русско-английский словарь
+rus_eng = {v: k for k, v in eng_rus.items()}
+print(rus_eng)  # {'яблоко': 'apple', 'книга': 'book', 'кошка': 'cat'}
+
+# Двусторонний поиск
+print(eng_rus["apple"])  # яблоко
+print(rus_eng["яблоко"])  # apple</pre>
+                </div>
+
+                <h3>Паттерн 4: Слияние словарей</h3>
+                <div class="code-block">
+                    <pre># Объединить несколько словарей
+dict1 = {"a": 1, "b": 2}
+dict2 = {"c": 3, "d": 4}
+dict3 = {"e": 5, "f": 6}
+
+# Способ 1: update() последовательно
+merged = {}
+merged.update(dict1)
+merged.update(dict2)
+merged.update(dict3)
+print(merged)  # {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6}
+
+# Способ 2: Оператор ** (Python 3.5+)
+merged = {**dict1, **dict2, **dict3}
+print(merged)
+
+# Способ 3: Оператор | (Python 3.9+)
+merged = dict1 | dict2 | dict3
+print(merged)</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
+                <div class="editor-container">
+                    <h4>Попробуй сам!</h4>
+                    <textarea id="code-editor" class="code-editor"># Пример 1: Методы просмотра
+student = {"name": "Иван", "age": 16, "grade": 10, "city": "Москва"}
+print("Ключи:", list(student.keys()))
+print("Значения:", list(student.values()))
+print("Пары:")
+for key, value in student.items():
+    print(f"  {key}: {value}")
+print()
+
+# Пример 2: update() - объединение
+dict1 = {"a": 1, "b": 2}
+dict2 = {"c": 3, "d": 4}
+dict1.update(dict2)
+print("После update:", dict1)
+print()
+
+# Пример 3: setdefault() - безопасная установка
+grades = {"математика": 5, "русский": 4}
+math = grades.setdefault("математика", 0)  # Есть
+physics = grades.setdefault("физика", 0)    # Нет - добавится
+print(f"Математика: {math}, Физика: {physics}")
+print("Словарь:", grades)
+print()
+
+# Пример 4: Dictionary comprehension
+squares = {x: x**2 for x in range(1, 6)}
+print("Квадраты:", squares)
+
+words = ["apple", "banana", "cat"]
+lengths = {word: len(word) for word in words}
+print("Длины слов:", lengths)
+print()
+
+# Пример 5: Счетчик слов
+text = "python is great python is fun python is powerful"
+word_count = {}
+for word in text.split():
+    word_count[word] = word_count.get(word, 0) + 1
+print("Частота слов:")
+for word, count in sorted(word_count.items()):
+    print(f"  {word}: {count}")
+print()
+
+# Пример 6: Группировка
+students = [("Иван", 10), ("Мария", 9), ("Петр", 10), ("Анна", 9)]
+by_grade = {}
+for name, grade in students:
+    by_grade.setdefault(grade, []).append(name)
+print("По классам:")
+for grade, names in sorted(by_grade.items()):
+    print(f"  {grade} класс: {', '.join(names)}")
+print()
+
+# Пример 7: Вложенные словари
+school = {
+    "10А": {
+        "teacher": "Иванов",
+        "students": ["Петр", "Мария"]
+    },
+    "9Б": {
+        "teacher": "Петрова",
+        "students": ["Анна", "Олег"]
+    }
+}
+print("Школа:")
+for class_name, info in school.items():
+    print(f"{class_name}: учитель {info['teacher']}, учеников: {len(info['students'])}")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Анализ текста</h4>
+                    <p>Создай программу для глубокого анализа текста:</p>
+                    <ol>
+                        <li>Создай текст из 15-20 слов (можно с повторами)</li>
+                        <li>Подсчитай частоту каждого слова (словарь слово->количество)</li>
+                        <li>Найди топ-3 самых частых слова</li>
+                        <li>Найди слова которые встречаются ровно 1 раз</li>
+                        <li>Создай словарь длина_слова->список_слов</li>
+                        <li>Выведи статистику по длинам слов</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй get(), setdefault(), dictionary comprehension</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: База данных студентов</h4>
+                    <p>Создай систему управления студентами:</p>
+                    <ol>
+                        <li>Создай вложенный словарь: имя -> {age, grade, subjects-> {предмет: оценка}}</li>
+                        <li>Добавь данные о 3-4 студентах</li>
+                        <li>Вычисли средний балл каждого студента</li>
+                        <li>Найди студента с максимальным средним баллом</li>
+                        <li>Выведи студентов по классам (группировка)</li>
+                        <li>Создай словарь предмет -> средний_балл_по_всем</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй вложенные словари и группировку</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Инвентарь магазина</h4>
+                    <p>Создай систему инвентаризации:</p>
+                    <ol>
+                        <li>Создай словарь товар -> {"price": цена, "quantity": количество}</li>
+                        <li>Добавь 5-6 товаров с данными</li>
+                        <li>Реализуй функцию продажи: уменьшить quantity, вернуть стоимость</li>
+                        <li>Вычисли общую стоимость всех товаров на складе</li>
+                        <li>Найди товары которых осталось меньше 5 штук</li>
+                        <li>Создай отчет: товары по убыванию цены</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй вложенные словари и sorted() с key=</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Использование результата update()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - update() возвращает None!
+dict1 = {"a": 1}
+dict2 = {"b": 2}
+result = dict1.update(dict2)  # result = None!
+print(result)  # None
+
+# ПРАВИЛЬНО - просто вызвать метод
+dict1.update(dict2)
+print(dict1)  # {'a': 1, 'b': 2}</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Путаница get() и setdefault()</h4>
+                    <div class="code-block">
+                        <pre>d = {"a": 1}
+
+# get() - только читает, НЕ меняет словарь
+value = d.get("b", 0)
+print(value)  # 0
+print(d)  # {'a': 1} - не изменился!
+
+# setdefault() - читает и УСТАНАВЛИВАЕТ если нет
+value = d.setdefault("b", 0)
+print(value)  # 0
+print(d)  # {'a': 1, 'b': 0} - добавлен ключ!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Поверхностное копирование</h4>
+                    <div class="code-block">
+                        <pre># copy() делает поверхностную копию!
+original = {"list": [1, 2, 3], "num": 5}
+shallow = original.copy()
+
+# Изменение вложенного объекта влияет на оригинал
+shallow["list"][0] = 999
+print(original)  # {'list': [999, 2, 3], ...} - изменился!
+
+# Для глубокого копирования:
+import copy
+deep = copy.deepcopy(original)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Изменение во время перебора</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - изменяем словарь во время for
+grades = {"математика": 5, "русский": 3, "физика": 4}
+# for subject in grades:
+#     if grades[subject] < 4:
+#         del grades[subject]  # RuntimeError!
+
+# ПРАВИЛЬНО - перебрать список ключей
+for subject in list(grades.keys()):
+    if grades[subject] < 4:
+        del grades[subject]
+print(grades)  # {'математика': 5, 'физика': 4}</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Неуникальные значения при инверсии</h4>
+                    <div class="code-block">
+                        <pre># Проблема: при инверсии значения должны быть уникальны!
+original = {"a": 1, "b": 2, "c": 1}  # 1 встречается дважды!
+inverted = {v: k for k, v in original.items()}
+print(inverted)  # {1: 'c', 2: 'b'} - потерян 'a'!
+
+# Если значения повторяются - нужен список
+inverted = {}
+for k, v in original.items():
+    inverted.setdefault(v, []).append(k)
+print(inverted)  # {1: ['a', 'c'], 2: ['b']}</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Доступ к вложенному без проверки</h4>
+                    <div class="code-block">
+                        <pre>data = {"user": {"name": "Иван"}}
+
+# НЕПРАВИЛЬНО - ключа может не быть!
+# age = data["user"]["age"]  # KeyError!
+
+# ПРАВИЛЬНО - проверить или использовать get()
+age = data.get("user", {}).get("age", "Неизвестно")
+print(age)  # Неизвестно
+
+# Или проверить вложенно
+if "user" in data and "age" in data["user"]:
+    age = data["user"]["age"]</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что возвращает метод update()?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! update() не возвращает словарь.">Обновленный словарь</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! update() изменяет словарь на месте и возвращает None.">None</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Возвращает None, не количество.">Количество добавленных элементов</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! update() работает корректно.">Ошибку</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: В чем разница между get() и setdefault()?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Оба могут принимать default.">get() принимает default, setdefault() нет</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! get() только читает, setdefault() устанавливает если ключа нет.">get() не меняет словарь, setdefault() добавляет ключ если его нет</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Разница есть - в изменении словаря.">Нет разницы</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Оба работают со словарями.">setdefault() работает только со списками</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Как создать словарь квадратов чисел от 1 до 5?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это список, не словарь.">[x**2 for x in range(1, 6)]</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Dictionary comprehension с ключ:значение.">{x: x**2 for x in range(1, 6)}</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это создаст множество, не словарь.">{x**2 for x in range(1, 6)}</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Такого синтаксиса нет.">dict[x**2 for x in range(1, 6)]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что делает copy()?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! copy() делает поверхностную копию.">Глубокую копию всех вложенных объектов</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! copy() делает поверхностную копию (вложенные объекты не копируются).">Поверхностную копию словаря</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! copy() создает новый словарь.">Создает ссылку на тот же словарь</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! copy() копирует словарь.">Очищает словарь</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что делает popitem()?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! popitem() удаляет элемент, не только возвращает.">Возвращает последнюю пару без удаления</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! popitem() удаляет и возвращает последнюю пару.">Удаляет и возвращает последнюю пару (key, value)</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! popitem() работает с парами, не только со значениями.">Удаляет и возвращает последнее значение</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! popitem() возвращает кортеж (key, value).">Возвращает список всех пар</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Методы словарей критически важны для эффективного решения задач:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 14 (программирование с обработкой данных через словари)</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-27 (сложная обработка данных, оптимизация алгоритмов)</li>
+                        <li>Применение на экзаменах:
+                            <ul>
+                                <li>Подсчет частоты (слова, числа, элементы) - паттерн счетчика</li>
+                                <li>Группировка данных по ключам - паттерн группировки</li>
+                                <li>Создание индексов для быстрого поиска</li>
+                                <li>Обработка больших объемов данных эффективно</li>
+                                <li>Dictionary comprehension для краткого кода</li>
+                            </ul>
+                        </li>
+                        <li>Важно знать разницу между методами, изменяющими словарь (update) и возвращающими значения (get)</li>
+                        <li>Понимать когда использовать get() vs setdefault() vs []</li>
+                        <li>Уметь работать с вложенными структурами данных</li>
+                        <li>Знать паттерны: счетчик, группировка, инверсия, слияние</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Просмотр:</strong> <code>keys()</code>, <code>values()</code>, <code>items()</code> - получить ключи, значения, пары</li>
+                    <li><strong>Объединение:</strong> <code>update(dict)</code> - добавить элементы из другого словаря</li>
+                    <li><strong>Удаление:</strong> <code>pop(key, default)</code>, <code>popitem()</code> - удалить с возвратом</li>
+                    <li><strong>Безопасная установка:</strong> <code>setdefault(key, default)</code> - установить если нет</li>
+                    <li><strong>Копирование:</strong> <code>copy()</code> - поверхностная копия</li>
+                    <li><strong>Генератор:</strong> <code>{k: v for k, v in items}</code> - dictionary comprehension</li>
+                    <li><strong>Вложенные:</strong> словари внутри словарей для сложных данных</li>
+                    <li><strong>Паттерны:</strong> счетчик, группировка, инверсия, слияние</li>
+                    <li><strong>Важно:</strong> get() читает, setdefault() устанавливает; update() возвращает None</li>
+                    <li><strong>Применение:</strong> обработка данных, подсчет, группировка, индексирование</li>
+                </ul>
+
+                <p>Превосходно! Теперь ты полностью освоил словари - одну из самых мощных структур данных Python! Ты готов эффективно решать сложные задачи по обработке данных на экзаменах и в реальных проектах. Модуль "Структуры данных" завершен!</p>
             </div>
 
             <div class="lesson-nav">

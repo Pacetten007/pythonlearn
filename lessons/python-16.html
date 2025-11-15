@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 21: Словари (dict) - Основы - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <title>Урок 21: Словари - Основы - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-16">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -218,51 +219,741 @@
     <main class="container">
         <div class="lesson-container">
             <div class="lesson-header">
-                <h1>Урок 21: Словари (dict) - Основы</h1>
-                <div class="lesson-meta">Структуры данных • 25 минут</div>
+                <h1>Урок 21: Словари - Основы</h1>
+                <div class="lesson-meta">Структуры данных • 50 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Словарь (dictionary) - это коллекция пар <strong>ключ-значение</strong>, как настоящий словарь: слово (ключ) и его определение (значение). В Python словари используются для хранения связанных данных: имя-возраст, товар-цена, логин-пароль, слово-перевод!</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Словари - одна из самых мощных структур данных в Python. Поиск по ключу мгновенный (O(1))! Они изменяемые, но ключи должны быть неизменяемыми (строки, числа, кортежи).</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Концепция пар ключ-значение</li>
+                        <li>Создание словарей фигурными скобками</li>
+                        <li>Доступ к значениям: dict[key] vs dict.get(key, default)</li>
+                        <li>Добавление и изменение элементов</li>
+                        <li>Удаление элементов: del и pop()</li>
+                        <li>Проверка наличия ключа: key in dict</li>
+                        <li>Перебор: keys(), values(), items()</li>
+                        <li>Практические примеры: оценки, телефонная книга, переводчик</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
+                <h2>Что такое словарь?</h2>
+                <p>Словарь - это неупорядоченная коллекция пар ключ-значение. Как настоящий словарь связывает слова с определениями:</p>
+
+                <div class="code-block">
+                    <pre># Настоящий словарь:
+# "apple" -> "яблоко"
+# "book" -> "книга"
+# "cat" -> "кошка"
+
+# Словарь в Python
+eng_rus = {
+    "apple": "яблоко",
+    "book": "книга",
+    "cat": "кошка"
+}
+
+print(eng_rus["apple"])  # яблоко
+print(eng_rus["book"])   # книга
+
+# Другие примеры словарей
+ages = {"Иван": 16, "Мария": 15, "Петр": 17}
+prices = {"хлеб": 30, "молоко": 65, "яйца": 90}
+grades = {"математика": 5, "русский": 4, "физика": 5}</pre>
+                </div>
+
+                <h2>Создание словарей</h2>
+
+                <h3>Способ 1: Фигурные скобки {}</h3>
+                <div class="code-block">
+                    <pre># Создание словаря с фигурными скобками
+student = {
+    "name": "Иван",
+    "age": 16,
+    "grade": 10,
+    "city": "Москва"
+}
+
+print(student)
+# {'name': 'Иван', 'age': 16, 'grade': 10, 'city': 'Москва'}
+
+# Пустой словарь
+empty_dict = {}
+print(type(empty_dict))  # <class 'dict'>
+
+# Разные типы ключей и значений
+mixed = {
+    1: "one",
+    "два": 2,
+    3.14: "пи",
+    (1, 2): "tuple key"
+}
+print(mixed[1])  # one
+print(mixed["два"])  # 2</pre>
+                </div>
+
+                <h3>Способ 2: Функция dict()</h3>
+                <div class="code-block">
+                    <pre># Создание через dict()
+student = dict(name="Иван", age=16, grade=10)
+print(student)  # {'name': 'Иван', 'age': 16, 'grade': 10'}
+
+# Из списка кортежей
+pairs = [("apple", "яблоко"), ("book", "книга"), ("cat", "кошка")]
+dictionary = dict(pairs)
+print(dictionary)  # {'apple': 'яблоко', 'book': 'книга', 'cat': 'кошка'}
+
+# Из двух списков с помощью zip()
+keys = ["Иван", "Мария", "Петр"]
+values = [16, 15, 17]
+ages = dict(zip(keys, values))
+print(ages)  # {'Иван': 16, 'Мария': 15, 'Петр': 17}</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>ВАЖНО: Ключи должны быть неизменяемыми!</h4>
+                    <div class="code-block">
+                        <pre># Можно использовать как ключи (неизменяемые типы)
+valid_dict = {
+    "string": 1,      # Строка - OK
+    42: 2,            # Число - OK
+    3.14: 3,          # Float - OK
+    (1, 2): 4,        # Кортеж - OK
+    True: 5           # Bool - OK
+}
+
+# НЕЛЬЗЯ использовать изменяемые типы
+# invalid = {[1, 2]: "value"}  # TypeError! Список изменяемый
+# invalid = {{1, 2}: "value"}  # TypeError! Множество изменяемое
+
+# Ключи должны быть hashable (неизменяемые)</pre>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                </div>
+
+                <h2>Доступ к элементам</h2>
+
+                <h3>Способ 1: Квадратные скобки []</h3>
+                <div class="code-block">
+                    <pre># Доступ через []
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+print(student["name"])   # Иван
+print(student["age"])    # 16
+print(student["grade"])  # 10
+
+# ВАЖНО: KeyError если ключа нет!
+# print(student["city"])  # KeyError: 'city'
+
+# Проверка перед доступом
+if "city" in student:
+    print(student["city"])
+else:
+    print("Ключа 'city' нет")</pre>
+                </div>
+
+                <h3>Способ 2: Метод get()</h3>
+                <div class="code-block">
+                    <pre># get() - безопасный доступ
+student = {"name": "Иван", "age": 16}
+
+# get(key) - вернет None если ключа нет
+print(student.get("name"))  # Иван
+print(student.get("city"))  # None (нет ошибки!)
+
+# get(key, default) - вернет default если ключа нет
+print(student.get("city", "Неизвестно"))  # Неизвестно
+print(student.get("age", 0))  # 16 (ключ есть, default не используется)
+
+# Практика: безопасное получение оценки
+grades = {"математика": 5, "русский": 4}
+math_grade = grades.get("математика", 0)
+physics_grade = grades.get("физика", 0)  # Нет такого предмета
+print(f"Математика: {math_grade}, Физика: {physics_grade}")</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Когда использовать [] vs get():</h4>
+                    <ul>
+                        <li><strong>dict[key]</strong> - когда уверен что ключ есть (или хочешь получить ошибку)</li>
+                        <li><strong>dict.get(key)</strong> - когда ключа может не быть (безопасно)</li>
+                        <li><strong>dict.get(key, default)</strong> - когда нужно значение по умолчанию</li>
+                    </ul>
+                </div>
+
+                <h2>Добавление и изменение элементов</h2>
+                <p>Словари изменяемые - можно добавлять новые пары и менять существующие:</p>
+
+                <div class="code-block">
+                    <pre># Добавление нового ключа
+student = {"name": "Иван", "age": 16}
+print(student)  # {'name': 'Иван', 'age': 16}
+
+# Добавить новый ключ
+student["grade"] = 10
+print(student)  # {'name': 'Иван', 'age': 16, 'grade': 10}
+
+student["city"] = "Москва"
+print(student)  # {'name': 'Иван', 'age': 16, 'grade': 10, 'city': 'Москва'}
+
+# Изменение существующего ключа (синтаксис тот же!)
+student["age"] = 17  # Был 16, стал 17
+print(student["age"])  # 17
+
+# Практика: счетчик слов
+word_count = {}
+text = "apple banana apple orange banana apple"
+for word in text.split():
+    if word in word_count:
+        word_count[word] += 1  # Увеличить счетчик
+    else:
+        word_count[word] = 1   # Первое появление
+print(word_count)  # {'apple': 3, 'banana': 2, 'orange': 1}</pre>
+                </div>
+
+                <h2>Удаление элементов</h2>
+
+                <h3>1. Оператор del</h3>
+                <div class="code-block">
+                    <pre># del - удалить пару ключ-значение
+student = {"name": "Иван", "age": 16, "grade": 10, "city": "Москва"}
+
+del student["grade"]
+print(student)  # {'name': 'Иван', 'age': 16, 'city': 'Москва'}
+
+# Ошибка если ключа нет
+# del student["phone"]  # KeyError!
+
+# Безопасное удаление
+if "phone" in student:
+    del student["phone"]</pre>
+                </div>
+
+                <h3>2. Метод pop()</h3>
+                <div class="code-block">
+                    <pre># pop(key) - удалить и вернуть значение
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+grade = student.pop("grade")
+print(f"Удалена оценка: {grade}")  # Удалена оценка: 10
+print(student)  # {'name': 'Иван', 'age': 16}
+
+# pop(key, default) - не вызовет ошибку если ключа нет
+phone = student.pop("phone", "нет телефона")
+print(phone)  # нет телефона (ключа не было)
+print(student)  # {'name': 'Иван', 'age': 16} - не изменился</pre>
+                </div>
+
+                <h3>3. Метод clear()</h3>
+                <div class="code-block">
+                    <pre># clear() - удалить все элементы
+student = {"name": "Иван", "age": 16, "grade": 10}
+student.clear()
+print(student)  # {} - пустой словарь</pre>
+                </div>
+
+                <h2>Проверка наличия ключа</h2>
+                <div class="code-block">
+                    <pre># Оператор in - проверка наличия ключа
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+# Проверка ключа
+print("name" in student)     # True
+print("city" in student)     # False
+print("Иван" in student)     # False! Проверяются ключи, не значения
+
+# Оператор not in
+print("phone" not in student)  # True
+
+# Использование в условиях
+if "grade" in student:
+    print(f"Класс: {student['grade']}")
+else:
+    print("Класс неизвестен")
+
+# Проверка значения (нужен метод values())
+print("Иван" in student.values())  # True - значение есть
+print(16 in student.values())      # True</pre>
+                </div>
+
+                <h2>Перебор словаря</h2>
+
+                <h3>1. Перебор ключей</h3>
+                <div class="code-block">
+                    <pre># По умолчанию перебираются ключи
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+for key in student:
+    print(key)
+# name
+# age
+# grade
+
+# Или явно через keys()
+for key in student.keys():
+    print(f"{key}: {student[key]}")
+# name: Иван
+# age: 16
+# grade: 10</pre>
+                </div>
+
+                <h3>2. Перебор значений</h3>
+                <div class="code-block">
+                    <pre># values() - перебор значений
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+for value in student.values():
+    print(value)
+# Иван
+# 16
+# 10
+
+# Практика: сумма оценок
+grades = {"математика": 5, "русский": 4, "физика": 5, "химия": 3}
+total = sum(grades.values())
+print(f"Сумма оценок: {total}")  # 17</pre>
+                </div>
+
+                <h3>3. Перебор пар ключ-значение</h3>
+                <div class="code-block">
+                    <pre># items() - перебор пар (key, value)
+student = {"name": "Иван", "age": 16, "grade": 10}
+
+for key, value in student.items():
+    print(f"{key} = {value}")
+# name = Иван
+# age = 16
+# grade = 10
+
+# Практика: красивый вывод словаря
+prices = {"хлеб": 30, "молоко": 65, "яйца": 90, "масло": 120}
+print("Прайс-лист:")
+for product, price in prices.items():
+    print(f"{product:10} - {price} руб.")</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Журнал оценок</h3>
+                <div class="code-block">
+                    <pre># Журнал оценок по предметам
+grades = {
+    "математика": 5,
+    "русский": 4,
+    "физика": 5,
+    "химия": 3,
+    "история": 4
+}
+
+# Вывести все оценки
+print("Оценки студента:")
+for subject, grade in grades.items():
+    print(f"{subject}: {grade}")
+
+# Средний балл
+average = sum(grades.values()) / len(grades)
+print(f"\nСредний балл: {average:.2f}")
+
+# Количество пятерок
+count_5 = sum(1 for grade in grades.values() if grade == 5)
+print(f"Пятерок: {count_5}")
+
+# Самый низкий балл
+min_subject = min(grades, key=grades.get)
+print(f"Самая низкая оценка: {min_subject} ({grades[min_subject]})")</pre>
+                </div>
+
+                <h3>Пример 2: Телефонная книга</h3>
+                <div class="code-block">
+                    <pre># Телефонная книга
+phonebook = {
+    "Иван": "+7-999-123-45-67",
+    "Мария": "+7-999-234-56-78",
+    "Петр": "+7-999-345-67-89"
+}
+
+# Найти телефон
+name = "Мария"
+if name in phonebook:
+    print(f"Телефон {name}: {phonebook[name]}")
+else:
+    print(f"Контакта {name} нет")
+
+# Добавить новый контакт
+phonebook["Анна"] = "+7-999-456-78-90"
+
+# Изменить телефон
+phonebook["Иван"] = "+7-999-111-22-33"
+
+# Удалить контакт
+del phonebook["Петр"]
+
+# Вывести всю книгу
+print("\nТелефонная книга:")
+for name, phone in phonebook.items():
+    print(f"{name:10} : {phone}")</pre>
+                </div>
+
+                <h3>Пример 3: Переводчик</h3>
+                <div class="code-block">
+                    <pre># Англо-русский словарь
+dictionary = {
+    "apple": "яблоко",
+    "book": "книга",
+    "cat": "кошка",
+    "dog": "собака",
+    "house": "дом",
+    "car": "машина"
+}
+
+# Перевести слово
+word = "book"
+translation = dictionary.get(word, "Перевод не найден")
+print(f"{word} -> {translation}")
+
+# Перевести предложение
+sentence = "cat book apple"
+translated = []
+for word in sentence.split():
+    translation = dictionary.get(word, word)
+    translated.append(translation)
+print(" ".join(translated))  # кошка книга яблоко
+
+# Добавить новое слово
+dictionary["tree"] = "дерево"</pre>
+                </div>
+
+                <h3>Пример 4: Подсчет частоты слов</h3>
+                <div class="code-block">
+                    <pre># Подсчитать сколько раз встречается каждое слово
+text = "apple banana apple orange banana apple banana orange"
+
+word_count = {}
+for word in text.split():
+    word_count[word] = word_count.get(word, 0) + 1
+
+print("Частота слов:")
+for word, count in word_count.items():
+    print(f"{word}: {count} раз")
+
+# Самое частое слово
+most_common = max(word_count, key=word_count.get)
+print(f"\nСамое частое слово: {most_common} ({word_count[most_common]} раз)")</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
+                <div class="editor-container">
+                    <h4>Попробуй сам!</h4>
+                    <textarea id="code-editor" class="code-editor"># Пример 1: Создание и доступ
+student = {
+    "name": "Иван",
+    "age": 16,
+    "grade": 10,
+    "city": "Москва"
+}
+print("Студент:", student)
+print(f"Имя: {student['name']}, Возраст: {student['age']}")
+print()
+
+# Пример 2: Безопасный доступ get()
+print("Класс:", student.get("grade"))
+print("Телефон:", student.get("phone", "не указан"))
+print()
+
+# Пример 3: Добавление и изменение
+student["email"] = "ivan@example.com"
+student["age"] = 17
+print("После изменений:", student)
+print()
+
+# Пример 4: Проверка ключей
+print("Есть 'name'?", "name" in student)
+print("Есть 'phone'?", "phone" in student)
+print()
+
+# Пример 5: Перебор
+grades = {"математика": 5, "русский": 4, "физика": 5, "химия": 3}
+print("Оценки по предметам:")
+for subject, grade in grades.items():
+    print(f"  {subject}: {grade}")
+print(f"Средний балл: {sum(grades.values()) / len(grades):.2f}")
+print()
+
+# Пример 6: Телефонная книга
+phonebook = {
+    "Иван": "+7-999-111-22-33",
+    "Мария": "+7-999-222-33-44",
+    "Петр": "+7-999-333-44-55"
+}
+print("Телефонная книга:")
+for name, phone in phonebook.items():
+    print(f"  {name}: {phone}")
+print()
+
+# Пример 7: Подсчет слов
+text = "python is great python is fun python is powerful"
+word_count = {}
+for word in text.split():
+    word_count[word] = word_count.get(word, 0) + 1
+print("Частота слов:")
+for word, count in sorted(word_count.items()):
+    print(f"  {word}: {count}")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: База данных студентов</h4>
+                    <p>Создай программу для управления данными студентов:</p>
+                    <ol>
+                        <li>Создай словарь для 3 студентов: имя -> возраст</li>
+                        <li>Выведи всех студентов и их возраст</li>
+                        <li>Добавь нового студента</li>
+                        <li>Измени возраст одного студента</li>
+                        <li>Найди самого старшего студента</li>
+                        <li>Вычисли средний возраст</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй items() для перебора, max() с key= для поиска максимума</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Магазин с ценами</h4>
+                    <p>Создай программу магазина:</p>
+                    <ol>
+                        <li>Создай словарь товаров с ценами (минимум 5 товаров)</li>
+                        <li>Выведи прайс-лист (товар и цена)</li>
+                        <li>Запроси у пользователя название товара</li>
+                        <li>Выведи цену (используй get с сообщением "нет в наличии")</li>
+                        <li>Вычисли среднюю цену всех товаров</li>
+                        <li>Найди самый дорогой и самый дешевый товар</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй get() для безопасного доступа, min/max с key=</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Анализ текста</h4>
+                    <p>Создай программу для анализа текста:</p>
+                    <ol>
+                        <li>Создай строку с произвольным текстом (минимум 10 слов)</li>
+                        <li>Подсчитай сколько раз встречается каждое слово</li>
+                        <li>Выведи все слова и их количество</li>
+                        <li>Найди самое частое слово</li>
+                        <li>Найди слова которые встречаются только 1 раз</li>
+                        <li>Выведи общее количество уникальных слов</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй split(), цикл for, get(word, 0) + 1</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: KeyError при доступе</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - ключа может не быть!
+student = {"name": "Иван", "age": 16}
+# print(student["city"])  # KeyError!
+
+# ПРАВИЛЬНО - использовать get()
+city = student.get("city", "Неизвестно")
+print(city)  # Неизвестно
+
+# Или проверить перед доступом
+if "city" in student:
+    print(student["city"])</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Использование изменяемых ключей</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - список нельзя использовать как ключ!
+# my_dict = {[1, 2]: "value"}  # TypeError!
+
+# ПРАВИЛЬНО - использовать кортеж
+my_dict = {(1, 2): "value"}  # OK
+print(my_dict[(1, 2)])  # value</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Путаница in для ключей и значений</h4>
+                    <div class="code-block">
+                        <pre>student = {"name": "Иван", "age": 16}
+
+# in проверяет КЛЮЧИ, не значения!
+print("name" in student)  # True (ключ есть)
+print("Иван" in student)  # False! Это значение, не ключ
+
+# Для проверки значений
+print("Иван" in student.values())  # True
+print(16 in student.values())      # True</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Изменение словаря во время перебора</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - изменяем словарь во время перебора
+grades = {"математика": 5, "русский": 3, "физика": 4}
+# for subject in grades:
+#     if grades[subject] < 4:
+#         del grades[subject]  # RuntimeError!
+
+# ПРАВИЛЬНО - перебрать копию или список ключей
+for subject in list(grades.keys()):
+    if grades[subject] < 4:
+        del grades[subject]
+print(grades)  # {'математика': 5, 'физика': 4}</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Путаница между [] и get()</h4>
+                    <div class="code-block">
+                        <pre>student = {"name": "Иван", "age": 16}
+
+# [] вызывает ошибку если ключа нет
+try:
+    print(student["city"])
+except KeyError:
+    print("Ошибка! Ключа нет")
+
+# get() возвращает None или default
+print(student.get("city"))  # None
+print(student.get("city", "Неизвестно"))  # Неизвестно
+
+# Используй get() когда ключа может не быть!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Дублирование ключей</h4>
+                    <div class="code-block">
+                        <pre># Дублирующиеся ключи - останется последнее значение!
+student = {
+    "name": "Иван",
+    "age": 16,
+    "name": "Петр"  # Перезапишет первое "name"!
+}
+print(student)  # {'name': 'Петр', 'age': 16}
+
+# Ключи уникальны - каждый может быть только один раз</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет <code>d = {"a": 1, "b": 2}; print(d["c"])</code>?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! При обращении к несуществующему ключу будет ошибка.">None</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Не выведет 0, а вызовет ошибку.">0</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Обращение к несуществующему ключу вызывает KeyError.">KeyError</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Будет ошибка, не пустая строка.">" "</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: В чем разница между dict[key] и dict.get(key)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Оба могут получать значения.">Нет разницы</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! [] вызывает KeyError, get() возвращает None.">[] вызывает ошибку если ключа нет, get() возвращает None</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! get() тоже получает значение.">[] получает значение, get() проверяет наличие</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! get() работает так же быстро.">[] быстрее чем get()</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что проверяет <code>"name" in student</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Оператор in проверяет наличие ключа.">Есть ли ключ "name"</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Для проверки значения нужно student.values().">Есть ли значение "name"</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Проверяется только ключ.">Есть ли ключ или значение "name"</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! in работает со словарями.">Вызывает ошибку</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Можно ли использовать список как ключ словаря?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Список изменяемый, нельзя использовать как ключ.">Да, можно</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Ключи должны быть неизменяемыми (hashable).">Нет, только неизменяемые типы</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Попытка использовать список вызовет ошибку.">Да, если список пустой</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Можно использовать кортеж, но не список.">Да, но он станет кортежем</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как перебрать все пары ключ-значение?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это перебирает только ключи.">for key in dict:</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это перебирает только значения.">for value in dict.values():</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! items() возвращает пары (key, value).">for key, value in dict.items():</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Такого метода нет.">for pair in dict.pairs():</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Словари - важнейшая структура данных для экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ программ со словарями), Задание 14 (обработка данных)</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-27 (эффективная обработка данных со словарями)</li>
+                        <li>Применение на экзаменах:
+                            <ul>
+                                <li>Подсчет частоты элементов (слова, числа, символы)</li>
+                                <li>Группировка данных по ключам</li>
+                                <li>Хранение связанных данных (имя-значение)</li>
+                                <li>Быстрый поиск по ключу (O(1) вместо O(n))</li>
+                                <li>Создание индексов для оптимизации</li>
+                            </ul>
+                        </li>
+                        <li>Важно знать разницу между [] и get() (частая ловушка!)</li>
+                        <li>Понимать что ключи должны быть неизменяемыми</li>
+                        <li>Уметь перебирать keys(), values(), items()</li>
+                        <li>Знать методы для безопасной работы (get, pop с default)</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Словарь:</strong> коллекция пар ключ-значение</li>
+                    <li><strong>Создание:</strong> <code>{"key": "value"}</code> или <code>dict()</code></li>
+                    <li><strong>Доступ:</strong> <code>dict[key]</code> (с ошибкой) или <code>dict.get(key, default)</code> (безопасно)</li>
+                    <li><strong>Добавление:</strong> <code>dict[key] = value</code> (новый или изменить существующий)</li>
+                    <li><strong>Удаление:</strong> <code>del dict[key]</code> или <code>dict.pop(key, default)</code></li>
+                    <li><strong>Проверка:</strong> <code>key in dict</code> - есть ли ключ</li>
+                    <li><strong>Перебор:</strong> <code>keys()</code>, <code>values()</code>, <code>items()</code></li>
+                    <li><strong>Ключи:</strong> должны быть неизменяемыми (строки, числа, кортежи)</li>
+                    <li><strong>Значения:</strong> могут быть любыми (включая списки, словари)</li>
+                    <li><strong>Применение:</strong> подсчет частоты, хранение связанных данных, быстрый поиск</li>
+                </ul>
+
+                <p>Отлично! Теперь ты знаешь основы работы со словарями - одной из самых полезных структур данных! В следующем уроке изучим продвинутые методы словарей и их применение.</p>
             </div>
 
             <div class="lesson-nav">

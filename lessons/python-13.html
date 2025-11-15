@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 18: Вложенные списки (матрицы) - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <title>Урок 18: Вложенные списки - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-13">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -218,51 +219,799 @@
     <main class="container">
         <div class="lesson-container">
             <div class="lesson-header">
-                <h1>Урок 18: Вложенные списки (матрицы)</h1>
-                <div class="lesson-meta">Структуры данных • 30 минут</div>
+                <h1>Урок 18: Вложенные списки (Nested Lists)</h1>
+                <div class="lesson-meta">Структуры данных • 50 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Представь таблицу с оценками: строки - ученики, столбцы - предметы. Как хранить такую таблицу в Python? Используем <strong>вложенные списки</strong> (nested lists) - списки внутри списков! Это называется двумерным массивом или матрицей.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Вложенные списки - мощный инструмент для работы с табличными данными: расписания уроков, игровые поля (шахматы, крестики-нолики), карты, пиксели изображений и многое другое!</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Концепцию двумерных списков (матриц)</li>
+                        <li>Создание вложенных списков</li>
+                        <li>Доступ к элементам через <code>[row][col]</code></li>
+                        <li>Вложенные циклы для перебора</li>
+                        <li>Правильное создание матриц (частая ошибка!)</li>
+                        <li>Операции: сумма, максимум, транспонирование</li>
+                        <li>Практические задачи: таблица оценок, крестики-нолики, рассадка</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
+                <h2>Что такое вложенный список?</h2>
+                <p>Вложенный список - это список, элементами которого являются другие списки. Представь это как таблицу или сетку:</p>
+
+                <div class="code-block">
+                    <pre># Простой список (одномерный)
+numbers = [1, 2, 3, 4, 5]
+
+# Вложенный список (двумерный)
+matrix = [
+    [1, 2, 3],  # Первая строка
+    [4, 5, 6],  # Вторая строка
+    [7, 8, 9]   # Третья строка
+]
+
+print(matrix)
+# [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+# Визуализация как таблица:
+#   1  2  3
+#   4  5  6
+#   7  8  9</pre>
+                </div>
+
+                <h2>Создание вложенных списков</h2>
+
+                <h3>Способ 1: Прямое создание</h3>
+                <div class="code-block">
+                    <pre># Создание вложенного списка напрямую
+grades = [
+    [5, 4, 5],  # Оценки первого ученика
+    [4, 4, 3],  # Оценки второго ученика
+    [5, 5, 4]   # Оценки третьего ученика
+]
+
+# Расписание уроков на неделю
+schedule = [
+    ["Математика", "Русский", "Физика"],     # Понедельник
+    ["История", "Английский", "Биология"],   # Вторник
+    ["Математика", "Химия", "Литература"],   # Среда
+    ["Физкультура", "ИЗО", "Музыка"]        # Четверг
+]
+
+# Пустая матрица 3x3
+empty_matrix = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+]</pre>
+                </div>
+
+                <h3>Способ 2: Создание через циклы</h3>
+                <div class="code-block">
+                    <pre># Создание матрицы 3x4 (3 строки, 4 столбца) из нулей
+rows = 3
+cols = 4
+matrix = []
+for i in range(rows):
+    row = []  # Новая строка
+    for j in range(cols):
+        row.append(0)
+    matrix.append(row)
+
+print(matrix)
+# [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+# Заполнить матрицу последовательными числами
+matrix = []
+num = 1
+for i in range(3):
+    row = []
+    for j in range(4):
+        row.append(num)
+        num += 1
+    matrix.append(row)
+
+print(matrix)
+# [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]</pre>
+                </div>
+
+                <h3>Способ 3: Генератор списков (list comprehension)</h3>
+                <div class="code-block">
+                    <pre># Короткий способ создания матрицы
+# Матрица 3x4 из нулей
+matrix = [[0 for j in range(4)] for i in range(3)]
+print(matrix)
+# [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+# Матрица с последовательными числами
+matrix = [[i*4 + j + 1 for j in range(4)] for i in range(3)]
+print(matrix)
+# [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+
+# Единичная матрица (диагональ из 1, остальное 0)
+size = 4
+identity = [[1 if i == j else 0 for j in range(size)] for i in range(size)]
+print(identity)
+# [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>ВАЖНО: Частая ошибка при создании матриц!</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - НЕ делай так!
+matrix = [[0] * 3] * 3
+print(matrix)  # [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+
+# Кажется правильным, но это ЛОВУШКА!
+matrix[0][0] = 999
+print(matrix)
+# [[999, 0, 0], [999, 0, 0], [999, 0, 0]]
+# Изменились ВСЕ строки! Потому что это одна и та же строка 3 раза!
+
+# ПРАВИЛЬНО - создавать каждую строку отдельно
+matrix = [[0] * 3 for i in range(3)]
+matrix[0][0] = 999
+print(matrix)
+# [[999, 0, 0], [0, 0, 0], [0, 0, 0]] - правильно!</pre>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                </div>
+
+                <h2>Доступ к элементам</h2>
+                <p>Для доступа к элементу используем <code>[row][col]</code> - сначала строка, потом столбец:</p>
+
+                <div class="code-block">
+                    <pre># Матрица 3x3
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Доступ к элементам: matrix[строка][столбец]
+print(matrix[0][0])  # 1 (строка 0, столбец 0)
+print(matrix[0][1])  # 2 (строка 0, столбец 1)
+print(matrix[1][0])  # 4 (строка 1, столбец 0)
+print(matrix[2][2])  # 9 (строка 2, столбец 2)
+
+# Схема индексов:
+#       col 0  col 1  col 2
+# row 0:  1      2      3
+# row 1:  4      5      6
+# row 2:  7      8      9
+
+# Доступ к целой строке
+print(matrix[0])  # [1, 2, 3] - первая строка
+print(matrix[1])  # [4, 5, 6] - вторая строка
+
+# Изменение элемента
+matrix[1][1] = 999
+print(matrix)
+# [[1, 2, 3], [4, 999, 6], [7, 8, 9]]</pre>
+                </div>
+
+                <h2>Перебор вложенных списков</h2>
+
+                <h3>Способ 1: Вложенные циклы с индексами</h3>
+                <div class="code-block">
+                    <pre># Перебор всех элементов матрицы
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Вложенные циклы
+for i in range(len(matrix)):          # Перебор строк
+    for j in range(len(matrix[i])):   # Перебор столбцов
+        print(f"[{i}][{j}] = {matrix[i][j]}")
+
+# Вывод:
+# [0][0] = 1
+# [0][1] = 2
+# [0][2] = 3
+# [1][0] = 4
+# ... и так далее
+
+# Вывести матрицу в табличном виде
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        print(matrix[i][j], end=" ")
+    print()  # Новая строка после каждой строки матрицы
+
+# Вывод:
+# 1 2 3
+# 4 5 6
+# 7 8 9</pre>
+                </div>
+
+                <h3>Способ 2: Перебор элементов напрямую</h3>
+                <div class="code-block">
+                    <pre># Перебор без индексов
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Перебор строк, затем элементов в строке
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
+
+# Вывод:
+# 1 2 3
+# 4 5 6
+# 7 8 9
+
+# Когда нужны индексы - используй enumerate
+for i, row in enumerate(matrix):
+    for j, element in enumerate(row):
+        print(f"[{i}][{j}] = {element}")</pre>
+                </div>
+
+                <h2>Операции с матрицами</h2>
+
+                <h3>1. Сумма всех элементов</h3>
+                <div class="code-block">
+                    <pre># Найти сумму всех элементов матрицы
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+total = 0
+for row in matrix:
+    for element in row:
+        total += element
+
+print(f"Сумма всех элементов: {total}")  # 45
+
+# Короткий способ через sum()
+total = sum(sum(row) for row in matrix)
+print(total)  # 45</pre>
+                </div>
+
+                <h3>2. Максимум и минимум</h3>
+                <div class="code-block">
+                    <pre># Найти максимальный элемент
+matrix = [
+    [3, 7, 2],
+    [9, 1, 5],
+    [4, 8, 6]
+]
+
+maximum = matrix[0][0]  # Начинаем с первого элемента
+for row in matrix:
+    for element in row:
+        if element > maximum:
+            maximum = element
+
+print(f"Максимум: {maximum}")  # 9
+
+# Короткий способ
+maximum = max(max(row) for row in matrix)
+print(maximum)  # 9
+
+# Минимум
+minimum = min(min(row) for row in matrix)
+print(minimum)  # 1</pre>
+                </div>
+
+                <h3>3. Сумма по строкам и столбцам</h3>
+                <div class="code-block">
+                    <pre># Сумма каждой строки
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+print("Сумма по строкам:")
+for i, row in enumerate(matrix):
+    row_sum = sum(row)
+    print(f"Строка {i}: {row_sum}")
+
+# Вывод:
+# Строка 0: 6
+# Строка 1: 15
+# Строка 2: 24
+
+# Сумма каждого столбца
+print("\nСумма по столбцам:")
+cols = len(matrix[0])
+for j in range(cols):
+    col_sum = 0
+    for i in range(len(matrix)):
+        col_sum += matrix[i][j]
+    print(f"Столбец {j}: {col_sum}")
+
+# Вывод:
+# Столбец 0: 12
+# Столбец 1: 15
+# Столбец 2: 18</pre>
+                </div>
+
+                <h3>4. Транспонирование матрицы</h3>
+                <div class="code-block">
+                    <pre># Транспонирование - замена строк и столбцов
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+# Исходная матрица 2x3:
+# 1 2 3
+# 4 5 6
+
+rows = len(matrix)
+cols = len(matrix[0])
+
+# Создать транспонированную матрицу 3x2
+transposed = [[0 for i in range(rows)] for j in range(cols)]
+
+for i in range(rows):
+    for j in range(cols):
+        transposed[j][i] = matrix[i][j]
+
+print("Транспонированная матрица:")
+for row in transposed:
+    print(row)
+
+# Вывод:
+# [1, 4]
+# [2, 5]
+# [3, 6]</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Таблица оценок</h3>
+                <div class="code-block">
+                    <pre># Оценки учеников по предметам
+# Строки - ученики, столбцы - предметы
+grades = [
+    [5, 4, 5],  # Иван
+    [4, 5, 4],  # Мария
+    [3, 4, 3],  # Петр
+    [5, 5, 5]   # Анна
+]
+
+names = ["Иван", "Мария", "Петр", "Анна"]
+subjects = ["Математика", "Русский", "Физика"]
+
+# Вывести таблицу
+print("       ", end="")
+for subject in subjects:
+    print(f"{subject:12}", end="")
+print()
+
+for i, name in enumerate(names):
+    print(f"{name:7}", end="")
+    for grade in grades[i]:
+        print(f"{grade:12}", end="")
+    print()
+
+# Средний балл каждого ученика
+print("\nСредний балл:")
+for i, name in enumerate(names):
+    avg = sum(grades[i]) / len(grades[i])
+    print(f"{name}: {avg:.2f}")
+
+# Средний балл по каждому предмету
+print("\nСредний балл по предметам:")
+for j, subject in enumerate(subjects):
+    total = sum(grades[i][j] for i in range(len(grades)))
+    avg = total / len(grades)
+    print(f"{subject}: {avg:.2f}")</pre>
+                </div>
+
+                <h3>Пример 2: Крестики-нолики</h3>
+                <div class="code-block">
+                    <pre># Игровое поле 3x3 для крестиков-ноликов
+# "X" - крестик, "O" - нолик, " " - пусто
+board = [
+    [" ", " ", " "],
+    [" ", " ", " "],
+    [" ", " ", " "]
+]
+
+# Функция вывода поля
+def print_board(board):
+    print("  0 1 2")
+    for i in range(3):
+        print(i, end=" ")
+        for j in range(3):
+            print(board[i][j], end=" ")
+        print()
+
+# Сделать ход
+board[0][0] = "X"  # X в левый верхний угол
+board[1][1] = "O"  # O в центр
+board[0][2] = "X"  # X в правый верхний угол
+
+print_board(board)
+
+# Проверка победы по первой строке
+if board[0][0] == board[0][1] == board[0][2] != " ":
+    print(f"Победил {board[0][0]}!")
+</pre>
+                </div>
+
+                <h3>Пример 3: Рассадка в классе</h3>
+                <div class="code-block">
+                    <pre># Рассадка учеников в классе (4 ряда по 3 парты)
+classroom = [
+    ["Иван", "Мария", "Петр"],
+    ["Анна", "Олег", "Света"],
+    ["Дима", "Катя", "Саша"],
+    ["Лена", "Макс", "Вика"]
+]
+
+print("Рассадка в классе:")
+print("(Доска)")
+print()
+for i, row in enumerate(classroom):
+    print(f"Ряд {i+1}:", " | ".join(row))
+
+# Найти ученика
+name = "Катя"
+for i in range(len(classroom)):
+    for j in range(len(classroom[i])):
+        if classroom[i][j] == name:
+            print(f"\n{name} сидит в ряду {i+1}, место {j+1}")</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
+                <div class="editor-container">
+                    <h4>Попробуй сам!</h4>
+                    <textarea id="code-editor" class="code-editor"># Пример 1: Создание и вывод матрицы
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+print("Матрица 3x3:")
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
+print()
+
+# Пример 2: Доступ к элементам
+print("Углы матрицы:")
+print(f"Левый верхний: {matrix[0][0]}")
+print(f"Правый верхний: {matrix[0][2]}")
+print(f"Левый нижний: {matrix[2][0]}")
+print(f"Правый нижний: {matrix[2][2]}")
+print()
+
+# Пример 3: Сумма всех элементов
+total = 0
+for row in matrix:
+    for element in row:
+        total += element
+print(f"Сумма всех элементов: {total}")
+print()
+
+# Пример 4: Таблица умножения
+print("Таблица умножения 5x5:")
+mult_table = [[i * j for j in range(1, 6)] for i in range(1, 6)]
+for row in mult_table:
+    for num in row:
+        print(f"{num:3}", end=" ")
+    print()
+print()
+
+# Пример 5: Оценки студентов
+grades = [
+    [5, 4, 5, 4],
+    [4, 5, 5, 5],
+    [3, 4, 4, 3]
+]
+names = ["Иван", "Мария", "Петр"]
+
+print("Средний балл каждого ученика:")
+for i, name in enumerate(names):
+    avg = sum(grades[i]) / len(grades[i])
+    print(f"{name}: {avg:.2f}")
+print()
+
+# Пример 6: Поиск максимума
+matrix = [
+    [3, 7, 2],
+    [9, 1, 5],
+    [4, 8, 6]
+]
+
+max_val = matrix[0][0]
+max_i, max_j = 0, 0
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        if matrix[i][j] > max_val:
+            max_val = matrix[i][j]
+            max_i, max_j = i, j
+
+print(f"Максимум: {max_val} на позиции [{max_i}][{max_j}]")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Калькулятор матриц</h4>
+                    <p>Создай программу для работы с матрицей:</p>
+                    <ol>
+                        <li>Создай матрицу 3x4 с произвольными числами</li>
+                        <li>Выведи матрицу в табличном виде</li>
+                        <li>Найди и выведи сумму всех элементов, максимум, минимум, среднее</li>
+                        <li>Вычисли сумму каждой строки</li>
+                        <li>Вычисли сумму каждого столбца</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй вложенные циклы и функции sum(), max(), min()</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Обработка таблицы</h4>
+                    <p>Создай программу для анализа продаж:</p>
+                    <ol>
+                        <li>Создай матрицу продаж: 4 продавца, 3 дня</li>
+                        <li>Выведи таблицу с подписями</li>
+                        <li>Найди какой продавец продал больше всего</li>
+                        <li>Найди в какой день было больше всего продаж</li>
+                        <li>Выведи средние продажи по каждому продавцу</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Сумма строки = продажи продавца, сумма столбца = продажи за день</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Поиск в матрице</h4>
+                    <p>Создай программу поиска элемента в матрице:</p>
+                    <ol>
+                        <li>Создай матрицу 5x5 с числами от 1 до 25</li>
+                        <li>Запроси у пользователя число для поиска</li>
+                        <li>Найди позицию этого числа (строка и столбец)</li>
+                        <li>Выведи все соседние элементы (сверху, снизу, слева, справа)</li>
+                        <li>Проверь является ли это число максимумом среди соседей</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Проверяй границы матрицы!</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неправильное создание матрицы</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - создается одна строка, повторенная 3 раза!
+matrix = [[0] * 3] * 3
+matrix[0][0] = 999
+print(matrix)  # [[999, 0, 0], [999, 0, 0], [999, 0, 0]] - все строки изменились!
+
+# ПРАВИЛЬНО - каждая строка создается отдельно
+matrix = [[0] * 3 for i in range(3)]
+matrix[0][0] = 999
+print(matrix)  # [[999, 0, 0], [0, 0, 0], [0, 0, 0]] - только первая строка</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Путаница в индексах [row][col]</h4>
+                    <div class="code-block">
+                        <pre># Матрица 3 строки x 4 столбца
+matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]
+]
+
+# НЕПРАВИЛЬНО - перепутаны строка и столбец
+# element = matrix[3][2]  # IndexError! Строки 3 нет (есть 0, 1, 2)
+
+# ПРАВИЛЬНО - сначала строка, потом столбец
+element = matrix[2][3]  # Строка 2, столбец 3 = 12
+print(element)  # 12</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Выход за границы матрицы</h4>
+                    <div class="code-block">
+                        <pre># Матрица 3x3
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+# НЕПРАВИЛЬНО - не проверяем границы
+i, j = 0, 0
+# top_neighbor = matrix[i-1][j]  # IndexError при i=0!
+
+# ПРАВИЛЬНО - проверяем границы
+if i > 0:
+    top_neighbor = matrix[i-1][j]
+    print(f"Сосед сверху: {top_neighbor}")
+else:
+    print("Нет соседа сверху (это верхний край)")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неправильный перебор столбцов</h4>
+                    <div class="code-block">
+                        <pre># Матрица может быть прямоугольной!
+matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7],
+    [8, 9]
+]
+
+# НЕПРАВИЛЬНО - предполагаем одинаковую длину строк
+# for i in range(len(matrix)):
+#     for j in range(len(matrix)):  # Неправильно!
+#         print(matrix[i][j])
+
+# ПРАВИЛЬНО - используем длину конкретной строки
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):  # Длина i-й строки
+        print(matrix[i][j], end=" ")
+    print()</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Изменение размера во время перебора</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - добавляем элементы во время перебора
+matrix = [[1, 2], [3, 4]]
+for row in matrix:
+    row.append(999)  # Изменяем размер во время перебора - опасно!
+
+# ПРАВИЛЬНО - создать новую матрицу
+matrix = [[1, 2], [3, 4]]
+new_matrix = []
+for row in matrix:
+    new_row = row + [999]
+    new_matrix.append(new_row)
+print(new_matrix)  # [[1, 2, 999], [3, 4, 999]]</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Путаница в операциях со строками/столбцами</h4>
+                    <div class="code-block">
+                        <pre>matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Сумма строки - легко
+row_sum = sum(matrix[0])  # Сумма первой строки
+print(row_sum)  # 6
+
+# Сумма столбца - нужен цикл!
+col_sum = 0
+for i in range(len(matrix)):
+    col_sum += matrix[i][0]  # Первый столбец
+print(col_sum)  # 12
+
+# Или короче:
+col_sum = sum(row[0] for row in matrix)
+print(col_sum)  # 12</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет <code>matrix = [[1, 2], [3, 4]]; print(matrix[1][0])</code>?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это matrix[0][0] (строка 0, столбец 0).">1</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это matrix[0][1] (строка 0, столбец 1).">2</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! matrix[1][0] - строка 1, столбец 0 = 3.">3</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это matrix[1][1] (строка 1, столбец 1).">4</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Почему <code>matrix = [[0] * 3] * 3</code> - плохой способ?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это создает матрицу 3x3, но с ошибкой.">Создает матрицу неправильного размера</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Все три строки - это одна и та же строка в памяти!">Все строки ссылаются на один и тот же список</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Код работает без синтаксических ошибок.">Вызывает синтаксическую ошибку</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Проблема в логике, не в производительности.">Работает слишком медленно</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Как правильно создать матрицу 4x5 из нулей?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это создаст 5x4 (5 строк, 4 столбца).">[[0] * 4 for i in range(5)]</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! 4 строки по 5 столбцов.">[[0] * 5 for i in range(4)]</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это неправильный способ - все строки будут одинаковыми.">[[0] * 5] * 4</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Такой синтаксис неверен.">[[0 for 5] for 4]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Как получить сумму второго столбца матрицы?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Это даст сумму второй строки, не столбца.">sum(matrix[1])</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Берем второй элемент (индекс 1) из каждой строки.">sum(row[1] for row in matrix)</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! sum() не работает напрямую с двумерными списками так.">sum(matrix)[1]</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Это даст элемент, а не сумму столбца.">matrix[1][1]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Сколько итераций выполнится для матрицы 3x4 во вложенных циклах?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это только количество строк.">3</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это только количество столбцов.">4</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это сумма, а нужно произведение.">7</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! 3 строки × 4 столбца = 12 итераций.">12</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Двумерные массивы (матрицы) - важная тема на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ программ с двумерными массивами), Задание 14 (обработка матриц)</li>
+                        <li><strong>ЕГЭ:</strong> Задания 16, 24-27 (работа с двумерными структурами данных)</li>
+                        <li>Частые задачи на экзаменах:
+                            <ul>
+                                <li>Заполнение матрицы по определенному правилу</li>
+                                <li>Поиск элементов в матрице</li>
+                                <li>Сумма элементов по строкам, столбцам, диагоналям</li>
+                                <li>Обход матрицы в различных направлениях</li>
+                                <li>Преобразование матриц (транспонирование, поворот)</li>
+                            </ul>
+                        </li>
+                        <li>Важно знать правильный способ создания матрицы (частая ловушка!)</li>
+                        <li>Понимать разницу между строками и столбцами при индексации</li>
+                        <li>Уметь работать с вложенными циклами для перебора всех элементов</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Вложенный список:</strong> список, содержащий другие списки (двумерный массив)</li>
+                    <li><strong>Создание:</strong> <code>[[0] * cols for i in range(rows)]</code> - правильный способ</li>
+                    <li><strong>НЕ использовать:</strong> <code>[[0] * cols] * rows</code> - все строки будут одинаковыми!</li>
+                    <li><strong>Доступ:</strong> <code>matrix[row][col]</code> - сначала строка, потом столбец</li>
+                    <li><strong>Перебор:</strong> вложенные циклы <code>for i in range(rows): for j in range(cols):</code></li>
+                    <li><strong>Сумма строки:</strong> <code>sum(matrix[i])</code></li>
+                    <li><strong>Сумма столбца:</strong> <code>sum(row[j] for row in matrix)</code></li>
+                    <li><strong>Применение:</strong> таблицы, игровые поля, изображения, графы</li>
+                    <li><strong>Проверка границ:</strong> всегда проверяй индексы перед обращением</li>
+                    <li><strong>Размер:</strong> <code>rows = len(matrix)</code>, <code>cols = len(matrix[0])</code></li>
+                </ul>
+
+                <p>Отлично! Теперь ты умеешь работать с двумерными данными - матрицами и таблицами! Это фундамент для более сложных структур данных. В следующем уроке изучим кортежи - неизменяемые списки.</p>
             </div>
 
             <div class="lesson-nav">
