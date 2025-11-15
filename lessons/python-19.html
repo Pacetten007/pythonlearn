@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 24: Параметры функций - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-19">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,21 +220,445 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 24: Параметры функций</h1>
-                <div class="lesson-meta">Функции • 25 минут</div>
+                <div class="lesson-meta">Функции • 50 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>В прошлом уроке мы создавали простые функции без входных данных. Но что если функция должна работать с разными значениями? Представь функцию "приготовить пиццу" - она должна знать размер пиццы, начинку, количество сыра! Параметры позволяют передавать данные в функции, делая их гибкими и мощными.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>С параметрами функция становится по-настоящему универсальной - один раз написал, используй с любыми данными!</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Что такое параметры и аргументы</li>
+                        <li>Функции с одним параметром</li>
+                        <li>Функции с несколькими параметрами</li>
+                        <li>Позиционные параметры</li>
+                        <li>Параметры со значениями по умолчанию</li>
+                        <li>Именованные аргументы (keyword arguments)</li>
+                        <li>Смешивание позиционных и именованных аргументов</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
+                <h2>Параметры vs Аргументы</h2>
+                <p>Сначала разберем терминологию - это важно!</p>
+
+                <div class="code-block">
+                    <pre>def greet(name):  # 'name' - это ПАРАМЕТР
+    """Приветствует пользователя по имени."""
+    print(f"Привет, {name}!")
+
+# Вызываем функцию
+greet("Иван")  # "Иван" - это АРГУМЕНТ</pre>
+                </div>
+
+                <h3>В чем разница?</h3>
+                <ul>
+                    <li><strong>Параметр</strong> - переменная в определении функции (внутри скобок после <code>def</code>)</li>
+                    <li><strong>Аргумент</strong> - конкретное значение, которое передаем при вызове</li>
+                    <li>Параметр - как пустая коробка с именем</li>
+                    <li>Аргумент - что мы кладем в эту коробку</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre>def square(n):  # n - параметр (переменная)
+    """Выводит квадрат числа."""
+    result = n * n
+    print(result)
+
+square(5)   # 5 - аргумент (значение) → Выведет: 25
+square(10)  # 10 - аргумент → Выведет: 100
+square(3)   # 3 - аргумент → Выведет: 9
+
+# Одна функция, разные аргументы - разные результаты!</pre>
+                </div>
+
+                <h2>Функция с одним параметром</h2>
+                <p>Самый простой случай - функция принимает одно значение:</p>
+
+                <div class="code-block">
+                    <pre># Функция приветствия с именем
+def greet(name):
+    """Приветствует пользователя по имени."""
+    print(f"Здравствуй, {name}!")
+    print(f"Рад тебя видеть, {name}!")
+
+greet("Мария")  # Здравствуй, Мария! Рад тебя видеть, Мария!
+greet("Петр")   # Здравствуй, Петр! Рад тебя видеть, Петр!
+
+# Функция вывода числа в квадрате
+def print_square(number):
+    """Выводит квадрат числа."""
+    print(f"{number}² = {number ** 2}")
+
+print_square(7)   # 7² = 49
+print_square(12)  # 12² = 144
+
+# Функция повторения текста
+def repeat_text(text):
+    """Повторяет текст 3 раза."""
+    for i in range(3):
+        print(text)</pre>
+                </div>
+
+                <h3>Параметр может быть любого типа</h3>
+                <div class="code-block">
+                    <pre># Число
+def double(n):
+    print(n * 2)
+
+double(5)  # 10
+
+# Строка
+def shout(text):
+    print(text.upper())
+
+shout("привет")  # ПРИВЕТ
+
+# Список
+def print_list(items):
+    for item in items:
+        print(f"- {item}")
+
+print_list(["яблоко", "банан", "апельсин"])</pre>
+                </div>
+
+                <h2>Функция с несколькими параметрами</h2>
+                <p>Функция может принимать 2, 3, 5, 10 параметров! Разделяем их запятыми:</p>
+
+                <div class="code-block">
+                    <pre># Два параметра
+def add(a, b):
+    """Выводит сумму двух чисел."""
+    result = a + b
+    print(f"{a} + {b} = {result}")
+
+add(5, 3)    # 5 + 3 = 8
+add(10, 20)  # 10 + 20 = 30
+add(7, 15)   # 7 + 15 = 22
+
+# Три параметра
+def show_person(name, age, city):
+    """Выводит информацию о человеке."""
+    print(f"Имя: {name}")
+    print(f"Возраст: {age} лет")
+    print(f"Город: {city}")
+
+show_person("Иван", 16, "Москва")
+# Имя: Иван
+# Возраст: 16 лет
+# Город: Москва
+
+# Четыре параметра
+def calculate_rectangle(width, height, unit, name):
+    """Вычисляет площадь прямоугольника."""
+    area = width * height
+    perimeter = 2 * (width + height)
+    print(f"{name}:")
+    print(f"  Площадь: {area} {unit}²")
+    print(f"  Периметр: {perimeter} {unit}")
+
+calculate_rectangle(10, 5, "см", "Прямоугольник A")</pre>
+                </div>
+
+                <h2>Позиционные параметры</h2>
+                <p>По умолчанию Python сопоставляет аргументы с параметрами по позиции (порядку):</p>
+
+                <div class="code-block">
+                    <pre>def subtract(a, b):
+    """Вычитает b из a."""
+    result = a - b
+    print(f"{a} - {b} = {result}")
+
+subtract(10, 3)  # a=10, b=3 → 10 - 3 = 7
+subtract(3, 10)  # a=3, b=10 → 3 - 10 = -7
+
+# Порядок ВАЖЕН!
+# Первый аргумент → первый параметр (a)
+# Второй аргумент → второй параметр (b)
+
+def divide(dividend, divisor):
+    """Делит dividend на divisor."""
+    result = dividend / divisor
+    print(f"{dividend} / {divisor} = {result}")
+
+divide(20, 4)  # dividend=20, divisor=4 → 20 / 4 = 5.0
+divide(4, 20)  # dividend=4, divisor=20 → 4 / 20 = 0.2</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Важно!</h4>
+                    <p>Количество аргументов должно совпадать с количеством параметров!</p>
+                    <div class="code-block">
+                        <pre>def greet(name, age):
+    print(f"{name}, {age} лет")
+
+# greet("Иван")  # ERROR! Не хватает одного аргумента
+# greet("Иван", 16, "Москва")  # ERROR! Слишком много аргументов
+
+greet("Иван", 16)  # Правильно!</pre>
+                    </div>
+                </div>
+
+                <h2>Параметры по умолчанию</h2>
+                <p>Можно задать значение по умолчанию - если аргумент не передан, используется это значение:</p>
+
+                <div class="code-block">
+                    <pre>def greet(name, greeting="Привет"):
+    """Приветствует с заданным приветствием."""
+    print(f"{greeting}, {name}!")
+
+# Используем значение по умолчанию
+greet("Иван")  # Привет, Иван!
+
+# Переопределяем значение по умолчанию
+greet("Мария", "Здравствуй")  # Здравствуй, Мария!
+greet("Петр", "Добрый день")  # Добрый день, Петр!
+
+# Еще примеры
+def power(number, exponent=2):
+    """Возводит число в степень (по умолчанию в квадрат)."""
+    result = number ** exponent
+    print(f"{number}^{exponent} = {result}")
+
+power(5)     # 5^2 = 25 (используем значение по умолчанию)
+power(5, 3)  # 5^3 = 125
+power(2, 10) # 2^10 = 1024</pre>
+                </div>
+
+                <h3>Правила параметров по умолчанию</h3>
+                <ul>
+                    <li>Параметры по умолчанию должны идти <strong>после</strong> обязательных</li>
+                    <li>Можно сделать все параметры с умолчаниями</li>
+                    <li>Можно сделать только последние параметры с умолчаниями</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre># ПРАВИЛЬНО
+def func1(a, b=2, c=3):
+    pass
+
+def func2(a=1, b=2, c=3):
+    pass
+
+# НЕПРАВИЛЬНО
+# def func3(a=1, b, c):  # SyntaxError!
+#     pass
+
+# Параметр с умолчанием ПЕРЕД обязательным - ошибка!</pre>
+                </div>
+
+                <h3>Практический пример - настройки печати</h3>
+                <div class="code-block">
+                    <pre>def print_banner(text, width=40, symbol="="):
+    """Выводит текст в рамке."""
+    line = symbol * width
+    print(line)
+    print(text.center(width))
+    print(line)
+
+# Все значения по умолчанию
+print_banner("Привет")
+# ========================================
+#                 Привет
+# ========================================
+
+# Меняем ширину
+print_banner("Python", 30)
+
+# Меняем символ
+print_banner("Важно!", 50, "*")
+
+# Меняем всё
+print_banner("ЕГЭ 2025", 35, "#")</pre>
+                </div>
+
+                <h2>Именованные аргументы (Keyword Arguments)</h2>
+                <p>Можно передавать аргументы по имени параметра, а не по позиции:</p>
+
+                <div class="code-block">
+                    <pre>def show_student(name, age, grade, city):
+    """Выводит информацию о студенте."""
+    print(f"Студент: {name}")
+    print(f"Возраст: {age} лет")
+    print(f"Класс: {grade}")
+    print(f"Город: {city}")
+
+# Позиционные аргументы (по порядку)
+show_student("Иван", 16, 10, "Москва")
+
+# Именованные аргументы (порядок не важен!)
+show_student(name="Мария", city="Санкт-Петербург", age=15, grade=9)
+
+# Можно в любом порядке!
+show_student(grade=11, name="Петр", city="Казань", age=17)
+
+# Это читаемо и понятно
+show_student(
+    name="Анна",
+    age=16,
+    grade=10,
+    city="Новосибирск"
+)</pre>
+                </div>
+
+                <h3>Преимущества именованных аргументов</h3>
+                <ul>
+                    <li><strong>Читаемость:</strong> Сразу видно что означает каждый аргумент</li>
+                    <li><strong>Порядок не важен:</strong> Можно передавать в любой последовательности</li>
+                    <li><strong>Безопасность:</strong> Меньше шансов перепутать параметры</li>
+                    <li><strong>Самодокументирование:</strong> Код объясняет сам себя</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre># Сравни читаемость:
+
+# Непонятно
+draw_rectangle(10, 20, "красный", True, 2)
+
+# Понятно!
+draw_rectangle(
+    width=10,
+    height=20,
+    color="красный",
+    filled=True,
+    border=2
+)</pre>
+                </div>
+
+                <h2>Смешивание позиционных и именованных</h2>
+                <p>Можно комбинировать! Но ВАЖНО: позиционные должны идти ПЕРЕД именованными:</p>
+
+                <div class="code-block">
+                    <pre>def create_user(name, age, city="Москва", active=True):
+    """Создает пользователя."""
+    print(f"Пользователь: {name}, {age} лет")
+    print(f"Город: {city}")
+    print(f"Активен: {active}")
+
+# ПРАВИЛЬНО - позиционные, потом именованные
+create_user("Иван", 16)  # Используем умолчания
+create_user("Мария", 15, city="Казань")
+create_user("Петр", 17, active=False)
+create_user("Анна", 16, city="Санкт-Петербург", active=True)
+
+# НЕПРАВИЛЬНО - именованный ПЕРЕД позиционным
+# create_user(name="Иван", 16)  # SyntaxError!
+# create_user(city="Москва", "Мария", 15)  # SyntaxError!
+
+# ПРАВИЛЬНЫЙ порядок:
+# 1. Позиционные аргументы
+# 2. Именованные аргументы</pre>
+                </div>
+
+                <h3>Практический пример - форматирование вывода</h3>
+                <div class="code-block">
+                    <pre>def format_price(price, currency="₽", decimals=2, show_label=True):
+    """Форматирует цену для вывода."""
+    formatted = f"{price:.{decimals}f}"
+    if show_label:
+        return f"Цена: {formatted} {currency}"
+    return f"{formatted} {currency}"
+
+# Разные варианты вызова
+print(format_price(1250))
+# Цена: 1250.00 ₽
+
+print(format_price(99.99, "$"))
+# Цена: 99.99 $
+
+print(format_price(1500, decimals=0))
+# Цена: 1500 ₽
+
+print(format_price(45.5, show_label=False))
+# 45.50 ₽
+
+print(format_price(price=2000, currency="€", decimals=0, show_label=False))
+# 2000 €</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Калькулятор</h3>
+                <div class="code-block">
+                    <pre>def calculate(operation, a, b):
+    """Выполняет математическую операцию."""
+    if operation == "+":
+        print(f"{a} + {b} = {a + b}")
+    elif operation == "-":
+        print(f"{a} - {b} = {a - b}")
+    elif operation == "*":
+        print(f"{a} * {b} = {a * b}")
+    elif operation == "/":
+        if b != 0:
+            print(f"{a} / {b} = {a / b}")
+        else:
+            print("Ошибка: деление на ноль!")
+    else:
+        print("Неизвестная операция!")
+
+calculate("+", 10, 5)  # 10 + 5 = 15
+calculate("*", 7, 3)   # 7 * 3 = 21
+calculate("/", 20, 4)  # 20 / 4 = 5.0</pre>
+                </div>
+
+                <h3>Пример 2: Генератор таблицы умножения</h3>
+                <div class="code-block">
+                    <pre>def print_times_table(number, max_multiplier=10):
+    """Выводит таблицу умножения для числа."""
+    print(f"Таблица умножения на {number}:")
+    for i in range(1, max_multiplier + 1):
+        print(f"{number} × {i} = {number * i}")
+
+print_times_table(5)       # До 10
+print_times_table(7, 5)    # До 5
+print_times_table(number=9, max_multiplier=12)  # До 12</pre>
+                </div>
+
+                <h3>Пример 3: Создатель визиток</h3>
+                <div class="code-block">
+                    <pre>def print_card(name, job, phone="не указан", email="не указан"):
+    """Выводит визитную карточку."""
+    print("┌" + "─" * 38 + "┐")
+    print(f"│ {name:36} │")
+    print(f"│ {job:36} │")
+    print("├" + "─" * 38 + "┤")
+    print(f"│ Тел: {phone:31} │")
+    print(f"│ Email: {email:29} │")
+    print("└" + "─" * 38 + "┘")
+
+print_card("Иван Петров", "Python разработчик")
+print()
+print_card(
+    name="Мария Сидорова",
+    job="Data Scientist",
+    phone="+7-999-123-45-67",
+    email="maria@example.com"
+)</pre>
+                </div>
+
+                <h3>Пример 4: Валидатор оценок</h3>
+                <div class="code-block">
+                    <pre>def check_grade(name, subject, grade, min_grade=3):
+    """Проверяет оценку студента."""
+    print(f"Студент: {name}")
+    print(f"Предмет: {subject}")
+    print(f"Оценка: {grade}")
+    
+    if grade >= min_grade:
+        print("✓ Оценка приемлемая")
+    else:
+        print("✗ Оценка ниже минимума!")
+    print()
+
+check_grade("Иван", "Математика", 5)
+check_grade("Мария", "Физика", 3, min_grade=4)
+check_grade(subject="Русский", name="Петр", grade=4)</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +667,351 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Пример 1: Один параметр
+def greet(name):
+    """Приветствует по имени."""
+    print(f"Привет, {name}!")
+
+greet("Аня")
+greet("Миша")
+print()
+
+# Пример 2: Несколько параметров
+def add_numbers(a, b):
+    """Складывает два числа."""
+    result = a + b
+    print(f"{a} + {b} = {result}")
+
+add_numbers(5, 3)
+add_numbers(10, 20)
+print()
+
+# Пример 3: Параметры по умолчанию
+def power(base, exponent=2):
+    """Возводит в степень."""
+    result = base ** exponent
+    print(f"{base}^{exponent} = {result}")
+
+power(5)      # 5^2 = 25
+power(5, 3)   # 5^3 = 125
+power(2, 10)  # 2^10 = 1024
+print()
+
+# Пример 4: Именованные аргументы
+def show_info(name, age, city):
+    """Выводит информацию."""
+    print(f"{name}, {age} лет, {city}")
+
+show_info("Иван", 16, "Москва")
+show_info(city="Казань", name="Мария", age=15)
+print()
+
+# Пример 5: Прямоугольник
+def rectangle_info(width, height, unit="см"):
+    """Вычисляет площадь и периметр."""
+    area = width * height
+    perimeter = 2 * (width + height)
+    print(f"Прямоугольник {width}×{height} {unit}:")
+    print(f"  Площадь: {area} {unit}²")
+    print(f"  Периметр: {perimeter} {unit}")
+
+rectangle_info(10, 5)
+rectangle_info(7, 3, "м")
+print()
+
+# Пример 6: Температура
+def show_temperature(temp, scale="C"):
+    """Выводит температуру."""
+    if scale == "C":
+        print(f"Температура: {temp}°C")
+    elif scale == "F":
+        print(f"Температура: {temp}°F")
+    else:
+        print(f"Температура: {temp}°")
+
+show_temperature(25)
+show_temperature(77, "F")
+show_temperature(temp=30, scale="C")
+print()
+
+# Пример 7: Сложный пример
+def format_message(text, width=40, border="=", uppercase=False):
+    """Форматирует сообщение."""
+    if uppercase:
+        text = text.upper()
+    print(border * width)
+    print(text.center(width))
+    print(border * width)
+
+format_message("Python")
+format_message("Внимание", border="*")
+format_message("важно", width=30, border="#", uppercase=True)</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Персональное приветствие</h4>
+                    <p>Создай функцию <code>personal_greeting(name, time_of_day="день")</code>:</p>
+                    <ol>
+                        <li>Принимает имя (обязательно) и время суток (по умолчанию "день")</li>
+                        <li>Выводит приветствие: "Доброе утро, Иван!" или "Добрый день, Мария!"</li>
+                        <li>Время суток: "утро", "день", "вечер"</li>
+                        <li>Вызови функцию 4 раза с разными параметрами</li>
+                        <li>Используй как позиционные, так и именованные аргументы</li>
+                    </ol>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Калькулятор скидок</h4>
+                    <p>Создай функцию <code>calculate_discount(price, discount=10, show_details=True)</code>:</p>
+                    <ol>
+                        <li><code>price</code> - исходная цена товара</li>
+                        <li><code>discount</code> - процент скидки (по умолчанию 10%)</li>
+                        <li><code>show_details</code> - показывать детали (по умолчанию True)</li>
+                        <li>Если show_details=True, выводи исходную цену, скидку, итог</li>
+                        <li>Если show_details=False, выводи только итоговую цену</li>
+                        <li>Протестируй с разными вариантами вызова</li>
+                    </ol>
+                    <p><strong>Пример:</strong></p>
+                    <pre>calculate_discount(1000)
+# Цена: 1000 руб
+# Скидка: 10% (100 руб)
+# Итого: 900 руб
+
+calculate_discount(5000, 25, False)
+# 3750 руб</pre>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Генератор рамок</h4>
+                    <p>Создай функцию <code>draw_box(text, width=50, char="*", double=False)</code>:</p>
+                    <ol>
+                        <li><code>text</code> - текст внутри рамки</li>
+                        <li><code>width</code> - ширина рамки (по умолчанию 50)</li>
+                        <li><code>char</code> - символ для рамки (по умолчанию "*")</li>
+                        <li><code>double</code> - двойная рамка (по умолчанию False)</li>
+                        <li>Если double=True, рисуй две линии сверху и снизу</li>
+                        <li>Текст должен быть по центру</li>
+                        <li>Вызови функцию с разными комбинациями параметров</li>
+                    </ol>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неправильное количество аргументов</h4>
+                    <div class="code-block">
+                        <pre>def greet(name, age):
+    print(f"{name}, {age} лет")
+
+# ОШИБКА - не хватает аргумента
+# greet("Иван")  # TypeError: missing 1 required positional argument
+
+# ОШИБКА - лишний аргумент
+# greet("Мария", 15, "Москва")  # TypeError: takes 2 positional arguments but 3 were given
+
+# ПРАВИЛЬНО
+greet("Иван", 16)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Именованный аргумент перед позиционным</h4>
+                    <div class="code-block">
+                        <pre>def show_info(name, age, city):
+    print(f"{name}, {age}, {city}")
+
+# ОШИБКА - именованный перед позиционным
+# show_info(name="Иван", 16, "Москва")  # SyntaxError!
+
+# ПРАВИЛЬНО - сначала позиционные
+show_info("Иван", 16, "Москва")
+
+# ПРАВИЛЬНО - позиционный, затем именованные
+show_info("Иван", age=16, city="Москва")
+
+# ПРАВИЛЬНО - все именованные
+show_info(name="Иван", age=16, city="Москва")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Параметр с умолчанием перед обязательным</h4>
+                    <div class="code-block">
+                        <pre># ОШИБКА - параметр с умолчанием ПЕРЕД обязательным
+# def greet(greeting="Привет", name):  # SyntaxError!
+#     print(f"{greeting}, {name}!")
+
+# ПРАВИЛЬНО - сначала обязательные, потом с умолчаниями
+def greet(name, greeting="Привет"):
+    print(f"{greeting}, {name}!")
+
+greet("Иван")  # Привет, Иван!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Дублирование аргументов</h4>
+                    <div class="code-block">
+                        <pre>def greet(name, age):
+    print(f"{name}, {age} лет")
+
+# ОШИБКА - один параметр получил два значения
+# greet("Иван", name="Мария")  # TypeError: got multiple values for argument 'name'
+
+# Первый аргумент ("Иван") уже присвоился name
+# Затем мы пытаемся еще раз присвоить name="Мария"
+
+# ПРАВИЛЬНО
+greet("Иван", 16)
+greet(name="Иван", age=16)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Опечатки в именах параметров</h4>
+                    <div class="code-block">
+                        <pre>def show_student(name, age, grade):
+    print(f"{name}, {age} лет, {grade} класс")
+
+# ОШИБКА - опечатка в имени параметра
+# show_student(name="Иван", ages=16, grade=10)  # TypeError: unexpected keyword argument 'ages'
+
+# Правильно: age, а не ages!
+
+# ПРАВИЛЬНО
+show_student(name="Иван", age=16, grade=10)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Изменяемые значения по умолчанию</h4>
+                    <div class="code-block">
+                        <pre># ОПАСНО - не делай так!
+# def add_item(item, items=[]):
+#     items.append(item)
+#     return items
+#
+# Список создается один раз и переиспользуется!
+
+# ПРАВИЛЬНО
+def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: В чем разница между параметром и аргументом?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Параметр - в определении функции (переменная), аргумент - при вызове (значение).">Параметр - в def, аргумент - при вызове</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это наоборот.">Параметр - при вызове, аргумент - в def</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это разные понятия.">Это одно и то же</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Разница есть.">Параметр только для чисел, аргумент для строк</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что выведет код: def f(a, b=5): print(a, b); f(10)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! b имеет значение по умолчанию.">Ошибка - не хватает аргумента</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! a=10, b использует значение по умолчанию (5).">10 5</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! a=10, не 5.">5 10</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! b имеет значение по умолчанию 5.">10 None</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Какой вызов правильный?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Именованный аргумент НЕ может идти перед позиционным.">func(name="Иван", 16)</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Сначала позиционный, потом именованный.">func("Иван", age=16)</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! name получает два значения.">func("Иван", name="Мария")</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Именованные перед позиционными - ошибка.">func(age=16, "Иван")</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Где должны быть параметры с умолчаниями?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Параметры с умолчаниями должны идти после обязательных.">В начале списка параметров</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Сначала обязательные, затем параметры с умолчаниями.">В конце списка параметров</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Есть правило порядка.">В любом месте</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Параметры с умолчаниями можно использовать.">Их нельзя использовать</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Для чего нужны именованные аргументы?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Именованные аргументы не влияют на скорость.">Ускорить выполнение программы</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Именованные аргументы делают код понятнее и позволяют не соблюдать порядок.">Улучшить читаемость и не зависеть от порядка</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это не связано с типами данных.">Указать тип данных</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это для другого.">Обработать ошибки</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Параметры функций - ключевой элемент программирования на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ Задание 14:</strong> Написание функций с параметрами для обработки данных</li>
+                        <li><strong>ЕГЭ Задания 24-27:</strong> Сложные функции с множеством параметров</li>
+                        <li><strong>ЕГЭ Задание 16:</strong> Анализ рекурсивных функций с параметрами</li>
+                        <li>Применение на экзаменах:
+                            <ul>
+                                <li>Функции обработки массивов - принимают список как параметр</li>
+                                <li>Функции валидации - проверяют данные через параметры</li>
+                                <li>Рекурсивные функции - передают измененные параметры</li>
+                                <li>Функции-фильтры - критерий фильтрации как параметр</li>
+                            </ul>
+                        </li>
+                        <li>Важно понимать разницу позиционных и именованных аргументов</li>
+                        <li>Знание параметров по умолчанию делает код компактнее</li>
+                        <li>Правильное использование параметров = чистый, читаемый код</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Параметр</strong> - переменная в определении функции (в def)</li>
+                    <li><strong>Аргумент</strong> - значение при вызове функции</li>
+                    <li><strong>Синтаксис:</strong> <code>def func(param1, param2):</code></li>
+                    <li><strong>Позиционные:</strong> порядок аргументов важен</li>
+                    <li><strong>По умолчанию:</strong> <code>def func(a, b=5):</code> - b необязателен</li>
+                    <li><strong>Именованные:</strong> <code>func(name="Иван", age=16)</code> - порядок не важен</li>
+                    <li><strong>Порядок в вызове:</strong> сначала позиционные, потом именованные</li>
+                    <li><strong>Порядок в определении:</strong> сначала обязательные, потом с умолчаниями</li>
+                    <li><strong>Количество:</strong> количество аргументов должно совпадать (кроме умолчаний)</li>
+                    <li><strong>Гибкость:</strong> параметры делают функции универсальными</li>
+                    <li><strong>Читаемость:</strong> именованные аргументы улучшают понимание кода</li>
+                </ul>
+
+                <p>Превосходно! Ты освоил работу с параметрами функций. Теперь твои функции стали по-настоящему мощными и гибкими! В следующем уроке изучим как функции могут возвращать результаты с помощью return!</p>
             </div>
 
             <div class="lesson-nav">
@@ -272,7 +1021,6 @@
             </div>
         </div>
     </main>
-
 
     <script src="../js/main.js"></script>
 </body>

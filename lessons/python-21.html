@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 26: Область видимости - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-21">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,21 +220,384 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 26: Область видимости</h1>
-                <div class="lesson-meta">Функции • 25 минут</div>
+                <div class="lesson-meta">Функции • 40 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Представь два дома рядом. В каждом доме свои жильцы, свои вещи. Гости одного дома не могут просто так пользоваться вещами из другого дома! В программировании работает похоже: переменные "живут" в определенных местах кода, и не везде к ним можно обратиться.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Область видимости (scope) - это "зона действия" переменной, где она существует и где к ней можно обращаться. Понимание scope критично для избежания ошибок и написания правильного кода!</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Что такое область видимости (scope)</li>
+                        <li>Локальные переменные (внутри функций)</li>
+                        <li>Глобальные переменные (вне функций)</li>
+                        <li>Ключевое слово global</li>
+                        <li>Почему global - плохая практика</li>
+                        <li>Параметры как локальные переменные</li>
+                        <li>Вложенные функции (preview)</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
+                <h2>Что такое область видимости?</h2>
+                <p>Область видимости определяет где переменная существует и где к ней можно обращаться:</p>
+
+                <div class="code-block">
+                    <pre># Простой пример
+x = 10  # Глобальная переменная
+
+def my_function():
+    y = 20  # Локальная переменная
+    print(f"Внутри функции: x={x}, y={y}")
+
+my_function()  # Работает: x=10, y=20
+
+print(f"Вне функции: x={x}")  # Работает: x=10
+# print(f"y={y}")  # ОШИБКА! y не существует здесь!</pre>
+                </div>
+
+                <h2>Локальные переменные</h2>
+                <p>Переменные, созданные ВНУТРИ функции, называются локальными. Они существуют только внутри этой функции!</p>
+
+                <div class="code-block">
+                    <pre>def my_func():
+    """Функция с локальной переменной."""
+    x = 10  # Локальная переменная
+    print(f"Внутри функции: x = {x}")
+    
+my_func()  # Выведет: Внутри функции: x = 10
+
+# Попытка использовать x ВНЕ функции
+# print(x)  # NameError: name 'x' is not defined
+
+# x существует только ВНУТРИ my_func!</pre>
+                </div>
+
+                <h3>Жизненный цикл локальной переменной:</h3>
+                <ol>
+                    <li><strong>Создание:</strong> Когда функция вызывается</li>
+                    <li><strong>Использование:</strong> Внутри функции</li>
+                    <li><strong>Уничтожение:</strong> Когда функция завершается</li>
+                </ol>
+
+                <div class="code-block">
+                    <pre>def calculate():
+    """Демонстрация жизненного цикла локальной переменной."""
+    # Здесь переменная 'result' еще НЕ существует
+    
+    result = 5 + 3  # result СОЗДАЕТСЯ
+    print(f"Результат: {result}")  # result ИСПОЛЬЗУЕТСЯ
+    
+    # Когда функция завершится, result УНИЧТОЖИТСЯ
+
+calculate()  # result живет только во время выполнения
+calculate()  # result создается заново (не помнит предыдущий вызов!)
+# print(result)  # NameError - result уже уничтожен!</pre>
+                </div>
+
+                <h3>Каждый вызов - свои локальные переменные</h3>
+                <div class="code-block">
+                    <pre>def count():
+    """Каждый вызов создает новую локальную переменную."""
+    x = 0
+    x = x + 1
+    print(f"x = {x}")
+
+count()  # x = 1
+count()  # x = 1 (не 2! x создается заново)
+count()  # x = 1 (снова новый x)</pre>
+                </div>
+
+                <h2>Глобальные переменные</h2>
+                <p>Переменные, созданные ВНЕ функций, называются глобальными. Они видны везде в программе!</p>
+
+                <div class="code-block">
+                    <pre># Глобальная переменная
+total = 0
+
+def show_total():
+    """Функция ЧИТАЕТ глобальную переменную."""
+    print(f"Текущий total: {total}")  # Можем ЧИТАТЬ
+
+show_total()  # Текущий total: 0
+
+# Изменим глобальную переменную
+total = 100
+
+show_total()  # Текущий total: 100
+
+# Глобальную переменную видно отовсюду
+print(f"В основной программе: {total}")  # 100</pre>
+                </div>
+
+                <h3>Чтение глобальных - можно, изменение - нельзя!</h3>
+                <div class="code-block">
+                    <pre>counter = 0
+
+def read_counter():
+    """Читаем глобальную - ОК!"""
+    print(f"Counter = {counter}")
+
+read_counter()  # Работает!
+
+def try_change_counter():
+    """Пытаемся изменить глобальную - ОШИБКА!"""
+    # counter = counter + 1  # UnboundLocalError!
+    # Python думает что counter - локальная
+    pass
+
+# Чтобы ИЗМЕНИТЬ глобальную - нужен global!</pre>
+                </div>
+
+                <h2>Ключевое слово global</h2>
+                <p>Чтобы ИЗМЕНИТЬ глобальную переменную из функции, используй <code>global</code>:</p>
+
+                <div class="code-block">
+                    <pre>counter = 0  # Глобальная
+
+def increment():
+    """Увеличивает счетчик."""
+    global counter  # Говорим Python: используем ГЛОБАЛЬНУЮ counter
+    counter = counter + 1
+    print(f"Counter увеличен до {counter}")
+
+print(f"Начальный counter: {counter}")  # 0
+increment()  # Counter увеличен до 1
+increment()  # Counter увеличен до 2
+increment()  # Counter увеличен до 3
+print(f"Финальный counter: {counter}")  # 3
+
+# Теперь изменения глобальной переменной сохраняются!</pre>
+                </div>
+
+                <div class="code-block">
+                    <pre># Еще пример - игровой счет
+score = 0
+
+def add_points(points):
+    """Добавляет очки к счету."""
+    global score
+    score = score + points
+    print(f"+{points} очков! Всего: {score}")
+
+def reset_score():
+    """Сбрасывает счет."""
+    global score
+    score = 0
+    print("Счет сброшен!")
+
+add_points(10)  # +10 очков! Всего: 10
+add_points(5)   # +5 очков! Всего: 15
+add_points(20)  # +20 очков! Всего: 35
+reset_score()   # Счет сброшен!
+add_points(7)   # +7 очков! Всего: 7</pre>
+                </div>
+
+                <h2>Почему global - плохая практика?</h2>
+                <p>Использование global обычно считается плохой практикой. Почему?</p>
+
+                <div class="warning-block">
+                    <h4>Проблемы с global:</h4>
+                    <ul>
+                        <li><strong>Сложно отследить изменения:</strong> Любая функция может изменить переменную</li>
+                        <li><strong>Ошибки:</strong> Легко случайно изменить глобальную в неправильном месте</li>
+                        <li><strong>Тестирование:</strong> Сложно тестировать функции зависящие от global</li>
+                        <li><strong>Переиспользование:</strong> Функция с global не независима</li>
+                        <li><strong>Конфликты имен:</strong> Можно случайно перезаписать важную переменную</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <pre># ПЛОХО - использование global
+total = 0
+
+def add_bad(n):
+    global total
+    total = total + n
+
+add_bad(5)
+add_bad(3)
+print(total)  # 8
+
+# ХОРОШО - return и параметры
+def add_good(current_total, n):
+    return current_total + n
+
+total = 0
+total = add_good(total, 5)
+total = add_good(total, 3)
+print(total)  # 8
+
+# Второй вариант лучше:
+# - Функция независима
+# - Легко тестировать
+# - Понятен поток данных</pre>
+                </div>
+
+                <h3>Когда global допустим?</h3>
+                <ul>
+                    <li>Константы (которые не меняются)</li>
+                    <li>Настройки/конфигурация</li>
+                    <li>Счетчики в простых скриптах</li>
+                    <li>Учебные примеры</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre># Константы - ОК (обычно в ВЕРХНЕМ_РЕГИСТРЕ)
+PI = 3.14159
+MAX_SCORE = 100
+
+def calculate_circle_area(radius):
+    """Использует константу PI."""
+    return PI * radius ** 2
+
+print(calculate_circle_area(5))  # ОК!</pre>
+                </div>
+
+                <h2>Параметры функций - локальные переменные</h2>
+                <p>Параметры функции - это тоже локальные переменные!</p>
+
+                <div class="code-block">
+                    <pre>def greet(name):  # name - локальная переменная
+    """Параметр name существует только внутри функции."""
+    message = f"Привет, {name}!"  # message - тоже локальная
+    print(message)
+
+greet("Иван")  # name="Иван" внутри функции
+greet("Мария") # name="Мария" внутри функции
+
+# print(name)  # NameError! name не существует здесь
+# print(message)  # NameError! message не существует здесь</pre>
+                </div>
+
+                <div class="code-block">
+                    <pre># Изменение параметра не влияет на внешнюю переменную!
+def change_value(x):
+    """Изменяет локальную копию x."""
+    print(f"До изменения: x = {x}")
+    x = 100  # Изменяем ЛОКАЛЬНУЮ x
+    print(f"После изменения: x = {x}")
+
+number = 5
+print(f"Начальное number: {number}")  # 5
+
+change_value(number)
+# До изменения: x = 5
+# После изменения: x = 100
+
+print(f"Финальное number: {number}")  # 5 (не изменилось!)
+
+# number и x - РАЗНЫЕ переменные!
+# x - локальная копия значения number</pre>
+                </div>
+
+                <h2>Локальная vs Глобальная с одинаковым именем</h2>
+                <p>Если локальная и глобальная переменные имеют одно имя, внутри функции используется локальная!</p>
+
+                <div class="code-block">
+                    <pre>x = 10  # Глобальная
+
+def my_function():
+    x = 20  # Локальная (затеняет глобальную!)
+    print(f"Внутри функции: x = {x}")  # 20 (локальная)
+
+print(f"До вызова: x = {x}")  # 10 (глобальная)
+my_function()  # Внутри функции: x = 20
+print(f"После вызова: x = {x}")  # 10 (глобальная не изменилась)
+
+# Это называется "затенение" (shadowing)
+# Локальная x "затеняет" глобальную x внутри функции</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Избегай одинаковых имен!</h4>
+                    <p>Лучше использовать разные имена для локальных и глобальных переменных, чтобы избежать путаницы!</p>
+                </div>
+
+                <h2>Вложенные функции (Preview)</h2>
+                <p>Функции могут быть определены внутри других функций. У них своя область видимости:</p>
+
+                <div class="code-block">
+                    <pre>def outer():
+    """Внешняя функция."""
+    x = 10  # Локальная для outer
+    
+    def inner():
+        """Вложенная функция."""
+        y = 20  # Локальная для inner
+        print(f"Внутри inner: x={x}, y={y}")  # Видит x из outer!
+    
+    inner()  # Вызываем вложенную
+    print(f"Внутри outer: x={x}")
+    # print(y)  # Ошибка! y не видна в outer
+
+outer()
+# Внутри inner: x=10, y=20
+# Внутри outer: x=10
+
+# inner() - недоступна здесь! Она локальна для outer</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Счетчик вызовов (с global)</h3>
+                <div class="code-block">
+                    <pre>call_count = 0
+
+def my_function():
+    """Подсчитывает количество вызовов."""
+    global call_count
+    call_count += 1
+    print(f"Функция вызвана {call_count} раз(а)")
+
+my_function()  # 1
+my_function()  # 2
+my_function()  # 3
+print(f"Всего вызовов: {call_count}")</pre>
+                </div>
+
+                <h3>Пример 2: Без global (лучший подход)</h3>
+                <div class="code-block">
+                    <pre>def count_calls(current_count):
+    """Возвращает увеличенный счетчик."""
+    return current_count + 1
+
+calls = 0
+calls = count_calls(calls)  # 1
+calls = count_calls(calls)  # 2
+calls = count_calls(calls)  # 3
+print(f"Всего вызовов: {calls}")</pre>
+                </div>
+
+                <h3>Пример 3: Игровой персонаж</h3>
+                <div class="code-block">
+                    <pre>player_health = 100
+player_score = 0
+
+def take_damage(damage):
+    """Уменьшает здоровье игрока."""
+    global player_health
+    player_health -= damage
+    print(f"Получен урон {damage}! Здоровье: {player_health}")
+    if player_health <= 0:
+        print("Игрок погиб!")
+
+def add_score(points):
+    """Добавляет очки."""
+    global player_score
+    player_score += points
+    print(f"+{points} очков! Счет: {player_score}")
+
+take_damage(20)  # Здоровье: 80
+add_score(10)    # Счет: 10
+take_damage(30)  # Здоровье: 50
+add_score(15)    # Счет: 25</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +606,331 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Пример 1: Локальные переменные
+def test_local():
+    """Локальная переменная."""
+    x = 10  # Локальная
+    print(f"Внутри функции: x = {x}")
+
+test_local()
+# print(x)  # Раскомментируй - получишь ошибку!
+print()
+
+# Пример 2: Глобальные переменные (чтение)
+message = "Привет!"
+
+def show_message():
+    """Читает глобальную переменную."""
+    print(f"Сообщение: {message}")
+
+show_message()
+print()
+
+# Пример 3: global для изменения
+counter = 0
+
+def increment():
+    """Увеличивает счетчик."""
+    global counter
+    counter += 1
+
+print(f"До: counter = {counter}")
+increment()
+increment()
+increment()
+print(f"После: counter = {counter}")
+print()
+
+# Пример 4: Затенение
+x = "глобальная"
+
+def test_shadow():
+    """Демонстрация затенения."""
+    x = "локальная"  # Затеняет глобальную
+    print(f"В функции: {x}")
+
+print(f"До функции: {x}")
+test_shadow()
+print(f"После функции: {x}")
+print()
+
+# Пример 5: Параметры - локальные
+def change(n):
+    """Изменяет локальную копию."""
+    print(f"До: n = {n}")
+    n = 100
+    print(f"После: n = {n}")
+
+value = 42
+print(f"До вызова: value = {value}")
+change(value)
+print(f"После вызова: value = {value}")
+print()
+
+# Пример 6: Правильный подход (без global)
+def add_to_total(current, amount):
+    """Возвращает новый total."""
+    return current + amount
+
+total = 0
+print(f"Total: {total}")
+total = add_to_total(total, 10)
+print(f"Total: {total}")
+total = add_to_total(total, 20)
+print(f"Total: {total}")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Банковский счет</h4>
+                    <p>Создай систему управления банковским счетом:</p>
+                    <ol>
+                        <li>Глобальная переменная <code>balance = 0</code></li>
+                        <li>Функция <code>deposit(amount)</code> - пополнение</li>
+                        <li>Функция <code>withdraw(amount)</code> - снятие (проверка на достаточность средств!)</li>
+                        <li>Функция <code>show_balance()</code> - показать баланс</li>
+                        <li>Протестируй: пополни 1000, сними 300, пополни 500, попытайся снять 2000</li>
+                    </ol>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Без global (правильный подход)</h4>
+                    <p>Перепиши Задание 1 БЕЗ использования global:</p>
+                    <ol>
+                        <li>Функции должны принимать текущий баланс как параметр</li>
+                        <li>Функции должны ВОЗВРАЩАТЬ новый баланс</li>
+                        <li>Переменная balance в основной программе обновляется результатом</li>
+                        <li>Сравни: какой подход лучше и почему?</li>
+                    </ol>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Счетчик статистики</h4>
+                    <p>Создай систему подсчета статистики программы:</p>
+                    <ol>
+                        <li>Глобальные переменные: <code>total_operations = 0</code>, <code>errors = 0</code>, <code>success = 0</code></li>
+                        <li>Функция <code>record_success()</code> - увеличивает success и total_operations</li>
+                        <li>Функция <code>record_error()</code> - увеличивает errors и total_operations</li>
+                        <li>Функция <code>show_stats()</code> - показывает статистику и процент успеха</li>
+                        <li>Вызови несколько раз record_success и record_error, затем show_stats</li>
+                    </ol>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Попытка изменить глобальную без global</h4>
+                    <div class="code-block">
+                        <pre>count = 0
+
+def increment():
+    # count = count + 1  # UnboundLocalError!
+    # Python думает что count локальная, но она не определена
+    pass
+
+# ПРАВИЛЬНО:
+def increment():
+    global count
+    count = count + 1</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Использование локальной вне функции</h4>
+                    <div class="code-block">
+                        <pre>def my_func():
+    x = 10
+    return x
+
+result = my_func()
+# print(x)  # NameError! x локальная, не существует здесь
+print(result)  # Используй return!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Путаница с одинаковыми именами</h4>
+                    <div class="code-block">
+                        <pre>x = 10
+
+def test():
+    x = 20  # Новая локальная, НЕ изменяет глобальную!
+    print(x)  # 20
+
+test()
+print(x)  # 10 (глобальная не изменилась)
+
+# Если хотел изменить глобальную - нужен global!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Забыли global при изменении</h4>
+                    <div class="code-block">
+                        <pre>score = 0
+
+def add_points(n):
+    # Забыли global!
+    # score = score + n  # UnboundLocalError
+    pass
+
+# ПРАВИЛЬНО:
+def add_points(n):
+    global score
+    score = score + n</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Излишнее использование global</h4>
+                    <div class="code-block">
+                        <pre># ПЛОХО - слишком много global
+total = 0
+count = 0
+average = 0
+
+def calculate():
+    global total, count, average
+    # ...
+
+# ХОРОШО - используй return
+def calculate(total, count):
+    average = total / count if count > 0 else 0
+    return total, count, average</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Изменение изменяемых типов</h4>
+                    <div class="code-block">
+                        <pre># Списки - изменяемые! Можно менять без global
+my_list = [1, 2, 3]
+
+def modify_list():
+    # НЕ нужен global для изменения содержимого!
+    my_list.append(4)  # Работает
+
+modify_list()
+print(my_list)  # [1, 2, 3, 4]
+
+# НО для переприсваивания нужен global
+def replace_list():
+    global my_list
+    my_list = [10, 20]  # Создаем новый список
+
+replace_list()
+print(my_list)  # [10, 20]</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Где существует локальная переменная?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Локальная переменная видна только внутри функции.">Везде в программе</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Локальная переменная существует только внутри своей функции.">Только внутри функции</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Она не видна в других функциях.">В других функциях тоже</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Локальная переменная имеет ограниченную область видимости.">Только в глобальной области</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что нужно для изменения глобальной переменной в функции?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Можно менять, но нужно ключевое слово.">Нельзя изменить глобальную в функции</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Ключевое слово global позволяет изменять глобальную переменную.">Использовать ключевое слово global</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Обычное присваивание создаст локальную переменную.">Просто присвоить новое значение</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! return возвращает значение, а не изменяет глобальную.">Использовать return</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Можно ли ЧИТАТЬ глобальную переменную в функции?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Глобальные переменные можно читать без global.">Да, без использования global</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! global нужен только для изменения.">Да, но нужен global</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Читать можно.">Нет, нельзя читать</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Читать глобальные можно всегда.">Только если объявлена как global</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что происходит с локальной переменной после выполнения функции?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Локальные переменные не сохраняются между вызовами.">Сохраняется до следующего вызова</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Локальная переменная уничтожается при завершении функции.">Уничтожается</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Локальная не становится глобальной.">Становится глобальной</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Она уничтожается.">Сохраняется в памяти навсегда</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Почему global считается плохой практикой?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! global работает корректно.">Потому что не работает</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! global делает код сложным для понимания и тестирования.">Усложняет отслеживание изменений и тестирование</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! global не медленнее.">Работает медленно</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это не основная причина.">Занимает больше памяти</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Понимание области видимости критично для экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ Задание 14:</strong> Анализ программ с локальными/глобальными переменными</li>
+                        <li><strong>ЕГЭ Задание 16:</strong> Трассировка рекурсии требует понимания локальных переменных</li>
+                        <li><strong>ЕГЭ Задания 24-27:</strong> Написание функций с правильной областью видимости</li>
+                        <li>Применение на экзаменах:
+                            <ul>
+                                <li>Понимание что изменяется, а что нет при вызове функций</li>
+                                <li>Отслеживание значений переменных в разных областях</li>
+                                <li>Анализ рекурсивных вызовов (каждый вызов - свои локальные)</li>
+                                <li>Избежание ошибок с глобальными переменными</li>
+                            </ul>
+                        </li>
+                        <li>На экзамене лучше избегать global - используй параметры и return</li>
+                        <li>Понимание scope помогает читать и анализировать чужой код</li>
+                        <li>Локальные переменные делают функции независимыми и тестируемыми</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Область видимости</strong> - где переменная существует и доступна</li>
+                    <li><strong>Локальная</strong> - создана внутри функции, существует только там</li>
+                    <li><strong>Глобальная</strong> - создана вне функций, видна везде</li>
+                    <li><strong>Чтение глобальных:</strong> можно без ограничений</li>
+                    <li><strong>Изменение глобальных:</strong> нужно ключевое слово global</li>
+                    <li><strong>Жизненный цикл:</strong> локальные создаются при вызове, уничтожаются при завершении</li>
+                    <li><strong>Параметры:</strong> это локальные переменные</li>
+                    <li><strong>Затенение:</strong> локальная с тем же именем "скрывает" глобальную</li>
+                    <li><strong>Лучшая практика:</strong> избегай global, используй параметры и return</li>
+                    <li><strong>Независимость:</strong> функции без global легче тестировать и переиспользовать</li>
+                </ul>
+
+                <p>Превосходно! Ты разобрался с областью видимости - одной из важнейших концепций программирования! Теперь ты понимаешь где "живут" переменные и как правильно с ними работать. В следующем уроке изучим рекурсию - когда функция вызывает саму себя!</p>
             </div>
 
             <div class="lesson-nav">
@@ -272,7 +940,6 @@
             </div>
         </div>
     </main>
-
 
     <script src="../js/main.js"></script>
 </body>
