@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 6: Первая программа на Python - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-01">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,21 +220,174 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 6: Первая программа на Python</h1>
-                <div class="lesson-meta">Введение в Python • 15 минут</div>
+                <div class="lesson-meta">Введение в Python • 20 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Поздравляю! Сегодня ты напишешь свою первую программу на Python! Это очень волнующий момент - момент, когда ты из изучающего алгоритмы превращаешься в настоящего программиста.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Ты уже знаешь, что такое алгоритмы, как рисовать блок-схемы, понимаешь линейные алгоритмы, ветвления и циклы. Теперь пришло время превратить эти знания в настоящий код!</p>
+
+                <div class="info-block">
+                    <h4>Что такое Python?</h4>
+                    <p>Python - это один из самых популярных языков программирования в мире. Его используют в Google, Instagram, Spotify, NASA и тысячах других компаний.</p>
+                    <p><strong>Почему Python так популярен?</strong></p>
+                    <ul>
+                        <li>Простой и понятный синтаксис - код читается почти как английский текст</li>
+                        <li>Мощный и универсальный - можно создавать игры, сайты, приложения, работать с данными</li>
+                        <li>Огромное сообщество - легко найти помощь и готовые решения</li>
+                        <li>Отличный для обучения - идеально подходит для начинающих</li>
+                        <li>Востребован на работе - Python-программисты очень нужны компаниям</li>
+                    </ul>
+                </div>
+
+                <h2>Твоя первая программа: Hello, World!</h2>
+                <p>По традиции первая программа любого программиста выводит на экран приветствие. Давай и мы начнем с классики!</p>
 
                 <div class="code-block">
                     <pre>print("Hello, World!")</pre>
                 </div>
 
+                <p>Вот и все! Одна строка кода - и ты уже программист! Эта программа выведет на экран текст: <code>Hello, World!</code></p>
+
+                <div class="info-block">
+                    <h4>Интересный факт</h4>
+                    <p>Традиция начинать обучение с программы "Hello, World!" появилась в 1978 году благодаря книге Брайана Кернигана и Денниса Ритчи о языке C. С тех пор миллионы программистов по всему миру начинали свой путь именно с этой программы!</p>
+                </div>
+
+                <h2>Функция print()</h2>
+                <p>Главная функция, которую мы сегодня изучим, называется <code>print()</code>. Это твой способ общаться с пользователем программы!</p>
+
+                <h3>Базовый синтаксис</h3>
+                <p>Самый простой способ использования:</p>
+
+                <div class="code-block">
+                    <pre>print("Привет!")
+print("Я изучаю Python!")
+print("Это очень интересно!")</pre>
+                </div>
+
+                <p><strong>Результат:</strong></p>
+                <div class="code-block">
+                    <pre>Привет!
+Я изучаю Python!
+Это очень интересно!</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Обрати внимание!</h4>
+                    <ul>
+                        <li>Текст (строка) заключается в кавычки: <code>"текст"</code> или <code>'текст'</code></li>
+                        <li>После <code>print</code> обязательно идут круглые скобки <code>()</code></li>
+                        <li>Каждый <code>print()</code> выводит текст на новой строке</li>
+                    </ul>
+                </div>
+
+                <h3>Вывод нескольких значений</h3>
+                <p>Функция <code>print()</code> может выводить несколько значений сразу. Просто перечисли их через запятую:</p>
+
+                <div class="code-block">
+                    <pre>print("Меня зовут", "Иван")
+print("Мне", 15, "лет")
+print("Я", "учусь", "в", "9", "классе")</pre>
+                </div>
+
+                <p><strong>Результат:</strong></p>
+                <div class="code-block">
+                    <pre>Меня зовут Иван
+Мне 15 лет
+Я учусь в 9 классе</pre>
+                </div>
+
+                <p>Заметь: между значениями автоматически добавляется пробел!</p>
+
+                <h3>Параметр sep (разделитель)</h3>
+                <p>Можешь сам выбрать, что будет между словами! Используй параметр <code>sep</code>:</p>
+
+                <div class="code-block">
+                    <pre>print("Python", "JavaScript", "C++", sep=" | ")
+print("2024", "11", "14", sep="-")
+print("Раз", "два", "три", sep="...")
+print("A", "B", "C", "D", sep="")</pre>
+                </div>
+
+                <p><strong>Результат:</strong></p>
+                <div class="code-block">
+                    <pre>Python | JavaScript | C++
+2024-11-14
+Раз...два...три
+ABCD</pre>
+                </div>
+
+                <h3>Параметр end (окончание строки)</h3>
+                <p>По умолчанию <code>print()</code> после вывода переходит на новую строку. Но ты можешь изменить это поведение параметром <code>end</code>:</p>
+
+                <div class="code-block">
+                    <pre>print("Привет", end=" ")
+print("мир", end="!")
+print()  # Пустой print для перехода на новую строку
+
+print("Раз", end=", ")
+print("два", end=", ")
+print("три!")</pre>
+                </div>
+
+                <p><strong>Результат:</strong></p>
+                <div class="code-block">
+                    <pre>Привет мир!
+Раз, два, три!</pre>
+                </div>
+
+                <h2>Комментарии в коде</h2>
+                <p>Комментарии - это текст в программе, который Python игнорирует. Они нужны для того, чтобы объяснять, что делает код.</p>
+
+                <h3>Однострочные комментарии</h3>
+                <p>Используй символ <code>#</code> для создания комментария:</p>
+
+                <div class="code-block">
+                    <pre># Это комментарий - Python его не выполняет
+print("А это код")  # Комментарий может быть и в конце строки
+
+# Комментарии помогают понять, что делает программа
+# Особенно полезны для сложного кода</pre>
+                </div>
+
+                <h3>Зачем нужны комментарии?</h3>
+                <ul>
+                    <li><strong>Объяснять сложные участки кода</strong> - чтобы потом вспомнить, что ты делал</li>
+                    <li><strong>Оставлять заметки</strong> - для себя или других программистов</li>
+                    <li><strong>Временно отключать код</strong> - закомментировать строку, которую не хочешь выполнять</li>
+                    <li><strong>Документировать программу</strong> - описывать алгоритм работы</li>
+                </ul>
+
+                <div class="example-block">
+                    <h4>Примеры хороших комментариев:</h4>
+                    <div class="code-block">
+                        <pre># Вычисляем площадь прямоугольника
+print("Площадь =", 5 * 10)
+
+# TODO: Добавить проверку на отрицательные числа
+# FIXME: Исправить ошибку с делением на ноль</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Плохие комментарии - избегай их!</h4>
+                    <div class="code-block">
+                        <pre># Выводим текст
+print("Привет")  # Плохо! Очевидно из кода
+
+# a = 5  # Плохо! Непонятное название переменной
+
+# Этот код работает не знаю как но работает  # Плохо! Нужно разобраться!</pre>
+                    </div>
+                    <p><strong>Правило:</strong> Комментарии должны объяснять "ЗАЧЕМ" и "ПОЧЕМУ", а не "ЧТО" (это и так видно из кода).</p>
+                </div>
+
                 <h2>Попробуй сам!</h2>
+                <p>Теперь твоя очередь! Поэкспериментируй с кодом в редакторе ниже. Попробуй изменить текст, добавить новые строки, использовать параметры <code>sep</code> и <code>end</code>.</p>
+
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +396,235 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Моя первая программа на Python!
+print("Привет, мир!")
+print("Меня зовут", "Программист")
+print("Python", "это", "круто", sep=" - ")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Создай приветствие</h4>
+                    <p>Напиши программу, которая выводит твое имя, возраст и любимый предмет. Используй несколько команд <code>print()</code>.</p>
+                    <p><strong>Пример вывода:</strong></p>
+                    <div class="code-block">
+                        <pre>Привет! Меня зовут Мария
+Мне 14 лет
+Мой любимый предмет - математика</pre>
+                    </div>
+                    <p><strong>Подсказка:</strong> Используй три команды <code>print()</code>, каждая выводит одну строку.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Рисуем текстом</h4>
+                    <p>Используй команду <code>print()</code> для создания простого рисунка из символов:</p>
+                    <div class="code-block">
+                        <pre>print("  *  ")
+print(" *** ")
+print("*****")
+print(" *** ")
+print("  *  ")</pre>
+                    </div>
+                    <p>Попробуй создать свой рисунок! Это может быть ёлочка, сердечко, домик или что угодно.</p>
+                    <p><strong>Подсказка:</strong> Используй символы: <code>*</code>, <code>#</code>, <code>@</code>, <code>-</code>, <code>|</code> и пробелы.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Эксперименты с параметрами</h4>
+                    <p>Создай программу, которая выводит дату в формате ДД-ММ-ГГГГ, используя параметр <code>sep</code>:</p>
+                    <div class="code-block">
+                        <pre>print(14, 11, 2024, sep="-")</pre>
+                    </div>
+                    <p>Теперь попробуй:</p>
+                    <ul>
+                        <li>Вывести дату через точки: 14.11.2024</li>
+                        <li>Вывести дату через слэш: 14/11/2024</li>
+                        <li>Вывести на одной строке "Число: 14 Месяц: 11 Год: 2024" используя <code>end</code> и <code>sep</code></li>
+                    </ul>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+                <p>Изучи эти ошибки, чтобы не совершать их самому!</p>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли кавычки</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+print(Привет)  # Ошибка! Python думает, что Привет - это переменная
+
+# ПРАВИЛЬНО:
+print("Привет")  # Текст должен быть в кавычках!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Забыли скобки</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+print "Привет"  # Ошибка! Нужны круглые скобки
+
+# ПРАВИЛЬНО:
+print("Привет")  # После print обязательно ()</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильные кавычки</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+print("Привет')  # Ошибка! Разные кавычки
+
+# ПРАВИЛЬНО:
+print("Привет")  # Или оба раза "
+print('Привет')  # Или оба раза '</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Русские буквы в названиях</h4>
+                    <div class="code-block">
+                        <pre># ПЛОХАЯ ПРАКТИКА:
+принт("текст")  # Работать не будет! print - это английское слово
+
+# ПРАВИЛЬНО:
+print("текст")  # Команды всегда на английском!</pre>
+                    </div>
+                    <p><strong>Запомни:</strong> Команды Python всегда пишутся на английском языке, но текст внутри кавычек может быть на русском!</p>
+                </div>
+
+                <h2>Интересные примеры</h2>
+
+                <div class="example-block">
+                    <h4>Пример 1: Создание рамки</h4>
+                    <div class="code-block">
+                        <pre>print("*" * 30)
+print("*", " " * 26, "*")
+print("*", "  Добро пожаловать!  ", "*")
+print("*", " " * 26, "*")
+print("*" * 30)</pre>
+                    </div>
+                    <p>Умножение строки на число повторяет её! <code>"*" * 5</code> даст <code>*****</code></p>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример 2: Красивый вывод информации</h4>
+                    <div class="code-block">
+                        <pre>print("=" * 40)
+print("ИНФОРМАЦИЯ О ПРОГРАММЕ")
+print("=" * 40)
+print("Название:", "Python Learning")
+print("Версия:", "1.0")
+print("Автор:", "Ученик 9 класса")
+print("=" * 40)</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет эта программа?</h4>
+                        <div class="code-block">
+                            <pre>print("Python", "JavaScript", sep=" и ")</pre>
+                        </div>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, между словами будет не пробел, а то, что указано в sep.">Python JavaScript</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Параметр sep=' и ' заменяет стандартный пробел на ' и '.">Python и JavaScript</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, sep определяет разделитель между элементами, не добавляет в конец.">PythonJavaScript и</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, sep работает корректно и разделяет элементы.">Python sep=" и " JavaScript</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Какая команда создаст комментарий в Python?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, // используется для комментариев в C++, JavaScript, но не в Python.">// Это комментарий</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Верно! В Python комментарии начинаются с символа #."># Это комментарий</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, /* */ используется для многострочных комментариев в C++, но не в Python.">/* Это комментарий */</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, -- используется в SQL, но не в Python.">-- Это комментарий</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько строк выведет эта программа?</h4>
+                        <div class="code-block">
+                            <pre>print("А", end=" ")
+print("Б", end=" ")
+print("В")</pre>
+                        </div>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, команд print три, но строк в выводе будет меньше из-за параметра end.">3 строки</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, хотя бы одна строка точно будет.">0 строк</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Все три print выведут на одну строку 'А Б В', потому что первые два используют end=' '.">1 строку</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, параметр end=' ' предотвращает переход на новую строку.">2 строки</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Какой код выведет "1-2-3"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Верно! Параметр sep='-' ставит дефис между числами.">print(1, 2, 3, sep="-")</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, это выведет '1 2 3' с пробелами (стандартное поведение).">print(1, 2, 3)</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, end определяет, что добавляется в конец, а не между элементами.">print(1, 2, 3, end="-")</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, здесь '1-2-3' - это одна строка текста, а не три отдельных числа.">print("1-2-3")</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что произойдет при выполнении этого кода?</h4>
+                        <div class="code-block">
+                            <pre>print("Привет)  # Забыли закрывающую кавычку</pre>
+                        </div>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, код с ошибкой не запустится вообще.">Выведет: Привет)</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Python выдаст SyntaxError из-за незакрытой кавычки. Каждая открывающая кавычка должна иметь закрывающую.">Будет ошибка (SyntaxError)</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, ничего не выведется, будет ошибка.">Выведет: Привет</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, комментарий здесь не поможет - ошибка в строке перед ним.">Ничего не произойдет (это комментарий)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Функция <code>print()</code> - это основа программирования на Python, которая используется во всех заданиях:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (простые программы с выводом), Задание 14 (написание программы)</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-25 (создание программ, вывод результатов)</li>
+                    </ul>
+                    <p>Знание параметров <code>sep</code> и <code>end</code> поможет создавать красиво форматированный вывод, что важно для читаемости программы.</p>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li>Python - простой и мощный язык программирования, популярный во всем мире</li>
+                    <li><code>print()</code> - основная функция для вывода информации на экран</li>
+                    <li>Текст должен быть в кавычках: <code>"текст"</code> или <code>'текст'</code></li>
+                    <li>Можно выводить несколько значений через запятую: <code>print("А", "Б", "В")</code></li>
+                    <li>Параметр <code>sep</code> определяет разделитель между значениями</li>
+                    <li>Параметр <code>end</code> определяет, что добавляется в конец строки</li>
+                    <li>Комментарии создаются символом <code>#</code> и помогают объяснять код</li>
+                    <li>Хорошие комментарии объясняют "зачем", а не "что"</li>
+                </ul>
+
+                <p>Отличная работа! Ты написал свою первую программу на Python и освоил функцию <code>print()</code>. В следующем уроке мы изучим переменные - "коробки" для хранения данных!</p>
             </div>
 
             <div class="lesson-nav">

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 9: Арифметические операции - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-04">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,22 +220,388 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 9: Арифметические операции</h1>
-                <div class="lesson-meta">Введение в Python • 20 минут</div>
+                <div class="lesson-meta">Введение в Python • 30 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Python - это не только язык программирования, но и мощный калькулятор! С помощью арифметических операций ты можешь выполнять любые математические вычисления: от простого сложения до сложных формул.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>В этом уроке мы освоим семь арифметических операторов Python. Некоторые из них ты знаешь из математики, но есть и особенные операторы, которые могут тебя удивить!</p>
+
+                <div class="info-block">
+                    <h4>Зачем изучать арифметические операции?</h4>
+                    <ul>
+                        <li>Создавать калькуляторы и программы для вычислений</li>
+                        <li>Обрабатывать числовые данные (баллы в играх, цены, расстояния)</li>
+                        <li>Решать математические задачи автоматически</li>
+                        <li>Писать формулы для научных расчетов</li>
+                        <li>Проверять четность чисел, вычислять остатки</li>
+                    </ul>
+                </div>
+
+                <h2>Семь арифметических операторов</h2>
+
+                <h3>1. Сложение (+)</h3>
+                <p>Оператор <strong>+</strong> складывает два числа. Все просто, как в математике!</p>
 
                 <div class="code-block">
-                    <pre>print(10 + 5)
-print(10 ** 2)</pre>
+                    <pre># Сложение чисел
+print(5 + 3)           # 8
+print(10 + 20)         # 30
+print(100 + 1)         # 101
+
+# С переменными
+a = 15
+b = 25
+sum_result = a + b
+print(sum_result)      # 40
+
+# С отрицательными числами
+print(10 + (-5))       # 5
+print(-3 + (-7))       # -10</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Особенность: сложение работает и для строк!</h4>
+                    <div class="code-block">
+                        <pre># Конкатенация (объединение) строк
+first_name = "Иван"
+last_name = "Петров"
+full_name = first_name + " " + last_name
+print(full_name)       # "Иван Петров"
+
+# Объединение текста
+greeting = "Привет" + ", " + "мир" + "!"
+print(greeting)        # "Привет, мир!"</pre>
+                    </div>
+                    <p><strong>Важно:</strong> нельзя складывать число и строку! <code>5 + "3"</code> вызовет ошибку.</p>
+                </div>
+
+                <h3>2. Вычитание (-)</h3>
+                <p>Оператор <strong>-</strong> вычитает одно число из другого.</p>
+
+                <div class="code-block">
+                    <pre># Вычитание чисел
+print(10 - 4)          # 6
+print(50 - 20)         # 30
+print(100 - 1)         # 99
+
+# С переменными
+total = 100
+spent = 35
+remaining = total - spent
+print(remaining)       # 65
+
+# Отрицательные результаты
+print(5 - 10)          # -5
+print(0 - 8)           # -8</pre>
+                </div>
+
+                <h3>3. Умножение (*)</h3>
+                <p>Оператор <strong>*</strong> умножает числа. В программировании используется звездочка, а не × или ·</p>
+
+                <div class="code-block">
+                    <pre># Умножение чисел
+print(3 * 7)           # 21
+print(5 * 5)           # 25
+print(12 * 2)          # 24
+
+# С переменными
+price = 250
+quantity = 3
+total_cost = price * quantity
+print(total_cost)      # 750
+
+# С дробными числами
+print(2.5 * 4)         # 10.0
+print(1.5 * 1.5)       # 2.25</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Особенность: умножение работает и для строк!</h4>
+                    <div class="code-block">
+                        <pre># Повторение строк
+print("Ha" * 3)        # "HaHaHa"
+print("Python " * 2)   # "Python Python "
+print("=" * 20)        # "===================="
+
+# Полезно для рисования:
+line = "-" * 30
+print(line)            # ------------------------------</pre>
+                    </div>
+                    <p>Строка, умноженная на число N, повторяется N раз!</p>
+                </div>
+
+                <h3>4. Деление (/)</h3>
+                <p>Оператор <strong>/</strong> делит одно число на другое. <strong>ВАЖНО: всегда возвращает float!</strong></p>
+
+                <div class="code-block">
+                    <pre># Деление чисел
+print(10 / 2)          # 5.0 (не 5, а 5.0!)
+print(15 / 3)          # 5.0
+print(7 / 2)           # 3.5
+
+# Результат всегда float
+print(type(10 / 2))    # &lt;class 'float'&gt;
+print(type(9 / 3))     # &lt;class 'float'&gt;
+
+# Деление с дробными числами
+print(10 / 3)          # 3.3333333333333335
+print(100 / 7)         # 14.285714285714286
+
+# С переменными
+total_score = 95
+tests_count = 5
+average = total_score / tests_count
+print(average)         # 19.0</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Деление на ноль - ошибка!</h4>
+                    <div class="code-block">
+                        <pre># Это вызовет ошибку ZeroDivisionError:
+# print(10 / 0)
+
+# Важно проверять делитель:
+divisor = 0
+if divisor != 0:
+    result = 10 / divisor
+else:
+    print("Делить на ноль нельзя!")</pre>
+                    </div>
+                </div>
+
+                <h3>5. Целочисленное деление (//)</h3>
+                <p>Оператор <strong>//</strong> делит и отбрасывает остаток, оставляя только целую часть.</p>
+
+                <div class="code-block">
+                    <pre># Целочисленное деление
+print(7 // 2)          # 3 (не 3.5!)
+print(10 // 3)         # 3 (не 3.333...)
+print(15 // 4)         # 3 (не 3.75)
+
+# Даже если делится нацело
+print(10 // 2)         # 5 (тип int, если оба операнда int)
+print(9 // 3)          # 3
+
+# С отрицательными числами (округление к меньшему!)
+print(7 // 2)          # 3
+print(-7 // 2)         # -4 (не -3!)
+
+# Практическое применение
+total_apples = 23
+people = 5
+apples_per_person = total_apples // people
+print(apples_per_person)  # 4 (каждому по 4 яблока)</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Разница между / и //</h4>
+                    <div class="code-block">
+                        <pre>print(10 / 3)      # 3.3333333333333335 (точное деление)
+print(10 // 3)     # 3 (только целая часть)
+
+print(7 / 2)       # 3.5
+print(7 // 2)      # 3
+
+print(10 / 2)      # 5.0 (float)
+print(10 // 2)     # 5 (int)</pre>
+                    </div>
+                    <p><strong>Правило:</strong> Используй <code>/</code> для точного деления, <code>//</code> когда нужна только целая часть.</p>
+                </div>
+
+                <h3>6. Остаток от деления (%)</h3>
+                <p>Оператор <strong>%</strong> (модуло) возвращает остаток от деления. Очень полезен!</p>
+
+                <div class="code-block">
+                    <pre># Остаток от деления
+print(7 % 2)           # 1 (7 = 2*3 + 1)
+print(10 % 3)          # 1 (10 = 3*3 + 1)
+print(15 % 4)          # 3 (15 = 4*3 + 3)
+
+# Если делится нацело - остаток 0
+print(10 % 2)          # 0
+print(9 % 3)           # 0
+
+# Проверка четности
+number = 17
+if number % 2 == 0:
+    print("Четное")
+else:
+    print("Нечетное")  # Выведет это
+
+# Проверка кратности
+number = 15
+if number % 5 == 0:
+    print("Кратно 5")  # Выведет это</pre>
+                </div>
+
+                <div class="example-block">
+                    <h4>Практическое применение % (модуло):</h4>
+                    <div class="code-block">
+                        <pre># 1. Проверка четности/нечетности
+num = 42
+is_even = (num % 2 == 0)
+print(is_even)         # True
+
+# 2. Распределение по группам
+student_number = 17
+group = student_number % 3  # Группы 0, 1, 2
+print("Группа:", group)     # Группа: 2
+
+# 3. Получение последней цифры числа
+number = 12345
+last_digit = number % 10
+print(last_digit)      # 5
+
+# 4. Подсчет остатка яблок
+total_apples = 23
+people = 5
+leftover = total_apples % people
+print("Остаток:", leftover)  # Остаток: 3</pre>
+                    </div>
+                </div>
+
+                <h3>7. Возведение в степень (**)</h3>
+                <p>Оператор <strong>**</strong> возводит число в степень. Не путай с * (умножение)!</p>
+
+                <div class="code-block">
+                    <pre># Возведение в степень
+print(2 ** 3)          # 8 (2 в кубе)
+print(5 ** 2)          # 25 (5 в квадрате)
+print(10 ** 3)         # 1000 (10 в третьей степени)
+
+# С переменными
+base = 3
+exponent = 4
+result = base ** exponent
+print(result)          # 81 (3^4)
+
+# Дробные степени (корни!)
+print(9 ** 0.5)        # 3.0 (квадратный корень из 9)
+print(8 ** (1/3))      # 2.0 (кубический корень из 8)
+print(16 ** 0.25)      # 2.0 (корень 4-й степени)
+
+# Отрицательные степени (дроби)
+print(2 ** -1)         # 0.5 (1/2)
+print(10 ** -2)        # 0.01 (1/100)</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Степень vs. Умножение:</h4>
+                    <div class="code-block">
+                        <pre>print(2 * 3)       # 6 (умножение)
+print(2 ** 3)      # 8 (степень: 2*2*2)
+
+print(5 * 2)       # 10 (умножение)
+print(5 ** 2)      # 25 (степень: 5*5)
+
+# Запомни:
+# * - это умножение
+# ** - это степень</pre>
+                    </div>
+                </div>
+
+                <h2>Порядок операций (приоритет)</h2>
+                <p>Когда в одном выражении несколько операторов, Python выполняет их в определенном порядке - как в математике (правило PEMDAS).</p>
+
+                <div class="info-block">
+                    <h4>Приоритет операторов (от высшего к низшему):</h4>
+                    <ol>
+                        <li><strong>**</strong> - возведение в степень</li>
+                        <li><strong>*</strong>, <strong>/</strong>, <strong>//</strong>, <strong>%</strong> - умножение, деление, остаток</li>
+                        <li><strong>+</strong>, <strong>-</strong> - сложение, вычитание</li>
+                    </ol>
+                    <p>Скобки <strong>( )</strong> имеют наивысший приоритет и выполняются первыми!</p>
+                </div>
+
+                <div class="code-block">
+                    <pre># Примеры с приоритетом
+print(2 + 3 * 4)           # 14 (сначала 3*4=12, потом +2)
+print((2 + 3) * 4)         # 20 (сначала скобки: 5, потом *4)
+
+print(10 - 2 * 3)          # 4 (сначала 2*3=6, потом 10-6)
+print((10 - 2) * 3)        # 24 (сначала 10-2=8, потом *3)
+
+# Степень выполняется первой
+print(2 + 3 ** 2)          # 11 (3**2=9, потом +2)
+print((2 + 3) ** 2)        # 25 (сначала 2+3=5, потом 5**2)
+
+# Сложное выражение
+print(10 + 2 * 3 ** 2)     # 28
+# Порядок: 3**2=9, 2*9=18, 10+18=28
+
+# Используй скобки для ясности!
+result = (100 + 50) / (3 * 2)
+print(result)              # 25.0</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Всегда используй скобки, если не уверен!</h4>
+                    <div class="code-block">
+                        <pre># Неясно без скобок:
+a = 5 + 3 * 2 ** 2 / 4 - 1
+
+# Яснее со скобками:
+b = 5 + ((3 * (2 ** 2)) / 4) - 1
+
+print(a)  # 7.0
+print(b)  # 7.0
+# Результат тот же, но второе легче понять!</pre>
+                    </div>
+                </div>
+
+                <h2>Практические применения</h2>
+
+                <h3>1. Площадь прямоугольника</h3>
+                <div class="code-block">
+                    <pre># Вычисление площади
+length = 15
+width = 8
+area = length * width
+print("Площадь прямоугольника:", area, "кв. м")  # 120 кв. м</pre>
+                </div>
+
+                <h3>2. Конвертер температуры (Цельсий → Фаренгейт)</h3>
+                <div class="code-block">
+                    <pre># Формула: F = C * 9/5 + 32
+celsius = 25
+fahrenheit = celsius * 9 / 5 + 32
+print(celsius, "°C =", fahrenheit, "°F")  # 25 °C = 77.0 °F
+
+# С другой температурой
+celsius = 0
+fahrenheit = celsius * 9 / 5 + 32
+print(celsius, "°C =", fahrenheit, "°F")  # 0 °C = 32.0 °F</pre>
+                </div>
+
+                <h3>3. Среднее арифметическое</h3>
+                <div class="code-block">
+                    <pre># Средний балл за 4 теста
+test1 = 85
+test2 = 92
+test3 = 78
+test4 = 88
+
+average = (test1 + test2 + test3 + test4) / 4
+print("Средний балл:", average)  # 85.75</pre>
+                </div>
+
+                <h3>4. Расчет времени в играх</h3>
+                <div class="code-block">
+                    <pre># Сколько полных часов и минут в 142 минутах?
+total_minutes = 142
+
+hours = total_minutes // 60      # Целая часть
+minutes = total_minutes % 60     # Остаток
+
+print(hours, "часов", minutes, "минут")  # 2 часов 22 минут</pre>
                 </div>
 
                 <h2>Попробуй сам!</h2>
+                <p>Поэкспериментируй с арифметическими операциями:</p>
+
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -243,28 +610,265 @@ print(10 ** 2)</pre>
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print(10 + 5)
-print(10 ** 2)</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Эксперименты с арифметическими операциями
+
+# 1. Все семь операторов
+print("Сложение:", 10 + 5)
+print("Вычитание:", 10 - 5)
+print("Умножение:", 10 * 5)
+print("Деление:", 10 / 5)
+print("Целочисленное деление:", 10 // 3)
+print("Остаток:", 10 % 3)
+print("Степень:", 10 ** 2)
+
+# 2. Проверка четности
+number = 17
+if number % 2 == 0:
+    print(number, "- четное")
+else:
+    print(number, "- нечетное")
+
+# 3. Калькулятор площади круга
+pi = 3.14159
+radius = 5
+area = pi * radius ** 2
+print("Площадь круга с радиусом", radius, ":", area)</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Калькулятор прямоугольника</h4>
+                    <p>Создай программу для вычисления площади и периметра прямоугольника.</p>
+                    <p><strong>Дано:</strong></p>
+                    <ul>
+                        <li>Длина: 12 метров</li>
+                        <li>Ширина: 7 метров</li>
+                    </ul>
+                    <p><strong>Вычисли и выведи:</strong></p>
+                    <ul>
+                        <li>Площадь = длина × ширина</li>
+                        <li>Периметр = (длина + ширина) × 2</li>
+                    </ul>
+                    <p><strong>Ожидаемый вывод:</strong></p>
+                    <div class="code-block">
+                        <pre>Площадь: 84 кв. м
+Периметр: 38 м</pre>
+                    </div>
+                    <p><strong>Подсказка:</strong> Создай переменные length и width, затем используй формулы.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Проверка четности и остаток</h4>
+                    <p>Напиши программу, которая:</p>
+                    <ol>
+                        <li>Берет число 47</li>
+                        <li>Проверяет, четное оно или нечетное (используй % 2)</li>
+                        <li>Находит остаток от деления на 5</li>
+                        <li>Находит остаток от деления на 10 (последняя цифра)</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй оператор % и условие <code>if number % 2 == 0</code></p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Конвертер температуры</h4>
+                    <p>Создай программу для конвертации температуры из Цельсия в Фаренгейт.</p>
+                    <p><strong>Формула:</strong> F = C × 9/5 + 32</p>
+                    <p><strong>Проверь на:</strong></p>
+                    <ul>
+                        <li>0°C должно быть 32°F</li>
+                        <li>100°C должно быть 212°F</li>
+                        <li>-40°C должно быть -40°F (интересный случай!)</li>
+                    </ul>
+                    <p><strong>Подсказка:</strong> Создай переменную celsius и вычисли fahrenheit по формуле.</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Путаница / и //</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО: хотели целое число, но получили float
+apples = 10
+people = 3
+per_person = apples / people  # 3.3333... (дробное!)
+
+# ПРАВИЛЬНО:
+per_person = apples // people  # 3 (целое число)</pre>
+                    </div>
+                    <p>Используй <code>//</code> когда нужно целое число (деление предметов, людей)!</p>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Забыли про скобки</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+average = 10 + 20 + 30 / 3  # 40.0 (только 30 разделили!)
+
+# ПРАВИЛЬНО:
+average = (10 + 20 + 30) / 3  # 20.0 (сумма, потом деление)</pre>
+                    </div>
+                    <p>Скобки контролируют порядок вычислений!</p>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Путаница * и **</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+square = 5 * 2      # 10 (умножение)
+
+# ПРАВИЛЬНО (если хотели квадрат):
+square = 5 ** 2     # 25 (степень)
+
+# Запомни:
+# * (одна звездочка) - умножение
+# ** (две звездочки) - степень</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Деление на ноль</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+result = 10 / 0  # ZeroDivisionError!
+
+# ПРАВИЛЬНО: проверка перед делением
+divisor = 0
+if divisor != 0:
+    result = 10 / divisor
+    print(result)
+else:
+    print("Ошибка: деление на ноль!")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Неправильный порядок операций</h4>
+                    <div class="code-block">
+                        <pre># Вычисли: (5 + 3) × 2
+# НЕПРАВИЛЬНО:
+result = 5 + 3 * 2  # 11 (умножение сначала!)
+
+# ПРАВИЛЬНО:
+result = (5 + 3) * 2  # 16 (скобки сначала!)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Округление vs отбрасывание</h4>
+                    <div class="code-block">
+                        <pre># int() ОТБРАСЫВАЕТ дробную часть:
+print(int(3.9))     # 3 (не 4!)
+print(int(5.1))     # 5
+
+# Для округления используй round():
+print(round(3.9))   # 4
+print(round(5.1))   # 5
+
+# 7 // 2 тоже отбрасывает:
+print(7 / 2)        # 3.5
+print(7 // 2)       # 3 (отбрасывание!)</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что вернет выражение 10 / 2?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Оператор / ВСЕГДА возвращает float, даже при делении нацело.">5</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Оператор / всегда возвращает float, даже если результат целый.">5.0</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это результат целочисленного деления //.">"5"</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, деление работает корректно.">Ошибка</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Чему равно 7 % 3?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, это результат целочисленного деления 7 // 3.">2</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Верно! 7 = 3×2 + 1, остаток от деления 7 на 3 равен 1.">1</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, это результат обычного деления 7 / 3.">2.333</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, оператор % возвращает остаток от деления.">0</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Как проверить, что число четное?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, это проверяет делимость нацело, но не четность.">number // 2 == 0</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Если остаток от деления на 2 равен 0, число четное.">number % 2 == 0</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, это сравнивает число со строкой '2'.">number == "2"</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, в Python нет функции is_even.">number.is_even()</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Чему равно 2 + 3 * 4?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, это было бы при (2 + 3) * 4. Умножение имеет приоритет!">20</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Сначала 3*4=12, потом 2+12=14. Умножение выполняется до сложения.">14</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, операции выполняются не слева направо в таком случае.">12</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, умножение имеет приоритет над сложением.">24</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Чему равно 2 ** 3?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, это был бы результат умножения 2 * 3.">6</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! 2 ** 3 = 2³ = 2×2×2 = 8.">8</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, ** - это степень, а не деление.">0.666</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, это было бы 3 ** 2 (3 в квадрате).">9</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Арифметические операции - основа для многих задач на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ алгоритмов с вычислениями), Задание 14 (программы с арифметическими операциями)</li>
+                        <li><strong>ЕГЭ:</strong> Задание 5 (анализ программ), Задания 24-25 (программирование с вычислениями), Задание 12 (выполнение алгоритмов)</li>
+                        <li>Особенно важны операторы <code>%</code> (проверка четности, кратности) и <code>//</code> (целочисленное деление)</li>
+                        <li>На экзаменах часто встречаются задачи на перевод времени, систем счисления, поиск делителей - везде нужны эти операторы!</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>+</strong> - сложение чисел (также объединение строк)</li>
+                    <li><strong>-</strong> - вычитание чисел</li>
+                    <li><strong>*</strong> - умножение (также повторение строк)</li>
+                    <li><strong>/</strong> - деление (ВСЕГДА возвращает float!)</li>
+                    <li><strong>//</strong> - целочисленное деление (отбрасывает остаток)</li>
+                    <li><strong>%</strong> - остаток от деления (для проверки четности, кратности)</li>
+                    <li><strong>**</strong> - возведение в степень</li>
+                    <li>Приоритет: ** → *, /, //, % → +, -</li>
+                    <li>Скобки () имеют наивысший приоритет</li>
+                    <li>Деление на ноль вызывает ошибку</li>
+                    <li>10 / 2 = 5.0 (float), а 10 // 2 = 5 (int)</li>
+                </ul>
+
+                <p>Отлично! Теперь Python стал для тебя мощным калькулятором. В следующем уроке мы научимся получать данные от пользователя и создавать по-настоящему интерактивные программы!</p>
             </div>
 
             <div class="lesson-nav">

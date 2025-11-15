@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 10: Ввод и вывод данных - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-05">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,22 +220,327 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 10: Ввод и вывод данных</h1>
-                <div class="lesson-meta">Введение в Python • 20 минут</div>
+                <div class="lesson-meta">Введение в Python • 35 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>До этого момента мы писали программы с фиксированными данными. Но настоящие программы должны взаимодействовать с пользователем! В этом уроке ты научишься получать данные от пользователя и красиво выводить результаты.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Представь калькулятор, который всегда считает только 2+3. Не очень полезно, правда? Нам нужен калькулятор, где пользователь сам вводит числа. Именно этому мы и научимся!</p>
+
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Функцию <code>input()</code> для получения данных от пользователя</li>
+                        <li>Преобразование типов данных (ОЧЕНЬ ВАЖНО!)</li>
+                        <li>Форматирование вывода с помощью f-строк</li>
+                        <li>Создание интерактивных программ</li>
+                        <li>Лучшие практики ввода-вывода</li>
+                    </ul>
+                </div>
+
+                <h2>Функция input() - получение данных</h2>
+                <p>Функция <strong>input()</strong> останавливает программу и ждет, когда пользователь введет что-то с клавиатуры.</p>
 
                 <div class="code-block">
-                    <pre>name = input("Имя: ")
-print("Привет,", name)</pre>
+                    <pre># Простейший ввод
+name = input("Как тебя зовут? ")
+print("Привет,", name)
+
+# Пример работы:
+# Программа: Как тебя зовут?
+# Пользователь вводит: Иван
+# Программа: Привет, Иван</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Как работает input():</h4>
+                    <ul>
+                        <li>Показывает подсказку (prompt) на экране</li>
+                        <li>Ждет, пока пользователь введет текст и нажмет Enter</li>
+                        <li><strong>ВСЕГДА возвращает строку (str)!</strong> Даже если ввели число!</li>
+                        <li>Сохраняет введенный текст в переменную</li>
+                    </ul>
+                </div>
+
+                <h3>Примеры использования input()</h3>
+                <div class="code-block">
+                    <pre># С подсказкой
+city = input("В каком городе ты живешь? ")
+print("Круто! Я слышал, что", city, "- отличный город!")
+
+# Без подсказки (не рекомендуется)
+answer = input()  # Пользователь не знает, что вводить!
+
+# Ввод нескольких данных
+name = input("Имя: ")
+age = input("Возраст: ")
+hobby = input("Хобби: ")
+
+print("Меня зовут", name, ", мне", age, "лет, я люблю", hobby)</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>ВАЖНО: input() всегда возвращает строку!</h4>
+                    <div class="code-block">
+                        <pre># Пользователь вводит: 15
+age = input("Возраст: ")
+
+print(type(age))  # &lt;class 'str'&gt; - это строка!
+print(age)        # "15" - в кавычках!
+
+# Это НЕ сработает для вычислений:
+# next_year = age + 1  # TypeError! Нельзя складывать строку и число!</pre>
+                    </div>
+                    <p>Чтобы работать с числами, нужно преобразование типов!</p>
+                </div>
+
+                <h2>Преобразование типов при вводе</h2>
+                <p>Поскольку <code>input()</code> возвращает строку, нам часто нужно преобразовать её в число.</p>
+
+                <h3>int(input()) - ввод целого числа</h3>
+                <div class="code-block">
+                    <pre># Правильный ввод целого числа
+age = int(input("Сколько тебе лет? "))
+
+# Теперь age - это число int!
+print(type(age))  # &lt;class 'int'&gt;
+
+# Можно использовать в вычислениях
+next_year = age + 1
+print("Через год тебе будет", next_year, "лет")
+
+# Еще примеры
+points = int(input("Сколько очков набрал? "))
+total = points * 2
+print("Удвоенный счет:", total)</pre>
+                </div>
+
+                <h3>float(input()) - ввод дробного числа</h3>
+                <div class="code-block">
+                    <pre># Ввод дробного числа
+price = float(input("Цена товара: "))
+quantity = int(input("Количество: "))
+
+total_cost = price * quantity
+print("Итого к оплате:", total_cost, "руб.")
+
+# Пример:
+# Цена товара: 99.99
+# Количество: 3
+# Итого к оплате: 299.97 руб.</pre>
+                </div>
+
+                <div class="example-block">
+                    <h4>Зачем нужно преобразование?</h4>
+                    <div class="code-block">
+                        <pre># БЕЗ преобразования:
+a = input("Первое число: ")  # Пользователь вводит: 10
+b = input("Второе число: ")  # Пользователь вводит: 20
+result = a + b
+print(result)  # "1020" - объединение строк!
+
+# С преобразованием:
+a = int(input("Первое число: "))  # 10 как число
+b = int(input("Второе число: "))  # 20 как число
+result = a + b
+print(result)  # 30 - математическое сложение!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибки при неправильном вводе</h4>
+                    <div class="code-block">
+                        <pre># Если пользователь введет не число:
+# age = int(input("Возраст: "))  # Пользователь вводит: abc
+# ValueError: invalid literal for int()
+
+# Пока не изучили обработку ошибок, просто:
+# 1. Предупреди пользователя, что нужно вводить
+# 2. Проверь ввод перед преобразованием (позже изучим)</pre>
+                    </div>
+                </div>
+
+                <h2>Форматирование вывода</h2>
+                <p>Есть несколько способов красиво вывести данные. Самый современный и удобный - <strong>f-строки</strong>!</p>
+
+                <h3>Вывод через запятую (простой способ)</h3>
+                <div class="code-block">
+                    <pre># Простое перечисление через запятую
+name = "Иван"
+age = 15
+print("Меня зовут", name, ", мне", age, "лет")
+# Меня зовут Иван , мне 15 лет
+
+# Автоматически добавляются пробелы
+score = 100
+print("Ваш счет:", score, "очков")
+# Ваш счет: 100 очков</pre>
+                </div>
+
+                <h3>F-строки (ЛУЧШИЙ СПОСОБ!)</h3>
+                <p>F-строки - это самый современный и удобный способ форматирования в Python. Буква <strong>f</strong> перед строкой позволяет вставлять переменные прямо в текст!</p>
+
+                <div class="code-block">
+                    <pre># Базовое использование f-строк
+name = "Мария"
+age = 16
+
+# Переменные в фигурных скобках {}
+message = f"Меня зовут {name}, мне {age} лет"
+print(message)  # Меня зовут Мария, мне 16 лет
+
+# Можно сразу в print
+city = "Москва"
+print(f"Я живу в городе {city}")
+
+# Выражения внутри {}
+a = 10
+b = 5
+print(f"Сумма {a} и {b} равна {a + b}")
+# Сумма 10 и 5 равна 15</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Преимущества f-строк:</h4>
+                    <ul>
+                        <li>Читаемость - сразу видно, где какие переменные</li>
+                        <li>Можно вставлять выражения: <code>f"{2 + 2}"</code></li>
+                        <li>Форматирование чисел (округление и т.д.)</li>
+                        <li>Современный стандарт Python (с версии 3.6)</li>
+                    </ul>
+                </div>
+
+                <h3>Форматирование чисел в f-строках</h3>
+                <div class="code-block">
+                    <pre># Округление дробных чисел
+price = 99.999
+print(f"Цена: {price:.2f} руб.")
+# Цена: 100.00 руб.
+# :.2f означает "2 знака после запятой"
+
+# Разные форматы
+number = 1234.5678
+
+print(f"{number:.1f}")  # 1234.6 (1 знак)
+print(f"{number:.2f}")  # 1234.57 (2 знака)
+print(f"{number:.0f}")  # 1235 (без дробной части)
+
+# Процентные вычисления
+score = 85
+total = 100
+print(f"Результат: {score}/{total} ({score/total:.1%})")
+# Результат: 85/100 (85.0%)</pre>
+                </div>
+
+                <h3>Конкатенация строк (старый способ)</h3>
+                <div class="code-block">
+                    <pre># Объединение строк через +
+name = "Петр"
+age = 17
+
+# Нужно преобразовывать числа в строки!
+message = "Меня зовут " + name + ", мне " + str(age) + " лет"
+print(message)
+
+# Неудобно и много кода!
+# Лучше используй f-строки:
+message = f"Меня зовут {name}, мне {age} лет"  # Проще!</pre>
+                </div>
+
+                <h2>Полные интерактивные программы</h2>
+
+                <h3>Программа 1: Приветствие</h3>
+                <div class="code-block">
+                    <pre># Программа знакомства
+print("=== Давай познакомимся! ===")
+
+name = input("Как тебя зовут? ")
+age = int(input("Сколько тебе лет? "))
+city = input("Откуда ты? ")
+
+print(f"\nПриятно познакомиться, {name}!")
+print(f"Тебе {age} лет, и ты из города {city}.")
+
+# Вычисления с возрастом
+years_to_adult = 18 - age
+if years_to_adult > 0:
+    print(f"До совершеннолетия осталось {years_to_adult} лет.")
+else:
+    print("Ты уже совершеннолетний!")</pre>
+                </div>
+
+                <h3>Программа 2: Калькулятор</h3>
+                <div class="code-block">
+                    <pre># Простой калькулятор
+print("=== КАЛЬКУЛЯТОР ===")
+
+num1 = float(input("Введите первое число: "))
+num2 = float(input("Введите второе число: "))
+
+# Вычисляем все операции
+sum_result = num1 + num2
+diff = num1 - num2
+product = num1 * num2
+quotient = num1 / num2
+
+# Выводим результаты
+print(f"\n{num1} + {num2} = {sum_result}")
+print(f"{num1} - {num2} = {diff}")
+print(f"{num1} × {num2} = {product}")
+print(f"{num1} ÷ {num2} = {quotient:.2f}")</pre>
+                </div>
+
+                <h3>Программа 3: Вычисление площади</h3>
+                <div class="code-block">
+                    <pre># Калькулятор площади прямоугольника
+print("=== Площадь прямоугольника ===")
+
+length = float(input("Введите длину (м): "))
+width = float(input("Введите ширину (м): "))
+
+area = length * width
+perimeter = (length + width) * 2
+
+print(f"\nРезультаты:")
+print(f"Площадь: {area:.2f} кв. м")
+print(f"Периметр: {perimeter:.2f} м")
+
+# Дополнительная информация
+if area < 10:
+    print("Это небольшая комната")
+elif area < 30:
+    print("Это средняя комната")
+else:
+    print("Это большая комната")</pre>
+                </div>
+
+                <h3>Программа 4: Конвертер температуры</h3>
+                <div class="code-block">
+                    <pre># Конвертер Цельсий → Фаренгейт
+print("=== Конвертер температуры ===")
+
+celsius = float(input("Температура в °C: "))
+
+fahrenheit = celsius * 9/5 + 32
+
+print(f"\n{celsius}°C = {fahrenheit:.1f}°F")
+
+# Подсказки
+if celsius < 0:
+    print("Холодно! Температура ниже нуля")
+elif celsius < 20:
+    print("Прохладно")
+elif celsius < 30:
+    print("Комфортная температура")
+else:
+    print("Жарко!")</pre>
                 </div>
 
                 <h2>Попробуй сам!</h2>
+                <p>Поэкспериментируй с вводом и выводом:</p>
+
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -243,28 +549,288 @@ print("Привет,", name)</pre>
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">name = input("Имя: ")
-print("Привет,", name)</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Интерактивная программа "Профиль"
+
+print("=== Создай свой профиль ===\n")
+
+# Ввод данных
+name = input("Имя: ")
+age = int(input("Возраст: "))
+hobby = input("Любимое хобби: ")
+
+# Вычисления
+birth_year = 2024 - age
+
+# Красивый вывод с f-строками
+print("\n" + "=" * 30)
+print(f"Имя: {name}")
+print(f"Возраст: {age} лет")
+print(f"Год рождения: примерно {birth_year}")
+print(f"Хобби: {hobby}")
+print("=" * 30)
+
+# Дополнительная информация
+print(f"\nЗдорово, что ты увлекаешься {hobby}!")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Построитель профиля</h4>
+                    <p>Создай программу, которая запрашивает у пользователя:</p>
+                    <ul>
+                        <li>Имя</li>
+                        <li>Возраст</li>
+                        <li>Любимый предмет</li>
+                        <li>Город</li>
+                    </ul>
+                    <p>И выводит красиво оформленный профиль с помощью f-строк.</p>
+                    <p><strong>Дополнительно:</strong> Вычисли, сколько лет пользователю было 5 лет назад.</p>
+                    <p><strong>Подсказка:</strong> Используй <code>f"Имя: {name}"</code> для вывода.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Математическая викторина</h4>
+                    <p>Создай программу, которая:</p>
+                    <ol>
+                        <li>Задает вопрос: "Сколько будет 7 × 8?"</li>
+                        <li>Получает ответ от пользователя (используй <code>int(input())</code>)</li>
+                        <li>Проверяет правильность (правильный ответ: 56)</li>
+                        <li>Выводит "Правильно!" или "Неправильно, ответ: 56"</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>if answer == 56:</code> для проверки.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Конвертер величин</h4>
+                    <p>Создай программу, которая:</p>
+                    <ol>
+                        <li>Спрашивает рост в сантиметрах</li>
+                        <li>Конвертирует в метры (разделить на 100)</li>
+                        <li>Спрашивает вес в килограммах</li>
+                        <li>Вычисляет ИМТ по формуле: вес / (рост_в_метрах²)</li>
+                        <li>Выводит результат с 1 знаком после запятой</li>
+                    </ol>
+                    <p><strong>Пример:</strong> Рост 170 см, вес 65 кг → ИМТ = 22.5</p>
+                    <p><strong>Подсказка:</strong> Используй <code>height_m = height_cm / 100</code> и <code>f"{bmi:.1f}"</code></p>
+                </div>
+
+                <h2>Лучшие практики</h2>
+
+                <div class="info-block">
+                    <h4>Правила хорошего ввода-вывода:</h4>
+                    <ol>
+                        <li><strong>Четкие подсказки:</strong> Всегда указывай, что нужно ввести
+                            <div class="code-block"><pre># Плохо:
+x = input()
+
+# Хорошо:
+x = int(input("Введите число: "))</pre></div>
+                        </li>
+                        <li><strong>Используй f-строки:</strong> Самый читаемый способ форматирования
+                            <div class="code-block"><pre># Старый способ:
+print("Привет, " + name + "!")
+
+# Современный способ:
+print(f"Привет, {name}!")</pre></div>
+                        </li>
+                        <li><strong>Преобразуй сразу:</strong> Делай <code>int(input())</code> в одной строке
+                            <div class="code-block"><pre># Можно так:
+age_str = input("Возраст: ")
+age = int(age_str)
+
+# Но лучше так:
+age = int(input("Возраст: "))</pre></div>
+                        </li>
+                        <li><strong>Разделяй вывод:</strong> Используй пустые строки для читаемости
+                            <div class="code-block"><pre>print("=== Результаты ===")
+print(f"Имя: {name}")
+print(f"Возраст: {age}")
+print("=" * 20)</pre></div>
+                        </li>
+                    </ol>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли int() при вводе числа</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+age = input("Возраст: ")
+next_year = age + 1  # TypeError!
+
+# ПРАВИЛЬНО:
+age = int(input("Возраст: "))
+next_year = age + 1  # Работает!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Пытаются сложить строку и число</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+name = "Иван"
+age = 15
+print("Привет, " + name + ", тебе " + age)  # TypeError!
+
+# ПРАВИЛЬНО - вариант 1 (f-строка):
+print(f"Привет, {name}, тебе {age}")
+
+# ПРАВИЛЬНО - вариант 2 (str):
+print("Привет, " + name + ", тебе " + str(age))</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неясные подсказки в input()</h4>
+                    <div class="code-block">
+                        <pre># ПЛОХО:
+x = input()  # Что вводить?
+y = input("Число: ")  # Какое число? Для чего?
+
+# ХОРОШО:
+length = float(input("Введите длину прямоугольника (см): "))
+width = float(input("Введите ширину прямоугольника (см): "))</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Забыли букву f в f-строке</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+name = "Мария"
+print("Привет, {name}")  # Выведет: Привет, {name}
+
+# ПРАВИЛЬНО:
+print(f"Привет, {name}")  # Выведет: Привет, Мария
+# Обрати внимание на букву f перед кавычками!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Неправильное форматирование чисел</h4>
+                    <div class="code-block">
+                        <pre># Некрасивый вывод:
+price = 99.999999
+print(f"Цена: {price}")  # Цена: 99.999999
+
+# Красивый вывод:
+print(f"Цена: {price:.2f} руб.")  # Цена: 100.00 руб.
+# :.2f = 2 знака после точки</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Путают float и int при вводе</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО (если пользователь введет 5.5):
+age = int(input("Сколько лет? "))  # ValueError при вводе 5.5!
+
+# ПРАВИЛЬНО для целых чисел:
+age = int(input("Сколько полных лет? "))
+
+# ПРАВИЛЬНО для дробных:
+height = float(input("Рост в метрах: "))</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что вернет input(), если пользователь введет 42?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! input() ВСЕГДА возвращает строку, а не число.">42 (число int)</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! input() всегда возвращает строку, даже если введено число.">"42" (строка str)</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, не дробное число.">42.0 (число float)</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, функция работает корректно.">Ошибка</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Как правильно ввести целое число?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, input() вернет строку, а не число.">age = input("Возраст: ")</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! int(input()) преобразует введенную строку в целое число.">age = int(input("Возраст: "))</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, str() преобразует в строку, а не число.">age = str(input("Возраст: "))</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, float() для дробных чисел.">age = float(input("Возраст: "))</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что выведет print(f"Привет, {name}"), если name = "Иван"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, f-строка подставляет значение переменной.">Привет, {name}</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! F-строка заменяет {name} на значение переменной.">Привет, Иван</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, это не то, что выведет f-строка.">Привет, name</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, это корректный синтаксис.">Ошибка</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Какой формат округлит число до 2 знаков после запятой?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, .2d используется для целых чисел с отступом.">f"{number:.2d}"</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! :.2f означает 2 знака после запятой для дробных чисел.">f"{number:.2f}"</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, .2s не используется для чисел.">f"{number:.2s}"</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, 2f - неправильный синтаксис.">f"{number:2f}"</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что произойдет при выполнении: "5" + 5?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, Python не складывает строку с числом автоматически.">10</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, это не сработает.">"55"</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Python не может складывать строку и число, выдает TypeError.">TypeError (ошибка)</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, это не то, что произойдет.">"5" + "5" = "55"</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Ввод и вывод - ключевые навыки для экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 14 (практическое программирование - нужно считывать данные и выводить результат)</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-25 (программирование - обязательно нужен ввод данных), Задание 27 (обработка последовательностей)</li>
+                        <li>На экзаменах ввод чаще всего числовой: <code>n = int(input())</code></li>
+                        <li>Важно помнить, что <code>input()</code> возвращает строку - частая ошибка на экзаменах!</li>
+                        <li>F-строки упрощают форматированный вывод результатов</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>input()</strong> - получает данные от пользователя, ВСЕГДА возвращает строку</li>
+                    <li><strong>int(input())</strong> - преобразует ввод в целое число</li>
+                    <li><strong>float(input())</strong> - преобразует ввод в дробное число</li>
+                    <li><strong>F-строки</strong> - лучший способ форматирования: <code>f"Привет, {name}!"</code></li>
+                    <li><strong>:.2f</strong> - округление до 2 знаков после запятой</li>
+                    <li>Всегда используй понятные подсказки в input()</li>
+                    <li>Нельзя складывать строку и число без преобразования</li>
+                    <li>print() через запятую автоматически добавляет пробелы</li>
+                </ul>
+
+                <p>Отлично! Теперь твои программы могут общаться с пользователем! В следующем уроке мы научимся принимать решения с помощью условного оператора if!</p>
             </div>
 
             <div class="lesson-nav">

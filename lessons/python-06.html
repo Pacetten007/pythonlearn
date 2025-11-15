@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 11: Условный оператор if - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-06">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,23 +220,365 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 11: Условный оператор if</h1>
-                <div class="lesson-meta">Введение в Python • 25 минут</div>
+                <div class="lesson-meta">Введение в Python • 35 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Программы должны уметь принимать решения! Если пользователю 18 лет - разрешить доступ. Если пароль неверный - показать ошибку. Если число положительное - одно действие, если отрицательное - другое.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Условный оператор <strong>if</strong> - это "развилка" в программе. Помнишь урок <a href="algo-04.html">Ветвления</a> из основ алгоритмики? Теперь мы реализуем ветвления в Python!</p>
+
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Операторы сравнения для проверки условий</li>
+                        <li>Простой <code>if</code> - выполнение кода при выполнении условия</li>
+                        <li><code>if-else</code> - два пути выполнения программы</li>
+                        <li><code>if-elif-else</code> - множественный выбор</li>
+                        <li>Вложенные условия - условия внутри условий</li>
+                        <li>Отступы в Python - КРИТИЧЕСКИ ВАЖНО!</li>
+                    </ul>
+                </div>
+
+                <h2>Операторы сравнения</h2>
+                <p>Перед изучением if нужно научиться сравнивать значения. Операторы сравнения возвращают <code>True</code> (истина) или <code>False</code> (ложь).</p>
 
                 <div class="code-block">
-                    <pre>x = 10
-if x > 5:
-    print("Больше 5")</pre>
+                    <pre># Шесть операторов сравнения
+print(5 == 5)    # True (равно)
+print(5 != 3)    # True (не равно)
+print(5 > 3)     # True (больше)
+print(5 < 10)    # True (меньше)
+print(5 >= 5)    # True (больше или равно)
+print(5 <= 4)    # False (меньше или равно)</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Все операторы сравнения:</h4>
+                    <ul>
+                        <li><strong>==</strong> равно (два знака равно!)</li>
+                        <li><strong>!=</strong> не равно</li>
+                        <li><strong>&gt;</strong> больше</li>
+                        <li><strong>&lt;</strong> меньше</li>
+                        <li><strong>&gt;=</strong> больше или равно</li>
+                        <li><strong>&lt;=</strong> меньше или равно</li>
+                    </ul>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Частая ошибка: = vs ==</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+if x = 5:  # Ошибка! = это присваивание, а не сравнение!
+
+# ПРАВИЛЬНО:
+if x == 5:  # == это сравнение!</pre>
+                    </div>
+                    <p><strong>=</strong> присваивает значение, <strong>==</strong> сравнивает!</p>
+                </div>
+
+                <h2>Простой оператор if</h2>
+                <p>Базовая конструкция: "если условие истинно, выполни код".</p>
+
+                <div class="code-block">
+                    <pre># Синтаксис if
+age = 20
+
+if age >= 18:
+    print("Ты совершеннолетний")
+    print("Можешь голосовать")
+
+print("Программа продолжается")
+
+# Вывод:
+# Ты совершеннолетний
+# Можешь голосовать
+# Программа продолжается</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Важные элементы синтаксиса if:</h4>
+                    <ol>
+                        <li><strong>Ключевое слово if</strong></li>
+                        <li><strong>Условие</strong> (выражение, которое дает True или False)</li>
+                        <li><strong>Двоеточие :</strong> в конце строки (ОБЯЗАТЕЛЬНО!)</li>
+                        <li><strong>Отступ</strong> (4 пробела) для кода внутри if</li>
+                    </ol>
+                </div>
+
+                <div class="code-block">
+                    <pre># Примеры простого if
+number = 10
+
+if number > 0:
+    print("Число положительное")
+
+# Можно использовать переменные
+password = "secret123"
+user_input = "secret123"
+
+if password == user_input:
+    print("Доступ разрешен")
+
+# Проверка четности
+num = 42
+if num % 2 == 0:
+    print(f"{num} - четное число")</pre>
+                </div>
+
+                <h2>Оператор if-else</h2>
+                <p><strong>else</strong> (иначе) выполняется, когда условие if ложно. Это позволяет выбирать между двумя путями.</p>
+
+                <div class="code-block">
+                    <pre># Синтаксис if-else
+age = 15
+
+if age >= 18:
+    print("Взрослый")
+else:
+    print("Ребенок")
+
+# Выведет: Ребенок
+
+# Еще примеры
+temperature = 25
+
+if temperature > 30:
+    print("Жарко!")
+else:
+    print("Нормальная температура")
+
+# Выведет: Нормальная температура</pre>
+                </div>
+
+                <div class="example-block">
+                    <h4>Практический пример: проверка пароля</h4>
+                    <div class="code-block">
+                        <pre>correct_password = "python123"
+user_password = input("Введите пароль: ")
+
+if user_password == correct_password:
+    print("✓ Доступ разрешен")
+    print("Добро пожаловать!")
+else:
+    print("✗ Неверный пароль")
+    print("Доступ запрещен")</pre>
+                    </div>
+                </div>
+
+                <h2>Оператор if-elif-else</h2>
+                <p><strong>elif</strong> (сокращение от "else if") позволяет проверить несколько условий последовательно. Выполняется только ПЕРВОЕ истинное условие!</p>
+
+                <div class="code-block">
+                    <pre># Синтаксис if-elif-else
+score = 85
+
+if score >= 90:
+    grade = "A"
+elif score >= 80:
+    grade = "B"
+elif score >= 70:
+    grade = "C"
+elif score >= 60:
+    grade = "D"
+else:
+    grade = "F"
+
+print(f"Оценка: {grade}")
+# Выведет: Оценка: B</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Как работает if-elif-else:</h4>
+                    <ol>
+                        <li>Проверяется первое условие if</li>
+                        <li>Если True - выполняется его блок, остальные пропускаются</li>
+                        <li>Если False - проверяется следующий elif</li>
+                        <li>Если все условия False - выполняется else (если есть)</li>
+                    </ol>
+                    <p><strong>Важно:</strong> Выполняется ТОЛЬКО ОДИН блок - первый истинный!</p>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример: определение возрастной категории</h4>
+                    <div class="code-block">
+                        <pre>age = int(input("Введите возраст: "))
+
+if age < 0:
+    print("Ошибка: возраст не может быть отрицательным")
+elif age < 3:
+    print("Младенец")
+elif age < 7:
+    print("Дошкольник")
+elif age < 18:
+    print("Школьник")
+elif age < 65:
+    print("Взрослый")
+else:
+    print("Пенсионер")</pre>
+                    </div>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример: система оценок</h4>
+                    <div class="code-block">
+                        <pre>points = int(input("Количество баллов (0-100): "))
+
+if points < 0 or points > 100:
+    print("Ошибка: баллы должны быть от 0 до 100")
+elif points >= 90:
+    print("Отлично! Оценка: 5")
+elif points >= 75:
+    print("Хорошо! Оценка: 4")
+elif points >= 60:
+    print("Удовлетворительно. Оценка: 3")
+else:
+    print("Неудовлетворительно. Оценка: 2")</pre>
+                    </div>
+                </div>
+
+                <h2>Вложенные условия</h2>
+                <p>Можно размещать if внутри другого if. Это называется <strong>вложенные условия</strong>.</p>
+
+                <div class="code-block">
+                    <pre># Вложенный if
+age = 20
+has_license = True
+
+if age >= 18:
+    print("Ты совершеннолетний")
+
+    if has_license:
+        print("Можешь водить машину")
+    else:
+        print("Нужны права для вождения")
+else:
+    print("Ты несовершеннолетний")
+    print("Водить машину нельзя")</pre>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример: цена билета с учетом скидок</h4>
+                    <div class="code-block">
+                        <pre>age = int(input("Возраст: "))
+is_student = input("Студент? (да/нет): ").lower() == "да"
+
+base_price = 500
+
+if age < 7:
+    price = 0
+    print("Детям до 7 лет - бесплатно")
+elif age < 18:
+    price = base_price * 0.5
+    print(f"Детский билет: {price} руб.")
+else:
+    if is_student:
+        price = base_price * 0.7
+        print(f"Студенческий билет: {price} руб.")
+    else:
+        price = base_price
+        print(f"Взрослый билет: {price} руб.")</pre>
+                    </div>
+                </div>
+
+                <h2>Отступы в Python - КРИТИЧЕСКИ ВАЖНО!</h2>
+                <p>В Python отступы (пробелы в начале строки) определяют структуру программы. Это не просто красота - это синтаксис!</p>
+
+                <div class="warning-block">
+                    <h4>Почему отступы важны?</h4>
+                    <p>Python использует отступы для определения блоков кода. Другие языки используют фигурные скобки {}, но Python - отступы!</p>
+                    <div class="code-block">
+                        <pre># ПРАВИЛЬНО:
+if age >= 18:
+    print("Взрослый")    # 4 пробела
+    print("Доступ есть") # 4 пробела
+
+# НЕПРАВИЛЬНО:
+if age >= 18:
+print("Взрослый")  # IndentationError!</pre>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <h4>Правила отступов:</h4>
+                    <ul>
+                        <li><strong>Стандарт:</strong> 4 пробела (не Tab!)</li>
+                        <li>Весь код в блоке должен иметь одинаковые отступы</li>
+                        <li>Вложенные блоки имеют дополнительные отступы (8, 12 и т.д.)</li>
+                        <li>Неправильные отступы вызывают <code>IndentationError</code></li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <pre># Правильные отступы
+age = 25
+
+if age >= 18:                    # 0 пробелов
+    print("Взрослый")            # 4 пробела
+
+    if age >= 65:                # 4 пробела
+        print("Пенсионер")       # 8 пробелов
+        print("Льготы есть")     # 8 пробелов
+    else:                        # 4 пробела
+        print("Работоспособный") # 8 пробелов
+
+print("Конец проверки")          # 0 пробелов</pre>
+                </div>
+
+                <h2>Полные практические примеры</h2>
+
+                <h3>Пример 1: Калькулятор оценок</h3>
+                <div class="code-block">
+                    <pre>print("=== Калькулятор оценок ===")
+
+points = int(input("Баллы (0-100): "))
+
+if points < 0 or points > 100:
+    print("Ошибка: баллы от 0 до 100")
+elif points >= 90:
+    print(f"{points} баллов = Оценка 5 (Отлично)")
+elif points >= 75:
+    print(f"{points} баллов = Оценка 4 (Хорошо)")
+elif points >= 60:
+    print(f"{points} баллов = Оценка 3 (Удовл.)")
+elif points >= 40:
+    print(f"{points} баллов = Оценка 2 (Неудовл.)")
+else:
+    print(f"{points} баллов = Оценка 1 (Очень плохо)")</pre>
+                </div>
+
+                <h3>Пример 2: Определение знака числа</h3>
+                <div class="code-block">
+                    <pre>number = int(input("Введите число: "))
+
+if number > 0:
+    print(f"{number} - положительное число")
+elif number < 0:
+    print(f"{number} - отрицательное число")
+else:
+    print("Это ноль")</pre>
+                </div>
+
+                <h3>Пример 3: Максимум из трех чисел</h3>
+                <div class="code-block">
+                    <pre>a = int(input("Первое число: "))
+b = int(input("Второе число: "))
+c = int(input("Третье число: "))
+
+if a >= b and a >= c:
+    maximum = a
+elif b >= a and b >= c:
+    maximum = b
+else:
+    maximum = c
+
+print(f"Максимальное число: {maximum}")</pre>
                 </div>
 
                 <h2>Попробуй сам!</h2>
+                <p>Поэкспериментируй с условными операторами:</p>
+
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -244,29 +587,283 @@ if x > 5:
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">x = 10
-if x > 5:
-    print("Больше 5")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Программа "Проверка возраста"
+
+print("=== Проверка возраста ===\n")
+
+age = int(input("Введите ваш возраст: "))
+
+if age < 0:
+    print("Ошибка: возраст не может быть отрицательным!")
+elif age < 7:
+    print("Ты дошкольник")
+    print("Скоро пойдешь в школу!")
+elif age < 18:
+    print("Ты школьник")
+    years_to_adult = 18 - age
+    print(f"До совершеннолетия осталось {years_to_adult} лет")
+elif age < 65:
+    print("Ты взрослый")
+    print("Работоспособный возраст")
+else:
+    print("Ты пенсионер")
+    print("Заслуженный отдых!")
+
+print("\nСпасибо за использование программы!")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Система оценок</h4>
+                    <p>Создай программу, которая:</p>
+                    <ol>
+                        <li>Запрашивает у пользователя балл от 0 до 100</li>
+                        <li>Выводит оценку по шкале:
+                            <ul>
+                                <li>90-100: "Отлично (A)"</li>
+                                <li>80-89: "Хорошо (B)"</li>
+                                <li>70-79: "Удовлетворительно (C)"</li>
+                                <li>60-69: "Посредственно (D)"</li>
+                                <li>0-59: "Неудовлетворительно (F)"</li>
+                            </ul>
+                        </li>
+                        <li>Если балл вне диапазона 0-100, выводит ошибку</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>if-elif-else</code></p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Калькулятор цены билета</h4>
+                    <p>Базовая цена билета - 1000 руб. Создай программу со скидками:</p>
+                    <ul>
+                        <li>Дети до 5 лет: бесплатно (0 руб.)</li>
+                        <li>Дети 5-12 лет: скидка 50% (500 руб.)</li>
+                        <li>Подростки 13-17 лет: скидка 25% (750 руб.)</li>
+                        <li>Взрослые 18-64: полная цена (1000 руб.)</li>
+                        <li>Пенсионеры 65+: скидка 30% (700 руб.)</li>
+                    </ul>
+                    <p><strong>Подсказка:</strong> Запрашивай возраст и используй <code>if-elif-else</code></p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Нахождение максимума из трех чисел</h4>
+                    <p>Создай программу, которая:</p>
+                    <ol>
+                        <li>Запрашивает три числа от пользователя</li>
+                        <li>Определяет и выводит максимальное из них</li>
+                        <li>Сообщает, если все три числа равны</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй условия <code>a >= b and a >= c</code></p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Путаница = и ==</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+if x = 5:  # SyntaxError!
+    print("x равно 5")
+
+# ПРАВИЛЬНО:
+if x == 5:  # Сравнение
+    print("x равно 5")
+
+# Запомни:
+# = это присваивание
+# == это сравнение</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Забыли двоеточие</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+if age >= 18  # SyntaxError!
+    print("Взрослый")
+
+# ПРАВИЛЬНО:
+if age >= 18:  # Двоеточие обязательно!
+    print("Взрослый")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильные отступы</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+if age >= 18:
+print("Взрослый")  # IndentationError!
+
+# НЕПРАВИЛЬНО:
+if age >= 18:
+  print("Строка 1")   # 2 пробела
+    print("Строка 2") # 4 пробела - IndentationError!
+
+# ПРАВИЛЬНО:
+if age >= 18:
+    print("Строка 1")  # 4 пробела
+    print("Строка 2")  # 4 пробела</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: elif без if</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+elif age > 18:  # SyntaxError! elif без if
+    print("Взрослый")
+
+# ПРАВИЛЬНО:
+if age < 18:
+    print("Ребенок")
+elif age == 18:
+    print("18 лет")
+else:
+    print("Взрослый")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Неправильный порядок условий</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+if score >= 60:
+    print("D")
+elif score >= 80:  # Никогда не выполнится!
+    print("B")
+
+# Если score=85, выведет "D", а не "B"!
+
+# ПРАВИЛЬНО (от большего к меньшему):
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+elif score >= 60:
+    print("D")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Использование = вместо == в условии</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+password = "secret"
+if password = "admin":  # SyntaxError!
+    print("Админ")
+
+# ПРАВИЛЬНО:
+password = "secret"
+if password == "admin":  # Сравнение
+    print("Админ")</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет код, если x = 10?</h4>
+                        <div class="code-block"><pre>if x > 5:
+    print("A")
+elif x > 8:
+    print("B")
+else:
+    print("C")</pre></div>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! x=10 больше 5, поэтому выполняется первое условие. Остальные пропускаются.">A</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Выполняется только ПЕРВОЕ истинное условие.">B</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! x=10 удовлетворяет первому условию.">C</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Выполняется только один блок.">A и B</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: В чем разница между = и ==?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это наоборот.">= для сравнения, == для присваивания</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! = присваивает значение, == сравнивает два значения.">= для присваивания, == для сравнения</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Они разные.">Нет разницы</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Оба используются.">= устарел, используй ==</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько пробелов стандартный отступ в Python?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! 2 пробела - не стандарт Python.">2</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Стандарт Python - 4 пробела для отступа.">4</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! 8 пробелов - это двойной отступ.">8</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Tab не рекомендуется, используй пробелы.">1 Tab</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что обязательно в конце строки if?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! В Python не используются фигурные скобки для блоков.">Фигурная скобка {</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Двоеточие : обязательно после условия в if.">Двоеточие :</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Точка с запятой не нужна в Python.">Точка с запятой ;</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Ничего специального не нужно, кроме двоеточия.">Ничего</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что произойдет при неправильных отступах?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Python строго требует правильные отступы.">Программа запустится нормально</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Неправильные отступы вызывают IndentationError.">IndentationError</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Ошибка возникает при выполнении, а не только предупреждение.">Предупреждение, но работает</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Отступы обязательны в Python.">SyntaxError</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Условные операторы - основа алгоритмического мышления на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ алгоритмов с ветвлениями), Задание 8 (блок-схемы с условиями), Задание 14 (программирование с if)</li>
+                        <li><strong>ЕГЭ:</strong> Задание 5 (анализ программ с условиями), Задания 24-27 (программирование с множественными условиями)</li>
+                        <li>Часто встречаются задачи на понимание порядка проверки условий в if-elif-else</li>
+                        <li>Важно понимать разницу между вложенными if и использованием логических операторов (and/or)</li>
+                        <li>На экзаменах часто проверяют умение читать код с условиями и предсказывать результат</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Операторы сравнения:</strong> ==, !=, &gt;, &lt;, &gt;=, &lt;= (возвращают True/False)</li>
+                    <li><strong>if:</strong> выполняет код, если условие истинно</li>
+                    <li><strong>if-else:</strong> два пути - одно для True, другое для False</li>
+                    <li><strong>if-elif-else:</strong> множественный выбор, выполняется ПЕРВОЕ истинное</li>
+                    <li><strong>Вложенные if:</strong> условия внутри условий</li>
+                    <li><strong>Двоеточие :</strong> обязательно после if/elif/else</li>
+                    <li><strong>Отступы:</strong> 4 пробела, определяют блоки кода</li>
+                    <li><strong>IndentationError:</strong> ошибка при неправильных отступах</li>
+                    <li><strong>= vs ==:</strong> присваивание vs сравнение</li>
+                </ul>
+
+                <p>Превосходно! Теперь твои программы могут принимать решения! В следующем уроке мы изучим логические операции (and, or, not), чтобы создавать более сложные условия!</p>
             </div>
 
             <div class="lesson-nav">

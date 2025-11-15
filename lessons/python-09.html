@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 14: Цикл for - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-09">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,52 +220,642 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 14: Цикл for</h1>
-                <div class="lesson-meta">Введение в Python • 25 минут</div>
+                <div class="lesson-meta">Введение в Python • 45 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>В прошлом уроке мы изучили цикл <code>while</code> - он повторяет действия, пока условие истинно. Но часто мы заранее знаем, сколько раз нужно повторить: "вывести числа от 1 до 10", "повторить 100 раз", "для каждого элемента списка".</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Для таких случаев есть цикл <code>for</code> - более удобный и читаемый способ! Он автоматически проходит по последовательности значений, и тебе не нужно следить за счетчиком вручную.</p>
 
-                <div class="code-block">
-                    <pre>for i in range(5):
-    print(i)</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Синтаксис цикла <code>for</code></li>
+                        <li>Функция <code>range()</code> - главный инструмент для циклов</li>
+                        <li>Три формы range: <code>range(n)</code>, <code>range(start, stop)</code>, <code>range(start, stop, step)</code></li>
+                        <li>Практические примеры: от простых до сложных</li>
+                        <li>Вложенные циклы (циклы внутри циклов)</li>
+                        <li>Разница между for и while - когда что использовать</li>
+                        <li>break и continue в циклах for</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
-                    </div>
-                    <textarea id="code-editor" spellcheck="false">for i in range(5):
-    print(i)</textarea>
+                <h2>Синтаксис цикла for</h2>
+                <p>Цикл for проходит по элементам последовательности (например, диапазону чисел, строке, списку):</p>
+
+                <div class="code-block">
+                    <pre># Общая структура
+for переменная in последовательность:
+    # Этот блок выполняется
+    # для каждого элемента последовательности
+    действие1
+    действие2
+
+# После цикла</pre>
+                </div>
+
+                <div class="code-block">
+                    <pre># Простейший пример
+for i in [1, 2, 3, 4, 5]:
+    print(i)
+
+# Вывод:
+# 1
+# 2
+# 3
+# 4
+# 5</pre>
+                </div>
+
+                <h2>Функция range() - Главный инструмент!</h2>
+                <p>Функция <code>range()</code> создает последовательность чисел. Это THE САМЫЙ ВАЖНЫЙ инструмент для циклов for в Python!</p>
+
+                <h3>1. range(n) - От 0 до n-1</h3>
+                <p>Создает числа от 0 до n-1 (n не включается!).</p>
+
+                <div class="code-block">
+                    <pre># range(5) дает: 0, 1, 2, 3, 4
+for i in range(5):
+    print(i)
+
+# Вывод:
+# 0
+# 1
+# 2
+# 3
+# 4
+
+# Обрати внимание: 5 НЕ выводится!</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>ВАЖНО: Python считает от 0!</h4>
+                    <p><code>range(10)</code> дает числа от 0 до 9 (всего 10 чисел), а НЕ от 1 до 10!</p>
+                    <p>Если нужны числа от 1 до 10, используй <code>range(1, 11)</code></p>
+                </div>
+
+                <h3>2. range(start, stop) - От start до stop-1</h3>
+                <p>Создает числа от start до stop-1 (stop не включается!).</p>
+
+                <div class="code-block">
+                    <pre># Числа от 1 до 10
+for i in range(1, 11):  # 11 не включается!
+    print(i)
+
+# Вывод: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+# Числа от 5 до 8
+for i in range(5, 9):  # 9 не включается!
+    print(i)
+
+# Вывод: 5, 6, 7, 8
+
+# Запомни: последнее число НЕ включается!</pre>
+                </div>
+
+                <h3>3. range(start, stop, step) - С шагом</h3>
+                <p>Создает числа от start до stop-1 с шагом step.</p>
+
+                <div class="code-block">
+                    <pre># Четные числа от 0 до 20 (шаг 2)
+for i in range(0, 21, 2):
+    print(i)
+
+# Вывод: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20
+
+# Нечетные числа от 1 до 20 (шаг 2)
+for i in range(1, 20, 2):
+    print(i)
+
+# Вывод: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19
+
+# Числа кратные 5
+for i in range(0, 51, 5):
+    print(i)
+
+# Вывод: 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50</pre>
+                </div>
+
+                <h3>4. Обратный отсчет (отрицательный шаг)</h3>
+                <p>Используй отрицательный step для обратного порядка:</p>
+
+                <div class="code-block">
+                    <pre># От 10 до 1
+for i in range(10, 0, -1):
+    print(i)
+
+# Вывод: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+
+# От 20 до 0 с шагом -2
+for i in range(20, -1, -2):
+    print(i)
+
+# Вывод: 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <div class="code-block">
+                    <pre># Пример 1: Сумма чисел от 1 до N
+n = 10
+total = 0
+
+for i in range(1, n + 1):
+    total += i
+
+print(f"Сумма от 1 до {n} = {total}")
+# Сумма от 1 до 10 = 55
+
+# Пример 2: Факториал
+n = 5
+factorial = 1
+
+for i in range(1, n + 1):
+    factorial *= i
+
+print(f"{n}! = {factorial}")
+# 5! = 120
+
+# Пример 3: Таблица умножения
+number = 7
+
+for i in range(1, 11):
+    result = number * i
+    print(f"{number} × {i} = {result}")
+
+# Пример 4: Вывод квадратов чисел
+for i in range(1, 11):
+    square = i ** 2
+    print(f"{i}² = {square}")
+
+# Вывод: 1² = 1, 2² = 4, 3² = 9, ... , 10² = 100
+
+# Пример 5: Обратный отсчет
+print("Запуск ракеты через:")
+for i in range(10, 0, -1):
+    print(i)
+print("Пуск!")
+
+# Пример 6: Только четные числа
+print("Четные числа от 2 до 20:")
+for i in range(2, 21, 2):
+    print(i, end=" ")
+print()  # Переход на новую строку</pre>
+                </div>
+
+                <h2>Вложенные циклы</h2>
+                <p>Цикл можно поместить внутрь другого цикла - это называется "вложенные циклы". Внутренний цикл выполняется полностью для каждой итерации внешнего.</p>
+
+                <div class="code-block">
+                    <pre># Пример 1: Таблица с координатами
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(f"({i}, {j})", end=" ")
+    print()  # Новая строка после каждого i
+
+# Вывод:
+# (1, 1) (1, 2) (1, 3)
+# (2, 1) (2, 2) (2, 3)
+# (3, 1) (3, 2) (3, 3)
+
+# Пример 2: Таблица умножения (полная)
+for i in range(1, 11):
+    for j in range(1, 11):
+        print(f"{i * j:4}", end="")  # :4 - ширина 4 символа
+    print()
+
+# Пример 3: Рисование треугольника звездами
+for i in range(1, 6):
+    for j in range(i):
+        print("*", end="")
+    print()
+
+# Вывод:
+# *
+# **
+# ***
+# ****
+# *****
+
+# Пример 4: Прямоугольник
+height = 4
+width = 6
+
+for i in range(height):
+    for j in range(width):
+        print("#", end="")
+    print()
+
+# Вывод:
+# ######
+# ######
+# ######
+# ######</pre>
+                </div>
+
+                <h2>for vs while - Когда что использовать?</h2>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Используй for когда:</th>
+                            <th>Используй while когда:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Знаешь количество итераций</td>
+                            <td>НЕ знаешь количество итераций</td>
+                        </tr>
+                        <tr>
+                            <td>"Повторить N раз"</td>
+                            <td>"Пока условие истинно"</td>
+                        </tr>
+                        <tr>
+                            <td>"Для каждого элемента"</td>
+                            <td>Валидация ввода</td>
+                        </tr>
+                        <tr>
+                            <td>Проход по диапазону чисел</td>
+                            <td>Поиск до нахождения</td>
+                        </tr>
+                        <tr>
+                            <td>Код короче и яснее</td>
+                            <td>Условие сложное</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-block">
+                    <pre># Один и тот же результат разными способами:
+
+# С for (проще и понятнее)
+for i in range(1, 6):
+    print(i)
+
+# С while (больше кода)
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+
+# Вывод одинаковый: 1, 2, 3, 4, 5
+# Но for короче!</pre>
+                </div>
+
+                <h2>break и continue в циклах for</h2>
+                <p>Как и в while, можно использовать break (выход) и continue (пропуск итерации).</p>
+
+                <div class="code-block">
+                    <pre># Пример с break - поиск первого четного квадрата > 50
+for i in range(1, 20):
+    square = i ** 2
+    if square > 50 and square % 2 == 0:
+        print(f"Первый четный квадрат > 50: {square} (число {i})")
+        break
+
+# Пример с continue - пропуск чисел кратных 3
+print("Числа от 1 до 20, не кратные 3:")
+for i in range(1, 21):
+    if i % 3 == 0:
+        continue  # Пропускаем числа кратные 3
+    print(i, end=" ")
+print()
+
+# Вывод: 1 2 4 5 7 8 10 11 13 14 16 17 19 20
+
+# Пример: Поиск в последовательности
+target = 42
+found = False
+
+for i in range(1, 101):
+    if i == target:
+        print(f"Нашел {target}!")
+        found = True
+        break
+
+if not found:
+    print(f"{target} не найден")</pre>
+                </div>
+
+                <h2>Интерактивный редактор</h2>
+                <p>Попробуй разные варианты range() и вложенных циклов!</p>
+
+                <div class="code-editor">
+                    <textarea id="code-input" rows="15"># Пример 1: Простой цикл
+print("=== Числа от 1 до 5 ===")
+for i in range(1, 6):
+    print(i)
+
+print()
+
+# Пример 2: С шагом
+print("=== Четные от 0 до 10 ===")
+for i in range(0, 11, 2):
+    print(i, end=" ")
+
+print("\n")
+
+# Пример 3: Обратный отсчет
+print("=== Обратный отсчет ===")
+for i in range(5, 0, -1):
+    print(i)
+print("Пуск!")
+
+print()
+
+# Пример 4: Сумма
+print("=== Сумма от 1 до 100 ===")
+total = 0
+for i in range(1, 101):
+    total += i
+print(f"Сумма: {total}")
+
+print()
+
+# Пример 5: Треугольник
+print("=== Треугольник ===")
+for i in range(1, 6):
+    for j in range(i):
+        print("*", end="")
+    print()
+
+print()
+
+# Пример 6: Таблица умножения на 7
+print("=== Таблица умножения на 7 ===")
+for i in range(1, 11):
+    print(f"7 × {i} = {7 * i}")
+
+print()
+
+# Пример 7: Квадраты
+print("=== Квадраты от 1 до 10 ===")
+for i in range(1, 11):
+    print(f"{i}² = {i**2}")
+
+print()
+
+# Пример 8: Вложенные циклы - координаты
+print("=== Координаты 3x3 ===")
+for x in range(1, 4):
+    for y in range(1, 4):
+        print(f"({x},{y})", end=" ")
+    print()</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Рисование паттерна</h4>
+                    <p>Создай программу, которая рисует паттерн:</p>
+                    <pre>
+*****
+****
+***
+**
+*
+                    </pre>
+                    <ol>
+                        <li>Используй вложенные циклы for</li>
+                        <li>Внешний цикл - для строк (от 5 до 1)</li>
+                        <li>Внутренний цикл - для звездочек в строке</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> <code>for i in range(5, 0, -1):</code> для внешнего цикла</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Калькулятор факториала</h4>
+                    <p>Создай программу для вычисления факториала:</p>
+                    <ol>
+                        <li>Запрашивай число от пользователя</li>
+                        <li>Вычисляй факториал с помощью цикла for</li>
+                        <li>Выводи результат в формате: "5! = 120"</li>
+                        <li>Бонус: покажи пошаговое вычисление: "5! = 5 × 4 × 3 × 2 × 1 = 120"</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Начни с <code>factorial = 1</code> и умножай на каждое число</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Проверка на простое число</h4>
+                    <p>Создай программу проверки простых чисел:</p>
+                    <ol>
+                        <li>Запрашивай число у пользователя</li>
+                        <li>Используй цикл for для проверки делителей от 2 до числа-1</li>
+                        <li>Если число делится нацело хотя бы на один делитель - оно не простое</li>
+                        <li>Выводи "Простое" или "Не простое"</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>if number % i == 0:</code> и <code>break</code></p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: range(10) дает 0-9, а не 1-10!</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - если хочешь 1-10
+for i in range(10):
+    print(i)
+# Выведет: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+# ПРАВИЛЬНО - для чисел 1-10
+for i in range(1, 11):  # 11 не включается!
+    print(i)
+# Выведет: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+# Запомни: range(10) - это 10 чисел от 0!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Off-by-one error (ошибка на единицу)</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - не включает 100
+total = 0
+for i in range(1, 100):  # До 99!
+    total += i
+# Сумма от 1 до 99, не до 100!
+
+# ПРАВИЛЬНО - включает 100
+total = 0
+for i in range(1, 101):  # До 100!
+    total += i
+# Сумма от 1 до 100
+
+# Запомни: stop не включается в range!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Изменение переменной цикла</h4>
+                    <div class="code-block">
+                        <pre># ПЛОХАЯ ПРАКТИКА - не меняй переменную цикла!
+for i in range(5):
+    print(i)
+    i += 10  # Это НЕ влияет на цикл!
+# i все равно будет 0, 1, 2, 3, 4
+
+# Цикл for сам управляет переменной
+# Не пытайся её изменять!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неправильный шаг для обратного отсчета</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - пустой диапазон!
+for i in range(10, 1):  # Шаг по умолчанию +1
+    print(i)
+# Ничего не выведет! 10 > 1, но идем вперед
+
+# ПРАВИЛЬНО - отрицательный шаг
+for i in range(10, 0, -1):  # Шаг -1
+    print(i)
+# Выведет: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Забыли print() после вложенного цикла</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - все в одной строке
+for i in range(3):
+    for j in range(3):
+        print("*", end="")
+# Вывод: *********
+
+# ПРАВИЛЬНО - новая строка после каждой строки
+for i in range(3):
+    for j in range(3):
+        print("*", end="")
+    print()  # Переход на новую строку!
+# Вывод:
+# ***
+# ***
+# ***</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Путаница уровней вложенности</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - print() в неправильном месте
+for i in range(3):
+    for j in range(3):
+        print(f"({i},{j})")
+        print()  # Новая строка после КАЖДОЙ пары!
+
+# Вывод не такой, как ожидаешь
+
+# ПРАВИЛЬНО - print() вне внутреннего цикла
+for i in range(3):
+    for j in range(3):
+        print(f"({i},{j})", end=" ")
+    print()  # Новая строка после всей строки</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет <code>for i in range(5): print(i)</code>?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Python считает от 0.">1, 2, 3, 4, 5</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! range(5) дает числа от 0 до 4 (5 не включается).">0, 1, 2, 3, 4</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! range(5) дает 5 чисел, начиная с 0.">0, 1, 2, 3, 4, 5</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! range(5) выполнится 5 раз.">1, 2, 3, 4</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Как получить числа от 1 до 10 включительно?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это даст 0-9.">range(10)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это даст 1-9 (10 не включается).">range(1, 10)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! range(1, 11) дает 1, 2, 3, ..., 10 (11 не включается).">range(1, 11)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это даст 0-10.">range(11)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что выведет вложенный цикл?<br><code>for i in range(2):<br>&nbsp;&nbsp;for j in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print("*", end="")<br>&nbsp;&nbsp;print()</code></h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Внутренний цикл повторяется для каждого внешнего.">** (одна строка)</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Внешний цикл 2 раза, внутренний 3 раза каждый → две строки по 3 звезды.">***<br>*** (две строки)</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Внутренний цикл выполняется 3 раза.">**<br>** (две строки по 2)</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! print() после внутреннего цикла создает новую строку.">****** (одна строка)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Как получить четные числа от 0 до 10?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Это даст все числа 0-9.">range(10)</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Шаг 2 дает 0, 2, 4, 6, 8, 10.">range(0, 11, 2)</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! 10 не включится.">range(0, 10, 2)</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Это начнет с 2, пропустив 0.">range(2, 11, 2)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Когда лучше использовать for вместо while?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! for удобнее когда знаешь количество итераций.">Когда заранее известно количество итераций</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Для валидации ввода лучше while.">Для валидации ввода пользователя</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Бесконечные циклы делают через while True.">Для бесконечных циклов</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Для сложных условий while понятнее.">Когда условие очень сложное</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Цикл for - один из самых часто используемых на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ программ с for), Задание 8 (блок-схемы), Задание 14 (программирование с циклами for)</li>
+                        <li><strong>ЕГЭ:</strong> Задание 5 (анализ циклов), Задание 8 (вычисление значений после цикла), Задания 24-27 (программы с обработкой данных)</li>
+                        <li>На экзаменах часто проверяют понимание range(): сколько раз выполнится цикл, какие значения примет переменная</li>
+                        <li>Вложенные циклы встречаются в задачах на двумерные массивы и таблицы</li>
+                        <li>Важно понимать разницу между for и while для выбора оптимального решения</li>
+                        <li>Часто используется для обработки последовательностей и вычисления сумм/произведений</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>for переменная in последовательность:</strong> перебирает элементы последовательности</li>
+                    <li><strong>range(n):</strong> числа от 0 до n-1 (n чисел)</li>
+                    <li><strong>range(start, stop):</strong> числа от start до stop-1</li>
+                    <li><strong>range(start, stop, step):</strong> числа от start до stop-1 с шагом step</li>
+                    <li><strong>Python считает от 0!</strong> range(10) дает 0-9, не 1-10</li>
+                    <li><strong>Последнее число не включается!</strong> range(1, 11) для чисел 1-10</li>
+                    <li><strong>Отрицательный шаг:</strong> для обратного отсчета (например, -1)</li>
+                    <li><strong>Вложенные циклы:</strong> цикл внутри цикла (для таблиц, паттернов)</li>
+                    <li><strong>for vs while:</strong> for когда знаешь количество итераций</li>
+                    <li><strong>break и continue:</strong> работают так же, как в while</li>
+                </ul>
+
+                <p>Превосходно! Ты освоил цикл for - один из самых мощных инструментов Python! В следующем уроке мы изучим работу со строками - как обрабатывать и изменять текст!</p>
             </div>
 
             <div class="lesson-nav">

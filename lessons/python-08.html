@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 13: Цикл while - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-08">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,56 +220,653 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 13: Цикл while</h1>
-                <div class="lesson-meta">Введение в Python • 25 минут</div>
+                <div class="lesson-meta">Введение в Python • 45 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Представь, что тебе нужно вывести числа от 1 до 100. Писать 100 строк <code>print()</code>? Это безумие! Для повторяющихся действий в программировании есть <strong>циклы</strong>.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Помнишь урок <a href="algo-05.html">Циклы</a> из основ алгоритмики? Там мы изучали циклы в блок-схемах. Теперь научимся использовать их в Python! Начнем с цикла <code>while</code> - он повторяет действия, пока условие истинно.</p>
 
-                <div class="code-block">
-                    <pre>i = 0
-while i < 5:
-    print(i)
-    i += 1</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Что такое цикл и зачем он нужен</li>
+                        <li>Синтаксис цикла <code>while</code></li>
+                        <li>Паттерн "счетчик" - как считать итерации</li>
+                        <li>Паттерн "аккумулятор" - как накапливать значения</li>
+                        <li>Бесконечные циклы и как их избежать (ВАЖНО!)</li>
+                        <li>Операторы управления: <code>break</code> и <code>continue</code></li>
+                        <li>Практические применения циклов</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
+                <h2>Что такое цикл?</h2>
+                <p>Цикл - это конструкция, которая повторяет блок кода несколько раз. Цикл <code>while</code> (пока) работает так:</p>
+
+                <div class="code-block">
+                    <pre># Общая структура
+while условие:
+    # Этот блок повторяется
+    # пока условие True
+    действие1
+    действие2
+    # ...
+
+# После цикла (когда условие стало False)</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Как работает while:</h4>
+                    <ol>
+                        <li>Проверяется условие</li>
+                        <li>Если условие <code>True</code> - выполняется тело цикла</li>
+                        <li>Возврат к шагу 1 (проверка условия снова)</li>
+                        <li>Если условие <code>False</code> - цикл завершается</li>
+                    </ol>
+                </div>
+
+                <h2>Первый пример цикла while</h2>
+
+                <div class="code-block">
+                    <pre># Выводим числа от 1 до 5
+counter = 1  # Начальное значение
+
+while counter <= 5:  # Условие: пока counter меньше или равно 5
+    print(counter)   # Вывод текущего значения
+    counter = counter + 1  # Увеличение на 1
+
+print("Цикл завершен!")
+
+# Вывод:
+# 1
+# 2
+# 3
+# 4
+# 5
+# Цикл завершен!</pre>
+                </div>
+
+                <p>Разберем пошагово:</p>
+                <ol>
+                    <li><code>counter = 1</code> - устанавливаем начальное значение</li>
+                    <li><code>while counter <= 5:</code> - проверяем условие (1 <= 5 это True)</li>
+                    <li><code>print(counter)</code> - выводим 1</li>
+                    <li><code>counter = counter + 1</code> - теперь counter = 2</li>
+                    <li>Возврат к шагу 2, проверка условия (2 <= 5 это True)</li>
+                    <li>...и так далее, пока counter не станет 6 (6 <= 5 это False)</li>
+                </ol>
+
+                <h2>Паттерн "Счетчик" (Counter)</h2>
+                <p>Счетчик - это переменная, которая отслеживает номер итерации. Это самый распространенный паттерн в циклах.</p>
+
+                <div class="code-block">
+                    <pre># Подсчет от 1 до N
+n = 10
+counter = 1
+
+while counter <= n:
+    print(f"Итерация {counter}")
+    counter += 1  # Краткая форма для counter = counter + 1
+
+# Подсчет в обратном порядке (обратный отсчет)
+countdown = 5
+
+while countdown > 0:
+    print(countdown)
+    countdown -= 1  # Уменьшение на 1
+
+print("Пуск!")
+
+# Вывод:
+# 5
+# 4
+# 3
+# 2
+# 1
+# Пуск!</pre>
+                </div>
+
+                <h2>КРИТИЧЕСКИ ВАЖНО: Условие должно стать False!</h2>
+
+                <div class="warning-block">
+                    <h4>Опасность бесконечного цикла!</h4>
+                    <p>Если условие никогда не станет False, цикл будет работать вечно (пока ты не остановишь программу).</p>
+                    
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - Бесконечный цикл!
+x = 1
+while x <= 10:
+    print(x)
+    # Забыли увеличить x!
+    # x всегда равен 1
+    # Цикл никогда не закончится!
+
+# ПРАВИЛЬНО - Цикл завершится
+x = 1
+while x <= 10:
+    print(x)
+    x += 1  # Обязательно изменяем переменную!</pre>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">i = 0
-while i < 5:
-    print(i)
-    i += 1</textarea>
+                    
+                    <p><strong>Совет:</strong> Если программа "зависла" - нажми Ctrl+C для остановки.</p>
+                </div>
+
+                <h2>Паттерн "Аккумулятор" (Accumulator)</h2>
+                <p>Аккумулятор - это переменная, которая накапливает результат (сумму, произведение, строку и т.д.).</p>
+
+                <div class="code-block">
+                    <pre># Сумма чисел от 1 до N
+n = 10
+counter = 1
+total = 0  # Аккумулятор для суммы
+
+while counter <= n:
+    total = total + counter  # Добавляем текущее число к сумме
+    counter += 1
+
+print(f"Сумма чисел от 1 до {n} = {total}")
+# Сумма чисел от 1 до 10 = 55
+
+# Произведение (факториал)
+n = 5
+counter = 1
+factorial = 1  # Аккумулятор для произведения (начинаем с 1, не с 0!)
+
+while counter <= n:
+    factorial = factorial * counter
+    counter += 1
+
+print(f"{n}! = {factorial}")
+# 5! = 120 (5 * 4 * 3 * 2 * 1)</pre>
+                </div>
+
+                <h2>Валидация ввода с помощью while</h2>
+                <p>Один из самых практичных случаев использования while - повторять запрос, пока пользователь не введет корректные данные.</p>
+
+                <div class="code-block">
+                    <pre># Запрашиваем положительное число
+number = int(input("Введи положительное число: "))
+
+while number <= 0:
+    print("Ошибка! Число должно быть положительным!")
+    number = int(input("Попробуй еще раз: "))
+
+print(f"Отлично! Ты ввел {number}")
+
+# Запрос числа в диапазоне
+age = int(input("Введи возраст (1-120): "))
+
+while age < 1 or age > 120:
+    print("Некорректный возраст!")
+    age = int(input("Введи возраст (1-120): "))
+
+print(f"Твой возраст: {age} лет")</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <div class="code-block">
+                    <pre># Пример 1: Таблица умножения
+number = int(input("Введи число для таблицы умножения: "))
+multiplier = 1
+
+while multiplier <= 10:
+    result = number * multiplier
+    print(f"{number} × {multiplier} = {result}")
+    multiplier += 1
+
+# Пример 2: Сумма введенных чисел (до ввода 0)
+total = 0
+number = int(input("Введи число (0 для завершения): "))
+
+while number != 0:
+    total += number
+    number = int(input("Введи число (0 для завершения): "))
+
+print(f"Сумма всех чисел: {total}")
+
+# Пример 3: Проверка пароля (максимум 3 попытки)
+correct_password = "python123"
+attempts = 3
+
+while attempts > 0:
+    password = input("Введи пароль: ")
+    
+    if password == correct_password:
+        print("✓ Доступ разрешен!")
+        break  # Выход из цикла (см. следующий раздел)
+    else:
+        attempts -= 1
+        if attempts > 0:
+            print(f"✗ Неверный пароль! Осталось попыток: {attempts}")
+        else:
+            print("✗ Доступ заблокирован!")
+
+# Пример 4: Угадай число
+import random
+secret_number = random.randint(1, 100)
+guess = 0
+
+print("Я загадал число от 1 до 100. Угадай его!")
+
+while guess != secret_number:
+    guess = int(input("Твоя догадка: "))
+    
+    if guess < secret_number:
+        print("Слишком маленькое!")
+    elif guess > secret_number:
+        print("Слишком большое!")
+    else:
+        print("✓ Правильно! Ты угадал!")</pre>
+                </div>
+
+                <h2>Оператор break - Досрочный выход из цикла</h2>
+                <p>Иногда нужно прервать цикл до того, как условие станет False. Для этого используется <code>break</code>.</p>
+
+                <div class="code-block">
+                    <pre># Пример 1: Поиск числа
+target = 7
+counter = 1
+
+while counter <= 10:
+    if counter == target:
+        print(f"Нашел число {target}!")
+        break  # Выходим из цикла немедленно
+    
+    counter += 1
+
+print("Цикл завершен")
+
+# Пример 2: Бесконечный цикл с break
+while True:  # Условие всегда True!
+    answer = input("Продолжить? (да/нет): ")
+    
+    if answer.lower() == "нет":
+        print("Выход из программы")
+        break  # Единственный способ выйти из этого цикла
+    
+    print("Продолжаем работу...")
+
+# Пример 3: Меню программы
+while True:
+    print("\n=== МЕНЮ ===")
+    print("1. Вариант 1")
+    print("2. Вариант 2")
+    print("3. Выход")
+    
+    choice = input("Выбери вариант: ")
+    
+    if choice == "1":
+        print("Выполняем вариант 1...")
+    elif choice == "2":
+        print("Выполняем вариант 2...")
+    elif choice == "3":
+        print("До свидания!")
+        break
+    else:
+        print("Неверный выбор!")</pre>
+                </div>
+
+                <h2>Оператор continue - Пропуск итерации</h2>
+                <p>Оператор <code>continue</code> пропускает оставшуюся часть текущей итерации и переходит к следующей проверке условия.</p>
+
+                <div class="code-block">
+                    <pre># Вывод только нечетных чисел от 1 до 10
+number = 0
+
+while number < 10:
+    number += 1
+    
+    if number % 2 == 0:  # Если четное
+        continue  # Пропускаем print и переходим к следующей итерации
+    
+    print(number)
+
+# Вывод:
+# 1
+# 3
+# 5
+# 7
+# 9
+
+# Пример 2: Пропуск некорректных значений
+counter = 0
+
+while counter < 10:
+    counter += 1
+    
+    if counter == 5 or counter == 7:
+        continue  # Пропускаем 5 и 7
+    
+    print(counter)
+
+# Выведет: 1, 2, 3, 4, 6, 8, 9, 10 (без 5 и 7)</pre>
+                </div>
+
+                <h2>Интерактивный редактор</h2>
+                <p>Попробуй разные примеры циклов. Измени начальные значения и условия!</p>
+
+                <div class="code-editor">
+                    <textarea id="code-input" rows="15"># Пример 1: Обратный отсчет
+print("=== Обратный отсчет ===")
+countdown = 5
+
+while countdown > 0:
+    print(countdown)
+    countdown -= 1
+
+print("Пуск!")
+print()
+
+# Пример 2: Сумма чисел
+print("=== Сумма от 1 до 10 ===")
+counter = 1
+total = 0
+
+while counter <= 10:
+    total += counter
+    counter += 1
+
+print(f"Сумма: {total}")
+print()
+
+# Пример 3: Факториал
+print("=== Факториал 6 ===")
+n = 6
+counter = 1
+factorial = 1
+
+while counter <= n:
+    factorial *= counter
+    counter += 1
+
+print(f"{n}! = {factorial}")
+print()
+
+# Пример 4: Только четные числа
+print("=== Четные числа от 2 до 10 ===")
+number = 2
+
+while number <= 10:
+    print(number)
+    number += 2
+print()
+
+# Пример 5: Степени двойки
+print("=== Степени 2 (до 1000) ===")
+power = 1
+
+while power <= 1000:
+    print(power)
+    power *= 2
+
+print()
+
+# Пример 6: Использование break
+print("=== Поиск первого числа > 50 ===")
+number = 1
+
+while number <= 100:
+    if number > 50:
+        print(f"Первое число больше 50: {number}")
+        break
+    number += 1</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Обратный отсчет с таймером</h4>
+                    <p>Создай программу-таймер:</p>
+                    <ol>
+                        <li>Запрашивай у пользователя количество секунд</li>
+                        <li>Используй цикл while для обратного отсчета от этого числа до 1</li>
+                        <li>Выводи каждую секунду в формате: "Осталось: X секунд"</li>
+                        <li>После завершения выводи "Время вышло!"</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй паттерн счетчика с уменьшением</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Сумма до нуля</h4>
+                    <p>Создай калькулятор суммы:</p>
+                    <ol>
+                        <li>Запрашивай числа от пользователя в цикле</li>
+                        <li>Добавляй каждое число к общей сумме</li>
+                        <li>Когда пользователь введет 0, цикл должен завершиться</li>
+                        <li>Выводи итоговую сумму и количество введенных чисел (не считая 0)</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй два аккумулятора - для суммы и для счетчика</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Валидатор пароля</h4>
+                    <p>Создай систему проверки пароля:</p>
+                    <ol>
+                        <li>Установи правильный пароль в коде (например, "secret123")</li>
+                        <li>Дай пользователю максимум 3 попытки</li>
+                        <li>После каждой неудачной попытки сообщай, сколько попыток осталось</li>
+                        <li>Если пароль верный - выводи "Доступ разрешен" и выходи из цикла</li>
+                        <li>Если попытки закончились - выводи "Доступ заблокирован"</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй break для выхода при правильном пароле</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли изменить переменную условия</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - Бесконечный цикл!
+counter = 1
+while counter <= 5:
+    print(counter)
+    # Забыли counter += 1
+    # counter всегда 1!
+
+# ПРАВИЛЬНО:
+counter = 1
+while counter <= 5:
+    print(counter)
+    counter += 1  # Обязательно!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильное начальное значение</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - Цикл не выполнится!
+counter = 10  # Начинаем с 10
+while counter <= 5:  # 10 <= 5 это False!
+    print(counter)
+    counter += 1
+# Ничего не выведется!
+
+# ПРАВИЛЬНО:
+counter = 1  # Начинаем с 1
+while counter <= 5:
+    print(counter)
+    counter += 1</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Изменение переменной в неправильном месте</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - Пропускает последнее значение
+counter = 1
+while counter <= 5:
+    counter += 1  # Увеличили ДО print
+    print(counter)
+# Выведет: 2, 3, 4, 5, 6 (не то, что нужно!)
+
+# ПРАВИЛЬНО:
+counter = 1
+while counter <= 5:
+    print(counter)
+    counter += 1  # Увеличили ПОСЛЕ print
+# Выведет: 1, 2, 3, 4, 5</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неправильное условие</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - Лишняя итерация
+counter = 1
+while counter <= 5:  # <= вместо <
+    print(counter)
+    counter += 1
+# При counter=5: 5 <= 5 это True, выполнится
+# Затем counter=6, 6 <= 5 это False
+
+# Если хочешь 5 итераций:
+counter = 0
+while counter < 5:  # < вместо <=
+    counter += 1
+    print(counter)
+# Выведет: 1, 2, 3, 4, 5</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Аккумулятор с неправильным начальным значением</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - Произведение
+factorial = 0  # Начали с 0!
+counter = 1
+while counter <= 5:
+    factorial *= counter  # 0 * что угодно = 0
+    counter += 1
+print(factorial)  # Всегда будет 0!
+
+# ПРАВИЛЬНО:
+factorial = 1  # Для произведения начинаем с 1!
+counter = 1
+while counter <= 5:
+    factorial *= counter
+    counter += 1
+print(factorial)  # 120</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Бесконечный цикл без break</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+while True:
+    print("Привет!")
+    # Нет способа выйти из цикла!
+    # Будет работать вечно!
+
+# ПРАВИЛЬНО:
+while True:
+    answer = input("Продолжить? (да/нет): ")
+    if answer == "нет":
+        break  # Выход из цикла</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Сколько раз выполнится тело цикла?<br><code>x = 5<br>while x > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x)<br>&nbsp;&nbsp;&nbsp;&nbsp;x -= 1</code></h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! x начинается с 5, а не с 4.">4 раза</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! x: 5, 4, 3, 2, 1 → затем 0 > 0 это False.">5 раз</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Цикл прекратится когда x станет 0.">6 раз</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это не бесконечный цикл, x уменьшается.">Бесконечно</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что произойдет?<br><code>x = 1<br>while x <= 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x)</code></h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! x не изменяется, условие всегда True.">Выведет 1 до 10</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! x всегда равен 1, условие всегда True, цикл не завершится.">Бесконечный цикл (выводит 1 вечно)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Цикл выполнится хотя бы раз.">Ничего не выведет</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это корректный синтаксис.">Ошибка</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Чему равна сумма?<br><code>s = 0<br>i = 1<br>while i <= 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;s += i<br>&nbsp;&nbsp;&nbsp;&nbsp;i += 1</code></h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Считай: 0 + 1 + 2 + 3.">3</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Включается и число 3.">5</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! s = 0 + 1 + 2 + 3 = 6.">6</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Цикл останавливается при i=4.">10</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что делает оператор break?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Это делает continue.">Пропускает текущую итерацию</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! break немедленно прерывает цикл.">Выходит из цикла немедленно</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! break прерывает цикл.">Перезапускает цикл</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! break работает в любом месте тела цикла.">Работает только в начале цикла</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: С какого значения начинать аккумулятор для произведения?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! 0 * любое число = 0. Произведение всегда будет 0.">0</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! 1 - нейтральный элемент умножения. 1 * x = x.">1</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! 2 даст удвоенный результат.">2</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! -1 даст отрицательный/положительный результат попеременно.">-1</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Цикл while - фундаментальная конструкция для экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ алгоритмов с циклами), Задание 8 (блок-схемы с циклами while), Задание 14 (программирование с циклами)</li>
+                        <li><strong>ЕГЭ:</strong> Задание 5 (анализ программ с циклами), Задание 8 (определение значения после цикла), Задания 24-27 (программы с while)</li>
+                        <li>Часто на экзаменах нужно вычислить, сколько раз выполнится цикл или какое значение будет у переменной</li>
+                        <li>Важно понимать разницу между счетчиком (counter) и аккумулятором (accumulator)</li>
+                        <li>На ЕГЭ встречаются задачи на анализ условий завершения цикла</li>
+                        <li>Понимание break и continue помогает в оптимизации алгоритмов</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>while условие:</strong> повторяет блок кода, пока условие True</li>
+                    <li><strong>Счетчик (counter):</strong> переменная для отслеживания номера итерации</li>
+                    <li><strong>Аккумулятор:</strong> переменная для накопления результата (сумма: начать с 0, произведение: с 1)</li>
+                    <li><strong>ОБЯЗАТЕЛЬНО изменять</strong> переменную условия в теле цикла!</li>
+                    <li><strong>Бесконечный цикл:</strong> когда условие никогда не становится False (ошибка!)</li>
+                    <li><strong>break:</strong> немедленный выход из цикла</li>
+                    <li><strong>continue:</strong> пропуск оставшейся части текущей итерации</li>
+                    <li><strong>while True:</strong> бесконечный цикл с выходом через break</li>
+                    <li><strong>Валидация ввода:</strong> повторять запрос до корректного ответа</li>
+                </ul>
+
+                <p>Отлично! Ты освоил цикл while! В следующем уроке изучим цикл for - более удобный способ для повторений с известным количеством итераций!</p>
             </div>
 
             <div class="lesson-nav">

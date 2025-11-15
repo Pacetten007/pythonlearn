@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 12: Логические операции - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-07">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,52 +220,748 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 12: Логические операции</h1>
-                <div class="lesson-meta">Введение в Python • 20 минут</div>
+                <div class="lesson-meta">Введение в Python • 40 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>В прошлом уроке мы научились использовать <code>if</code> для проверки простых условий: <code>age >= 18</code>, <code>password == "secret"</code>. Но что делать, когда нужно проверить несколько условий одновременно?</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Например: "Разрешить вход, если возраст >= 18 <strong>И</strong> есть билет". Или: "Скидка действует, если ты студент <strong>ИЛИ</strong> пенсионер". Для этого существуют <strong>логические операции</strong>!</p>
 
-                <div class="code-block">
-                    <pre>if x > 0 and x < 10:
-    print("OK")</pre>
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Логический тип данных: True и False</li>
+                        <li>Оператор <code>and</code> (И) - все условия должны быть истинны</li>
+                        <li>Оператор <code>or</code> (ИЛИ) - хотя бы одно условие истинно</li>
+                        <li>Оператор <code>not</code> (НЕ) - инверсия значения</li>
+                        <li>Таблицы истинности для каждого оператора</li>
+                        <li>Приоритет операторов и использование скобок</li>
+                        <li>Короткое вычисление (short-circuit evaluation)</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
-                <div class="python-editor">
-                    <div class="editor-header">
-                        <h3>Python редактор</h3>
-                        <div class="editor-controls">
-                            <button class="run-btn">▶ Запустить</button>
-                            <button class="clear-btn">✕ Очистить</button>
-                        </div>
+                <h2>Логический тип данных: bool</h2>
+                <p>В Python есть специальный тип данных для логических значений - <code>bool</code> (boolean). У него всего два возможных значения:</p>
+
+                <div class="code-block">
+                    <pre># Два логических значения
+print(True)   # Истина (первая буква ОБЯЗАТЕЛЬНО заглавная!)
+print(False)  # Ложь (первая буква ОБЯЗАТЕЛЬНО заглавная!)
+
+# Проверка типа
+print(type(True))   # &lt;class 'bool'&gt;
+print(type(False))  # &lt;class 'bool'&gt;
+
+# Результат сравнения - это bool
+print(5 > 3)        # True
+print(10 == 100)    # False</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Важно: регистр имеет значение!</h4>
+                    <div class="code-block">
+                        <pre># ПРАВИЛЬНО:
+is_ready = True
+is_active = False
+
+# НЕПРАВИЛЬНО:
+is_ready = true    # NameError! (маленькая буква)
+is_active = false  # NameError! (маленькая буква)</pre>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">if x > 0 and x < 10:
-    print("OK")</textarea>
+                </div>
+
+                <h2>Оператор and (И) - Логическое "И"</h2>
+                <p>Оператор <code>and</code> возвращает <code>True</code> только если <strong>ОБА</strong> условия истинны. Если хотя бы одно ложно - результат <code>False</code>.</p>
+
+                <div class="code-block">
+                    <pre># Пример: вход в клуб - нужен возраст И билет
+age = 20
+has_ticket = True
+
+if age >= 18 and has_ticket:
+    print("Добро пожаловать в клуб!")
+else:
+    print("Вход запрещен")
+
+# Оба условия True → результат True → выполнится if</pre>
+                </div>
+
+                <h3>Таблица истинности для and</h3>
+                <p>Рассмотрим все возможные комбинации:</p>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Условие 1</th>
+                            <th>Условие 2</th>
+                            <th>Результат (and)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>True</td>
+                            <td>True</td>
+                            <td><strong>True</strong></td>
+                        </tr>
+                        <tr>
+                            <td>True</td>
+                            <td>False</td>
+                            <td><strong>False</strong></td>
+                        </tr>
+                        <tr>
+                            <td>False</td>
+                            <td>True</td>
+                            <td><strong>False</strong></td>
+                        </tr>
+                        <tr>
+                            <td>False</td>
+                            <td>False</td>
+                            <td><strong>False</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-block">
+                    <pre># Примеры с and
+print(True and True)    # True - оба истинны
+print(True and False)   # False - второе ложно
+print(False and True)   # False - первое ложно
+print(False and False)  # False - оба ложны
+
+# Реальный пример
+age = 25
+income = 50000
+
+if age >= 21 and income >= 30000:
+    print("Кредит одобрен!")
+else:
+    print("Кредит не одобрен")</pre>
+                </div>
+
+                <h2>Оператор or (ИЛИ) - Логическое "ИЛИ"</h2>
+                <p>Оператор <code>or</code> возвращает <code>True</code>, если <strong>хотя бы одно</strong> условие истинно. Только если оба ложны - результат <code>False</code>.</p>
+
+                <div class="code-block">
+                    <pre># Пример: скидка для студентов ИЛИ пенсионеров
+is_student = True
+is_senior = False
+
+if is_student or is_senior:
+    print("Вы получаете скидку 20%!")
+else:
+    print("Полная цена")
+
+# Хотя бы одно True → результат True → выполнится if</pre>
+                </div>
+
+                <h3>Таблица истинности для or</h3>
+                <p>Рассмотрим все возможные комбинации:</p>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Условие 1</th>
+                            <th>Условие 2</th>
+                            <th>Результат (or)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>True</td>
+                            <td>True</td>
+                            <td><strong>True</strong></td>
+                        </tr>
+                        <tr>
+                            <td>True</td>
+                            <td>False</td>
+                            <td><strong>True</strong></td>
+                        </tr>
+                        <tr>
+                            <td>False</td>
+                            <td>True</td>
+                            <td><strong>True</strong></td>
+                        </tr>
+                        <tr>
+                            <td>False</td>
+                            <td>False</td>
+                            <td><strong>False</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-block">
+                    <pre># Примеры с or
+print(True or True)     # True - оба истинны
+print(True or False)    # True - первое истинно
+print(False or True)    # True - второе истинно
+print(False or False)   # False - оба ложны
+
+# Реальный пример - выходной день
+is_saturday = False
+is_sunday = True
+
+if is_saturday or is_sunday:
+    print("Сегодня выходной!")
+else:
+    print("Сегодня рабочий день")</pre>
+                </div>
+
+                <h2>Оператор not (НЕ) - Логическое отрицание</h2>
+                <p>Оператор <code>not</code> инвертирует (переворачивает) логическое значение: <code>True</code> становится <code>False</code>, а <code>False</code> становится <code>True</code>.</p>
+
+                <div class="code-block">
+                    <pre># Примеры с not
+print(not True)   # False
+print(not False)  # True
+
+# Практический пример
+is_raining = False
+
+if not is_raining:
+    print("Можно идти гулять!")
+else:
+    print("Лучше остаться дома")
+
+# not False → True → выполнится if</pre>
+                </div>
+
+                <h3>Таблица истинности для not</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Условие</th>
+                            <th>Результат (not)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>True</td>
+                            <td><strong>False</strong></td>
+                        </tr>
+                        <tr>
+                            <td>False</td>
+                            <td><strong>True</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-block">
+                    <pre># Примеры использования not
+is_logged_in = False
+
+if not is_logged_in:
+    print("Пожалуйста, войдите в систему")
+
+# Двойное отрицание
+print(not not True)   # True
+print(not not False)  # False</pre>
+                </div>
+
+                <h2>Комбинирование условий</h2>
+                <p>Можно создавать сложные условия, комбинируя несколько логических операторов:</p>
+
+                <div class="code-block">
+                    <pre># Пример 1: Диапазон значений
+age = 25
+
+if age >= 18 and age <= 65:
+    print("Работоспособный возраст")
+
+# Пример 2: Проверка на недопустимые значения
+score = 150
+
+if score < 0 or score > 100:
+    print("Ошибка! Балл должен быть от 0 до 100")
+
+# Пример 3: Сложное условие
+age = 20
+has_license = True
+has_car = False
+
+if age >= 18 and (has_license or has_car):
+    print("Можешь водить машину")
+
+# Пример 4: Проверка допустимого диапазона
+x = 50
+
+if not (x < 0 or x > 100):
+    print("x находится в диапазоне 0-100")
+    # Это то же самое, что: if x >= 0 and x <= 100:</pre>
+                </div>
+
+                <h2>Приоритет логических операторов</h2>
+                <p>Когда в одном выражении несколько операторов, важен порядок их выполнения:</p>
+
+                <div class="info-block">
+                    <h4>Приоритет (от высшего к низшему):</h4>
+                    <ol>
+                        <li><strong>not</strong> - выполняется первым</li>
+                        <li><strong>and</strong> - выполняется вторым</li>
+                        <li><strong>or</strong> - выполняется последним</li>
+                    </ol>
+                    <p><strong>Совет:</strong> Используй скобки для ясности, даже если они не обязательны!</p>
+                </div>
+
+                <div class="code-block">
+                    <pre># Примеры приоритета
+# Без скобок
+result = True or False and False
+# False and False → False
+# True or False → True
+print(result)  # True
+
+# Со скобками (меняем порядок)
+result = (True or False) and False
+# (True or False) → True
+# True and False → False
+print(result)  # False
+
+# not имеет высший приоритет
+result = not True or False
+# not True → False
+# False or False → False
+print(result)  # False
+
+# Всегда используй скобки для ясности!
+age = 25
+is_student = True
+
+# Непонятно:
+if age >= 18 and is_student or age < 12:
+    pass
+
+# Понятно:
+if (age >= 18 and is_student) or (age < 12):
+    pass</pre>
+                </div>
+
+                <h2>Короткое вычисление (Short-circuit evaluation)</h2>
+                <p>Python использует "ленивое" вычисление логических выражений - если результат уже известен, дальнейшие проверки не выполняются.</p>
+
+                <div class="info-block">
+                    <h4>Правила короткого вычисления:</h4>
+                    <ul>
+                        <li><strong>and:</strong> Если первое условие False, второе не проверяется (результат уже False)</li>
+                        <li><strong>or:</strong> Если первое условие True, второе не проверяется (результат уже True)</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <pre># Пример с and
+x = 5
+# Первое условие False → второе не проверяется
+if x > 10 and x < 20:
+    print("Не выведется")
+
+# Пример с or
+is_admin = True
+# Первое условие True → второе не проверяется
+if is_admin or has_permission:  # has_permission даже не определена!
+    print("Доступ разрешен")
+
+# Практическое применение - защита от деления на ноль
+divisor = 0
+if divisor != 0 and 100 / divisor > 5:
+    # divisor != 0 проверяется первым
+    # Если divisor == 0, деление не выполнится (ошибки не будет)
+    print("Результат больше 5")
+
+# Порядок важен!
+# НЕПРАВИЛЬНО:
+# if 100 / divisor > 5 and divisor != 0:
+#     # Сначала попытается разделить на 0 → ошибка!</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <div class="code-block">
+                    <pre># Программа 1: Контроль доступа
+age = int(input("Введи свой возраст: "))
+has_ticket = input("Есть билет? (да/нет): ").lower() == "да"
+
+if age >= 18 and has_ticket:
+    print("✓ Добро пожаловать!")
+elif age < 18:
+    print("✗ Вход только для совершеннолетних")
+else:
+    print("✗ Нужен билет для входа")
+
+# Программа 2: Калькулятор скидок
+is_student = input("Ты студент? (да/нет): ").lower() == "да"
+is_senior = input("Тебе 65+ лет? (да/нет): ").lower() == "да"
+price = 1000
+
+if is_student or is_senior:
+    discount = 0.2  # 20% скидка
+    final_price = price * (1 - discount)
+    print(f"Скидка 20%! Цена: {final_price} руб.")
+else:
+    print(f"Полная цена: {price} руб.")
+
+# Программа 3: Валидация ввода
+number = int(input("Введи число от 1 до 100: "))
+
+if number >= 1 and number <= 100:
+    print("✓ Корректное число!")
+    print(f"Квадрат числа: {number ** 2}")
+else:
+    print("✗ Ошибка! Число должно быть от 1 до 100")
+
+# Программа 4: Игровая логика (есть ключ И дверь не заперта)
+has_key = True
+door_locked = False
+
+if has_key and not door_locked:
+    print("Ты открыл дверь и прошел дальше!")
+elif not has_key:
+    print("Нужен ключ!")
+else:
+    print("Дверь заперта изнутри!")</pre>
+                </div>
+
+                <h2>Интерактивный редактор</h2>
+                <p>Попробуй примеры с логическими операциями. Измени значения переменных и посмотри, как меняется результат!</p>
+
+                <div class="code-editor">
+                    <textarea id="code-input" rows="15"># Пример 1: and
+age = 20
+has_license = True
+
+if age >= 18 and has_license:
+    print("✓ Можешь водить машину")
+else:
+    print("✗ Не можешь водить")
+
+print()  # Пустая строка
+
+# Пример 2: or
+is_weekend = True
+is_holiday = False
+
+if is_weekend or is_holiday:
+    print("✓ Сегодня можно отдыхать!")
+else:
+    print("✗ Пора на работу/учебу")
+
+print()
+
+# Пример 3: not
+is_raining = False
+
+if not is_raining:
+    print("✓ Хорошая погода для прогулки!")
+else:
+    print("✗ Лучше взять зонт")
+
+print()
+
+# Пример 4: Комбинация
+score = 85
+
+if score >= 0 and score <= 100:
+    if score >= 90:
+        print("Оценка: Отлично!")
+    elif score >= 70:
+        print("Оценка: Хорошо!")
+    else:
+        print("Оценка: Удовлетворительно")
+else:
+    print("Ошибка: недопустимый балл")
+
+print()
+
+# Пример 5: Сложное условие
+username = "admin"
+password = "12345"
+is_active = True
+
+if (username == "admin" and password == "12345") and is_active:
+    print("✓ Вход выполнен успешно!")
+else:
+    print("✗ Доступ запрещен")
+
+print()
+
+# Пример 6: Проверка диапазона
+temperature = 22
+
+if temperature >= 18 and temperature <= 25:
+    print("Комфортная температура")
+elif temperature < 18:
+    print("Холодно")
+else:
+    print("Жарко")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Система контроля доступа</h4>
+                    <p>Создай программу для входа в систему:</p>
+                    <ol>
+                        <li>Запрашивай возраст, наличие пропуска (да/нет) и уровень доступа (1-3)</li>
+                        <li>Доступ разрешен если:
+                            <ul>
+                                <li>Возраст >= 18 <strong>И</strong> есть пропуск <strong>И</strong> уровень >= 2</li>
+                            </ul>
+                        </li>
+                        <li>Выводи "Доступ разрешен" или "Доступ запрещен" с указанием причины</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>and</code> для объединения всех условий</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Калькулятор скидок</h4>
+                    <p>Магазин дает скидки по следующим правилам:</p>
+                    <ul>
+                        <li>Базовая цена товара: 5000 руб.</li>
+                        <li>Скидка 15%, если покупатель - студент <strong>ИЛИ</strong> пенсионер</li>
+                        <li>Дополнительная скидка 5%, если сумма покупки > 10000 руб.</li>
+                        <li>Скидки суммируются (могут быть 0%, 15%, 20%)</li>
+                    </ul>
+                    <p>Создай программу, которая запрашивает количество товаров, статус покупателя и вычисляет итоговую цену.</p>
+                    <p><strong>Подсказка:</strong> Сначала вычисли общую сумму, потом применяй скидки</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Валидатор ввода</h4>
+                    <p>Создай программу для проверки корректности данных:</p>
+                    <ol>
+                        <li>Запрашивай у пользователя число</li>
+                        <li>Проверяй, что число находится в диапазоне от 1 до 100 <strong>И</strong> является четным</li>
+                        <li>Если условия выполнены, выводи "Число принято" и его квадрат</li>
+                        <li>Если нет, выводи конкретную ошибку:
+                            <ul>
+                                <li>"Число вне диапазона" (если < 1 или > 100)</li>
+                                <li>"Число должно быть четным" (если нечетное)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>number % 2 == 0</code> для проверки четности</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Путаница and и or</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - пропускает всех!
+age = 15
+has_ticket = False
+
+if age >= 18 or has_ticket:  # or вместо and!
+    print("Добро пожаловать")
+# 15-летний без билета пройдет? НЕТ!
+
+# ПРАВИЛЬНО:
+if age >= 18 and has_ticket:
+    print("Добро пожаловать")
+
+# Запомни:
+# and - нужны ОБА условия
+# or - нужно ХОТЯ БЫ ОДНО</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильная проверка диапазона</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+x = 50
+if 0 < x < 100:  # В Python это работает!
+    # Но лучше явно:
+    pass
+
+# ПРАВИЛЬНО и понятно:
+if x > 0 and x < 100:
+    print("x в диапазоне")
+
+# НЕПРАВИЛЬНО - синтаксическая ошибка!
+if x > 0 and < 100:  # SyntaxError!
+    pass
+
+# Нужно повторять переменную:
+if x > 0 and x < 100:  # Правильно!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Забыли скобки в сложных условиях</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - непонятный порядок
+if age >= 18 and is_student or is_senior:
+    # Что здесь проверяется?
+    # (age >= 18 and is_student) or is_senior
+    # Но это неочевидно!
+    pass
+
+# ПРАВИЛЬНО - понятно:
+if (age >= 18 and is_student) or is_senior:
+    print("Скидка")
+
+# Или:
+if age >= 18 and (is_student or is_senior):
+    print("Скидка")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: True/False с маленькой буквы</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+is_ready = true   # NameError!
+is_done = false   # NameError!
+
+# ПРАВИЛЬНО (первая буква заглавная!):
+is_ready = True   # ✓
+is_done = False   # ✓
+
+# В других языках может быть true/false
+# В Python ТОЛЬКО True/False</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Двойное отрицание</h4>
+                    <div class="code-block">
+                        <pre># ПЛОХОЙ стиль (хоть и работает):
+is_not_ready = True
+
+if not is_not_ready:  # Двойное отрицание - путает!
+    print("Готов")
+
+# ХОРОШИЙ стиль:
+is_ready = False
+
+if not is_ready:  # Понятно!
+    print("Не готов")
+
+# ИЛИ ЕЩЕ ЛУЧШЕ:
+is_ready = True
+
+if is_ready:  # Самый понятный вариант!
+    print("Готов")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Неправильный порядок в short-circuit</h4>
+                    <div class="code-block">
+                        <pre># ОПАСНО:
+divisor = 0
+if 100 / divisor > 5 and divisor != 0:
+    # Сначала деление → ошибка!
+    print("Результат большой")
+
+# ПРАВИЛЬНО:
+if divisor != 0 and 100 / divisor > 5:
+    # Сначала проверка → деление только если != 0
+    print("Результат большой")
+
+# Порядок условий важен для безопасности!</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет: <code>print(True and False)</code>?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! and возвращает True только если ОБА условия True.">True</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! and возвращает False, если хотя бы одно условие False.">False</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Логические операции возвращают bool, а не None.">None</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это корректный синтаксис Python.">Ошибка</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Когда <code>or</code> возвращает True?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! or не требует, чтобы оба были True.">Только когда оба условия True</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! or возвращает True, если ХОТЯ БЫ ОДНО условие True.">Когда хотя бы одно условие True</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! or возвращает True, если есть хотя бы одно True.">Только когда оба условия False</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! or возвращает False только если оба False.">Никогда</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что выведет: <code>print(not False or True)</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! not False = True, затем True or True = True.">True</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! not False дает True, и True or True = True.">False</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это корректное выражение.">Ошибка</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Логические операции возвращают bool.">None</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Какой приоритет операторов (от высшего к низшему)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! or имеет самый НИЗКИЙ приоритет.">or, and, not</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! not (высший), затем and, затем or (низший).">not, and, or</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! and имеет приоритет выше, чем or.">and, or, not</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! У них разный приоритет.">Все равны</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что произойдет при <code>if x > 0 and 10/x > 2:</code> когда x = 0?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! x > 0 это False, and не проверяет второе условие (short-circuit).">Условие False, деление не выполняется</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Short-circuit evaluation предотвращает выполнение деления.">ZeroDivisionError</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! x > 0 это False при x = 0.">Условие True</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! and проверяет x > 0 сначала и получает False.">SyntaxError</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Логические операции - ключевая тема на экзаменах по информатике:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 2 (анализ логических выражений), Задание 6 (программы с логическими условиями), Задание 14 (программирование с and/or)</li>
+                        <li><strong>ЕГЭ:</strong> Задание 2 (таблицы истинности), Задание 15 (логические уравнения), Задания 24-27 (программы со сложными условиями)</li>
+                        <li>На ЕГЭ часто встречаются задачи на построение таблиц истинности и упрощение логических выражений</li>
+                        <li>Важно знать законы де Моргана: not (A and B) = (not A) or (not B)</li>
+                        <li>Короткое вычисление (short-circuit) может быть использовано для оптимизации кода на экзамене</li>
+                        <li>Понимание приоритета операторов критично для правильного анализа программ</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>bool:</strong> логический тип с двумя значениями - True и False (заглавные!)</li>
+                    <li><strong>and (И):</strong> возвращает True, только если ОБА условия True</li>
+                    <li><strong>or (ИЛИ):</strong> возвращает True, если ХОТЯ БЫ ОДНО условие True</li>
+                    <li><strong>not (НЕ):</strong> инвертирует значение (True → False, False → True)</li>
+                    <li><strong>Приоритет:</strong> not → and → or (используй скобки для ясности!)</li>
+                    <li><strong>Short-circuit:</strong> and останавливается на первом False, or на первом True</li>
+                    <li><strong>Таблицы истинности:</strong> помогают понять все комбинации условий</li>
+                    <li><strong>Комбинирование:</strong> можно создавать сложные условия из простых</li>
+                    <li><strong>Скобки:</strong> делают код понятнее и контролируют порядок вычисления</li>
+                </ul>
+
+                <p>Отлично! Теперь ты умеешь создавать сложные условия! В следующем уроке мы изучим циклы - как заставить программу повторять действия много раз!</p>
             </div>
 
             <div class="lesson-nav">

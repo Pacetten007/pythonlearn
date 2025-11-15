@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 8: Типы данных - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-03">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -223,18 +224,389 @@
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Компьютеры работают с разными видами информации: числами, текстом, логическими значениями. Каждый вид информации имеет свой тип данных. Понимание типов данных - это фундамент программирования!</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Представь библиотеку: книги сортируются по жанрам (фантастика, детективы, учебники). Так же и в программировании - данные разделяются на типы, и каждый тип имеет свои особенности и возможности.</p>
+
+                <div class="info-block">
+                    <h4>Почему типы данных важны?</h4>
+                    <ul>
+                        <li>Числа можно складывать и умножать</li>
+                        <li>Текст можно объединять и искать в нем слова</li>
+                        <li>Логические значения используются для принятия решений</li>
+                        <li>Python автоматически определяет тип, но ты должен понимать, как это работает!</li>
+                    </ul>
+                </div>
+
+                <h2>Четыре основных типа данных</h2>
+                <p>В Python есть множество типов данных, но начнем с четырех самых важных:</p>
+
+                <h3>1. int (целые числа)</h3>
+                <p><strong>int</strong> (от англ. integer - целое число) - это тип для целых чисел без дробной части.</p>
 
                 <div class="code-block">
-                    <pre>x = 5
-print(type(x))</pre>
+                    <pre># Примеры целых чисел
+age = 15
+year = 2024
+temperature = -5
+points = 0
+population = 1000000</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Характеристики int:</h4>
+                    <ul>
+                        <li><strong>Целые числа:</strong> без десятичной точки</li>
+                        <li><strong>Могут быть отрицательными:</strong> -100, -5, 0, 5, 100</li>
+                        <li><strong>Неограниченный диапазон:</strong> в Python 3 целые числа могут быть сколь угодно большими!</li>
+                        <li><strong>Применение:</strong> возраст, год, количество, индексы, счетчики</li>
+                    </ul>
+                </div>
+
+                <div class="example-block">
+                    <h4>Когда использовать int:</h4>
+                    <div class="code-block">
+                        <pre>student_count = 30        # Количество учеников
+floor_number = 5          # Номер этажа
+lives_remaining = 3       # Количество жизней в игре
+score = 1250              # Счет в игре</pre>
+                    </div>
+                </div>
+
+                <h3>2. float (вещественные числа)</h3>
+                <p><strong>float</strong> (от англ. floating point - плавающая точка) - это тип для чисел с дробной частью.</p>
+
+                <div class="code-block">
+                    <pre># Примеры вещественных чисел
+price = 99.99
+temperature = 36.6
+pi = 3.14159
+height = 1.75
+coefficient = 0.5</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Характеристики float:</h4>
+                    <ul>
+                        <li><strong>Числа с точкой:</strong> обязательно присутствует десятичная точка (не запятая!)</li>
+                        <li><strong>Дробная часть:</strong> может быть любой длины</li>
+                        <li><strong>Научная нотация:</strong> можно писать 1.5e3 (это 1500.0)</li>
+                        <li><strong>Применение:</strong> цены, измерения, координаты, научные вычисления</li>
+                    </ul>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Важно! Точность float ограничена</h4>
+                    <p>Компьютеры хранят вещественные числа с ограниченной точностью. Иногда возникают небольшие неточности:</p>
+                    <div class="code-block">
+                        <pre>print(0.1 + 0.2)  # Выведет: 0.30000000000000004
+# Это нормально! Такова особенность работы компьютеров</pre>
+                    </div>
+                </div>
+
+                <div class="example-block">
+                    <h4>Когда использовать float:</h4>
+                    <div class="code-block">
+                        <pre>product_price = 149.99    # Цена товара
+body_temp = 36.6          # Температура тела
+distance = 5.8            # Расстояние в км
+tax_rate = 0.13           # Процент налога</pre>
+                    </div>
+                </div>
+
+                <h3>3. str (строки - текст)</h3>
+                <p><strong>str</strong> (от англ. string - строка) - это тип для текстовых данных.</p>
+
+                <div class="code-block">
+                    <pre># Примеры строк
+name = "Иван"
+message = 'Привет!'
+city = "Москва"
+email = "student@example.com"
+text = "Я изучаю Python"</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Характеристики str:</h4>
+                    <ul>
+                        <li><strong>Текст в кавычках:</strong> можно использовать "двойные" или 'одинарные'</li>
+                        <li><strong>Любые символы:</strong> буквы, цифры, пробелы, знаки препинания</li>
+                        <li><strong>Неизменяемость:</strong> нельзя изменить отдельный символ, только создать новую строку</li>
+                        <li><strong>Применение:</strong> имена, сообщения, адреса, любой текст</li>
+                    </ul>
+                </div>
+
+                <div class="example-block">
+                    <h4>Различные способы создания строк:</h4>
+                    <div class="code-block">
+                        <pre># Одинарные кавычки
+greeting = 'Привет'
+
+# Двойные кавычки
+farewell = "До свидания"
+
+# Кавычки внутри строки
+quote = "Он сказал: 'Привет!'"
+another = 'Книга "Python для начинающих"'
+
+# Многострочный текст
+poem = """Строка 1
+Строка 2
+Строка 3"""</pre>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <h4>Строки могут содержать цифры!</h4>
+                    <div class="code-block">
+                        <pre>age_number = 15      # Это число int
+age_text = "15"      # Это строка str
+
+# Будь внимателен:
+print(age_number + 5)  # 20 (математическое сложение)
+print(age_text + "5")  # "155" (объединение строк)</pre>
+                    </div>
+                </div>
+
+                <h3>4. bool (логический тип)</h3>
+                <p><strong>bool</strong> (от англ. boolean - логический) - это тип для истинности или ложности утверждений.</p>
+
+                <div class="code-block">
+                    <pre># Примеры логических значений
+is_student = True
+has_license = False
+game_over = False
+is_adult = True
+is_raining = False</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Характеристики bool:</h4>
+                    <ul>
+                        <li><strong>Только два значения:</strong> <code>True</code> (истина) или <code>False</code> (ложь)</li>
+                        <li><strong>Пишутся с большой буквы:</strong> именно <code>True</code> и <code>False</code>, не true или false</li>
+                        <li><strong>Результат сравнений:</strong> 5 > 3 даст True, 2 > 10 даст False</li>
+                        <li><strong>Применение:</strong> флаги, условия, проверки, да/нет вопросы</li>
+                    </ul>
+                </div>
+
+                <div class="example-block">
+                    <h4>Когда использовать bool:</h4>
+                    <div class="code-block">
+                        <pre>is_logged_in = True       # Пользователь вошел?
+has_permission = False    # Есть разрешение?
+is_premium = True         # Премиум аккаунт?
+game_running = True       # Игра запущена?
+
+# Bool часто получается из сравнений:
+is_adult = age >= 18      # True если возраст 18 или больше
+is_passing = score >= 60  # True если набрано 60+ очков</pre>
+                    </div>
+                </div>
+
+                <h2>Функция type() - проверка типа</h2>
+                <p>Как узнать, какого типа переменная? Используй функцию <code>type()</code>!</p>
+
+                <div class="code-block">
+                    <pre># Проверяем типы разных значений
+print(type(42))         # &lt;class 'int'&gt;
+print(type(3.14))       # &lt;class 'float'&gt;
+print(type("Hello"))    # &lt;class 'str'&gt;
+print(type(True))       # &lt;class 'bool'&gt;
+
+# Проверяем типы переменных
+age = 15
+name = "Иван"
+print(type(age))        # &lt;class 'int'&gt;
+print(type(name))       # &lt;class 'str'&gt;</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Важные примеры с type():</h4>
+                    <div class="code-block">
+                        <pre># Внимание на эти случаи!
+print(type(5))      # int - целое число
+print(type(5.0))    # float - есть точка!
+print(type("5"))    # str - в кавычках!
+
+# Даже если в строке число, это строка!
+number_text = "123"
+print(type(number_text))  # str
+
+# True и False - это bool
+print(type(True))   # bool
+print(type(False))  # bool</pre>
+                    </div>
+                </div>
+
+                <h2>Преобразование типов</h2>
+                <p>Иногда нужно изменить тип данных. Например, превратить строку в число или число в строку. Это называется <strong>преобразованием типов</strong>.</p>
+
+                <h3>int() - преобразование в целое число</h3>
+                <div class="code-block">
+                    <pre># Из строки в int
+age_text = "15"
+age_number = int(age_text)
+print(age_number)       # 15
+print(type(age_number)) # &lt;class 'int'&gt;
+
+# Из float в int (дробная часть отбрасывается!)
+price = 99.99
+price_int = int(price)
+print(price_int)        # 99 (не округление, а отбрасывание!)
+
+# Еще примеры
+print(int("123"))       # 123
+print(int(5.7))         # 5
+print(int(5.2))         # 5
+print(int(-3.9))        # -3</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибки при преобразовании в int:</h4>
+                    <div class="code-block">
+                        <pre># Эти команды вызовут ошибку:
+# int("hello")      # ValueError: нельзя превратить текст в число
+# int("3.14")       # ValueError: нельзя напрямую из строки с точкой
+# int("12abc")      # ValueError: смешанное содержимое
+
+# Правильный способ для "3.14":
+print(int(float("3.14")))  # Сначала в float, потом в int: 3</pre>
+                    </div>
+                    <p><strong>Правило:</strong> int() работает только со строками, содержащими целые числа, или с числами типа float.</p>
+                </div>
+
+                <h3>float() - преобразование в вещественное число</h3>
+                <div class="code-block">
+                    <pre># Из строки в float
+price_text = "99.99"
+price_number = float(price_text)
+print(price_number)       # 99.99
+print(type(price_number)) # &lt;class 'float'&gt;
+
+# Из int в float
+count = 5
+count_float = float(count)
+print(count_float)        # 5.0
+
+# Еще примеры
+print(float("3.14"))      # 3.14
+print(float("100"))       # 100.0
+print(float(42))          # 42.0
+print(float("-5.5"))      # -5.5</pre>
+                </div>
+
+                <h3>str() - преобразование в строку</h3>
+                <div class="code-block">
+                    <pre># Из int в str
+age = 15
+age_text = str(age)
+print(age_text)           # "15"
+print(type(age_text))     # &lt;class 'str'&gt;
+
+# Из float в str
+price = 99.99
+price_text = str(price)
+print(price_text)         # "99.99"
+
+# Из bool в str
+flag = True
+flag_text = str(flag)
+print(flag_text)          # "True"
+
+# Еще примеры
+print(str(123))           # "123"
+print(str(3.14))          # "3.14"
+print(str(False))         # "False"</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Зачем преобразовывать в строку?</h4>
+                    <p>Чтобы объединять с другим текстом:</p>
+                    <div class="code-block">
+                        <pre>age = 15
+
+# Это вызовет ошибку:
+# message = "Мне " + age + " лет"  # TypeError!
+
+# Правильно:
+message = "Мне " + str(age) + " лет"
+print(message)  # "Мне 15 лет"</pre>
+                    </div>
+                </div>
+
+                <h3>bool() - преобразование в логический тип</h3>
+                <p>Любое значение в Python можно преобразовать в bool. Есть простое правило:</p>
+
+                <div class="info-block">
+                    <h4>Что становится False:</h4>
+                    <ul>
+                        <li>Число 0 (ноль)</li>
+                        <li>Пустая строка ""</li>
+                        <li>None (специальное значение "ничего")</li>
+                        <li>Пустые коллекции (изучим позже)</li>
+                    </ul>
+                    <p><strong>Все остальное становится True!</strong></p>
+                </div>
+
+                <div class="code-block">
+                    <pre># Что дает False
+print(bool(0))          # False
+print(bool(0.0))        # False
+print(bool(""))         # False (пустая строка)
+
+# Что дает True
+print(bool(1))          # True
+print(bool(-5))         # True
+print(bool(3.14))       # True
+print(bool("Hello"))    # True
+print(bool("0"))        # True (непустая строка!)</pre>
+                </div>
+
+                <h2>Когда нужно преобразовывать типы?</h2>
+
+                <h3>1. Пользовательский ввод - всегда строка!</h3>
+                <p>Функция <code>input()</code> (которую мы изучим подробно позже) всегда возвращает строку:</p>
+
+                <div class="code-block">
+                    <pre># Вводим возраст
+age = input("Сколько тебе лет? ")
+# age - это строка! Даже если ввели "15"
+
+# Чтобы использовать как число, нужно преобразовать:
+age_number = int(age)
+next_year = age_number + 1
+print("Через год тебе будет", next_year)</pre>
+                </div>
+
+                <h3>2. Вычисления требуют чисел</h3>
+                <div class="code-block">
+                    <pre>a = "10"
+b = "20"
+
+# Это не сработает как ожидается:
+print(a + b)      # "1020" (объединение строк)
+
+# Правильно:
+print(int(a) + int(b))  # 30 (математическое сложение)</pre>
+                </div>
+
+                <h3>3. Вывод требует строк (или автоматически преобразует)</h3>
+                <div class="code-block">
+                    <pre>score = 100
+
+# Так можно (print сам преобразует):
+print("Счет:", score)
+
+# Но если объединяем строки, нужно преобразовать:
+message = "Твой счет: " + str(score) + " очков"
+print(message)</pre>
                 </div>
 
                 <h2>Попробуй сам!</h2>
+                <p>Поэкспериментируй с типами данных в редакторе:</p>
+
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -243,28 +615,277 @@ print(type(x))</pre>
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">x = 5
-print(type(x))</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Эксперименты с типами данных
+
+# Создаем переменные разных типов
+age = 15              # int
+price = 99.99         # float
+name = "Алекс"        # str
+is_student = True     # bool
+
+# Проверяем типы
+print("Тип age:", type(age))
+print("Тип price:", type(price))
+print("Тип name:", type(name))
+print("Тип is_student:", type(is_student))
+
+# Преобразования
+print("\nПреобразования:")
+print("int('42'):", int('42'))
+print("float('3.14'):", float('3.14'))
+print("str(100):", str(100))
+print("int(7.9):", int(7.9))  # Отбрасывает дробную часть!</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Исследователь типов</h4>
+                    <p>Создай переменные всех четырех типов:</p>
+                    <ul>
+                        <li>Твой возраст (int)</li>
+                        <li>Твой рост в метрах (float)</li>
+                        <li>Твое имя (str)</li>
+                        <li>Учишься ли ты в школе? (bool)</li>
+                    </ul>
+                    <p>Выведи каждую переменную и её тип с помощью <code>type()</code>.</p>
+                    <p><strong>Пример вывода:</strong></p>
+                    <div class="code-block">
+                        <pre>Возраст: 15, тип: &lt;class 'int'&gt;
+Рост: 1.65, тип: &lt;class 'float'&gt;
+Имя: Мария, тип: &lt;class 'str'&gt;
+Учусь: True, тип: &lt;class 'bool'&gt;</pre>
+                    </div>
+                    <p><strong>Подсказка:</strong> Используй <code>print("Возраст:", age, ", тип:", type(age))</code></p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Калькулятор из строк</h4>
+                    <p>У тебя есть две переменные со строковыми числами:</p>
+                    <div class="code-block">
+                        <pre>num1 = "25"
+num2 = "17"</pre>
+                    </div>
+                    <p>Преобразуй их в числа и вычисли:</p>
+                    <ul>
+                        <li>Сумму</li>
+                        <li>Разность</li>
+                        <li>Произведение</li>
+                        <li>Частное</li>
+                    </ul>
+                    <p><strong>Подсказка:</strong> Используй <code>int()</code> для преобразования перед вычислениями.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Фиксим код!</h4>
+                    <p>Этот код содержит ошибки, связанные с типами данных. Найди и исправь их:</p>
+                    <div class="code-block">
+                        <pre># Ошибка 1: попытка сложить строку и число
+age = "15"
+next_year = age + 1
+print("Через год:", next_year)
+
+# Ошибка 2: попытка объединить строки и число
+score = 100
+message = "Счет: " + score
+print(message)
+
+# Ошибка 3: неправильное преобразование
+text = "3.14"
+number = int(text)
+print(number)</pre>
+                    </div>
+                    <p><strong>Подсказка:</strong></p>
+                    <ul>
+                        <li>Для ошибки 1: преобразуй age в int</li>
+                        <li>Для ошибки 2: преобразуй score в str</li>
+                        <li>Для ошибки 3: сначала в float, потом можно в int</li>
+                    </ul>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Сложение строки и числа</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+age = 15
+print("Мне " + age + " лет")  # TypeError!
+
+# ПРАВИЛЬНО:
+print("Мне " + str(age) + " лет")
+# ИЛИ (еще проще):
+print("Мне", age, "лет")</pre>
+                    </div>
+                    <p>Python не может автоматически преобразовать число в строку при использовании оператора <code>+</code> для строк.</p>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: int() с дробными числами в строке</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+price = "99.99"
+price_int = int(price)  # ValueError!
+
+# ПРАВИЛЬНО:
+price_int = int(float(price))  # Сначала в float, потом в int
+print(price_int)  # 99</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Путаница между 3.0 и 3</h4>
+                    <div class="code-block">
+                        <pre># Это разные типы!
+a = 3      # int
+b = 3.0    # float
+
+print(type(a))  # &lt;class 'int'&gt;
+print(type(b))  # &lt;class 'float'&gt;
+
+# Но значения равны:
+print(a == b)   # True</pre>
+                    </div>
+                    <p>Наличие десятичной точки делает число типом float, даже если дробная часть равна нулю!</p>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: true/false вместо True/False</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+is_student = true   # NameError: имя 'true' не определено
+
+# ПРАВИЛЬНО:
+is_student = True   # С большой буквы!</pre>
+                    </div>
+                    <p>В Python логические значения пишутся с заглавной буквы: <code>True</code> и <code>False</code>.</p>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: int() отбрасывает, а не округляет!</h4>
+                    <div class="code-block">
+                        <pre># Внимание!
+print(int(3.9))    # 3, не 4!
+print(int(5.1))    # 5
+print(int(7.99))   # 7
+
+# int() просто отбрасывает дробную часть
+# Для округления используй round():
+print(round(3.9))  # 4
+print(round(5.1))  # 5</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Забыли, что "5" + 5 не работает</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО:
+text = "5"
+result = text + 5  # TypeError!
+
+# ПРАВИЛЬНО (зависит от цели):
+result1 = int(text) + 5    # 10 (математика)
+result2 = text + str(5)    # "55" (объединение строк)</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Какого типа значение 3.0?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Наличие точки делает число типом float, даже если дробная часть нулевая.">int</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Любое число с десятичной точкой - это float, даже 3.0.">float</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, str - это текст в кавычках.">str</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, bool - это только True или False.">bool</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что вернет int("42")?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, кавычки исчезнут после преобразования.">"42"</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Верно! int() преобразует строку '42' в целое число 42.">42</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, точки не появится - int возвращает целое число.">42.0</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, '42' - корректная строка для преобразования в int.">Ошибка</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что вернет int(3.7)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! int() отбрасывает дробную часть, не округляет. 3.7 становится 3.">3</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, int() не округляет, а отбрасывает дробную часть.">4</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, int() уберет десятичную точку.">3.7</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, преобразование float в int работает корректно.">Ошибка</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Можно ли в Python выполнить "5" + 5?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, Python не складывает строку с числом автоматически.">Да, получится 10</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, это не сработает - нельзя использовать + для строки и числа.">Да, получится "55"</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Python выдаст TypeError - нельзя складывать строку и число. Нужно сначала преобразовать один из них: int('5') + 5 или '5' + str(5).">Нет, будет ошибка TypeError</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, Python попытается выполнить операцию и выдаст ошибку.">Да, получится 5</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Какого типа значение True?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, True - это не строка (нет кавычек).">str</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, True не является целым числом, хотя внутренне может быть представлено как 1.">int</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! True (и False) - это значения логического типа bool.">bool</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, float - это числа с десятичной точкой.">float</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Понимание типов данных критически важно для экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ программ - нужно понимать, как работают разные типы), Задание 14 (написание программ с правильными типами)</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-25 (программирование - часто требуется преобразование типов для ввода/вывода), Задание 12 (анализ алгоритмов с разными типами данных)</li>
+                    </ul>
+                    <p>Особенно важно понимать разницу между int и float, а также уметь преобразовывать строки в числа!</p>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>int</strong> - целые числа: 15, -5, 0, 1000</li>
+                    <li><strong>float</strong> - числа с десятичной точкой: 3.14, 99.99, -0.5</li>
+                    <li><strong>str</strong> - текст в кавычках: "Hello", 'Python', "123"</li>
+                    <li><strong>bool</strong> - логические значения: True или False (с большой буквы!)</li>
+                    <li><strong>type()</strong> - функция для проверки типа переменной</li>
+                    <li><strong>int()</strong> - преобразует в целое число (отбрасывает дробную часть!)</li>
+                    <li><strong>float()</strong> - преобразует в вещественное число</li>
+                    <li><strong>str()</strong> - преобразует в строку</li>
+                    <li><strong>bool()</strong> - преобразует в логический тип (0 и "" дают False, остальное True)</li>
+                    <li>Нельзя складывать строку и число без преобразования</li>
+                    <li>3.0 и 3 - это разные типы (float и int), но равные значения</li>
+                </ul>
+
+                <p>Отличная работа! Теперь ты понимаешь, какие типы данных существуют в Python и как их использовать. В следующем уроке мы освоим арифметические операции - превратим Python в мощный калькулятор!</p>
             </div>
 
             <div class="lesson-nav">

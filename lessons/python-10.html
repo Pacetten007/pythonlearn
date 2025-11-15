@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 15: Строки - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-10">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,22 +220,558 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 15: Строки</h1>
-                <div class="lesson-meta">Введение в Python • 30 минут</div>
+                <div class="lesson-meta">Введение в Python • 50 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Строки (strings) - это один из самых важных типов данных в программировании! Текст повсюду: имена пользователей, сообщения, email-адреса, содержимое файлов. Python предоставляет мощные инструменты для работы со строками.</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>До этого мы уже использовали строки с <code>print()</code> и <code>input()</code>. Теперь изучим их подробно: как обращаться к отдельным символам, вырезать части строк, изменять регистр и многое другое!</p>
+
+                <div class="info-block">
+                    <h4>Что мы изучим:</h4>
+                    <ul>
+                        <li>Создание строк: одинарные и двойные кавычки</li>
+                        <li>Операции со строками: сложение и умножение</li>
+                        <li>Длина строки: функция <code>len()</code></li>
+                        <li>Индексация: доступ к отдельным символам</li>
+                        <li>Срезы (slicing): вырезание частей строки</li>
+                        <li>Методы строк: <code>upper()</code>, <code>lower()</code>, <code>replace()</code> и др.</li>
+                        <li>Перебор символов в цикле</li>
+                        <li>Неизменяемость строк (immutability)</li>
+                    </ul>
+                </div>
+
+                <h2>Создание строк</h2>
+                <p>Строку можно создать с помощью одинарных <code>'...'</code> или двойных <code>"..."</code> кавычек. Разницы почти нет - выбирай, что удобнее!</p>
 
                 <div class="code-block">
-                    <pre>text = "Hello"
-print(text.upper())</pre>
+                    <pre># Одинарные кавычки
+text1 = 'Привет, мир!'
+print(text1)
+
+# Двойные кавычки
+text2 = "Python - это круто"
+print(text2)
+
+# Оба способа дают одинаковый результат
+print('Привет')  # Привет
+print("Привет")  # Привет</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Когда использовать одинарные vs двойные кавычки?</h4>
+                    <ul>
+                        <li>Если в тексте есть апостроф: <code>"I'm happy"</code> (двойные кавычки удобнее)</li>
+                        <li>Если в тексте есть кавычки: <code>'Он сказал "Привет"'</code> (одинарные удобнее)</li>
+                        <li>В остальных случаях - без разницы! Выбирай один стиль и придерживайся его</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <pre># Примеры с апострофом и кавычками
+text1 = "I'm learning Python"  # Апостроф внутри - используем двойные кавычки
+text2 = 'Он сказал "Привет"'   # Кавычки внутри - используем одинарные
+
+print(text1)  # I'm learning Python
+print(text2)  # Он сказал "Привет"</pre>
+                </div>
+
+                <h2>Операции со строками</h2>
+
+                <h3>1. Сложение строк (конкатенация)</h3>
+                <p>Оператор <code>+</code> склеивает (конкатенирует) строки:</p>
+
+                <div class="code-block">
+                    <pre># Сложение строк
+first_name = "Иван"
+last_name = "Иванов"
+full_name = first_name + " " + last_name
+print(full_name)  # Иван Иванов
+
+# Примеры
+greeting = "Привет, " + "как дела?"
+print(greeting)  # Привет, как дела?
+
+# Можно складывать много строк
+message = "Я" + " " + "изучаю" + " " + "Python"
+print(message)  # Я изучаю Python</pre>
+                </div>
+
+                <h3>2. Умножение строк</h3>
+                <p>Оператор <code>*</code> повторяет строку несколько раз:</p>
+
+                <div class="code-block">
+                    <pre># Умножение строк
+print("Ha" * 3)        # HaHaHa
+print("=" * 20)        # ====================
+print("Python! " * 4)  # Python! Python! Python! Python!
+
+# Практическое применение - линии разделители
+separator = "-" * 40
+print(separator)
+print("Заголовок")
+print(separator)
+
+# Вывод:
+# ----------------------------------------
+# Заголовок
+# ----------------------------------------</pre>
+                </div>
+
+                <h2>Длина строки: len()</h2>
+                <p>Функция <code>len()</code> возвращает количество символов в строке (включая пробелы!):</p>
+
+                <div class="code-block">
+                    <pre># Длина строки
+text = "Python"
+print(len(text))  # 6
+
+text = "Привет, мир!"
+print(len(text))  # 12 (пробелы и знаки препинания считаются!)
+
+# Пустая строка
+empty = ""
+print(len(empty))  # 0
+
+# Применение в условиях
+password = input("Введи пароль: ")
+if len(password) < 8:
+    print("Пароль слишком короткий! Минимум 8 символов")
+else:
+    print("Пароль принят")</pre>
+                </div>
+
+                <h2>Индексация строк</h2>
+                <p>Каждый символ в строке имеет свой номер (индекс). Python считает с 0!</p>
+
+                <div class="code-block">
+                    <pre># Индексация строк
+text = "Python"
+
+# Доступ по индексу: text[индекс]
+print(text[0])  # P (первый символ)
+print(text[1])  # y (второй символ)
+print(text[2])  # t
+print(text[5])  # n (последний символ)
+
+# Схема индексов:
+#  P   y   t   h   o   n
+#  0   1   2   3   4   5  (положительные индексы)
+# -6  -5  -4  -3  -2  -1  (отрицательные индексы)</pre>
+                </div>
+
+                <h3>Отрицательные индексы</h3>
+                <p>Python позволяет считать с конца с помощью отрицательных индексов:</p>
+
+                <div class="code-block">
+                    <pre># Отрицательные индексы
+text = "Python"
+
+print(text[-1])  # n (последний символ)
+print(text[-2])  # o (предпоследний)
+print(text[-6])  # P (первый символ = text[0])
+
+# Это очень удобно для доступа к концу строки!
+email = "user@example.com"
+print(email[-3:])  # com (последние 3 символа)</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка: IndexError</h4>
+                    <p>Если индекс выходит за границы строки, получишь ошибку!</p>
+                    <div class="code-block">
+                        <pre>text = "Python"  # Индексы: 0, 1, 2, 3, 4, 5
+# print(text[10])  # IndexError! Индекса 10 не существует
+# print(text[6])   # IndexError! Последний индекс - 5
+
+# Безопасная проверка
+if len(text) > 10:
+    print(text[10])
+else:
+    print("Индекс слишком большой")</pre>
+                    </div>
+                </div>
+
+                <h2>Срезы (Slicing)</h2>
+                <p>Срезы позволяют получить часть строки (подстроку). Синтаксис: <code>строка[start:end]</code></p>
+
+                <div class="info-block">
+                    <h4>Синтаксис срезов:</h4>
+                    <ul>
+                        <li><code>text[start:end]</code> - от start до end-1 (end НЕ включается!)</li>
+                        <li><code>text[:end]</code> - с начала до end-1</li>
+                        <li><code>text[start:]</code> - от start до конца</li>
+                        <li><code>text[:]</code> - вся строка (копия)</li>
+                        <li><code>text[start:end:step]</code> - с шагом step</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <pre># Срезы строк
+text = "Python Programming"
+
+# [start:end] - от start до end-1
+print(text[0:6])    # Python (символы 0, 1, 2, 3, 4, 5)
+print(text[7:18])   # Programming
+
+# [:end] - с начала до end-1
+print(text[:6])     # Python (то же, что text[0:6])
+
+# [start:] - от start до конца
+print(text[7:])     # Programming
+
+# [:] - вся строка
+print(text[:])      # Python Programming
+
+# Примеры
+email = "user@example.com"
+username = email[:4]      # user (первые 4 символа)
+domain = email[5:]        # example.com (с 5-го до конца)
+print(username)  # user
+print(domain)    # example.com</pre>
+                </div>
+
+                <h3>Срезы с шагом</h3>
+                <p>Третий параметр среза - шаг. Можно брать каждый второй символ, или идти в обратном порядке!</p>
+
+                <div class="code-block">
+                    <pre># Срезы с шагом [start:end:step]
+text = "Python"
+
+# Каждый второй символ
+print(text[::2])    # Pto (индексы 0, 2, 4)
+
+# Каждый второй с 1-го индекса
+print(text[1::2])   # yhn (индексы 1, 3, 5)
+
+# Обратный порядок (шаг -1)
+print(text[::-1])   # nohtyP (переворот строки!)
+
+# Практика: проверка палиндрома
+word = "radar"
+if word == word[::-1]:
+    print(f"{word} - палиндром!")
+else:
+    print(f"{word} - не палиндром")
+
+# Вывод: radar - палиндром!</pre>
+                </div>
+
+                <h2>Методы строк</h2>
+                <p>Строки имеют множество встроенных методов для обработки текста. Метод вызывается так: <code>строка.метод()</code></p>
+
+                <h3>1. Изменение регистра</h3>
+
+                <div class="code-block">
+                    <pre># upper() - ВСЕ ЗАГЛАВНЫЕ
+text = "Python"
+print(text.upper())  # PYTHON
+
+# lower() - все строчные
+text = "HELLO WORLD"
+print(text.lower())  # hello world
+
+# capitalize() - Первая заглавная, остальные строчные
+text = "python programming"
+print(text.capitalize())  # Python programming
+
+# title() - Каждое Слово С Заглавной
+text = "python programming language"
+print(text.title())  # Python Programming Language
+
+# swapcase() - Инверсия регистра
+text = "PyThOn"
+print(text.swapcase())  # pYtHoN</pre>
+                </div>
+
+                <h3>2. Поиск и проверка</h3>
+
+                <div class="code-block">
+                    <pre># find() - найти позицию подстроки (-1 если не найдено)
+text = "Python Programming"
+print(text.find("Pro"))     # 7 (начало подстроки)
+print(text.find("Java"))    # -1 (не найдено)
+
+# count() - подсчитать количество вхождений
+text = "banana"
+print(text.count("a"))      # 3
+print(text.count("na"))     # 2
+
+# startswith() - начинается ли строка с подстроки
+email = "admin@example.com"
+print(email.startswith("admin"))  # True
+print(email.startswith("user"))   # False
+
+# endswith() - заканчивается ли строка подстрокой
+filename = "document.pdf"
+print(filename.endswith(".pdf"))   # True
+print(filename.endswith(".txt"))   # False
+
+# in - проверка наличия подстроки (оператор, а не метод)
+text = "Hello, World!"
+print("World" in text)      # True
+print("Python" in text)     # False</pre>
+                </div>
+
+                <h3>3. Изменение содержимого</h3>
+
+                <div class="code-block">
+                    <pre># replace() - замена подстроки
+text = "Hello, World!"
+new_text = text.replace("World", "Python")
+print(new_text)  # Hello, Python!
+
+# Заменить все вхождения
+text = "banana"
+print(text.replace("a", "o"))  # bonono
+
+# strip() - удалить пробелы в начале и конце
+text = "   Python   "
+print(text.strip())       # "Python"
+print(text.lstrip())      # "Python   " (только слева)
+print(text.rstrip())      # "   Python" (только справа)
+
+# split() - разбить строку на список слов
+text = "Python is awesome"
+words = text.split()      # Разбить по пробелам
+print(words)              # ['Python', 'is', 'awesome']
+
+# split() с разделителем
+email = "user@example.com"
+parts = email.split("@")
+print(parts)              # ['user', 'example.com']
+
+# join() - объединить список в строку
+words = ["Python", "is", "cool"]
+text = " ".join(words)
+print(text)               # "Python is cool"
+
+separator = "-"
+print(separator.join(words))  # "Python-is-cool"</pre>
+                </div>
+
+                <h3>4. Проверочные методы (возвращают True/False)</h3>
+
+                <div class="code-block">
+                    <pre># isdigit() - все символы цифры?
+print("123".isdigit())      # True
+print("12.3".isdigit())     # False (точка - не цифра)
+print("abc".isdigit())      # False
+
+# isalpha() - все символы буквы?
+print("Python".isalpha())   # True
+print("Python3".isalpha())  # False (есть цифра)
+print("Hello World".isalpha())  # False (есть пробел)
+
+# isalnum() - все символы буквы или цифры?
+print("Python3".isalnum())  # True
+print("Hello123".isalnum()) # True
+print("Hello 123".isalnum())  # False (есть пробел)
+
+# islower() - все буквы строчные?
+print("python".islower())   # True
+print("Python".islower())   # False
+
+# isupper() - все буквы заглавные?
+print("PYTHON".isupper())   # True
+print("Python".isupper())   # False
+
+# isspace() - только пробельные символы?
+print("   ".isspace())      # True
+print(" a ".isspace())      # False</pre>
+                </div>
+
+                <h2>Неизменяемость строк (Immutability)</h2>
+                <p>ВАЖНО: строки в Python неизменяемые! Нельзя изменить отдельный символ напрямую.</p>
+
+                <div class="code-block">
+                    <pre># Строки неизменяемые!
+text = "Python"
+# text[0] = "J"  # TypeError! Нельзя изменить символ!
+
+# Правильный способ - создать новую строку
+text = "Python"
+new_text = "J" + text[1:]  # "J" + "ython"
+print(new_text)  # Jython
+
+# Методы не меняют исходную строку!
+text = "python"
+upper_text = text.upper()
+print(text)       # python (не изменилась!)
+print(upper_text) # PYTHON (новая строка)
+
+# Чтобы "изменить" строку, нужно присвоить результат:
+text = "python"
+text = text.upper()  # Переприсваиваем
+print(text)  # PYTHON</pre>
+                </div>
+
+                <h2>Перебор строки в цикле</h2>
+                <p>Строку можно перебрать символ за символом с помощью цикла for:</p>
+
+                <div class="code-block">
+                    <pre># Перебор символов
+text = "Python"
+
+for char in text:
+    print(char)
+
+# Вывод:
+# P
+# y
+# t
+# h
+# o
+# n
+
+# Практика: подсчет гласных
+text = "Hello World"
+vowels = "aeiouAEIOU"
+count = 0
+
+for char in text:
+    if char in vowels:
+        count += 1
+
+print(f"Гласных букв: {count}")  # 3
+
+# С индексами (enumerate)
+text = "Python"
+for index, char in enumerate(text):
+    print(f"Индекс {index}: символ '{char}'")</pre>
+                </div>
+
+                <h2>Форматирование строк (f-strings)</h2>
+                <p>Мы уже видели f-strings в уроке <a href="python-05.html">Ввод и вывод</a>. Вспомним подробнее:</p>
+
+                <div class="code-block">
+                    <pre># f-strings - современный способ форматирования
+name = "Иван"
+age = 15
+print(f"Меня зовут {name}, мне {age} лет")
+
+# Можно вставлять выражения
+x = 10
+y = 5
+print(f"{x} + {y} = {x + y}")  # 10 + 5 = 15
+
+# Вызов методов внутри {}
+text = "python"
+print(f"Заглавными: {text.upper()}")  # Заглавными: PYTHON
+
+# Форматирование чисел
+pi = 3.14159265
+print(f"Число π ≈ {pi:.2f}")  # Число π ≈ 3.14 (2 знака)</pre>
+                </div>
+
+                <h2>Специальные символы (escape-последовательности)</h2>
+
+                <div class="code-block">
+                    <pre># \n - переход на новую строку
+print("Первая строка\nВторая строка")
+# Вывод:
+# Первая строка
+# Вторая строка
+
+# \t - табуляция
+print("Имя:\tИван\nВозраст:\t15")
+# Вывод:
+# Имя:    Иван
+# Возраст:    15
+
+# \\ - обратный слеш
+print("Путь: C:\\Users\\Documents")
+# Вывод: Путь: C:\Users\Documents
+
+# \' и \" - кавычки внутри строки
+print("Он сказал: \"Привет!\"")
+# Вывод: Он сказал: "Привет!"</pre>
+                </div>
+
+                <h2>Многострочные строки</h2>
+
+                <div class="code-block">
+                    <pre># Тройные кавычки для многострочных строк
+poem = """Розы красные,
+Фиалки синие,
+Python - это круто,
+И ты тоже крутой!"""
+
+print(poem)
+
+# Можно использовать и тройные одинарные кавычки
+text = '''Первая строка
+Вторая строка
+Третья строка'''
+
+print(text)</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <div class="code-block">
+                    <pre># Пример 1: Анализатор текста
+text = input("Введи текст: ")
+
+print(f"Длина текста: {len(text)} символов")
+print(f"Слов: {len(text.split())}")
+print(f"Заглавными: {text.upper()}")
+print(f"Строчными: {text.lower()}")
+print(f"Первая буква заглавная: {text.capitalize()}")
+
+# Пример 2: Валидация email
+email = input("Введи email: ")
+
+if "@" in email and "." in email:
+    parts = email.split("@")
+    if len(parts) == 2:
+        username = parts[0]
+        domain = parts[1]
+        print(f"✓ Email корректный")
+        print(f"  Имя пользователя: {username}")
+        print(f"  Домен: {domain}")
+    else:
+        print("✗ Некорректный email")
+else:
+    print("✗ Email должен содержать @ и точку")
+
+# Пример 3: Цензор нецензурных слов
+text = "Это плохое слово и еще одно плохое"
+bad_words = ["плохое"]
+
+censored = text
+for word in bad_words:
+    censored = censored.replace(word, "***")
+
+print(censored)  # Это *** слово и еще одно ***
+
+# Пример 4: Инициалы
+full_name = input("Введи полное имя: ")
+parts = full_name.split()
+
+if len(parts) >= 2:
+    first_name = parts[0]
+    last_name = parts[1]
+    initials = first_name[0] + "." + last_name[0] + "."
+    print(f"Инициалы: {initials}")
+else:
+    print("Введи имя и фамилию")
+
+# Пример 5: Палиндром
+word = input("Введи слово: ").lower()
+reversed_word = word[::-1]
+
+if word == reversed_word:
+    print(f"'{word}' - палиндром!")
+else:
+    print(f"'{word}' - не палиндром")</pre>
                 </div>
 
                 <h2>Попробуй сам!</h2>
+                <p>Поэкспериментируй с различными операциями и методами строк!</p>
+
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -243,28 +780,320 @@ print(text.upper())</pre>
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">text = "Hello"
-print(text.upper())</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Примеры работы со строками
+
+# Пример 1: Основные операции
+text = "Python"
+print(f"Длина: {len(text)}")
+print(f"Заглавными: {text.upper()}")
+print(f"Первый символ: {text[0]}")
+print(f"Последний: {text[-1]}")
+print(f"Первые 3: {text[:3]}")
+print(f"Перевернуто: {text[::-1]}")
+print()
+
+# Пример 2: Методы строк
+sentence = "  учу Python каждый день  "
+print(f"Без пробелов: '{sentence.strip()}'")
+print(f"Заменили: {sentence.replace('каждый', 'КАЖДЫЙ')}")
+print(f"Слова: {sentence.split()}")
+print()
+
+# Пример 3: Индексация и срезы
+word = "Programming"
+print(f"Символ 0: {word[0]}")
+print(f"Символ 5: {word[5]}")
+print(f"С 0 по 4: {word[0:5]}")
+print(f"С 5 до конца: {word[5:]}")
+print()
+
+# Пример 4: Проверки
+text1 = "Python123"
+text2 = "12345"
+text3 = "Python"
+
+print(f"'{text1}'.isalnum(): {text1.isalnum()}")
+print(f"'{text2}'.isdigit(): {text2.isdigit()}")
+print(f"'{text3}'.isalpha(): {text3.isalpha()}")
+print()
+
+# Пример 5: Поиск
+email = "user@example.com"
+print(f"Позиция @: {email.find('@')}")
+print(f"Есть .com? {'.com' in email}")
+print(f"Начинается с user? {email.startswith('user')}")
+print()
+
+# Пример 6: Перебор символов
+text = "Hello"
+print("Перебор символов:")
+for i, char in enumerate(text):
+    print(f"  [{i}] = '{char}'")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Анализатор текста</h4>
+                    <p>Создай программу-анализатор текста:</p>
+                    <ol>
+                        <li>Запрашивай текст у пользователя</li>
+                        <li>Выводи статистику:
+                            <ul>
+                                <li>Количество символов (с пробелами и без)</li>
+                                <li>Количество слов</li>
+                                <li>Количество гласных букв</li>
+                                <li>Количество согласных букв</li>
+                            </ul>
+                        </li>
+                        <li>Преобразуй текст:
+                            <ul>
+                                <li>Заглавными буквами</li>
+                                <li>Строчными буквами</li>
+                                <li>Каждое Слово С Заглавной</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>len()</code>, <code>split()</code> и цикл для подсчета</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Замена подстроки</h4>
+                    <p>Создай программу для замены слов:</p>
+                    <ol>
+                        <li>Запрашивай исходный текст</li>
+                        <li>Запрашивай слово, которое нужно заменить</li>
+                        <li>Запрашивай слово-замену</li>
+                        <li>Выводи:
+                            <ul>
+                                <li>Исходный текст</li>
+                                <li>Сколько раз встретилось заменяемое слово</li>
+                                <li>Текст после замены</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>count()</code> и <code>replace()</code></p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Проверка палиндрома</h4>
+                    <p>Создай программу проверки палиндромов:</p>
+                    <ol>
+                        <li>Запрашивай слово или фразу</li>
+                        <li>Игнорируй пробелы и регистр букв</li>
+                        <li>Проверь, является ли это палиндромом</li>
+                        <li>Примеры палиндромов:
+                            <ul>
+                                <li>"А роза упала на лапу Азора"</li>
+                                <li>"Казак"</li>
+                                <li>"radar"</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй <code>lower()</code>, <code>replace(" ", "")</code> и срез <code>[::-1]</code></p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Попытка изменить строку напрямую</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - строки неизменяемые!
+text = "Python"
+# text[0] = "J"  # TypeError!
+
+# ПРАВИЛЬНО - создать новую строку
+text = "Python"
+text = "J" + text[1:]  # "Jython"
+print(text)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Забыли присвоить результат метода</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - методы не изменяют исходную строку!
+text = "python"
+text.upper()  # Результат не сохранен!
+print(text)   # python (не изменилась!)
+
+# ПРАВИЛЬНО - присвоить результат
+text = "python"
+text = text.upper()  # Сохраняем результат
+print(text)  # PYTHON</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Выход за границы индекса</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО
+text = "Python"  # Индексы 0-5
+# print(text[10])  # IndexError!
+
+# ПРАВИЛЬНО - проверка перед доступом
+if len(text) > 10:
+    print(text[10])
+else:
+    print("Индекс слишком большой")
+
+# Или использовать срезы (они не дают ошибку)
+print(text[10:])  # "" (пустая строка, если индекс больше)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Путаница срезов [start:end]</h4>
+                    <div class="code-block">
+                        <pre># end НЕ включается!
+text = "Python"
+
+# Хочу "Pyt" (индексы 0, 1, 2)
+print(text[0:3])  # ПРАВИЛЬНО: Pyt
+# print(text[0:2])  # НЕПРАВИЛЬНО: Py (без t)
+
+# Запомни: text[0:3] дает символы 0, 1, 2 (3 не включен!)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Сравнение строк с числами</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО
+age = input("Возраст: ")  # input возвращает СТРОКУ!
+# if age > 18:  # TypeError! Нельзя сравнить строку и число
+
+# ПРАВИЛЬНО - преобразовать в число
+age = int(input("Возраст: "))
+if age > 18:
+    print("Совершеннолетний")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Использование + для строки и числа</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО
+age = 15
+# print("Мне " + age + " лет")  # TypeError!
+
+# ПРАВИЛЬНО - преобразовать число в строку
+age = 15
+print("Мне " + str(age) + " лет")
+
+# ИЛИ использовать f-string (лучше!)
+print(f"Мне {age} лет")</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что выведет <code>print("Python"[0])</code>?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Индекс 0 - это первый символ 'P'.">P</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Python считает с 0, не с 1.">y</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это был бы последний символ - индекс -1 или 5.">n</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Индекс 0 существует и дает первый символ.">Ошибка</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что выведет <code>print("Python"[2:5])</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это было бы [1:4].">yth</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Индексы 2, 3, 4 (5 не включается).">tho</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Индекс 5 не включается в срез.">thon</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Это было бы [-2:].">on</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что делает метод <code>upper()</code>?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! upper() преобразует все буквы в заглавные.">Преобразует в ЗАГЛАВНЫЕ буквы</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это делает метод lower().">Преобразует в строчные буквы</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это делает метод capitalize().">Делает первую букву заглавной</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! upper() изменяет регистр букв.">Удаляет пробелы</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Почему строки называют "неизменяемыми"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Можно присвоить новое значение переменной.">Нельзя присвоить новое значение</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Нельзя изменить отдельный символ, только создать новую строку.">Нельзя изменить отдельный символ</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Методы работают, но возвращают новую строку.">Нельзя использовать методы</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Строки можно складывать и умножать.">Нельзя складывать строки</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как перевернуть строку "Python"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Такого метода не существует.">text.reverse()</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Срез с шагом -1 переворачивает строку.">text[::-1]</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это даст первый символ.">text[-1]</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это даст последний символ, а не перевернутую строку.">text[len(text)-1]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Строки - одна из самых важных тем для экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 (анализ программ со строками), Задание 12 (обработка текстовой информации), Задание 14 (программирование со строками)</li>
+                        <li><strong>ЕГЭ:</strong> Задание 6 (анализ программ), Задание 9 (обработка текстовых файлов), Задания 24-27 (обработка строк, поиск подстрок)</li>
+                        <li>На экзаменах часто встречаются задачи на:
+                            <ul>
+                                <li>Подсчет символов и подстрок</li>
+                                <li>Поиск и замену текста</li>
+                                <li>Разбиение строк на части</li>
+                                <li>Проверку палиндромов</li>
+                            </ul>
+                        </li>
+                        <li>Важно знать индексацию (с 0!) и срезы [start:end]</li>
+                        <li>Методы строк: <code>upper()</code>, <code>lower()</code>, <code>replace()</code>, <code>split()</code>, <code>find()</code></li>
+                        <li>Неизменяемость строк часто проверяется в заданиях на анализ кода</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Создание:</strong> одинарные 'text' или двойные "text" кавычки</li>
+                    <li><strong>Операции:</strong> + (сложение), * (умножение)</li>
+                    <li><strong>len(text):</strong> длина строки (количество символов)</li>
+                    <li><strong>Индексация:</strong> text[0] - первый символ, text[-1] - последний</li>
+                    <li><strong>Срезы:</strong> text[start:end] - от start до end-1, text[::-1] - переворот</li>
+                    <li><strong>Методы изменения регистра:</strong> upper(), lower(), capitalize(), title()</li>
+                    <li><strong>Методы поиска:</strong> find(), count(), startswith(), endswith()</li>
+                    <li><strong>Методы изменения:</strong> replace(), strip(), split(), join()</li>
+                    <li><strong>Проверки:</strong> isdigit(), isalpha(), isalnum(), islower(), isupper()</li>
+                    <li><strong>Неизменяемость:</strong> нельзя изменить символ напрямую, методы создают новую строку</li>
+                    <li><strong>Перебор:</strong> for char in text - проход по каждому символу</li>
+                    <li><strong>f-strings:</strong> f"Привет, {name}!" - форматирование строк</li>
+                </ul>
+
+                <p>Превосходно! Ты завершил Модуль 2 "Введение в Python"! Теперь ты знаешь основы: переменные, типы данных, операции, ввод/вывод, условия, логику, циклы и строки. В следующем модуле изучим структуры данных - списки, словари и другие мощные инструменты!</p>
             </div>
 
             <div class="lesson-nav">
