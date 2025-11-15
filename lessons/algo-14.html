@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 41: Жадные алгоритмы - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-lesson-id="algo-14">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Содержание курса</h2>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+        
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Основы алгоритмики</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="algo-01.html">Что такое алгоритм?</a></li>
+                <li><a href="algo-02.html">Блок-схемы</a></li>
+                <li><a href="algo-03.html">Линейные алгоритмы</a></li>
+                <li><a href="algo-04.html">Ветвления</a></li>
+                <li><a href="algo-05.html">Циклы</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Введение в Python</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-01.html">Первая программа</a></li>
+                <li><a href="python-02.html">Переменные</a></li>
+                <li><a href="python-03.html">Типы данных</a></li>
+                <li><a href="python-04.html">Арифметические операции</a></li>
+                <li><a href="python-05.html">Ввод и вывод</a></li>
+                <li><a href="python-06.html">Условия if</a></li>
+                <li><a href="python-07.html">Логические операции</a></li>
+                <li><a href="python-08.html">Цикл while</a></li>
+                <li><a href="python-09.html">Цикл for</a></li>
+                <li><a href="python-10.html">Строки</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Структуры данных</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-11.html">Списки - основы</a></li>
+                <li><a href="python-12.html">Списки - методы</a></li>
+                <li><a href="python-13.html">Вложенные списки</a></li>
+                <li><a href="python-14.html">Кортежи</a></li>
+                <li><a href="python-15.html">Множества</a></li>
+                <li><a href="python-16.html">Словари - основы</a></li>
+                <li><a href="python-17.html">Словари - методы</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Функции</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-18.html">Создание функций</a></li>
+                <li><a href="python-19.html">Параметры функций</a></li>
+                <li><a href="python-20.html">Возврат значений</a></li>
+                <li><a href="python-21.html">Область видимости</a></li>
+                <li><a href="python-22.html">Рекурсия</a></li>
+                <li><a href="python-23.html">Lambda-функции</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Работа с файлами</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-24.html">Чтение файлов</a></li>
+                <li><a href="python-25.html">Запись в файлы</a></li>
+                <li><a href="python-26.html">Обработка текста</a></li>
+                <li><a href="python-27.html">Работа с CSV</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Алгоритмы</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="algo-06.html">Поиск в списке</a></li>
+                <li><a href="algo-07.html">Простые сортировки</a></li>
+                <li><a href="algo-08.html">Быстрые сортировки</a></li>
+                <li><a href="algo-09.html">Обработка последовательностей</a></li>
+                <li><a href="algo-10.html">Работа с числами</a></li>
+                <li><a href="algo-11.html">Строковые алгоритмы</a></li>
+                <li><a href="algo-12.html">ДП - основы</a></li>
+                <li><a href="algo-13.html">ДП - продвинутое</a></li>
+                <li><a href="algo-14.html">Жадные алгоритмы</a></li>
+                <li><a href="algo-15.html">Перебор и комбинаторика</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Системы счисления</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-28.html">Двоичная система</a></li>
+                <li><a href="python-29.html">8-я и 16-я системы</a></li>
+                <li><a href="python-30.html">Арифметика в СС</a></li>
+                <li><a href="python-31.html">СС в Python</a></li>
+                <li><a href="python-32.html">Задачи ЕГЭ по СС</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Логика</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-33.html">Логические операции</a></li>
+                <li><a href="python-34.html">Логические выражения</a></li>
+                <li><a href="python-35.html">Логика в Python</a></li>
+                <li><a href="python-36.html">Логические функции</a></li>
+                <li><a href="python-37.html">Задачи ЕГЭ по логике</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Графы и деревья</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-38.html">Введение в графы</a></li>
+                <li><a href="python-39.html">Обход в ширину (BFS)</a></li>
+                <li><a href="python-40.html">Обход в глубину (DFS)</a></li>
+                <li><a href="python-41.html">Деревья</a></li>
+                <li><a href="python-42.html">Алгоритмы на графах</a></li>
+                <li><a href="python-43.html">Задачи ЕГЭ с графами</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Подготовка к ОГЭ</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="oge-01.html">Исполнители алгоритмов</a></li>
+                <li><a href="oge-02.html">Анализ программ</a></li>
+                <li><a href="oge-03.html">Простые задачи</a></li>
+                <li><a href="oge-04.html">Массивы</a></li>
+                <li><a href="oge-05.html">Строки</a></li>
+                <li><a href="oge-06.html">Файлы</a></li>
+                <li><a href="oge-07.html">Электронные таблицы</a></li>
+                <li><a href="oge-08.html">Пробный экзамен</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Подготовка к ЕГЭ</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="ege-01.html">Кодирование информации</a></li>
+                <li><a href="ege-02.html">Логика и множества</a></li>
+                <li><a href="ege-03.html">Системы счисления</a></li>
+                <li><a href="ege-04.html">Алгоритмы</a></li>
+                <li><a href="ege-05.html">Программирование простое</a></li>
+                <li><a href="ege-06.html">Программирование среднее</a></li>
+                <li><a href="ege-07.html">Программирование сложное</a></li>
+                <li><a href="ege-08.html">Теория игр</a></li>
+                <li><a href="ege-09.html">Рекурсия</a></li>
+                <li><a href="ege-10.html">Динамическое программирование</a></li>
+                <li><a href="ege-11.html">Обработка больших данных</a></li>
+                <li><a href="ege-12.html">Пробный экзамен</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Продвинутые темы</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="advanced-01.html">ООП - Классы и объекты</a></li>
+                <li><a href="advanced-02.html">ООП - Наследование</a></li>
+                <li><a href="advanced-03.html">Обработка исключений</a></li>
+                <li><a href="advanced-04.html">Работа с модулями</a></li>
+                <li><a href="advanced-05.html">Регулярные выражения</a></li>
+                <li><a href="advanced-06.html">Сложность алгоритмов</a></li>
+                <li><a href="advanced-07.html">Олимпиадные задачи</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 41: Жадные алгоритмы</h1>
+                <div class="lesson-meta">Алгоритмы • 25 минут</div>
+            </div>
+
+            <div class="lesson-content">
+<h2>Введение</h2>
+                <p>В этом уроке мы изучим <strong>жадные стратегии</strong>. Это важная тема для программирования и подготовки к ОГЭ/ЕГЭ.</p>
+
+                <h2>Что такое Жадные алгоритмы?</h2>
+                <p><strong>Жадные алгоритмы</strong> - фундаментальная концепция в информатике.</p>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="300" viewBox="0 0 400 300" style="max-width: 400px;">
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+                        <ellipse cx="200" cy="40" rx="70" ry="25" fill="#dbeafe" stroke="#6366f1" stroke-width="2"/>
+                        <text x="200" y="48" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+                        <path d="M 200 65 L 200 95" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <rect x="130" y="95" width="140" height="50" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="200" y="125" text-anchor="middle" font-size="12" fill="#1e293b">Обработка</text>
+                        <path d="M 200 145 L 200 175" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <ellipse cx="200" cy="205" rx="70" ry="25" fill="#dbeafe" stroke="#6366f1" stroke-width="2"/>
+                        <text x="200" y="213" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <h2>Основные понятия</h2>
+                <ul>
+                    <li>Принципы работы алгоритма</li>
+                    <li>Применение на практике</li>
+                    <li>Типовые задачи</li>
+                </ul>
+
+                <div class="quiz-container">
+                    <h3>Тест к уроку</h3>
+                    <div class="question">
+                        <h4>Вопрос 1: Для чего нужны алгоритмы?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Для решения задач</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false">Для украшения</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                    <button class="btn-secondary" id="show-results">Показать результаты</button>
+                    <div class="quiz-results"></div>
+                </div>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="algo-13.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="algo-15.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Python для школьников © 2024</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

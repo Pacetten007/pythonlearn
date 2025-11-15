@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 4: Ветвления - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-lesson-id="algo-04">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Содержание курса</h2>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Основы алгоритмики</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="algo-01.html">Что такое алгоритм?</a></li>
+                <li><a href="algo-02.html">Блок-схемы</a></li>
+                <li><a href="algo-03.html">Линейные алгоритмы</a></li>
+                <li><a href="algo-04.html">Ветвления</a></li>
+                <li><a href="algo-05.html">Циклы</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Введение в Python</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-01.html">Первая программа</a></li>
+                <li><a href="python-02.html">Переменные</a></li>
+                <li><a href="python-03.html">Типы данных</a></li>
+                <li><a href="python-04.html">Арифметические операции</a></li>
+                <li><a href="python-05.html">Ввод и вывод</a></li>
+                <li><a href="python-06.html">Условия if</a></li>
+                <li><a href="python-07.html">Логические операции</a></li>
+                <li><a href="python-08.html">Цикл while</a></li>
+                <li><a href="python-09.html">Цикл for</a></li>
+                <li><a href="python-10.html">Строки</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Структуры данных</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-11.html">Списки - основы</a></li>
+                <li><a href="python-12.html">Списки - методы</a></li>
+                <li><a href="python-13.html">Вложенные списки</a></li>
+                <li><a href="python-14.html">Кортежи</a></li>
+                <li><a href="python-15.html">Множества</a></li>
+                <li><a href="python-16.html">Словари - основы</a></li>
+                <li><a href="python-17.html">Словари - методы</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Функции</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-18.html">Создание функций</a></li>
+                <li><a href="python-19.html">Параметры функций</a></li>
+                <li><a href="python-20.html">Возврат значений</a></li>
+                <li><a href="python-21.html">Область видимости</a></li>
+                <li><a href="python-22.html">Рекурсия</a></li>
+                <li><a href="python-23.html">Lambda-функции</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Работа с файлами</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-24.html">Чтение файлов</a></li>
+                <li><a href="python-25.html">Запись в файлы</a></li>
+                <li><a href="python-26.html">Обработка текста</a></li>
+                <li><a href="python-27.html">Работа с CSV</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Алгоритмы</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="algo-06.html">Поиск в списке</a></li>
+                <li><a href="algo-07.html">Простые сортировки</a></li>
+                <li><a href="algo-08.html">Быстрые сортировки</a></li>
+                <li><a href="algo-09.html">Обработка последовательностей</a></li>
+                <li><a href="algo-10.html">Работа с числами</a></li>
+                <li><a href="algo-11.html">Строковые алгоритмы</a></li>
+                <li><a href="algo-12.html">ДП - основы</a></li>
+                <li><a href="algo-13.html">ДП - продвинутое</a></li>
+                <li><a href="algo-14.html">Жадные алгоритмы</a></li>
+                <li><a href="algo-15.html">Перебор и комбинаторика</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Системы счисления</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-28.html">Двоичная система</a></li>
+                <li><a href="python-29.html">8-я и 16-я системы</a></li>
+                <li><a href="python-30.html">Арифметика в СС</a></li>
+                <li><a href="python-31.html">СС в Python</a></li>
+                <li><a href="python-32.html">Задачи ЕГЭ по СС</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Логика</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-33.html">Логические операции</a></li>
+                <li><a href="python-34.html">Логические выражения</a></li>
+                <li><a href="python-35.html">Логика в Python</a></li>
+                <li><a href="python-36.html">Логические функции</a></li>
+                <li><a href="python-37.html">Задачи ЕГЭ по логике</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Графы и деревья</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="python-38.html">Введение в графы</a></li>
+                <li><a href="python-39.html">Обход в ширину (BFS)</a></li>
+                <li><a href="python-40.html">Обход в глубину (DFS)</a></li>
+                <li><a href="python-41.html">Деревья</a></li>
+                <li><a href="python-42.html">Алгоритмы на графах</a></li>
+                <li><a href="python-43.html">Задачи ЕГЭ с графами</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Подготовка к ОГЭ</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="oge-01.html">Исполнители алгоритмов</a></li>
+                <li><a href="oge-02.html">Анализ программ</a></li>
+                <li><a href="oge-03.html">Простые задачи</a></li>
+                <li><a href="oge-04.html">Массивы</a></li>
+                <li><a href="oge-05.html">Строки</a></li>
+                <li><a href="oge-06.html">Файлы</a></li>
+                <li><a href="oge-07.html">Электронные таблицы</a></li>
+                <li><a href="oge-08.html">Пробный экзамен</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Подготовка к ЕГЭ</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="ege-01.html">Кодирование информации</a></li>
+                <li><a href="ege-02.html">Логика и множества</a></li>
+                <li><a href="ege-03.html">Системы счисления</a></li>
+                <li><a href="ege-04.html">Алгоритмы</a></li>
+                <li><a href="ege-05.html">Программирование простое</a></li>
+                <li><a href="ege-06.html">Программирование среднее</a></li>
+                <li><a href="ege-07.html">Программирование сложное</a></li>
+                <li><a href="ege-08.html">Теория игр</a></li>
+                <li><a href="ege-09.html">Рекурсия</a></li>
+                <li><a href="ege-10.html">Динамическое программирование</a></li>
+                <li><a href="ege-11.html">Обработка больших данных</a></li>
+                <li><a href="ege-12.html">Пробный экзамен</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-group">
+            <div class="lesson-group-header">
+                <h3>Продвинутые темы</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul>
+                <li><a href="advanced-01.html">ООП - Классы и объекты</a></li>
+                <li><a href="advanced-02.html">ООП - Наследование</a></li>
+                <li><a href="advanced-03.html">Обработка исключений</a></li>
+                <li><a href="advanced-04.html">Работа с модулями</a></li>
+                <li><a href="advanced-05.html">Регулярные выражения</a></li>
+                <li><a href="advanced-06.html">Сложность алгоритмов</a></li>
+                <li><a href="advanced-07.html">Олимпиадные задачи</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 4: Ветвления</h1>
+                <div class="lesson-meta">Основы алгоритмики • 20 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>Каждое утро ты смотришь на погоду за окном и принимаешь решение: если холодно - надеваешь куртку, если тепло - легкую кофту. Если идет дождь - берешь зонт, если нет - не берешь. Ты постоянно делаешь выбор в зависимости от условий!</p>
+
+                <p>В программировании такой выбор называется <strong>ветвлением</strong> или <strong>условным оператором</strong>. Алгоритм с ветвлением может выбирать разные пути выполнения в зависимости от того, истинно или ложно какое-то условие.</p>
+
+                <p>В этом уроке мы научимся создавать алгоритмы, которые умеют принимать решения. Это очень важный навык - ведь большинство реальных программ должны реагировать на разные ситуации!</p>
+
+                <h2>Что такое ветвление?</h2>
+                <p><strong>Ветвление</strong> - это алгоритм, в котором последовательность действий зависит от выполнения или невыполнения какого-либо условия. Алгоритм "разветвляется" на несколько путей!</p>
+
+                <div class="info-block">
+                    <h4>Простыми словами</h4>
+                    <p>Ветвление - это как развилка на дороге. Ты доходишь до точки, где нужно сделать выбор: пойти налево или направо. Какой путь выберешь - зависит от условия (например, где находится твоя цель).</p>
+                </div>
+
+                <h2>Примеры ветвлений из жизни</h2>
+
+                <div class="example-block">
+                    <h4>Пример 1: Выбор одежды по погоде</h4>
+                    <p><strong>Условие:</strong> Посмотреть температуру за окном</p>
+                    <ul>
+                        <li><strong>Если</strong> температура ниже 10°C: надеть теплую куртку</li>
+                        <li><strong>Иначе:</strong> надеть легкую кофту</li>
+                    </ul>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример 2: Оценка в школе</h4>
+                    <p><strong>Условие:</strong> Количество баллов на контрольной</p>
+                    <ul>
+                        <li><strong>Если</strong> баллов ≥ 90: поставить "5"</li>
+                        <li><strong>Иначе если</strong> баллов ≥ 70: поставить "4"</li>
+                        <li><strong>Иначе если</strong> баллов ≥ 50: поставить "3"</li>
+                        <li><strong>Иначе:</strong> поставить "2"</li>
+                    </ul>
+                </div>
+
+                <div class="example-block">
+                    <h4>Пример 3: Покупка билета в кино</h4>
+                    <p><strong>Условие:</strong> Возраст посетителя</p>
+                    <ul>
+                        <li><strong>Если</strong> возраст < 7 лет: вход бесплатный</li>
+                        <li><strong>Иначе если</strong> возраст < 18 лет: детский билет 200₽</li>
+                        <li><strong>Иначе если</strong> возраст ≥ 65 лет: льготный билет 250₽</li>
+                        <li><strong>Иначе:</strong> взрослый билет 400₽</li>
+                    </ul>
+                </div>
+
+                <h2>Типы ветвлений</h2>
+
+                <h3>1. Простое ветвление (только "если")</h3>
+                <p>Самый простой тип - выполняем действие только если условие истинно. Если ложно - просто пропускаем.</p>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="450" viewBox="0 0 500 450" style="max-width: 500px;">
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="250" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 250 55 L 250 100" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Условие -->
+                        <polygon points="250,100 370,170 250,240 130,170" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="250" y="165" text-anchor="middle" font-size="13" fill="#1e293b">Идет</text>
+                        <text x="250" y="182" text-anchor="middle" font-size="13" fill="#1e293b">дождь?</text>
+
+                        <!-- Да - направо -->
+                        <path d="M 370 170 L 420 170 L 420 270" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="385" y="165" font-size="12" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Действие -->
+                        <rect x="350" y="270" width="140" height="45" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="420" y="297" text-anchor="middle" font-size="13" fill="#1e293b">Взять зонт</text>
+
+                        <path d="M 420 315 L 420 340 L 250 340" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Нет - вниз -->
+                        <path d="M 250 240 L 250 340" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="210" y="280" font-size="12" font-weight="bold" fill="#dc2626">Нет</text>
+
+                        <path d="M 250 340 L 250 370" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="250" cy="395" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="250" y="402" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <div class="info-block">
+                    <h4>Псевдокод:</h4>
+                    <pre>
+НАЧАЛО
+  ЕСЛИ идет дождь ТО
+    Взять зонт
+  КОНЕЦ_ЕСЛИ
+КОНЕЦ</pre>
+                </div>
+
+                <h3>2. Полное ветвление (если-иначе)</h3>
+                <p>Два пути: один выполняется, если условие истинно, другой - если ложно.</p>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="500" viewBox="0 0 550 500" style="max-width: 550px;">
+                        <defs>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="275" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="275" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 275 55 L 275 100" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Ввод -->
+                        <path d="M 230 100 L 270 100 L 320 145 L 280 145 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="275" y="127" text-anchor="middle" font-size="13" fill="#1e293b">Введи возраст</text>
+
+                        <path d="M 275 145 L 275 190" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Условие -->
+                        <polygon points="275,190 395,260 275,330 155,260" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="275" y="255" text-anchor="middle" font-size="13" fill="#1e293b">возраст ≥ 18?</text>
+
+                        <!-- Да - направо -->
+                        <path d="M 395 260 L 450 260 L 450 360" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                        <text x="410" y="255" font-size="12" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Взрослый билет -->
+                        <path d="M 410 360 L 440 360 L 490 400 L 460 400 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="450" y="385" text-anchor="middle" font-size="12" fill="#1e293b">Вывод: "400₽"</text>
+
+                        <!-- Нет - налево -->
+                        <path d="M 155 260 L 100 260 L 100 360" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                        <text x="120" y="255" font-size="12" font-weight="bold" fill="#dc2626">Нет</text>
+
+                        <!-- Детский билет -->
+                        <path d="M 60 360 L 90 360 L 140 400 L 110 400 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="100" y="385" text-anchor="middle" font-size="12" fill="#1e293b">Вывод: "200₽"</text>
+
+                        <!-- Стрелки к концу -->
+                        <path d="M 100 400 L 100 430 L 275 430" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                        <path d="M 450 400 L 450 430 L 275 430" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <path d="M 275 430 L 275 455" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="275" cy="475" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="275" y="482" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <div class="info-block">
+                    <h4>Псевдокод:</h4>
+                    <pre>
+НАЧАЛО
+  ВВОД возраст
+  ЕСЛИ возраст ≥ 18 ТО
+    ВЫВОД "400₽"
+  ИНАЧЕ
+    ВЫВОД "200₽"
+  КОНЕЦ_ЕСЛИ
+КОНЕЦ</pre>
+                </div>
+
+                <h3>3. Множественное ветвление (если-иначе-если)</h3>
+                <p>Несколько условий проверяются последовательно. Выполняется действие для первого истинного условия.</p>
+
+                <div class="example-block">
+                    <h4>Пример: Определение времени года по номеру месяца</h4>
+                </div>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="700" viewBox="0 0 600 700" style="max-width: 600px;">
+                        <defs>
+                            <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="300" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="300" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 300 55 L 300 100" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Ввод -->
+                        <path d="M 255 100 L 295 100 L 345 145 L 305 145 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="300" y="127" text-anchor="middle" font-size="13" fill="#1e293b">Введи месяц (1-12)</text>
+
+                        <path d="M 300 145 L 300 190" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Условие 1: Зима -->
+                        <polygon points="300,190 400,240 300,290 200,240" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="300" y="235" text-anchor="middle" font-size="12" fill="#1e293b">месяц = 12</text>
+                        <text x="300" y="250" text-anchor="middle" font-size="12" fill="#1e293b">или 1 или 2?</text>
+
+                        <!-- Да - направо -->
+                        <path d="M 400 240 L 500 240 L 500 560" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="415" y="235" font-size="11" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Зима -->
+                        <path d="M 488 560 L 515 560 L 542 595 L 515 595 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="515" y="582" text-anchor="middle" font-size="11" fill="#1e293b">"Зима"</text>
+
+                        <!-- Нет - вниз -->
+                        <path d="M 300 290 L 300 335" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="265" y="315" font-size="11" font-weight="bold" fill="#dc2626">Нет</text>
+
+                        <!-- Условие 2: Весна -->
+                        <polygon points="300,335 400,385 300,435 200,385" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="300" y="380" text-anchor="middle" font-size="12" fill="#1e293b">месяц = 3, 4</text>
+                        <text x="300" y="395" text-anchor="middle" font-size="12" fill="#1e293b">или 5?</text>
+
+                        <!-- Да - направо -->
+                        <path d="M 400 385 L 480 385 L 480 560" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="415" y="380" font-size="11" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Весна -->
+                        <path d="M 468 560 L 495 560 L 522 595 L 495 595 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="495" y="582" text-anchor="middle" font-size="11" fill="#1e293b">"Весна"</text>
+
+                        <!-- Нет - вниз -->
+                        <path d="M 300 435 L 300 480" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="265" y="460" font-size="11" font-weight="bold" fill="#dc2626">Нет</text>
+
+                        <!-- Условие 3: Лето -->
+                        <polygon points="300,480 400,530 300,580 200,530" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="300" y="525" text-anchor="middle" font-size="12" fill="#1e293b">месяц = 6, 7</text>
+                        <text x="300" y="540" text-anchor="middle" font-size="12" fill="#1e293b">или 8?</text>
+
+                        <!-- Да - направо -->
+                        <path d="M 400 530 L 460 530 L 460 560" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="415" y="525" font-size="11" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Лето -->
+                        <path d="M 448 560 L 475 560 L 502 595 L 475 595 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="475" y="582" text-anchor="middle" font-size="11" fill="#1e293b">"Лето"</text>
+
+                        <!-- Нет (иначе) - вниз -->
+                        <path d="M 300 580 L 300 610" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <text x="250" y="600" font-size="11" font-weight="bold" fill="#dc2626">Нет (иначе)</text>
+
+                        <!-- Осень -->
+                        <path d="M 288 610 L 315 610 L 342 645 L 315 645 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="315" y="632" text-anchor="middle" font-size="11" fill="#1e293b">"Осень"</text>
+
+                        <!-- Все к концу -->
+                        <path d="M 315 645 L 315 660 L 475 660" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <path d="M 475 595 L 475 660" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <path d="M 495 595 L 495 650 L 475 650" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <path d="M 515 595 L 515 640 L 475 640" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <path d="M 475 660 L 300 660" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="300" cy="675" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="300" y="682" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <h3>4. Вложенные условия</h3>
+                <p>Условие внутри условия! Сначала проверяем одно, потом - другое.</p>
+
+                <div class="example-block">
+                    <h4>Пример: Покупка билета (возраст + льготы)</h4>
+                    <p>Сначала проверяем возраст, потом - наличие студенческого билета.</p>
+                </div>
+
+                <div class="info-block">
+                    <h4>Псевдокод вложенного условия:</h4>
+                    <pre>
+НАЧАЛО
+  ВВОД возраст, есть_студ_билет
+  ЕСЛИ возраст < 18 ТО
+    цена = 200  (детский)
+  ИНАЧЕ
+    ЕСЛИ есть_студ_билет = ДА ТО
+      цена = 250  (студенческий)
+    ИНАЧЕ
+      цена = 400  (взрослый)
+    КОНЕЦ_ЕСЛИ
+  КОНЕЦ_ЕСЛИ
+  ВЫВОД цена
+КОНЕЦ</pre>
+                </div>
+
+                <h2>Пример с вычислениями: Проверка положительного числа</h2>
+                <p>Определим, положительное ли число, отрицательное или ноль.</p>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="650" viewBox="0 0 600 650" style="max-width: 600px;">
+                        <defs>
+                            <marker id="arrowhead4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Начало -->
+                        <ellipse cx="300" cy="30" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="300" y="37" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">НАЧАЛО</text>
+
+                        <path d="M 300 55 L 300 100" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- Ввод -->
+                        <path d="M 255 100 L 295 100 L 345 145 L 305 145 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="300" y="127" text-anchor="middle" font-size="13" fill="#1e293b">Введи число X</text>
+
+                        <path d="M 300 145 L 300 190" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- Условие 1: X > 0 -->
+                        <polygon points="300,190 400,240 300,290 200,240" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="300" y="245" text-anchor="middle" font-size="13" fill="#1e293b">X > 0?</text>
+
+                        <!-- Да - направо -->
+                        <path d="M 400 240 L 480 240 L 480 540" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+                        <text x="415" y="235" font-size="12" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Положительное -->
+                        <path d="M 450 540 L 480 540 L 510 580 L 480 580 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="480" y="565" text-anchor="middle" font-size="12" fill="#1e293b">"Положительное"</text>
+
+                        <!-- Нет - вниз -->
+                        <path d="M 300 290 L 300 350" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+                        <text x="265" y="320" font-size="12" font-weight="bold" fill="#dc2626">Нет</text>
+
+                        <!-- Условие 2: X < 0 -->
+                        <polygon points="300,350 400,400 300,450 200,400" fill="#fecaca" stroke="#ef4444" stroke-width="2"/>
+                        <text x="300" y="405" text-anchor="middle" font-size="13" fill="#1e293b">X < 0?</text>
+
+                        <!-- Да - направо -->
+                        <path d="M 400 400 L 460 400 L 460 540" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+                        <text x="415" y="395" font-size="12" font-weight="bold" fill="#059669">Да</text>
+
+                        <!-- Отрицательное -->
+                        <path d="M 430 540 L 460 540 L 490 580 L 460 580 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="460" y="565" text-anchor="middle" font-size="12" fill="#1e293b">"Отрицательное"</text>
+
+                        <!-- Нет (иначе) - вниз -->
+                        <path d="M 300 450 L 300 490" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+                        <text x="245" y="475" font-size="12" font-weight="bold" fill="#dc2626">Нет (иначе)</text>
+
+                        <!-- Ноль -->
+                        <path d="M 288 490 L 315 490 L 342 530 L 315 530 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="315" y="515" text-anchor="middle" font-size="12" fill="#1e293b">"Ноль"</text>
+
+                        <!-- Все к концу -->
+                        <path d="M 315 530 L 315 600 L 300 600" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+                        <path d="M 460 580 L 460 600 L 300 600" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+                        <path d="M 480 580 L 480 590 L 300 590" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <path d="M 300 600 L 300 615" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowhead4)"/>
+
+                        <!-- Конец -->
+                        <ellipse cx="300" cy="635" rx="80" ry="25" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                        <text x="300" y="642" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">КОНЕЦ</text>
+                    </svg>
+                </div>
+
+                <h2>Задания для практики</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Калькулятор оценок</h4>
+                    <p>Составь блок-схему алгоритма, который вводит количество баллов (0-100) и выводит оценку:</p>
+                    <ul>
+                        <li>90-100 баллов → "5"</li>
+                        <li>70-89 баллов → "4"</li>
+                        <li>50-69 баллов → "3"</li>
+                        <li>0-49 баллов → "2"</li>
+                    </ul>
+                    <p><strong>Подсказка:</strong> Используй множественное ветвление!</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Високосный год</h4>
+                    <p>Создай алгоритм проверки, является ли год високосным. Правила:</p>
+                    <ul>
+                        <li>Год делится на 4 БЕЗ остатка</li>
+                        <li>НО если год делится на 100, то он не високосный</li>
+                        <li>НО если год делится на 400, то он високосный</li>
+                    </ul>
+                    <p>Примеры: 2020 (да), 1900 (нет), 2000 (да), 2023 (нет)</p>
+                    <p><strong>Подсказка:</strong> Здесь понадобятся вложенные условия!</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Максимум из трех чисел</h4>
+                    <p>Напиши алгоритм, который вводит три числа A, B, C и выводит наибольшее из них.</p>
+                    <p><strong>Подсказка:</strong> Сначала сравни A и B, найди большее. Потом сравни его с C!</p>
+                </div>
+
+                <div class="quiz-container">
+                    <h3>Проверь себя!</h3>
+
+                    <div class="question">
+                        <h4>Вопрос 1: Что такое ветвление в алгоритме?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно! Ветвление - это выбор пути выполнения в зависимости от условия.">Выбор разных действий в зависимости от условия</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это описание линейного алгоритма, где нет выбора.">Последовательное выполнение всех действий</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это описание циклического алгоритма.">Многократное повторение одних и тех же действий</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, ветвление есть и в других языках, это универсальная концепция.">Специальная команда только для Python</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Какая фигура в блок-схеме обозначает условие?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, прямоугольник обозначает действие или операцию.">Прямоугольник</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Ромб используется для проверки условий.">Ромб</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, овал - это начало или конец алгоритма.">Овал</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, параллелограмм - это ввод или вывод данных.">Параллелограмм</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько стрелок выходит из ромба (условия)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, одной стрелки недостаточно для выбора.">Одна</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Верно! Две стрелки: 'Да' (условие истинно) и 'Нет' (условие ложно).">Две</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, из ромба всегда выходят ровно две стрелки.">Три и больше</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, количество стрелок всегда фиксировано - две.">Зависит от количества вариантов</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Алгоритм: ЕСЛИ X > 10 ТО Y = 5 ИНАЧЕ Y = 15. Чему равен Y при X = 7?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, 5 было бы при X > 10, но 7 не больше 10.">Y = 5</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, Y не может быть равен 7. Проверь условие!">Y = 7</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, откуда 10? Посмотри на значения в ветвях.">Y = 10</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! X = 7 не больше 10, поэтому условие ложно и выполняется ИНАЧЕ: Y = 15.">Y = 15</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Какой тип ветвления нужен, чтобы проверить: "Если дождь И холодно - зонт и куртка; Если дождь БЕЗ холода - только зонт; Если холодно БЕЗ дождя - только куртка; Иначе - ничего"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, простое условие дает только 2 варианта, а здесь их 4.">Простое ветвление (если)</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, если-иначе дает 2 варианта, а здесь 4 варианта.">Полное ветвление (если-иначе)</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Нужны вложенные условия: сначала проверяем дождь, внутри - холодно.">Вложенные условия</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, цикл - это повторение, а здесь нужен выбор.">Цикл</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <button class="btn-secondary" id="show-results">Показать результаты</button>
+                    <div class="quiz-results"></div>
+                </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Ветвления - ключевая тема экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 6 - анализ алгоритмов с ветвлениями</li>
+                        <li><strong>ОГЭ:</strong> Задание 14 - написание простых программ с условиями</li>
+                        <li><strong>ЕГЭ:</strong> Задание 6 - формальное выполнение алгоритмов с условиями</li>
+                        <li><strong>ЕГЭ:</strong> Задание 12 - анализ сложных алгоритмов с множественными ветвлениями</li>
+                        <li><strong>Программирование:</strong> Почти все задачи требуют условных операторов!</li>
+                    </ul>
+                    <p>Понимание ветвлений критически важно для решения реальных задач!</p>
+                </div>
+
+                <h2>Резюме</h2>
+                <ul>
+                    <li><strong>Ветвление</strong> - выбор пути выполнения в зависимости от условия</li>
+                    <li><strong>Типы ветвлений:</strong>
+                        <ul>
+                            <li>Простое (если) - одна ветка</li>
+                            <li>Полное (если-иначе) - две ветки</li>
+                            <li>Множественное (если-иначе-если) - много веток</li>
+                            <li>Вложенное - условие внутри условия</li>
+                        </ul>
+                    </li>
+                    <li>В блок-схеме условие изображается <strong>ромбом</strong> с двумя выходами</li>
+                    <li>Ветвления делают алгоритмы гибкими и способными реагировать на разные ситуации</li>
+                    <li>Примеры: выбор одежды, определение оценки, расчет стоимости билета</li>
+                </ul>
+
+                <p>Превосходно! Теперь ты умеешь создавать алгоритмы с выбором. В следующем уроке мы изучим <strong>циклы</strong> - алгоритмы, которые умеют повторять действия!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="algo-03.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="algo-05.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Python для школьников © 2024</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
