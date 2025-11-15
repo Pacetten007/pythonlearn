@@ -577,9 +577,15 @@ else:
                 </div>
 
                 <h2>Интерактивные примеры</h2>
-                <div class="editor-container">
-                    <h4>Попробуй сам!</h4>
-                    <textarea id="code-editor" class="code-editor"># Пример 1: Создание множеств
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Пример 1: Создание множеств
 colors = {"red", "green", "blue"}
 numbers = {1, 2, 3, 4, 5}
 from_list = set([1, 2, 2, 3, 3, 3])  # Дубликаты удалятся
@@ -888,11 +894,6 @@ print(unique_ordered(numbers))  # [5, 2, 8, 1, 3] - порядок сохран�
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>Python для школьников © 2024</p>
-        </div>
-    </footer>
 
     <script src="../js/main.js"></script>
 </body>

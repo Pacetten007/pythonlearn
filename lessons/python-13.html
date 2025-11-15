@@ -670,9 +670,15 @@ for i in range(len(classroom)):
                 </div>
 
                 <h2>Интерактивные примеры</h2>
-                <div class="editor-container">
-                    <h4>Попробуй сам!</h4>
-                    <textarea id="code-editor" class="code-editor"># Пример 1: Создание и вывод матрицы
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Пример 1: Создание и вывод матрицы
 matrix = [
     [1, 2, 3],
     [4, 5, 6],
@@ -1022,11 +1028,6 @@ print(col_sum)  # 12</pre>
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>Python для школьников © 2024</p>
-        </div>
-    </footer>
 
     <script src="../js/main.js"></script>
 </body>
