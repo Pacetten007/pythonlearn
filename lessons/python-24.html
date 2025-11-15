@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 29: Чтение файлов - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-24">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,21 +220,553 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 29: Чтение файлов</h1>
-                <div class="lesson-meta">Работа с файлами • 25 минут</div>
+                <div class="lesson-meta">Работа с файлами • 45 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>До сих пор все наши программы работали только с данными, которые мы вводили с клавиатуры или хранили в переменных. Но что если данных очень много? Что если нужно сохранить результаты работы программы? Для этого существуют <strong>файлы</strong>!</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Файлы позволяют:</p>
+                <ul>
+                    <li><strong>Сохранять данные постоянно</strong> - не теряются после завершения программы</li>
+                    <li><strong>Работать с большими объемами информации</strong> - не нужно вводить каждый раз вручную</li>
+                    <li><strong>Обмениваться данными</strong> - между программами и пользователями</li>
+                    <li><strong>Анализировать логи</strong> - записи о работе программ и систем</li>
+                    <li><strong>Обрабатывать документы</strong> - тексты, таблицы, конфигурации</li>
+                </ul>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="warning-block">
+                    <h4>⚠️ Важно для Skulpt!</h4>
+                    <p>Работа с файлами в браузерном редакторе Skulpt <strong>не поддерживается</strong>. Чтобы запустить примеры с файлами, тебе нужно:</p>
+                    <ul>
+                        <li>Установить Python на свой компьютер (скачай с python.org)</li>
+                        <li>Сохранить код в файл с расширением .py</li>
+                        <li>Запустить через терминал: <code>python filename.py</code></li>
+                    </ul>
+                    <p>Но изучать синтаксис и примеры можно прямо здесь! Просто знай, что для реального использования понадобится локальная установка Python.</p>
                 </div>
 
-                <h2>Попробуй сам!</h2>
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Функция open() - открытие файла</li>
+                        <li>Режимы открытия файлов (r, rb, и другие)</li>
+                        <li>Метод read() - чтение всего файла</li>
+                        <li>Метод readline() - чтение одной строки</li>
+                        <li>Метод readlines() - чтение всех строк в список</li>
+                        <li>Закрытие файлов с close()</li>
+                        <li>Оператор with - автоматическое закрытие</li>
+                        <li>Итерация по строкам файла</li>
+                        <li>Обработка ошибок при работе с файлами</li>
+                        <li>Кодировки текста (UTF-8)</li>
+                    </ul>
+                </div>
+
+                <h2>Функция open()</h2>
+                <p>Чтобы работать с файлом, его нужно сначала <strong>открыть</strong> с помощью функции <code>open()</code>:</p>
+
+                <div class="code-block">
+                    <pre>file = open("filename.txt", "r")
+# file - переменная с объектом файла
+# "filename.txt" - имя файла (или путь)
+# "r" - режим открытия (read - чтение)</pre>
+                </div>
+
+                <h3>Параметры open():</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Параметр</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Описание</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Пример</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>filename</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Имя файла или путь</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">"text.txt", "data/file.txt"</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>mode</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Режим открытия</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">"r", "w", "a"</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>encoding</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Кодировка текста</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">"utf-8", "cp1251"</td>
+                    </tr>
+                </table>
+
+                <h2>Режимы открытия файлов</h2>
+                <p>Режим определяет, что можно делать с файлом:</p>
+
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Режим</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Название</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Описание</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>"r"</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Read (чтение)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Только чтение. Файл ДОЛЖЕН существовать!</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>"rb"</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Read Binary</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Чтение в бинарном режиме</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>"w"</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Write (запись)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Запись (о нём в следующем уроке)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>"a"</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Append (добавление)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Добавление в конец файла</td>
+                    </tr>
+                </table>
+
+                <div class="warning-block">
+                    <h4>⚠️ Режим "r" требует существующий файл!</h4>
+                    <p>Если файл не существует, получишь ошибку <code>FileNotFoundError</code>. Обрабатывай её с помощью try-except!</p>
+                </div>
+
+                <h2>Метод read() - Чтение всего файла</h2>
+                <p>Метод <code>read()</code> читает <strong>весь</strong> файл целиком как одну строку:</p>
+
+                <div class="code-block">
+                    <pre># Открыть файл
+file = open("text.txt", "r", encoding="utf-8")
+
+# Прочитать содержимое
+content = file.read()
+print(content)
+
+# Закрыть файл (ОБЯЗАТЕЛЬНО!)
+file.close()</pre>
+                </div>
+
+                <h3>Пример:</h3>
+                <div class="code-block">
+                    <pre># Файл poem.txt содержит:
+# Я памятник себе воздвиг нерукотворный,
+# К нему не зарастет народная тропа.
+
+file = open("poem.txt", "r", encoding="utf-8")
+content = file.read()
+file.close()
+
+print(content)
+# Выведет:
+# Я памятник себе воздвиг нерукотворный,
+# К нему не зарастет народная тропа.</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Когда использовать read():</h4>
+                    <ul>
+                        <li>Файл небольшой (помещается в память)</li>
+                        <li>Нужно обработать весь текст сразу</li>
+                        <li>Поиск или замена во всем файле</li>
+                        <li>Анализ всего документа</li>
+                    </ul>
+                </div>
+
+                <h2>Метод readline() - Чтение одной строки</h2>
+                <p>Метод <code>readline()</code> читает файл построчно - по одной строке за раз:</p>
+
+                <div class="code-block">
+                    <pre>file = open("text.txt", "r", encoding="utf-8")
+
+# Читаем первую строку
+line1 = file.readline()
+print("Первая строка:", line1)
+
+# Читаем вторую строку
+line2 = file.readline()
+print("Вторая строка:", line2)
+
+# Читаем третью строку
+line3 = file.readline()
+print("Третья строка:", line3)
+
+file.close()</pre>
+                </div>
+
+                <h3>Пример с циклом while:</h3>
+                <div class="code-block">
+                    <pre>file = open("text.txt", "r", encoding="utf-8")
+
+line = file.readline()
+while line:  # Пока строка не пустая
+    print(line.strip())  # strip() убирает \n
+    line = file.readline()  # Читаем следующую
+
+file.close()</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Когда использовать readline():</h4>
+                    <ul>
+                        <li>Файл очень большой (не помещается в память)</li>
+                        <li>Обработка построчно</li>
+                        <li>Поиск конкретной строки</li>
+                        <li>Чтение до определенного места</li>
+                    </ul>
+                </div>
+
+                <h2>Метод readlines() - Чтение всех строк в список</h2>
+                <p>Метод <code>readlines()</code> читает весь файл и возвращает <strong>список строк</strong>:</p>
+
+                <div class="code-block">
+                    <pre>file = open("text.txt", "r", encoding="utf-8")
+
+# Получаем список всех строк
+lines = file.readlines()
+file.close()
+
+print(f"Всего строк: {len(lines)}")
+
+# Обходим список
+for i, line in enumerate(lines, 1):
+    print(f"Строка {i}: {line.strip()}")</pre>
+                </div>
+
+                <h3>Пример:</h3>
+                <div class="code-block">
+                    <pre># Файл students.txt содержит:
+# Иван Петров
+# Мария Сидорова
+# Петр Иванов
+
+file = open("students.txt", "r", encoding="utf-8")
+students = file.readlines()
+file.close()
+
+print("Список студентов:")
+for i, student in enumerate(students, 1):
+    print(f"{i}. {student.strip()}")
+
+# Выведет:
+# Список студентов:
+# 1. Иван Петров
+# 2. Мария Сидорова
+# 3. Петр Иванов</pre>
+                </div>
+
+                <h2>Сравнение методов чтения</h2>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Метод</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Что возвращает</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Когда использовать</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>read()</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Одна большая строка</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Небольшие файлы</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>readline()</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Одна строка</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Большие файлы, поиск</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>readlines()</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Список строк</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Средние файлы, индексация</td>
+                    </tr>
+                </table>
+
+                <h2>Закрытие файлов - close()</h2>
+                <p>После работы с файлом его <strong>ОБЯЗАТЕЛЬНО</strong> нужно закрыть методом <code>close()</code>!</p>
+
+                <div class="code-block">
+                    <pre>file = open("text.txt", "r")
+content = file.read()
+file.close()  # ВАЖНО! Освобождаем ресурсы</pre>
+                </div>
+
+                <h3>Почему важно закрывать файлы:</h3>
+                <ul>
+                    <li><strong>Освобождение ресурсов</strong> - операционная система ограничивает количество открытых файлов</li>
+                    <li><strong>Сохранение изменений</strong> - данные из буфера записываются на диск</li>
+                    <li><strong>Избежание блокировок</strong> - другие программы смогут работать с файлом</li>
+                    <li><strong>Предотвращение утечек памяти</strong> - файловые дескрипторы занимают память</li>
+                </ul>
+
+                <div class="warning-block">
+                    <h4>⚠️ Проблема с забытым close():</h4>
+                    <div class="code-block">
+                        <pre># ПЛОХО - если произойдет ошибка, файл не закроется!
+file = open("text.txt", "r")
+content = file.read()
+result = process(content)  # Если здесь ошибка...
+file.close()  # ...это не выполнится!</pre>
+                    </div>
+                </div>
+
+                <h2>Оператор with - Лучший способ!</h2>
+                <p>Оператор <code>with</code> автоматически закрывает файл, даже если произошла ошибка!</p>
+
+                <div class="code-block">
+                    <pre>with open("text.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+    print(content)
+# Файл автоматически закрыт после блока with!</pre>
+                </div>
+
+                <h3>Преимущества with:</h3>
+                <ul>
+                    <li><strong>Автоматическое закрытие</strong> - не нужно помнить про close()</li>
+                    <li><strong>Безопасность</strong> - файл закроется даже при ошибке</li>
+                    <li><strong>Читаемость</strong> - ясно, где работа с файлом начинается и заканчивается</li>
+                    <li><strong>Рекомендуется всегда</strong> - это "правильный" способ работы с файлами</li>
+                </ul>
+
+                <div class="info-block">
+                    <h4>✅ Лучшая практика:</h4>
+                    <div class="code-block">
+                        <pre># ВСЕГДА используй with:
+with open("text.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+    # Работа с содержимым
+
+# Файл уже закрыт автоматически!</pre>
+                    </div>
+                </div>
+
+                <h2>Итерация по строкам файла</h2>
+                <p>Самый элегантный способ - использовать файл как итератор в цикле for:</p>
+
+                <div class="code-block">
+                    <pre>with open("text.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print(line.strip())  # strip() убирает \n в конце</pre>
+                </div>
+
+                <h3>Преимущества итерации:</h3>
+                <ul>
+                    <li><strong>Простота</strong> - самый короткий и понятный код</li>
+                    <li><strong>Эффективность</strong> - читает по одной строке (экономит память)</li>
+                    <li><strong>Автоматизм</strong> - не нужно вручную вызывать readline()</li>
+                    <li><strong>Подходит для больших файлов</strong> - не загружает весь файл в память</li>
+                </ul>
+
+                <h3>Примеры с итерацией:</h3>
+                <div class="code-block">
+                    <pre># Пример 1: Подсчет строк
+count = 0
+with open("text.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        count += 1
+print(f"Строк в файле: {count}")
+
+# Пример 2: Нумерованный вывод
+with open("text.txt", "r", encoding="utf-8") as file:
+    for i, line in enumerate(file, 1):
+        print(f"{i}: {line.strip()}")
+
+# Пример 3: Поиск текста
+search_word = "Python"
+with open("text.txt", "r", encoding="utf-8") as file:
+    for i, line in enumerate(file, 1):
+        if search_word in line:
+            print(f"Найдено в строке {i}: {line.strip()}")</pre>
+                </div>
+
+                <h2>Обработка ошибок при работе с файлами</h2>
+                <p>При работе с файлами могут возникать ошибки. Обрабатывай их с помощью try-except:</p>
+
+                <div class="code-block">
+                    <pre># Обработка FileNotFoundError
+try:
+    with open("missing.txt", "r", encoding="utf-8") as file:
+        content = file.read()
+except FileNotFoundError:
+    print("Ошибка: Файл не найден!")
+    print("Проверь имя файла и путь.")</pre>
+                </div>
+
+                <h3>Типичные ошибки:</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Ошибка</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Причина</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Решение</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>FileNotFoundError</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Файл не существует</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Проверь путь и имя</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>PermissionError</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Нет прав доступа</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Измени права файла</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>UnicodeDecodeError</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Неверная кодировка</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Укажи правильную encoding</td>
+                    </tr>
+                </table>
+
+                <h3>Полная обработка ошибок:</h3>
+                <div class="code-block">
+                    <pre>filename = "text.txt"
+
+try:
+    with open(filename, "r", encoding="utf-8") as file:
+        content = file.read()
+        print(content)
+except FileNotFoundError:
+    print(f"Файл '{filename}' не найден!")
+except PermissionError:
+    print(f"Нет прав для чтения '{filename}'!")
+except UnicodeDecodeError:
+    print(f"Ошибка кодировки в файле '{filename}'!")
+except Exception as e:
+    print(f"Неизвестная ошибка: {e}")</pre>
+                </div>
+
+                <h2>Кодировки текста</h2>
+                <p>Кодировка определяет, как символы хранятся в файле. Для русского текста используй <strong>UTF-8</strong>!</p>
+
+                <div class="code-block">
+                    <pre># Правильно для русского текста:
+with open("text.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+
+# Если файл в старой кодировке Windows:
+with open("old_file.txt", "r", encoding="cp1251") as file:
+    content = file.read()</pre>
+                </div>
+
+                <h3>Популярные кодировки:</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Кодировка</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Описание</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Когда использовать</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>utf-8</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Универсальная кодировка</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">ВСЕГДА (рекомендуется)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>cp1251</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Windows Cyrillic</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Старые файлы Windows</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>ascii</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Только английские символы</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Простые англоязычные файлы</td>
+                    </tr>
+                </table>
+
+                <div class="warning-block">
+                    <h4>⚠️ Проблемы с кодировкой:</h4>
+                    <p>Если видишь "кракозябры" вместо русского текста:</p>
+                    <ul>
+                        <li>Попробуй encoding="utf-8"</li>
+                        <li>Попробуй encoding="cp1251"</li>
+                        <li>Спроси, в какой кодировке создан файл</li>
+                    </ul>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Подсчет статистики файла</h3>
+                <div class="code-block">
+                    <pre>filename = "text.txt"
+
+try:
+    with open(filename, "r", encoding="utf-8") as file:
+        lines = 0
+        words = 0
+        chars = 0
+
+        for line in file:
+            lines += 1
+            words += len(line.split())
+            chars += len(line)
+
+        print(f"Статистика файла '{filename}':")
+        print(f"  Строк: {lines}")
+        print(f"  Слов: {words}")
+        print(f"  Символов: {chars}")
+except FileNotFoundError:
+    print(f"Файл '{filename}' не найден!")</pre>
+                </div>
+
+                <h3>Пример 2: Поиск в файле</h3>
+                <div class="code-block">
+                    <pre>search_word = "Python"
+filename = "text.txt"
+
+try:
+    with open(filename, "r", encoding="utf-8") as file:
+        found = False
+        for i, line in enumerate(file, 1):
+            if search_word in line:
+                print(f"Строка {i}: {line.strip()}")
+                found = True
+
+        if not found:
+            print(f"Слово '{search_word}' не найдено.")
+except FileNotFoundError:
+    print(f"Файл '{filename}' не найден!")</pre>
+                </div>
+
+                <h3>Пример 3: Чтение конфигурации</h3>
+                <div class="code-block">
+                    <pre># Файл config.txt содержит:
+# username=admin
+# password=12345
+# server=localhost
+
+config = {}
+
+try:
+    with open("config.txt", "r", encoding="utf-8") as file:
+        for line in file:
+            line = line.strip()
+            if "=" in line:
+                key, value = line.split("=", 1)
+                config[key] = value
+
+    print("Конфигурация загружена:")
+    print(f"  Username: {config.get('username')}")
+    print(f"  Server: {config.get('server')}")
+except FileNotFoundError:
+    print("Файл конфигурации не найден!")</pre>
+                </div>
+
+                <h3>Пример 4: Фильтрация строк</h3>
+                <div class="code-block">
+                    <pre># Прочитать только непустые строки
+non_empty_lines = []
+
+try:
+    with open("text.txt", "r", encoding="utf-8") as file:
+        for line in file:
+            line = line.strip()
+            if line:  # Если строка не пустая
+                non_empty_lines.append(line)
+
+    print("Непустые строки:")
+    for line in non_empty_lines:
+        print(f"  {line}")
+except FileNotFoundError:
+    print("Файл не найден!")</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +775,329 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># ⚠️ Работа с файлами не поддерживается в Skulpt!
+# Запусти этот код локально на своём компьютере.
+
+# Примеры синтаксиса чтения файлов:
+
+# Пример 1: Чтение всего файла
+print("=== Пример 1: read() ===")
+print("with open('text.txt', 'r', encoding='utf-8') as file:")
+print("    content = file.read()")
+print("    print(content)")
+print()
+
+# Пример 2: Построчное чтение
+print("=== Пример 2: readline() ===")
+print("with open('text.txt', 'r', encoding='utf-8') as file:")
+print("    line1 = file.readline()")
+print("    line2 = file.readline()")
+print("    print('Первая:', line1.strip())")
+print("    print('Вторая:', line2.strip())")
+print()
+
+# Пример 3: Чтение всех строк в список
+print("=== Пример 3: readlines() ===")
+print("with open('text.txt', 'r', encoding='utf-8') as file:")
+print("    lines = file.readlines()")
+print("    for i, line in enumerate(lines, 1):")
+print("        print(f'{i}: {line.strip()}')")
+print()
+
+# Пример 4: Итерация по файлу (ЛУЧШИЙ способ!)
+print("=== Пример 4: Итерация (рекомендуется) ===")
+print("with open('text.txt', 'r', encoding='utf-8') as file:")
+print("    for line in file:")
+print("        print(line.strip())")
+print()
+
+# Пример 5: Обработка ошибок
+print("=== Пример 5: Обработка ошибок ===")
+print("try:")
+print("    with open('missing.txt', 'r', encoding='utf-8') as file:")
+print("        content = file.read()")
+print("except FileNotFoundError:")
+print("    print('Файл не найден!')")
+print()
+
+# Симуляция работы для демонстрации
+print("=== Симуляция чтения файла ===")
+# Представим, что прочитали файл со списком студентов:
+simulated_content = """Иван Петров
+Мария Сидорова
+Петр Иванов
+Анна Смирнова"""
+
+print("Содержимое файла 'students.txt':")
+print(simulated_content)
+print()
+
+print("Обработка построчно:")
+lines = simulated_content.split('\n')
+for i, line in enumerate(lines, 1):
+    print(f"Студент {i}: {line}")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Статистика текстового файла</h4>
+                    <p>Создай программу, которая:</p>
+                    <ol>
+                        <li>Запрашивает имя файла у пользователя</li>
+                        <li>Открывает файл и читает его содержимое</li>
+                        <li>Подсчитывает количество строк, слов и символов</li>
+                        <li>Находит самую длинную строку</li>
+                        <li>Выводит всю статистику красиво оформленной</li>
+                        <li>Обрабатывает ошибку, если файл не найден</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй with, метод split() для подсчета слов, и max() для поиска самой длинной строки.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Поиск по файлу</h4>
+                    <p>Создай программу для поиска текста в файле:</p>
+                    <ol>
+                        <li>Запрашивает имя файла и текст для поиска</li>
+                        <li>Ищет все строки, содержащие искомый текст</li>
+                        <li>Выводит номер строки и её содержимое</li>
+                        <li>Подсчитывает общее количество совпадений</li>
+                        <li>Делает поиск без учета регистра (case-insensitive)</li>
+                        <li>Обрабатывает все возможные ошибки</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй метод lower() для поиска без учета регистра.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Анализ лог-файла</h4>
+                    <p>Создай программу для анализа лог-файла:</p>
+                    <ol>
+                        <li>Читает файл с логами (каждая строка - запись)</li>
+                        <li>Подсчитывает записи разных типов (INFO, WARNING, ERROR)</li>
+                        <li>Находит все строки с ERROR и выводит их</li>
+                        <li>Определяет время первой и последней записи</li>
+                        <li>Создает краткий отчет о состоянии системы</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй оператор in для поиска подстрок в строке.</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыл закрыть файл</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - файл не закрыт!
+file = open("text.txt", "r")
+content = file.read()
+print(content)
+# Забыли file.close()!
+
+# ПРАВИЛЬНО - используй with
+with open("text.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+    print(content)
+# Файл закрыт автоматически!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильный режим</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - режим "w" для чтения!
+file = open("text.txt", "w")  # Удалит содержимое!
+content = file.read()  # Ошибка!
+
+# ПРАВИЛЬНО - режим "r" для чтения
+with open("text.txt", "r", encoding="utf-8") as file:
+    content = file.read()</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Забыл указать кодировку</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - может быть проблема с русским текстом
+with open("text.txt", "r") as file:  # Кодировка по умолчанию
+    content = file.read()
+
+# ПРАВИЛЬНО - явно указываем UTF-8
+with open("text.txt", "r", encoding="utf-8") as file:
+    content = file.read()</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Не обработал исключения</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - программа упадет, если файла нет
+with open("missing.txt", "r") as file:
+    content = file.read()
+
+# ПРАВИЛЬНО - обрабатываем ошибку
+try:
+    with open("missing.txt", "r", encoding="utf-8") as file:
+        content = file.read()
+except FileNotFoundError:
+    print("Файл не найден!")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Неверный путь к файлу</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - путь зависит от ОС
+file = open("folder\file.txt", "r")  # \ для Windows
+
+# ПРАВИЛЬНО - используй / (работает везде)
+with open("folder/file.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+
+# Или используй модуль os.path:
+import os
+path = os.path.join("folder", "file.txt")
+with open(path, "r", encoding="utf-8") as file:
+    content = file.read()</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Читаешь весь огромный файл сразу</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - файл может быть гигабайты!
+with open("huge_file.txt", "r") as file:
+    content = file.read()  # Занимает всю память!
+
+# ПРАВИЛЬНО - читай построчно
+with open("huge_file.txt", "r", encoding="utf-8") as file:
+    for line in file:  # Читает по одной строке
+        process(line)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 7: Забыл про strip()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - в конце каждой строки \n
+with open("text.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print(line)  # Лишние пустые строки!
+
+# ПРАВИЛЬНО - убираем \n с помощью strip()
+with open("text.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print(line.strip())</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Какой режим используется для чтения файла?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Режим 'r' (read) используется для чтения файлов.">"r"</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Режим 'w' (write) используется для записи, а не чтения.">"w"</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Режим 'a' (append) используется для добавления в конец файла.">"a"</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Режим 'x' используется для создания нового файла.">"x"</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что вернет метод readlines()?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Одну строку возвращает readline(), а не readlines().">Одну строку</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! readlines() возвращает список, где каждый элемент - строка файла.">Список строк</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Весь файл как одну строку возвращает read(), а не readlines().">Весь файл как одну строку</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! readlines() возвращает список строк, а не словарь.">Словарь</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Зачем нужен оператор with?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! with не ускоряет чтение файла.">Ускоряет чтение файла</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! with автоматически закрывает файл после использования, даже если произошла ошибка.">Автоматически закрывает файл</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! with не создает файл, а управляет его жизненным циклом.">Создает новый файл</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! with не проверяет ошибки, а обеспечивает правильное закрытие файла.">Проверяет ошибки в файле</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Какая кодировка рекомендуется для русского текста?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! ASCII не поддерживает русские символы.">ascii</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! UTF-8 - универсальная кодировка, поддерживающая все языки, включая русский.">utf-8</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Binary - это бинарный режим, не подходит для текста.">binary</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! latin-1 не поддерживает русские символы.">latin-1</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что делает метод strip() при чтении строки?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! strip() не удаляет гласные буквы.">Удаляет все гласные</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! strip() удаляет пробелы и символы новой строки (\\n) с начала и конца.">Удаляет пробелы и \\n</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! strip() не делает строку заглавной (это делает upper()).">Делает строку заглавной</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! strip() не разбивает строку (это делает split()).">Разбивает строку на слова</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Работа с файлами - важная тема на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ Задание 6:</strong> Чтение данных из файла и их обработка</li>
+                        <li><strong>ЕГЭ Задания 24-27:</strong> Обработка больших файлов данных</li>
+                        <li>Типичные задачи на экзаменах:
+                            <ul>
+                                <li>Чтение чисел из файла и поиск max/min</li>
+                                <li>Подсчет элементов, удовлетворяющих условию</li>
+                                <li>Поиск последовательностей в файле</li>
+                                <li>Обработка текстовых данных</li>
+                                <li>Анализ структурированных данных</li>
+                            </ul>
+                        </li>
+                        <li>На экзамене часто дается готовый файл с данными</li>
+                        <li>Нужно уметь читать файл построчно и обрабатывать</li>
+                        <li>Важно правильно обрабатывать исключения (FileNotFoundError)</li>
+                        <li>Знание with и правильного закрытия файлов обязательно!</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>open(filename, mode, encoding)</strong> - открывает файл</li>
+                    <li><strong>Режим "r"</strong> - чтение (файл должен существовать!)</li>
+                    <li><strong>read()</strong> - читает весь файл как одну строку</li>
+                    <li><strong>readline()</strong> - читает одну строку</li>
+                    <li><strong>readlines()</strong> - читает все строки в список</li>
+                    <li><strong>close()</strong> - обязательно закрывай файл после работы!</li>
+                    <li><strong>with</strong> - автоматически закрывает файл (РЕКОМЕНДУЕТСЯ!)</li>
+                    <li><strong>Итерация for line in file</strong> - лучший способ для больших файлов</li>
+                    <li><strong>try-except</strong> - обрабатывай FileNotFoundError</li>
+                    <li><strong>encoding="utf-8"</strong> - используй для русского текста</li>
+                    <li><strong>strip()</strong> - убирает \n в конце строк</li>
+                </ul>
+
+                <p>Отлично! Ты научился читать файлы в Python! Это фундаментальный навык для работы с данными. В следующем уроке изучим, как записывать информацию в файлы!</p>
             </div>
 
             <div class="lesson-nav">
@@ -272,7 +1107,6 @@
             </div>
         </div>
     </main>
-
 
     <script src="../js/main.js"></script>
 </body>

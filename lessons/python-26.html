@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 31: Обработка текстовых файлов - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <title>Урок 31: Обработка текста - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-26">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -147,54 +148,15 @@
 
         <div class="lesson-group">
             <div class="lesson-group-header">
-                <h3>Графы и деревья</h3>
+                <h3>Информация</h3>
                 <span class="toggle-icon">▼</span>
             </div>
             <ul>
-                <li><a href="python-38.html">Введение в графы</a></li>
-                <li><a href="python-39.html">Обход в ширину (BFS)</a></li>
-                <li><a href="python-40.html">Обход в глубину (DFS)</a></li>
-                <li><a href="python-41.html">Деревья</a></li>
-                <li><a href="python-42.html">Алгоритмы на графах</a></li>
-                <li><a href="python-43.html">Задачи ЕГЭ с графами</a></li>
-            </ul>
-        </div>
-
-        <div class="lesson-group">
-            <div class="lesson-group-header">
-                <h3>Подготовка к ОГЭ</h3>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <ul>
-                <li><a href="oge-01.html">Исполнители алгоритмов</a></li>
-                <li><a href="oge-02.html">Анализ программ</a></li>
-                <li><a href="oge-03.html">Простые задачи</a></li>
-                <li><a href="oge-04.html">Массивы</a></li>
-                <li><a href="oge-05.html">Строки</a></li>
-                <li><a href="oge-06.html">Файлы</a></li>
-                <li><a href="oge-07.html">Электронные таблицы</a></li>
-                <li><a href="oge-08.html">Пробный экзамен</a></li>
-            </ul>
-        </div>
-
-        <div class="lesson-group">
-            <div class="lesson-group-header">
-                <h3>Подготовка к ЕГЭ</h3>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <ul>
-                <li><a href="ege-01.html">Кодирование информации</a></li>
-                <li><a href="ege-02.html">Логика и множества</a></li>
-                <li><a href="ege-03.html">Системы счисления</a></li>
-                <li><a href="ege-04.html">Алгоритмы</a></li>
-                <li><a href="ege-05.html">Программирование простое</a></li>
-                <li><a href="ege-06.html">Программирование среднее</a></li>
-                <li><a href="ege-07.html">Программирование сложное</a></li>
-                <li><a href="ege-08.html">Теория игр</a></li>
-                <li><a href="ege-09.html">Рекурсия</a></li>
-                <li><a href="ege-10.html">Динамическое программирование</a></li>
-                <li><a href="ege-11.html">Обработка больших данных</a></li>
-                <li><a href="ege-12.html">Пробный экзамен</a></li>
+                <li><a href="info-01.html">Измерение информации</a></li>
+                <li><a href="info-02.html">Кодирование текста</a></li>
+                <li><a href="info-03.html">Кодирование изображений</a></li>
+                <li><a href="info-04.html">Кодирование звука</a></li>
+                <li><a href="info-05.html">Задачи ЕГЭ</a></li>
             </ul>
         </div>
 
@@ -218,22 +180,472 @@
     <main class="container">
         <div class="lesson-container">
             <div class="lesson-header">
-                <h1>Урок 31: Обработка текстовых файлов</h1>
-                <div class="lesson-meta">Работа с файлами • 25 минут</div>
+                <h1>Урок 31: Обработка текста</h1>
+                <div class="lesson-meta">Работа с файлами • 50 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Теперь, когда ты умеешь читать и записывать файлы, давай научимся <strong>обрабатывать текст</strong>! Обработка текста - это реальные практические задачи, с которыми ты будешь сталкиваться постоянно:</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <ul>
+                    <li><strong>Анализ логов</strong> - поиск ошибок в файлах логов серверов</li>
+                    <li><strong>Обработка данных</strong> - подсчет статистики в текстовых файлах</li>
+                    <li><strong>Поиск и замена</strong> - автоматическое изменение текста</li>
+                    <li><strong>Фильтрация</strong> - удаление ненужных строк или данных</li>
+                    <li><strong>Извлечение информации</strong> - парсинг конфигураций, отчетов</li>
+                </ul>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="warning-block">
+                    <h4>⚠️ Важно для Skulpt!</h4>
+                    <p>Работа с файлами в браузере <strong>не поддерживается</strong>. Чтобы запустить примеры:</p>
+                    <ul>
+                        <li>Установи Python локально (python.org)</li>
+                        <li>Создай тестовые файлы с текстом</li>
+                        <li>Запускай код через терминал</li>
+                    </ul>
+                    <p>Но синтаксис и алгоритмы изучай здесь! В редакторе ниже есть симуляции для понимания.</p>
                 </div>
 
-                <h2>Попробуй сам!</h2>
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Построчная обработка файлов</li>
+                        <li>Подсчет строк, слов и символов</li>
+                        <li>Поиск текста с номерами строк</li>
+                        <li>Замена текста в файлах</li>
+                        <li>Фильтрация строк (удаление пустых, комментариев)</li>
+                        <li>Частотный анализ слов (словарь)</li>
+                        <li>Работа с двумя файлами одновременно</li>
+                        <li>Эффективная обработка больших файлов</li>
+                    </ul>
+                </div>
+
+                <h2>Построчная обработка файлов</h2>
+                <p>Самый эффективный способ обработки файлов - <strong>читать по одной строке</strong>. Это экономит память и позволяет работать даже с огромными файлами:</p>
+
+                <div class="code-block">
+                    <pre>with open("file.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        # Обрабатываем каждую строку
+        line = line.strip()  # Убираем \n
+        print(line)</pre>
+                </div>
+
+                <h3>Почему построчно лучше?</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Метод</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Преимущества</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Недостатки</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>read()</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Простота, весь файл сразу</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Требует много памяти</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>readlines()</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Список всех строк</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Весь файл в память</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>for line in file</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Мало памяти, работает с большими файлами</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Нет прямого доступа к строкам</td>
+                    </tr>
+                </table>
+
+                <h2>Задача 1: Подсчет строк, слов, символов</h2>
+                <p>Классическая задача - аналог утилиты <code>wc</code> (word count) в Linux:</p>
+
+                <div class="code-block">
+                    <pre>def count_statistics(filename):
+    """Подсчитывает строки, слова и символы в файле"""
+    lines = 0
+    words = 0
+    chars = 0
+
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                lines += 1
+                chars += len(line)
+                words += len(line.split())
+
+        print(f"Статистика файла '{filename}':")
+        print(f"  Строк: {lines}")
+        print(f"  Слов: {words}")
+        print(f"  Символов: {chars}")
+
+    except FileNotFoundError:
+        print(f"Файл '{filename}' не найден!")
+
+# Использование
+count_statistics("text.txt")</pre>
+                </div>
+
+                <h3>Как это работает:</h3>
+                <ul>
+                    <li><code>lines += 1</code> - увеличиваем счетчик строк</li>
+                    <li><code>chars += len(line)</code> - добавляем длину строки</li>
+                    <li><code>words += len(line.split())</code> - split() разбивает строку на слова</li>
+                    <li>Обрабатываем построчно - не загружаем весь файл!</li>
+                </ul>
+
+                <h2>Задача 2: Поиск текста с номерами строк</h2>
+                <p>Найдем все строки, содержащие определенный текст, и выведем с номерами:</p>
+
+                <div class="code-block">
+                    <pre>def search_in_file(filename, search_text, ignore_case=True):
+    """Ищет текст в файле и выводит совпадения с номерами строк"""
+    found_count = 0
+
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line_num, line in enumerate(file, start=1):
+                # Подготавливаем для сравнения
+                check_line = line.lower() if ignore_case else line
+                check_text = search_text.lower() if ignore_case else search_text
+
+                if check_text in check_line:
+                    print(f"Строка {line_num}: {line.strip()}")
+                    found_count += 1
+
+        print(f"\nНайдено совпадений: {found_count}")
+
+    except FileNotFoundError:
+        print(f"Файл '{filename}' не найден!")
+
+# Использование
+search_in_file("log.txt", "ERROR")</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Полезные приемы:</h4>
+                    <ul>
+                        <li><code>enumerate(file, start=1)</code> - получаем номер строки</li>
+                        <li><code>line.lower()</code> - поиск без учета регистра</li>
+                        <li><code>line.strip()</code> - убираем лишние пробелы</li>
+                        <li>Параметр <code>ignore_case</code> - настраиваем поведение</li>
+                    </ul>
+                </div>
+
+                <h2>Задача 3: Замена текста в файле</h2>
+                <p>Чтобы заменить текст, нужно прочитать файл, изменить и записать обратно:</p>
+
+                <div class="code-block">
+                    <pre>def replace_in_file(filename, old_text, new_text):
+    """Заменяет текст в файле"""
+    try:
+        # Шаг 1: Читаем файл
+        with open(filename, "r", encoding="utf-8") as file:
+            content = file.read()
+
+        # Шаг 2: Заменяем текст
+        new_content = content.replace(old_text, new_text)
+
+        # Шаг 3: Записываем обратно
+        with open(filename, "w", encoding="utf-8") as file:
+            file.write(new_content)
+
+        # Считаем количество замен
+        count = content.count(old_text)
+        print(f"Заменено {count} вхождений '{old_text}' на '{new_text}'")
+
+    except FileNotFoundError:
+        print(f"Файл '{filename}' не найден!")
+
+# Использование
+replace_in_file("config.txt", "localhost", "127.0.0.1")</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>⚠️ Осторожно с заменой!</h4>
+                    <p>Метод replace() заменяет <strong>все</strong> вхождения. Если нужна выборочная замена:</p>
+                    <ul>
+                        <li>Используй регулярные выражения (модуль re)</li>
+                        <li>Обрабатывай построчно с условиями</li>
+                        <li>Создавай резервную копию перед изменениями!</li>
+                    </ul>
+                </div>
+
+                <h2>Задача 4: Фильтрация строк</h2>
+                <p>Удалим пустые строки и комментарии из файла:</p>
+
+                <div class="code-block">
+                    <pre>def filter_file(input_file, output_file):
+    """Удаляет пустые строки и комментарии (начинающиеся с #)"""
+    filtered_lines = 0
+
+    try:
+        with open(input_file, "r", encoding="utf-8") as infile:
+            with open(output_file, "w", encoding="utf-8") as outfile:
+                for line in infile:
+                    # Убираем пробелы
+                    clean_line = line.strip()
+
+                    # Пропускаем пустые строки и комментарии
+                    if clean_line and not clean_line.startswith("#"):
+                        outfile.write(line)  # Пишем оригинальную строку
+                    else:
+                        filtered_lines += 1
+
+        print(f"Фильтрация завершена!")
+        print(f"Удалено строк: {filtered_lines}")
+        print(f"Результат сохранен в '{output_file}'")
+
+    except FileNotFoundError:
+        print(f"Файл '{input_file}' не найден!")
+
+# Использование
+filter_file("code.py", "code_clean.py")</pre>
+                </div>
+
+                <h3>Работа с двумя файлами одновременно:</h3>
+                <ul>
+                    <li>Вложенные <code>with</code> открывают оба файла</li>
+                    <li>Читаем из input_file построчно</li>
+                    <li>Записываем в output_file только нужные строки</li>
+                    <li>Оба файла автоматически закроются</li>
+                </ul>
+
+                <h2>Задача 5: Частотный анализ слов</h2>
+                <p>Подсчитаем, сколько раз каждое слово встречается в тексте (используя словарь!):</p>
+
+                <div class="code-block">
+                    <pre>def word_frequency(filename, top_n=10):
+    """Подсчитывает частоту слов в файле"""
+    word_count = {}
+
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                # Разбиваем на слова и очищаем от знаков препинания
+                words = line.lower().split()
+
+                for word in words:
+                    # Убираем знаки препинания
+                    clean_word = word.strip(".,!?;:()[]\"'")
+
+                    if clean_word:  # Если слово не пустое
+                        # Увеличиваем счетчик
+                        word_count[clean_word] = word_count.get(clean_word, 0) + 1
+
+        # Сортируем по частоте (от большего к меньшему)
+        sorted_words = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
+
+        # Выводим топ-N слов
+        print(f"Топ-{top_n} самых частых слов:")
+        for i, (word, count) in enumerate(sorted_words[:top_n], 1):
+            print(f"{i}. '{word}' - {count} раз")
+
+    except FileNotFoundError:
+        print(f"Файл '{filename}' не найден!")
+
+# Использование
+word_frequency("book.txt", top_n=15)</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Разбор алгоритма:</h4>
+                    <ul>
+                        <li><code>word_count = {}</code> - словарь для подсчета</li>
+                        <li><code>line.lower()</code> - приводим к нижнему регистру</li>
+                        <li><code>word.strip(".,!?")</code> - убираем знаки препинания</li>
+                        <li><code>word_count.get(clean_word, 0) + 1</code> - увеличиваем счетчик</li>
+                        <li><code>sorted(..., key=lambda x: x[1])</code> - сортируем по частоте</li>
+                    </ul>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Анализатор лог-файлов</h3>
+                <div class="code-block">
+                    <pre>def analyze_log(filename):
+    """Анализирует лог-файл и выводит статистику"""
+    stats = {
+        'INFO': 0,
+        'WARNING': 0,
+        'ERROR': 0,
+        'CRITICAL': 0
+    }
+    errors = []
+
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line_num, line in enumerate(file, 1):
+                # Подсчитываем типы сообщений
+                for level in stats:
+                    if level in line:
+                        stats[level] += 1
+                        if level == 'ERROR' or level == 'CRITICAL':
+                            errors.append((line_num, line.strip()))
+
+        # Выводим статистику
+        print("=== Статистика логов ===")
+        for level, count in stats.items():
+            print(f"{level}: {count}")
+
+        # Выводим ошибки
+        if errors:
+            print("\n=== Найденные ошибки ===")
+            for line_num, line in errors:
+                print(f"Строка {line_num}: {line}")
+
+    except FileNotFoundError:
+        print(f"Файл '{filename}' не найден!")
+
+analyze_log("server.log")</pre>
+                </div>
+
+                <h3>Пример 2: Калькулятор текстовой статистики</h3>
+                <div class="code-block">
+                    <pre>def text_stats(filename):
+    """Расширенная статистика текста"""
+    total_lines = 0
+    non_empty_lines = 0
+    total_words = 0
+    total_chars = 0
+    longest_line = ""
+    shortest_line = None
+
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                total_lines += 1
+                total_chars += len(line)
+
+                clean_line = line.strip()
+                if clean_line:
+                    non_empty_lines += 1
+                    total_words += len(clean_line.split())
+
+                    # Ищем самую длинную строку
+                    if len(clean_line) > len(longest_line):
+                        longest_line = clean_line
+
+                    # Ищем самую короткую непустую строку
+                    if shortest_line is None or len(clean_line) < len(shortest_line):
+                        shortest_line = clean_line
+
+        # Выводим результаты
+        print(f"=== Статистика файла '{filename}' ===")
+        print(f"Всего строк: {total_lines}")
+        print(f"Непустых строк: {non_empty_lines}")
+        print(f"Слов: {total_words}")
+        print(f"Символов: {total_chars}")
+        print(f"Среднее слов в строке: {total_words / non_empty_lines:.1f}")
+        print(f"\nСамая длинная строка ({len(longest_line)} символов):")
+        print(f"  {longest_line[:50]}...")  # Первые 50 символов
+        if shortest_line:
+            print(f"\nСамая короткая строка ({len(shortest_line)} символов):")
+            print(f"  {shortest_line}")
+
+    except FileNotFoundError:
+        print(f"Файл '{filename}' не найден!")
+    except ZeroDivisionError:
+        print("Файл пустой!")
+
+text_stats("article.txt")</pre>
+                </div>
+
+                <h3>Пример 3: Инструмент поиска и замены</h3>
+                <div class="code-block">
+                    <pre>def find_and_replace(input_file, output_file, replacements):
+    """
+    Множественная замена текста
+    replacements - словарь вида {"старый текст": "новый текст"}
+    """
+    replaced_total = 0
+
+    try:
+        with open(input_file, "r", encoding="utf-8") as infile:
+            with open(output_file, "w", encoding="utf-8") as outfile:
+                for line in infile:
+                    new_line = line
+
+                    # Применяем все замены
+                    for old, new in replacements.items():
+                        count = new_line.count(old)
+                        replaced_total += count
+                        new_line = new_line.replace(old, new)
+
+                    outfile.write(new_line)
+
+        print(f"Замен выполнено: {replaced_total}")
+        print(f"Результат сохранен в '{output_file}'")
+
+    except FileNotFoundError:
+        print(f"Файл '{input_file}' не найден!")
+
+# Пример использования
+replacements = {
+    "Python 2": "Python 3",
+    "print ": "print(",
+    "raw_input": "input"
+}
+find_and_replace("old_code.py", "new_code.py", replacements)</pre>
+                </div>
+
+                <h3>Пример 4: Простой счетчик слов</h3>
+                <div class="code-block">
+                    <pre>def simple_word_counter(filename):
+    """Подсчитывает уникальные слова и общее количество"""
+    all_words = []
+    unique_words = set()
+
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                words = line.lower().split()
+                for word in words:
+                    # Очищаем от знаков препинания
+                    clean = word.strip(".,!?;:()[]\"'-")
+                    if clean:
+                        all_words.append(clean)
+                        unique_words.add(clean)
+
+        print(f"Всего слов: {len(all_words)}")
+        print(f"Уникальных слов: {len(unique_words)}")
+        print(f"Повторяемость: {len(all_words) / len(unique_words):.2f}")
+
+    except FileNotFoundError:
+        print(f"Файл '{filename}' не найден!")
+    except ZeroDivisionError:
+        print("Файл не содержит слов!")
+
+simple_word_counter("text.txt")</pre>
+                </div>
+
+                <h2>Эффективная обработка больших файлов</h2>
+                <p>Когда файл очень большой (гигабайты), важно обрабатывать его правильно:</p>
+
+                <div class="code-block">
+                    <pre># ПЛОХО - загружает весь файл в память
+with open("huge_file.txt", "r") as file:
+    content = file.read()  # Может занять всю память!
+    # обработка...
+
+# ХОРОШО - обрабатывает построчно
+with open("huge_file.txt", "r", encoding="utf-8") as file:
+    for line in file:  # Читает по одной строке
+        # обработка строки
+        process(line)</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Советы по работе с большими файлами:</h4>
+                    <ul>
+                        <li>Всегда используй построчное чтение</li>
+                        <li>Не загружай весь файл в память</li>
+                        <li>Используй генераторы вместо списков</li>
+                        <li>Обрабатывай данные сразу, не накапливай</li>
+                        <li>Если нужна сортировка - используй внешнюю сортировку</li>
+                    </ul>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +654,349 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># ⚠️ Работа с файлами не поддерживается в Skulpt!
+# Запусти этот код локально на своём компьютере.
+
+# Симуляция обработки текста для понимания алгоритмов
+
+# Симулированное содержимое файла
+text_content = """Python - отличный язык программирования!
+Python используется для анализа данных.
+Python прост в изучении.
+Многие компании используют Python.
+Python популярен в машинном обучении."""
+
+print("=== Исходный текст ===")
+print(text_content)
+print()
+
+# Задача 1: Подсчет статистики
+lines = text_content.split('\n')
+words_count = sum(len(line.split()) for line in lines)
+chars_count = len(text_content)
+
+print("=== Статистика ===")
+print(f"Строк: {len(lines)}")
+print(f"Слов: {words_count}")
+print(f"Символов: {chars_count}")
+print()
+
+# Задача 2: Поиск текста
+search_word = "Python"
+print(f"=== Поиск слова '{search_word}' ===")
+for i, line in enumerate(lines, 1):
+    if search_word in line:
+        print(f"Строка {i}: {line}")
+print()
+
+# Задача 3: Частотный анализ слов
+word_freq = {}
+for line in lines:
+    words = line.lower().split()
+    for word in words:
+        clean = word.strip(".,!?;:")
+        word_freq[clean] = word_freq.get(clean, 0) + 1
+
+print("=== Частота слов ===")
+sorted_words = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)
+for word, count in sorted_words[:5]:
+    print(f"'{word}': {count} раз")
+print()
+
+# Задача 4: Замена текста
+new_text = text_content.replace("Python", "Python 3")
+print("=== После замены 'Python' на 'Python 3' ===")
+print(new_text)
+print()
+
+# Задача 5: Фильтрация пустых строк
+text_with_empty = """Строка 1
+
+Строка 3
+
+Строка 5"""
+
+print("=== Фильтрация пустых строк ===")
+print("До:")
+print(repr(text_with_empty))
+print("\nПосле:")
+filtered = [line for line in text_with_empty.split('\n') if line.strip()]
+print('\n'.join(filtered))</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Счетчик слов</h4>
+                    <p>Создай программу для подсчета слов в файле:</p>
+                    <ol>
+                        <li>Запрашивает имя файла у пользователя</li>
+                        <li>Подсчитывает общее количество слов</li>
+                        <li>Подсчитывает уникальные слова (используй set)</li>
+                        <li>Находит 5 самых частых слов</li>
+                        <li>Выводит статистику красиво оформленной</li>
+                        <li>Обрабатывает ошибки (файл не найден)</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй словарь для подсчета частоты и sorted() для сортировки.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Инструмент поиска</h4>
+                    <p>Создай продвинутый инструмент поиска в файлах:</p>
+                    <ol>
+                        <li>Запрашивает имя файла и текст для поиска</li>
+                        <li>Выводит все строки с совпадениями и их номера</li>
+                        <li>Подсчитывает общее количество вхождений (не строк!)</li>
+                        <li>Поддерживает поиск с учетом регистра (опционально)</li>
+                        <li>Выделяет найденный текст (например, в ЗАГЛАВНЫХ)</li>
+                        <li>Сохраняет результаты в отдельный файл</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй метод count() для подсчета вхождений в строке.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Трансформатор текста</h4>
+                    <p>Создай программу для преобразования текстовых файлов:</p>
+                    <ol>
+                        <li>Читает входной файл</li>
+                        <li>Удаляет все пустые строки</li>
+                        <li>Удаляет строки-комментарии (начинающиеся с # или //)</li>
+                        <li>Заменяет множественные пробелы на один</li>
+                        <li>Нумерует оставшиеся строки</li>
+                        <li>Сохраняет результат в новый файл</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй метод split() без параметров для удаления множественных пробелов.</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Загружаешь весь большой файл в память</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - файл может быть огромным!
+with open("big_file.txt", "r") as file:
+    content = file.read()  # Вся память!
+    for line in content.split('\n'):
+        process(line)
+
+# ПРАВИЛЬНО - читай построчно
+with open("big_file.txt", "r", encoding="utf-8") as file:
+    for line in file:  # По одной строке
+        process(line.strip())</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Не убираешь \n при обработке строк</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - в конце каждой строки \n
+with open("file.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        if line == "конец":  # Не сработает!
+            break
+
+# ПРАВИЛЬНО - используй strip()
+with open("file.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        if line.strip() == "конец":  # Работает!
+            break</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Не обрабатываешь кодировку</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - может быть ошибка с русским текстом
+with open("file.txt", "r") as file:
+    content = file.read()  # UnicodeDecodeError!
+
+# ПРАВИЛЬНО - указывай encoding
+with open("file.txt", "r", encoding="utf-8") as file:
+    content = file.read()</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Перезаписываешь входной файл</h4>
+                    <div class="code-block">
+                        <pre># ОПАСНО - может потерять данные!
+with open("data.txt", "r") as file:
+    lines = file.readlines()
+
+with open("data.txt", "w") as file:  # Удалит файл!
+    # Если тут ошибка - данные потеряны!
+    for line in lines:
+        file.write(line.upper())
+
+# БЕЗОПАСНЕЕ - используй другой файл
+with open("data.txt", "r", encoding="utf-8") as infile:
+    with open("data_new.txt", "w", encoding="utf-8") as outfile:
+        for line in infile:
+            outfile.write(line.upper())</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Неправильно считаешь слова</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - считает знаки препинания как части слов
+words = "Hello, world!".split()
+print(len(words))  # 2, но words[0] == "Hello," с запятой!
+
+# ПРАВИЛЬНО - очищай от знаков препинания
+text = "Hello, world!"
+words = [word.strip(".,!?;:") for word in text.split()]
+print(words)  # ['Hello', 'world']</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Забываешь про регистр при поиске</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - не найдет "python" или "PYTHON"
+if "Python" in line:
+    print("Найдено!")
+
+# ПРАВИЛЬНО - приводи к одному регистру
+if "python" in line.lower():
+    print("Найдено!")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 7: Не используешь enumerate для номеров строк</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неудобно и можно ошибиться
+line_num = 1
+with open("file.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print(f"{line_num}: {line.strip()}")
+        line_num += 1
+
+# ПРАВИЛЬНО - используй enumerate
+with open("file.txt", "r", encoding="utf-8") as file:
+    for line_num, line in enumerate(file, start=1):
+        print(f"{line_num}: {line.strip()}")</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Какой способ лучше для обработки большого файла?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! read() загружает весь файл в память, что плохо для больших файлов.">file.read()</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! readlines() тоже загружает весь файл в память.">file.readlines()</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Итерация for line in file читает по одной строке, экономя память.">for line in file</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! file[0] не работает - файловый объект не поддерживает индексацию.">file[0]</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что делает enumerate(file, start=1)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! enumerate() возвращает пары (номер, строка), start=1 начинает с 1.">Возвращает номер строки и саму строку</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! enumerate() не считает слова.">Считает количество слов в строке</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! enumerate() не фильтрует строки.">Фильтрует пустые строки</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! enumerate() не сортирует строки.">Сортирует строки по алфавиту</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Как правильно посчитать слова в строке?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! len(line) считает символы, а не слова.">len(line)</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! split() разбивает строку на слова, len() считает их количество.">len(line.split())</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! line.count(' ') подсчитывает пробелы, но слов на 1 больше.">line.count(" ")</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! sum(line) работает с числами, не с текстом.">sum(line)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Зачем использовать line.strip() при обработке?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! strip() не удаляет слова.">Удаляет все слова из строки</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! strip() убирает пробелы и символ новой строки \\n с концов.">Убирает пробелы и \\n с начала и конца</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! strip() не переводит в верхний регистр (это upper()).">Делает все буквы заглавными</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! strip() не разбивает строку (это split()).">Разбивает строку на части</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как безопасно заменить текст в файле?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Открытие в режиме 'w' сразу удаляет содержимое файла!">Открыть файл в режиме 'w' и писать</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Сначала читаем, потом изменяем, потом пишем - или лучше в новый файл.">Прочитать, изменить, записать обратно</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Режим 'r' только для чтения, писать нельзя.">Использовать только режим 'r'</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Такого режима не существует.">Использовать режим 'rw'</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Обработка текста - одна из самых важных и частых тем на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ Задание 6:</strong> Обработка текстовых файлов, подсчет статистики</li>
+                        <li><strong>ЕГЭ Задание 24:</strong> Поиск в файле, подсчет элементов</li>
+                        <li><strong>ЕГЭ Задание 25:</strong> Обработка последовательностей в файле</li>
+                        <li><strong>ЕГЭ Задание 26:</strong> Сложная обработка данных из файла</li>
+                        <li><strong>ЕГЭ Задание 27:</strong> Оптимизация обработки больших файлов</li>
+                        <li>Типичные задачи:
+                            <ul>
+                                <li>Подсчет слов, строк, символов в тексте</li>
+                                <li>Поиск максимального/минимального элемента</li>
+                                <li>Фильтрация данных по условию</li>
+                                <li>Частотный анализ элементов</li>
+                                <li>Обработка структурированных данных</li>
+                                <li>Поиск последовательностей и паттернов</li>
+                            </ul>
+                        </li>
+                        <li>На экзамене важно:
+                            <ul>
+                                <li>Уметь эффективно обрабатывать большие файлы</li>
+                                <li>Использовать построчное чтение</li>
+                                <li>Правильно обрабатывать строки (strip, split)</li>
+                                <li>Использовать словари для подсчета частоты</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Построчная обработка</strong> - лучший способ для больших файлов</li>
+                    <li><strong>for line in file</strong> - эффективная итерация</li>
+                    <li><strong>line.strip()</strong> - убирает \n и пробелы</li>
+                    <li><strong>line.split()</strong> - разбивает строку на слова</li>
+                    <li><strong>enumerate(file, start=1)</strong> - получение номера строки</li>
+                    <li><strong>Словари</strong> - отлично для подсчета частоты</li>
+                    <li><strong>Вложенные with</strong> - работа с двумя файлами сразу</li>
+                    <li><strong>str.replace()</strong> - замена текста</li>
+                    <li><strong>line.lower()</strong> - поиск без учета регистра</li>
+                    <li><strong>Обработка ошибок</strong> - try/except для FileNotFoundError</li>
+                    <li><strong>Кодировка utf-8</strong> - для русского текста</li>
+                </ul>
+
+                <p>Отлично! Теперь ты умеешь обрабатывать текстовые файлы как профессионал! Эти навыки пригодятся тебе не только на экзаменах, но и в реальной работе. В следующем уроке изучим работу с CSV - форматом для табличных данных!</p>
             </div>
 
             <div class="lesson-nav">
@@ -272,7 +1006,6 @@
             </div>
         </div>
     </main>
-
 
     <script src="../js/main.js"></script>
 </body>

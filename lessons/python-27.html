@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 32: Работа с CSV - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-27">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -147,54 +148,15 @@
 
         <div class="lesson-group">
             <div class="lesson-group-header">
-                <h3>Графы и деревья</h3>
+                <h3>Информация</h3>
                 <span class="toggle-icon">▼</span>
             </div>
             <ul>
-                <li><a href="python-38.html">Введение в графы</a></li>
-                <li><a href="python-39.html">Обход в ширину (BFS)</a></li>
-                <li><a href="python-40.html">Обход в глубину (DFS)</a></li>
-                <li><a href="python-41.html">Деревья</a></li>
-                <li><a href="python-42.html">Алгоритмы на графах</a></li>
-                <li><a href="python-43.html">Задачи ЕГЭ с графами</a></li>
-            </ul>
-        </div>
-
-        <div class="lesson-group">
-            <div class="lesson-group-header">
-                <h3>Подготовка к ОГЭ</h3>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <ul>
-                <li><a href="oge-01.html">Исполнители алгоритмов</a></li>
-                <li><a href="oge-02.html">Анализ программ</a></li>
-                <li><a href="oge-03.html">Простые задачи</a></li>
-                <li><a href="oge-04.html">Массивы</a></li>
-                <li><a href="oge-05.html">Строки</a></li>
-                <li><a href="oge-06.html">Файлы</a></li>
-                <li><a href="oge-07.html">Электронные таблицы</a></li>
-                <li><a href="oge-08.html">Пробный экзамен</a></li>
-            </ul>
-        </div>
-
-        <div class="lesson-group">
-            <div class="lesson-group-header">
-                <h3>Подготовка к ЕГЭ</h3>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <ul>
-                <li><a href="ege-01.html">Кодирование информации</a></li>
-                <li><a href="ege-02.html">Логика и множества</a></li>
-                <li><a href="ege-03.html">Системы счисления</a></li>
-                <li><a href="ege-04.html">Алгоритмы</a></li>
-                <li><a href="ege-05.html">Программирование простое</a></li>
-                <li><a href="ege-06.html">Программирование среднее</a></li>
-                <li><a href="ege-07.html">Программирование сложное</a></li>
-                <li><a href="ege-08.html">Теория игр</a></li>
-                <li><a href="ege-09.html">Рекурсия</a></li>
-                <li><a href="ege-10.html">Динамическое программирование</a></li>
-                <li><a href="ege-11.html">Обработка больших данных</a></li>
-                <li><a href="ege-12.html">Пробный экзамен</a></li>
+                <li><a href="info-01.html">Измерение информации</a></li>
+                <li><a href="info-02.html">Кодирование текста</a></li>
+                <li><a href="info-03.html">Кодирование изображений</a></li>
+                <li><a href="info-04.html">Кодирование звука</a></li>
+                <li><a href="info-05.html">Задачи ЕГЭ</a></li>
             </ul>
         </div>
 
@@ -219,21 +181,408 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 32: Работа с CSV</h1>
-                <div class="lesson-meta">Работа с файлами • 25 минут</div>
+                <div class="lesson-meta">Работа с файлами • 45 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>CSV (Comma-Separated Values) - один из самых популярных форматов для хранения табличных данных. Его используют везде:</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <ul>
+                    <li><strong>Excel и Google Таблицы</strong> - экспортируют и импортируют CSV</li>
+                    <li><strong>Базы данных</strong> - выгрузка данных в CSV</li>
+                    <li><strong>Научные данные</strong> - результаты экспериментов</li>
+                    <li><strong>Веб-приложения</strong> - обмен данными</li>
+                    <li><strong>Машинное обучение</strong> - датасеты часто в CSV</li>
+                </ul>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="warning-block">
+                    <h4>⚠️ Важно для Skulpt!</h4>
+                    <p>Модуль <code>csv</code> может <strong>не работать</strong> в Skulpt. Для реальной работы с CSV:</p>
+                    <ul>
+                        <li>Установи Python локально</li>
+                        <li>Модуль csv уже встроен в Python</li>
+                        <li>Можно использовать ручной парсинг с split()</li>
+                    </ul>
+                    <p>В редакторе ниже показан ручной парсинг CSV без модуля!</p>
                 </div>
 
-                <h2>Попробуй сам!</h2>
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Что такое CSV и его структура</li>
+                        <li>Ручное чтение CSV через split()</li>
+                        <li>Модуль csv для чтения (csv.reader)</li>
+                        <li>Чтение с заголовками (csv.DictReader)</li>
+                        <li>Запись CSV (csv.writer, csv.DictWriter)</li>
+                        <li>Работа с разными разделителями</li>
+                        <li>Кодировка для русского текста</li>
+                        <li>Практические примеры</li>
+                    </ul>
+                </div>
+
+                <h2>Что такое CSV?</h2>
+                <p>CSV - это текстовый формат, где:</p>
+                <ul>
+                    <li><strong>Значения разделены запятыми</strong> (или другими символами)</li>
+                    <li><strong>Каждая строка - одна запись</strong></li>
+                    <li><strong>Первая строка часто содержит заголовки</strong></li>
+                </ul>
+
+                <h3>Пример CSV-файла:</h3>
+                <div class="code-block">
+                    <pre># students.csv
+Имя,Возраст,Оценка
+Иван,15,5
+Мария,16,4
+Петр,15,5
+Анна,16,3</pre>
+                </div>
+
+                <p>Это таблица:</p>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Имя</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Возраст</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Оценка</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Иван</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">15</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">5</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Мария</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">16</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">4</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Петр</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">15</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">5</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Анна</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">16</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">3</td>
+                    </tr>
+                </table>
+
+                <h2>Ручное чтение CSV через split()</h2>
+                <p>Простейший способ - использовать метод split(","):</p>
+
+                <div class="code-block">
+                    <pre>with open("students.csv", "r", encoding="utf-8") as file:
+    # Читаем заголовок
+    headers = file.readline().strip().split(",")
+    print("Заголовки:", headers)
+
+    # Читаем данные
+    for line in file:
+        values = line.strip().split(",")
+        name, age, grade = values
+        print(f"{name}: возраст {age}, оценка {grade}")</pre>
+                </div>
+
+                <h3>Вывод:</h3>
+                <div class="code-block">
+                    <pre>Заголовки: ['Имя', 'Возраст', 'Оценка']
+Иван: возраст 15, оценка 5
+Мария: возраст 16, оценка 4
+Петр: возраст 15, оценка 5
+Анна: возраст 16, оценка 3</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>⚠️ Ограничения split():</h4>
+                    <ul>
+                        <li>Не работает, если в данных есть запятые</li>
+                        <li>Не обрабатывает кавычки правильно</li>
+                        <li>Для простых CSV - подходит, для сложных - используй модуль csv</li>
+                    </ul>
+                </div>
+
+                <h2>Модуль csv - Чтение файлов</h2>
+                <p>Модуль <code>csv</code> - правильный способ работы с CSV:</p>
+
+                <div class="code-block">
+                    <pre>import csv
+
+with open("students.csv", "r", encoding="utf-8") as file:
+    reader = csv.reader(file)
+
+    # Читаем заголовок
+    headers = next(reader)
+    print("Заголовки:", headers)
+
+    # Читаем данные
+    for row in reader:
+        name, age, grade = row
+        print(f"{name}: возраст {age}, оценка {grade}")</pre>
+                </div>
+
+                <h3>Преимущества csv.reader():</h3>
+                <ul>
+                    <li><strong>Правильно обрабатывает кавычки</strong> - "Иванов, Иван" не разобьется</li>
+                    <li><strong>Работает с разными разделителями</strong></li>
+                    <li><strong>Экранирует специальные символы</strong></li>
+                    <li><strong>Стандартный и надежный</strong></li>
+                </ul>
+
+                <h2>csv.DictReader - Чтение со словарями</h2>
+                <p>DictReader автоматически создает словари из строк:</p>
+
+                <div class="code-block">
+                    <pre>import csv
+
+with open("students.csv", "r", encoding="utf-8") as file:
+    reader = csv.DictReader(file)
+
+    for row in reader:
+        # row - это словарь!
+        print(f"{row['Имя']}: возраст {row['Возраст']}, оценка {row['Оценка']}")</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Зачем DictReader?</h4>
+                    <ul>
+                        <li><strong>Доступ по именам</strong> - row['Имя'] вместо row[0]</li>
+                        <li><strong>Понятнее код</strong> - сразу видно, что это</li>
+                        <li><strong>Порядок не важен</strong> - можно менять колонки</li>
+                        <li><strong>Удобно для больших таблиц</strong></li>
+                    </ul>
+                </div>
+
+                <h2>Запись CSV - csv.writer()</h2>
+                <p>Для записи используем csv.writer():</p>
+
+                <div class="code-block">
+                    <pre>import csv
+
+data = [
+    ["Имя", "Возраст", "Город"],
+    ["Иван", 25, "Москва"],
+    ["Мария", 30, "Санкт-Петербург"],
+    ["Петр", 28, "Казань"]
+]
+
+with open("people.csv", "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(data)  # Записываем все строки сразу
+
+print("Файл people.csv создан!")</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>⚠️ Важный параметр newline=""!</h4>
+                    <p>В Windows без <code>newline=""</code> будут лишние пустые строки!</p>
+                    <div class="code-block">
+                        <pre># ПРАВИЛЬНО
+with open("file.csv", "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file)</pre>
+                    </div>
+                </div>
+
+                <h3>Запись построчно:</h3>
+                <div class="code-block">
+                    <pre>import csv
+
+with open("grades.csv", "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file)
+
+    # Записываем заголовок
+    writer.writerow(["Студент", "Предмет", "Оценка"])
+
+    # Записываем данные
+    writer.writerow(["Иван", "Математика", 5])
+    writer.writerow(["Мария", "Физика", 4])
+    writer.writerow(["Петр", "Информатика", 5])</pre>
+                </div>
+
+                <h2>csv.DictWriter - Запись со словарями</h2>
+                <p>DictWriter позволяет писать словари:</p>
+
+                <div class="code-block">
+                    <pre>import csv
+
+data = [
+    {"name": "Иван", "age": 25, "city": "Москва"},
+    {"name": "Мария", "age": 30, "city": "СПб"},
+    {"name": "Петр", "age": 28, "city": "Казань"}
+]
+
+with open("people.csv", "w", encoding="utf-8", newline="") as file:
+    # Указываем названия полей
+    fieldnames = ["name", "age", "city"]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+    # Записываем заголовок
+    writer.writeheader()
+
+    # Записываем данные
+    writer.writerows(data)</pre>
+                </div>
+
+                <h2>Разные разделители</h2>
+                <p>Не всегда используется запятая. Популярны:</p>
+
+                <ul>
+                    <li><strong>Точка с запятой (;)</strong> - в Excel на русском</li>
+                    <li><strong>Табуляция (\t)</strong> - TSV файлы</li>
+                    <li><strong>Вертикальная черта (|)</strong> - иногда в БД</li>
+                </ul>
+
+                <h3>Чтение с другим разделителем:</h3>
+                <div class="code-block">
+                    <pre>import csv
+
+# Файл с разделителем "точка с запятой"
+with open("data.csv", "r", encoding="utf-8") as file:
+    reader = csv.reader(file, delimiter=";")
+    for row in reader:
+        print(row)</pre>
+                </div>
+
+                <h3>Запись с другим разделителем:</h3>
+                <div class="code-block">
+                    <pre>import csv
+
+with open("data.csv", "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file, delimiter=";")
+    writer.writerow(["Имя", "Город"])
+    writer.writerow(["Иван", "Москва"])</pre>
+                </div>
+
+                <h2>Кодировка для русского текста</h2>
+                <p>Всегда используй <code>encoding="utf-8"</code> для русского:</p>
+
+                <div class="code-block">
+                    <pre># ПРАВИЛЬНО - UTF-8 для русского
+with open("data.csv", "r", encoding="utf-8") as file:
+    reader = csv.reader(file)
+
+# Для старых файлов Excel может понадобиться cp1251
+with open("old_excel.csv", "r", encoding="cp1251") as file:
+    reader = csv.reader(file)</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Таблица оценок студентов</h3>
+                <div class="code-block">
+                    <pre>import csv
+
+# Создаем таблицу оценок
+grades = [
+    ["Студент", "Математика", "Физика", "Информатика"],
+    ["Иван Петров", 5, 4, 5],
+    ["Мария Сидорова", 4, 5, 5],
+    ["Петр Иванов", 5, 5, 4],
+    ["Анна Смирнова", 3, 4, 4]
+]
+
+# Записываем в файл
+with open("grades.csv", "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(grades)
+
+# Читаем и анализируем
+with open("grades.csv", "r", encoding="utf-8") as file:
+    reader = csv.DictReader(file)
+
+    for row in reader:
+        name = row['Студент']
+        avg = (int(row['Математика']) + int(row['Физика']) +
+               int(row['Информатика'])) / 3
+        print(f"{name}: средний балл {avg:.1f}")</pre>
+                </div>
+
+                <h3>Пример 2: Инвентарь товаров</h3>
+                <div class="code-block">
+                    <pre>import csv
+
+# Товары
+products = [
+    {"id": 1, "name": "Ноутбук", "price": 50000, "quantity": 10},
+    {"id": 2, "name": "Мышь", "price": 500, "quantity": 50},
+    {"id": 3, "name": "Клавиатура", "price": 1500, "quantity": 30},
+    {"id": 4, "name": "Монитор", "price": 15000, "quantity": 15}
+]
+
+# Записываем
+with open("inventory.csv", "w", encoding="utf-8", newline="") as file:
+    fieldnames = ["id", "name", "price", "quantity"]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(products)
+
+# Читаем и подсчитываем общую стоимость
+total_value = 0
+with open("inventory.csv", "r", encoding="utf-8") as file:
+    reader = csv.DictReader(file)
+
+    print("Товары на складе:")
+    for row in reader:
+        value = int(row['price']) * int(row['quantity'])
+        total_value += value
+        print(f"{row['name']}: {row['quantity']} шт, "
+              f"стоимость {value:,} руб")
+
+print(f"\nОбщая стоимость: {total_value:,} руб")</pre>
+                </div>
+
+                <h3>Пример 3: Результаты опроса</h3>
+                <div class="code-block">
+                    <pre>import csv
+
+# Сбор результатов опроса
+survey_results = []
+
+print("Опрос: Ваш любимый язык программирования?")
+print("Введите 'стоп' для завершения")
+
+while True:
+    name = input("Ваше имя: ")
+    if name.lower() == "стоп":
+        break
+
+    language = input("Любимый язык: ")
+    experience = input("Опыт (лет): ")
+
+    survey_results.append([name, language, experience])
+
+# Сохраняем результаты
+with open("survey.csv", "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Имя", "Язык", "Опыт"])
+    writer.writerows(survey_results)
+
+print(f"\nСохранено {len(survey_results)} ответов в survey.csv")</pre>
+                </div>
+
+                <h3>Пример 4: Экспорт для Excel</h3>
+                <div class="code-block">
+                    <pre>import csv
+
+# Данные для отчета
+report_data = [
+    ["Месяц", "Продажи", "Расходы", "Прибыль"],
+    ["Январь", 100000, 70000, 30000],
+    ["Февраль", 120000, 75000, 45000],
+    ["Март", 150000, 80000, 70000],
+    ["Апрель", 180000, 90000, 90000]
+]
+
+# Сохраняем для Excel (с точкой с запятой)
+with open("report.csv", "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file, delimiter=";")
+    writer.writerows(report_data)
+
+print("Отчет сохранен в report.csv")
+print("Можно открыть в Excel!")</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +591,317 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># ⚠️ Модуль csv может не работать в Skulpt!
+# Этот код показывает РУЧНОЙ парсинг CSV без модуля
+
+# Симулированное содержимое CSV файла
+csv_content = """Имя,Возраст,Город,Оценка
+Иван,15,Москва,5
+Мария,16,СПб,4
+Петр,15,Казань,5
+Анна,16,Москва,3
+Дмитрий,15,СПб,4"""
+
+print("=== Исходный CSV ===")
+print(csv_content)
+print()
+
+# Ручной парсинг CSV
+lines = csv_content.split('\n')
+
+# Первая строка - заголовки
+headers = lines[0].split(',')
+print("=== Заголовки ===")
+print(headers)
+print()
+
+# Читаем данные
+print("=== Данные ===")
+data = []
+for line in lines[1:]:
+    values = line.split(',')
+    data.append(values)
+    print(f"{values[0]}: {values[1]} лет, {values[2]}, оценка {values[3]}")
+print()
+
+# Анализ данных
+print("=== Анализ ===")
+
+# Средний возраст
+ages = [int(row[1]) for row in data]
+avg_age = sum(ages) / len(ages)
+print(f"Средний возраст: {avg_age:.1f}")
+
+# Средняя оценка
+grades = [int(row[3]) for row in data]
+avg_grade = sum(grades) / len(grades)
+print(f"Средняя оценка: {avg_grade:.1f}")
+
+# Группировка по городам
+cities = {}
+for row in data:
+    city = row[2]
+    cities[city] = cities.get(city, 0) + 1
+
+print("\nРаспределение по городам:")
+for city, count in cities.items():
+    print(f"  {city}: {count} чел.")
+
+# Создание нового CSV
+print("\n=== Создание нового CSV ===")
+new_csv = ["ID,Продукт,Цена"]
+new_csv.append("1,Ноутбук,50000")
+new_csv.append("2,Мышь,500")
+new_csv.append("3,Клавиатура,1500")
+
+result = '\n'.join(new_csv)
+print(result)</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Чтение CSV с оценками</h4>
+                    <p>Создай программу для анализа оценок:</p>
+                    <ol>
+                        <li>Читает CSV файл с колонками: Студент, Предмет, Оценка</li>
+                        <li>Подсчитывает средний балл каждого студента</li>
+                        <li>Находит студента с лучшим средним баллом</li>
+                        <li>Находит самый сложный предмет (минимальная средняя оценка)</li>
+                        <li>Выводит красивую статистику</li>
+                        <li>Сохраняет результаты в новый CSV</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй csv.DictReader для удобства и словари для группировки.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Создание CSV отчета</h4>
+                    <p>Создай программу для генерации отчета:</p>
+                    <ol>
+                        <li>Запрашивает у пользователя данные о продажах (товар, количество, цена)</li>
+                        <li>Сохраняет все в CSV файл</li>
+                        <li>Подсчитывает общую сумму продаж</li>
+                        <li>Находит самый продаваемый товар</li>
+                        <li>Создает итоговый отчет в отдельном CSV</li>
+                        <li>Форматирует для открытия в Excel (разделитель ;)</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй csv.writer() и правильный delimiter.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Обработка данных</h4>
+                    <p>Создай программу для обработки CSV:</p>
+                    <ol>
+                        <li>Читает CSV с любыми данными</li>
+                        <li>Фильтрует строки по условию (например, возраст > 18)</li>
+                        <li>Сортирует по определенной колонке</li>
+                        <li>Добавляет новую вычисляемую колонку</li>
+                        <li>Сохраняет обработанные данные в новый CSV</li>
+                        <li>Выводит статистику изменений</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Читай с csv.DictReader, обрабатывай, пиши с csv.DictWriter.</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыл newline="" при записи</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - будут пустые строки в Windows
+with open("data.csv", "w", encoding="utf-8") as file:
+    writer = csv.writer(file)
+
+# ПРАВИЛЬНО - всегда указывай newline=""
+with open("data.csv", "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Не указал кодировку</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - проблемы с русским текстом
+with open("data.csv", "r") as file:
+    reader = csv.reader(file)
+
+# ПРАВИЛЬНО - указывай encoding="utf-8"
+with open("data.csv", "r", encoding="utf-8") as file:
+    reader = csv.reader(file)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильный разделитель</h4>
+                    <div class="code-block">
+                        <pre># Файл использует точку с запятой
+# НЕПРАВИЛЬНО - будет одна колонка
+reader = csv.reader(file)
+
+# ПРАВИЛЬНО - указывай delimiter
+reader = csv.reader(file, delimiter=";")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Используешь split() для сложных CSV</h4>
+                    <div class="code-block">
+                        <pre># Данные: "Иванов, Иван",25,Москва
+# НЕПРАВИЛЬНО - разобьет имя на части
+values = line.split(",")  # ["Иванов", " Иван\"", "25", "Москва"]
+
+# ПРАВИЛЬНО - используй модуль csv
+reader = csv.reader(file)  # Правильно обработает кавычки</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Забыл про заголовок при чтении</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - первая строка попадет в данные
+for row in csv.reader(file):
+    process(row)  # Заголовок обработается как данные!
+
+# ПРАВИЛЬНО - пропусти заголовок
+reader = csv.reader(file)
+next(reader)  # Пропускаем заголовок
+for row in reader:
+    process(row)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Не закрыл файл при записи</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - данные могут не записаться
+file = open("data.csv", "w", encoding="utf-8", newline="")
+writer = csv.writer(file)
+writer.writerow(["test"])
+# Забыли file.close()!
+
+# ПРАВИЛЬНО - используй with
+with open("data.csv", "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["test"])
+# Автоматически закроется!</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что означает CSV?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! CSV = Comma-Separated Values (значения, разделенные запятыми).">Comma-Separated Values</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Character-Separated Values не является расшифровкой CSV.">Character-Separated Values</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Computer System Values не имеет отношения к CSV.">Computer System Values</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! CSV - это формат файла, а не язык программирования.">Code Styling Values</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Зачем нужен параметр newline=""?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! newline не ускоряет запись.">Ускоряет запись файла</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! newline='' предотвращает появление пустых строк в Windows.">Предотвращает пустые строки в Windows</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! newline не меняет кодировку.">Меняет кодировку на UTF-8</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! newline не добавляет заголовки.">Автоматически добавляет заголовки</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Чем DictReader отличается от reader?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! DictReader не быстрее обычного reader.">Работает быстрее</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! DictReader создает словари из строк, используя заголовки как ключи.">Возвращает словари вместо списков</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! DictReader работает только для чтения, а не для записи.">Используется только для записи</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! DictReader - это часть стандартной библиотеки Python.">Работает только в Python 3.10+</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Какая кодировка лучше для русского текста?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! ASCII не поддерживает русские буквы.">ascii</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! UTF-8 - универсальная кодировка для всех языков.">utf-8</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! latin-1 не поддерживает кириллицу.">latin-1</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! binary - это бинарный режим, не текстовый.">binary</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Для чего используется параметр delimiter?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! delimiter определяет символ-разделитель между значениями.">Указывает символ-разделитель</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! delimiter не меняет кодировку файла.">Меняет кодировку файла</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! delimiter не ускоряет чтение.">Ускоряет чтение больших файлов</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! delimiter работает и для чтения, и для записи.">Работает только при записи</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Работа с CSV и табличными данными - важная часть экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ Задание 6:</strong> Обработка табличных данных из файлов</li>
+                        <li><strong>ЕГЭ Задание 24-26:</strong> Анализ больших объемов структурированных данных</li>
+                        <li><strong>ЕГЭ Задание 27:</strong> Оптимизация обработки файлов с данными</li>
+                        <li>Типичные задачи:
+                            <ul>
+                                <li>Чтение и обработка табличных данных</li>
+                                <li>Подсчет сумм, средних, максимумов</li>
+                                <li>Фильтрация данных по условиям</li>
+                                <li>Группировка и агрегация</li>
+                                <li>Поиск паттернов в данных</li>
+                                <li>Создание отчетов</li>
+                            </ul>
+                        </li>
+                        <li>На экзамене важно:
+                            <ul>
+                                <li>Уметь парсить CSV вручную (split)</li>
+                                <li>Знать модуль csv для сложных случаев</li>
+                                <li>Правильно обрабатывать заголовки</li>
+                                <li>Использовать словари для группировки</li>
+                                <li>Эффективно работать с большими файлами</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>CSV</strong> - текстовый формат для табличных данных</li>
+                    <li><strong>split(",")</strong> - простой ручной парсинг</li>
+                    <li><strong>import csv</strong> - стандартный модуль для CSV</li>
+                    <li><strong>csv.reader()</strong> - чтение CSV как списков</li>
+                    <li><strong>csv.DictReader()</strong> - чтение как словарей (удобнее!)</li>
+                    <li><strong>csv.writer()</strong> - запись CSV из списков</li>
+                    <li><strong>csv.DictWriter()</strong> - запись из словарей</li>
+                    <li><strong>newline=""</strong> - обязательно при записи!</li>
+                    <li><strong>encoding="utf-8"</strong> - для русского текста</li>
+                    <li><strong>delimiter</strong> - параметр для других разделителей</li>
+                    <li><strong>writeheader()</strong> - запись заголовков</li>
+                </ul>
+
+                <p>Поздравляю! Ты завершил модуль "Работа с файлами"! Теперь ты можешь читать, записывать и обрабатывать любые текстовые данные, включая CSV таблицы. Эти навыки пригодятся в реальной работе и на экзаменах!</p>
             </div>
 
             <div class="lesson-nav">
@@ -272,7 +911,6 @@
             </div>
         </div>
     </main>
-
 
     <script src="../js/main.js"></script>
 </body>
