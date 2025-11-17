@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 28: Lambda-функции - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-23">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,21 +220,480 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 28: Lambda-функции</h1>
-                <div class="lesson-meta">Функции • 20 минут</div>
+                <div class="lesson-meta">Функции • 40 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Представь что ты пишешь программу и тебе нужна простая функция для одного маленького действия. Создавать полноценную функцию с <code>def</code> кажется слишком громоздко... В Python есть элегантное решение - lambda-функции!</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Lambda-функции (или анонимные функции) - это способ создать короткую функцию в одну строку БЕЗ использования <code>def</code> и даже БЕЗ имени! Это как "быстрая заметка" вместо "официального документа".</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Что такое lambda-функции и зачем они нужны</li>
+                        <li>Синтаксис: lambda параметры: выражение</li>
+                        <li>Разница между lambda и обычными def функциями</li>
+                        <li>Lambda с map() - применить ко всем элементам</li>
+                        <li>Lambda с filter() - отфильтровать элементы</li>
+                        <li>Lambda с sorted() - сортировка по критерию</li>
+                        <li>Когда использовать lambda, а когда def</li>
+                        <li>Ограничения lambda-функций</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
+                <h2>Что такое Lambda-функция?</h2>
+                <p>Lambda - это маленькая анонимная функция, которую можно создать в одну строку.</p>
+
+                <div class="code-block">
+                    <pre># Обычная функция
+def square(x):
+    return x ** 2
+
+print(square(5))  # 25
+
+# Lambda-функция (делает то же самое!)
+square_lambda = lambda x: x ** 2
+
+print(square_lambda(5))  # 25
+
+# Можно даже без имени (анонимно):
+print((lambda x: x ** 2)(5))  # 25</pre>
+                </div>
+
+                <h3>Синтаксис Lambda:</h3>
+                <div class="code-block">
+                    <pre>lambda параметры: выражение
+
+# Примеры:
+lambda x: x * 2              # Удвоить x
+lambda x, y: x + y           # Сложить x и y
+lambda x: x > 0              # Проверить положительное ли x
+lambda s: s.upper()          # Строку в верхний регистр
+lambda x, y, z: x + y + z    # Сложить три числа</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Структура Lambda:</h4>
+                    <ul>
+                        <li><code>lambda</code> - ключевое слово</li>
+                        <li><strong>параметры</strong> - аргументы функции (через запятую)</li>
+                        <li><code>:</code> - двоеточие (разделитель)</li>
+                        <li><strong>выражение</strong> - что вернуть (ОДНО выражение!)</li>
+                    </ul>
+                </div>
+
+                <h2>Lambda vs Обычные функции</h2>
+
+                <h3>Обычная функция (def):</h3>
+                <div class="code-block">
+                    <pre>def add(a, b):
+    """Складывает два числа."""
+    return a + b
+
+result = add(3, 5)
+print(result)  # 8</pre>
+                </div>
+
+                <h3>Lambda-функция:</h3>
+                <div class="code-block">
+                    <pre>add = lambda a, b: a + b
+
+result = add(3, 5)
+print(result)  # 8
+
+# Или анонимно (без имени):
+result = (lambda a, b: a + b)(3, 5)
+print(result)  # 8</pre>
+                </div>
+
+                <h3>Сравнение:</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Характеристика</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">def функция</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">lambda функция</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Имя</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Обязательно</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Необязательно (анонимная)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Размер</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Может быть большой</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Одна строка</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Выражений</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Множество операторов</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">ОДНО выражение</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>return</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Явный return</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Неявный (автоматический)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Документация</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Может иметь docstring</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Нет docstring</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Использование</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Сложная логика</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Простые операции</td>
+                    </tr>
+                </table>
+
+                <h2>Простые примеры Lambda</h2>
+
+                <h3>Пример 1: Математические операции</h3>
+                <div class="code-block">
+                    <pre># Квадрат числа
+square = lambda x: x ** 2
+print(square(4))  # 16
+
+# Куб числа
+cube = lambda x: x ** 3
+print(cube(3))  # 27
+
+# Удвоение
+double = lambda x: x * 2
+print(double(7))  # 14
+
+# Сложение двух чисел
+add = lambda a, b: a + b
+print(add(10, 5))  # 15
+
+# Среднее двух чисел
+average = lambda a, b: (a + b) / 2
+print(average(10, 20))  # 15.0</pre>
+                </div>
+
+                <h3>Пример 2: Работа со строками</h3>
+                <div class="code-block">
+                    <pre># Длина строки
+length = lambda s: len(s)
+print(length("Hello"))  # 5
+
+# Верхний регистр
+to_upper = lambda s: s.upper()
+print(to_upper("hello"))  # HELLO
+
+# Перевернуть строку
+reverse = lambda s: s[::-1]
+print(reverse("Python"))  # nohtyP
+
+# Первый символ
+first_char = lambda s: s[0] if s else ""
+print(first_char("Hello"))  # H</pre>
+                </div>
+
+                <h3>Пример 3: Логические проверки</h3>
+                <div class="code-block">
+                    <pre># Четное ли число?
+is_even = lambda x: x % 2 == 0
+print(is_even(4))   # True
+print(is_even(7))   # False
+
+# Положительное ли?
+is_positive = lambda x: x > 0
+print(is_positive(5))   # True
+print(is_positive(-3))  # False
+
+# Длинная ли строка?
+is_long = lambda s: len(s) > 5
+print(is_long("Hello"))      # False
+print(is_long("Hello World")) # True</pre>
+                </div>
+
+                <h2>Lambda с map()</h2>
+                <p>Функция <code>map()</code> применяет функцию ко всем элементам последовательности!</p>
+
+                <div class="code-block">
+                    <pre># Синтаксис: map(функция, последовательность)
+
+# Пример: удвоить все числа
+numbers = [1, 2, 3, 4, 5]
+
+# С обычной функцией:
+def double(x):
+    return x * 2
+result = list(map(double, numbers))
+print(result)  # [2, 4, 6, 8, 10]
+
+# С lambda (короче!):
+result = list(map(lambda x: x * 2, numbers))
+print(result)  # [2, 4, 6, 8, 10]</pre>
+                </div>
+
+                <h3>Больше примеров с map():</h3>
+                <div class="code-block">
+                    <pre>numbers = [1, 2, 3, 4, 5]
+
+# Квадраты
+squares = list(map(lambda x: x ** 2, numbers))
+print(squares)  # [1, 4, 9, 16, 25]
+
+# Кубы
+cubes = list(map(lambda x: x ** 3, numbers))
+print(cubes)  # [1, 8, 27, 64, 125]
+
+# Строки в верхний регистр
+words = ["hello", "world", "python"]
+upper_words = list(map(lambda s: s.upper(), words))
+print(upper_words)  # ['HELLO', 'WORLD', 'PYTHON']
+
+# Длины строк
+lengths = list(map(lambda s: len(s), words))
+print(lengths)  # [5, 5, 6]
+
+# Два списка: сложить попарно
+a = [1, 2, 3]
+b = [10, 20, 30]
+sums = list(map(lambda x, y: x + y, a, b))
+print(sums)  # [11, 22, 33]</pre>
+                </div>
+
+                <h2>Lambda с filter()</h2>
+                <p>Функция <code>filter()</code> оставляет только элементы, удовлетворяющие условию!</p>
+
+                <div class="code-block">
+                    <pre># Синтаксис: filter(функция, последовательность)
+# Функция должна возвращать True/False
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Только четные числа
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(evens)  # [2, 4, 6, 8, 10]
+
+# Только нечетные
+odds = list(filter(lambda x: x % 2 != 0, numbers))
+print(odds)  # [1, 3, 5, 7, 9]
+
+# Только больше 5
+greater_than_5 = list(filter(lambda x: x > 5, numbers))
+print(greater_than_5)  # [6, 7, 8, 9, 10]</pre>
+                </div>
+
+                <h3>Больше примеров с filter():</h3>
+                <div class="code-block">
+                    <pre># Положительные числа
+numbers = [-5, 3, -1, 7, 0, -3, 9]
+positives = list(filter(lambda x: x > 0, numbers))
+print(positives)  # [3, 7, 9]
+
+# Длинные слова (больше 4 символов)
+words = ["hi", "hello", "world", "a", "python"]
+long_words = list(filter(lambda s: len(s) > 4, words))
+print(long_words)  # ['hello', 'world', 'python']
+
+# Строки, начинающиеся с 'p'
+p_words = list(filter(lambda s: s.startswith('p'), words))
+print(p_words)  # ['python']
+
+# Числа, делящиеся на 3
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+div_by_3 = list(filter(lambda x: x % 3 == 0, numbers))
+print(div_by_3)  # [3, 6, 9, 12]</pre>
+                </div>
+
+                <h2>Lambda с sorted()</h2>
+                <p>Функция <code>sorted()</code> может использовать lambda для определения критерия сортировки!</p>
+
+                <div class="code-block">
+                    <pre># Синтаксис: sorted(последовательность, key=функция)
+
+# Пример: сортировка по абсолютному значению
+numbers = [-5, 2, -8, 1, -3, 7]
+
+# Обычная сортировка
+print(sorted(numbers))  # [-8, -5, -3, 1, 2, 7]
+
+# По абсолютному значению (по модулю)
+sorted_abs = sorted(numbers, key=lambda x: abs(x))
+print(sorted_abs)  # [1, 2, -3, -5, 7, -8]</pre>
+                </div>
+
+                <h3>Сортировка строк:</h3>
+                <div class="code-block">
+                    <pre>words = ["apple", "Banana", "cherry", "Date"]
+
+# Обычная сортировка (заглавные первые)
+print(sorted(words))  # ['Banana', 'Date', 'apple', 'cherry']
+
+# По длине
+by_length = sorted(words, key=lambda s: len(s))
+print(by_length)  # ['Date', 'apple', 'Banana', 'cherry']
+
+# Игнорируя регистр
+ignore_case = sorted(words, key=lambda s: s.lower())
+print(ignore_case)  # ['apple', 'Banana', 'cherry', 'Date']
+
+# В обратном порядке
+reverse = sorted(words, key=lambda s: s, reverse=True)
+print(reverse)  # ['cherry', 'apple', 'Date', 'Banana']</pre>
+                </div>
+
+                <h3>Сортировка сложных структур:</h3>
+                <div class="code-block">
+                    <pre># Список кортежей (имя, возраст)
+students = [
+    ("Иван", 16),
+    ("Мария", 15),
+    ("Петр", 17),
+    ("Анна", 15)
+]
+
+# По возрасту
+by_age = sorted(students, key=lambda s: s[1])
+print(by_age)
+# [('Мария', 15), ('Анна', 15), ('Иван', 16), ('Петр', 17)]
+
+# По имени
+by_name = sorted(students, key=lambda s: s[0])
+print(by_name)
+# [('Анна', 15), ('Иван', 16), ('Мария', 15), ('Петр', 17)]
+
+# Список словарей
+products = [
+    {"name": "Яблоко", "price": 100},
+    {"name": "Банан", "price": 50},
+    {"name": "Апельсин", "price": 80}
+]
+
+# По цене
+by_price = sorted(products, key=lambda p: p["price"])
+print(by_price)
+# [{'name': 'Банан', 'price': 50}, ...]</pre>
+                </div>
+
+                <h2>Когда использовать Lambda?</h2>
+
+                <div class="info-block">
+                    <h4>Lambda ХОРОША когда:</h4>
+                    <ul>
+                        <li><strong>Функция простая</strong> - одно выражение</li>
+                        <li><strong>Используется один раз</strong> - в map(), filter(), sorted()</li>
+                        <li><strong>Краткость важна</strong> - экономия строк кода</li>
+                        <li><strong>Функция короткая</strong> - легко читается в одну строку</li>
+                        <li><strong>Передается как аргумент</strong> - в другую функцию</li>
+                    </ul>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Lambda ПЛОХА когда:</h4>
+                    <ul>
+                        <li><strong>Сложная логика</strong> - несколько операций</li>
+                        <li><strong>Нужны условия</strong> - if/else делают код нечитаемым</li>
+                        <li><strong>Много параметров</strong> - функция становится длинной</li>
+                        <li><strong>Используется многократно</strong> - лучше def с именем</li>
+                        <li><strong>Нужна документация</strong> - lambda не может иметь docstring</li>
+                        <li><strong>Отладка</strong> - сложно отлаживать анонимные функции</li>
+                    </ul>
+                </div>
+
+                <h2>Ограничения Lambda</h2>
+
+                <h3>Ограничение 1: Только одно выражение</h3>
+                <div class="code-block">
+                    <pre># НЕЛЬЗЯ - несколько строк
+# lambda x: 
+#     y = x * 2
+#     return y + 1
+
+# МОЖНО - одно выражение
+lambda x: x * 2 + 1</pre>
+                </div>
+
+                <h3>Ограничение 2: Нет операторов</h3>
+                <div class="code-block">
+                    <pre># НЕЛЬЗЯ - операторы типа print, for, while
+# lambda x: print(x)  # SyntaxError!
+
+# МОЖНО - только выражения
+lambda x: x * 2</pre>
+                </div>
+
+                <h3>Ограничение 3: Условный оператор в одну строку</h3>
+                <div class="code-block">
+                    <pre># МОЖНО - тернарный оператор (if-else в одну строку)
+absolute = lambda x: x if x >= 0 else -x
+print(absolute(-5))  # 5
+print(absolute(3))   # 3
+
+# Четное или нечетное
+parity = lambda x: "четное" if x % 2 == 0 else "нечетное"
+print(parity(4))  # четное
+print(parity(7))  # нечетное</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Калькулятор операций</h3>
+                <div class="code-block">
+                    <pre># Словарь операций
+operations = {
+    '+': lambda a, b: a + b,
+    '-': lambda a, b: a - b,
+    '*': lambda a, b: a * b,
+    '/': lambda a, b: a / b if b != 0 else "Ошибка: деление на 0",
+    '**': lambda a, b: a ** b
+}
+
+# Использование
+print(operations['+'](10, 5))   # 15
+print(operations['-'](10, 5))   # 5
+print(operations['*'](10, 5))   # 50
+print(operations['/'](10, 5))   # 2.0
+print(operations['**'](2, 3))   # 8</pre>
+                </div>
+
+                <h3>Пример 2: Обработка данных</h3>
+                <div class="code-block">
+                    <pre>students = [
+    {"name": "Иван", "grade": 85},
+    {"name": "Мария", "grade": 92},
+    {"name": "Петр", "grade": 78},
+    {"name": "Анна", "grade": 95}
+]
+
+# Отфильтровать отличников (>= 90)
+excellent = list(filter(lambda s: s["grade"] >= 90, students))
+print(excellent)
+# [{'name': 'Мария', 'grade': 92}, {'name': 'Анна', 'grade': 95}]
+
+# Получить только имена
+names = list(map(lambda s: s["name"], students))
+print(names)  # ['Иван', 'Мария', 'Петр', 'Анна']
+
+# Средний балл
+grades = list(map(lambda s: s["grade"], students))
+average = sum(grades) / len(grades)
+print(f"Средний балл: {average}")  # 87.5</pre>
+                </div>
+
+                <h3>Пример 3: Преобразование данных</h3>
+                <div class="code-block">
+                    <pre># Температуры в Цельсиях
+celsius = [0, 10, 20, 30, 40]
+
+# Перевести в Фаренгейт: F = C * 9/5 + 32
+fahrenheit = list(map(lambda c: c * 9/5 + 32, celsius))
+print(fahrenheit)  # [32.0, 50.0, 68.0, 86.0, 104.0]
+
+# Цены в рублях
+prices_rub = [100, 250, 500, 1000]
+
+# Перевести в доллары (курс 75)
+prices_usd = list(map(lambda p: round(p / 75, 2), prices_rub))
+print(prices_usd)  # [1.33, 3.33, 6.67, 13.33]</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +702,286 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Пример 1: Простые lambda
+square = lambda x: x ** 2
+add = lambda a, b: a + b
+
+print(f"5^2 = {square(5)}")
+print(f"3 + 7 = {add(3, 7)}")
+print()
+
+# Пример 2: Lambda с map()
+numbers = [1, 2, 3, 4, 5]
+doubled = list(map(lambda x: x * 2, numbers))
+print(f"Удвоенные: {doubled}")
+
+squares = list(map(lambda x: x ** 2, numbers))
+print(f"Квадраты: {squares}")
+print()
+
+# Пример 3: Lambda с filter()
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(f"Четные: {evens}")
+
+greater_3 = list(filter(lambda x: x > 3, numbers))
+print(f"Больше 3: {greater_3}")
+print()
+
+# Пример 4: Lambda с sorted()
+words = ["banana", "apple", "cherry", "date"]
+by_length = sorted(words, key=lambda s: len(s))
+print(f"По длине: {by_length}")
+
+by_last = sorted(words, key=lambda s: s[-1])
+print(f"По последней букве: {by_last}")
+print()
+
+# Пример 5: Условие в lambda
+absolute = lambda x: x if x >= 0 else -x
+print(f"|5| = {absolute(5)}")
+print(f"|-3| = {absolute(-3)}")
+print()
+
+# Пример 6: Lambda со списками
+students = [("Иван", 85), ("Мария", 92), ("Петр", 78)]
+by_grade = sorted(students, key=lambda s: s[1], reverse=True)
+print("Студенты по баллам:")
+for name, grade in by_grade:
+    print(f"  {name}: {grade}")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Lambda с map() и filter()</h4>
+                    <p>Используя lambda-функции:</p>
+                    <ol>
+                        <li>Создай список чисел от -10 до 10</li>
+                        <li>С помощью map() получи список квадратов всех чисел</li>
+                        <li>С помощью filter() оставь только положительные числа</li>
+                        <li>С помощью map() преобразуй числа в строки вида "Число: X"</li>
+                        <li>Выведи результаты каждого шага</li>
+                    </ol>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Сортировка студентов</h4>
+                    <p>Создай список студентов (словари с полями name, age, grade):</p>
+                    <ol>
+                        <li>Минимум 5 студентов</li>
+                        <li>Отсортируй по баллу (убывание) используя lambda</li>
+                        <li>Отфильтруй студентов с баллом >= 80 используя lambda</li>
+                        <li>Получи список только имен отличников (>= 90) используя map и filter</li>
+                        <li>Найди средний возраст студентов с баллом >= 85</li>
+                    </ol>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Калькулятор с lambda</h4>
+                    <p>Создай расширенный калькулятор:</p>
+                    <ol>
+                        <li>Словарь operations с lambda для: +, -, *, /, **, %, //</li>
+                        <li>Добавь операции: min, max, abs</li>
+                        <li>Создай функцию calculate(a, b, op) которая использует словарь</li>
+                        <li>Обработай ошибки (деление на 0, неизвестная операция)</li>
+                        <li>Протестируй все операции</li>
+                    </ol>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Несколько операторов в lambda</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - нельзя несколько строк
+# func = lambda x: 
+#     y = x * 2
+#     return y + 1
+
+# ПРАВИЛЬНО - одно выражение
+func = lambda x: x * 2 + 1</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Забыли list() для map/filter</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - получим объект, а не список
+result = map(lambda x: x * 2, [1, 2, 3])
+print(result)  # <map object at 0x...>
+
+# ПРАВИЛЬНО - преобразуем в список
+result = list(map(lambda x: x * 2, [1, 2, 3]))
+print(result)  # [2, 4, 6]</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Слишком сложная lambda</h4>
+                    <div class="code-block">
+                        <pre># ПЛОХО - сложно читать
+func = lambda x: x * 2 if x > 0 else -x * 3 if x < -10 else 0
+
+# ХОРОШО - используй def для сложной логики
+def func(x):
+    if x > 0:
+        return x * 2
+    elif x < -10:
+        return -x * 3
+    else:
+        return 0</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Использование = вместо ==</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - присваивание нельзя в lambda
+# func = lambda x: x = 10  # SyntaxError!
+
+# ПРАВИЛЬНО - сравнение
+func = lambda x: x == 10  # True/False</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Забыли двоеточие</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - нет двоеточия
+# func = lambda x x * 2  # SyntaxError!
+
+# ПРАВИЛЬНО
+func = lambda x: x * 2</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Lambda когда нужен def</h4>
+                    <div class="code-block">
+                        <pre># ПЛОХО - lambda переиспользуется много раз
+process = lambda data: [x * 2 for x in data if x > 0]
+
+for i in range(100):
+    result = process(some_data)
+
+# ХОРОШО - используй def для переиспользуемых функций
+def process(data):
+    """Обрабатывает данные."""
+    return [x * 2 for x in data if x > 0]
+
+for i in range(100):
+    result = process(some_data)</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что такое lambda-функция?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Lambda - это функция, а не переменная.">Специальная переменная</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Lambda - это анонимная функция в одну строку.">Анонимная функция в одну строку</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Lambda - это не цикл.">Короткий цикл for</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Lambda - это функция, а не метод.">Метод списка</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Сколько выражений может быть в lambda?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Lambda может иметь только одно выражение.">Сколько угодно</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Lambda может содержать только ОДНО выражение.">Только одно</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Lambda должна иметь хотя бы одно выражение.">Ноль</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Не максимум два, а ровно одно.">Максимум два</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что делает функция map()?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! map() применяет функцию к каждому элементу.">Применяет функцию ко всем элементам</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это делает filter().">Фильтрует элементы по условию</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Это делает sorted().">Сортирует элементы</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! map() не создает словарь.">Создает словарь</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Когда лучше использовать lambda вместо def?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Для сложной логики лучше def.">Для сложной логики</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Lambda хороша для простых одноразовых функций.">Для простых одноразовых функций</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Lambda всегда одна строка.">Когда функция занимает много строк</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Lambda нельзя документировать.">Когда нужна документация</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что вернет: sorted([3,1,2], key=lambda x: -x)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Сортировка будет по убыванию из-за минуса.">[1, 2, 3]</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Ключ -x меняет порядок на обратный.">[3, 2, 1]</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Результат будет список, а не отрицательные числа.">[-3, -2, -1]</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! sorted() не вызовет ошибку.">Ошибка</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Lambda-функции встречаются на экзаменах по информатике:</p>
+                    <ul>
+                        <li><strong>ЕГЭ Задания 24-27:</strong> Обработка данных с использованием map(), filter(), sorted()</li>
+                        <li><strong>ОГЭ Задание 14:</strong> Понимание работы функций высшего порядка</li>
+                        <li>Применение на экзаменах:
+                            <ul>
+                                <li>Обработка списков и данных (map, filter)</li>
+                                <li>Сортировка по критерию (sorted с key)</li>
+                                <li>Преобразование данных</li>
+                                <li>Функциональное программирование</li>
+                                <li>Краткая запись простых операций</li>
+                            </ul>
+                        </li>
+                        <li>Lambda помогает писать более компактный и выразительный код</li>
+                        <li>Важно понимать когда lambda уместна, а когда лучше def</li>
+                        <li>Знание map(), filter(), sorted() с lambda дает преимущество на экзамене</li>
+                        <li>Lambda часто используется в задачах на обработку последовательностей</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Lambda</strong> - анонимная функция в одну строку</li>
+                    <li><strong>Синтаксис:</strong> lambda параметры: выражение</li>
+                    <li><strong>Одно выражение:</strong> lambda может содержать только ОДНО выражение</li>
+                    <li><strong>map()</strong> - применяет функцию ко всем элементам</li>
+                    <li><strong>filter()</strong> - оставляет элементы, удовлетворяющие условию</li>
+                    <li><strong>sorted()</strong> - сортировка с критерием (key=lambda)</li>
+                    <li><strong>Используй lambda</strong> для простых одноразовых функций</li>
+                    <li><strong>Используй def</strong> для сложной логики, документации, переиспользования</li>
+                    <li><strong>Ограничения:</strong> нет операторов, только выражения</li>
+                    <li><strong>Читаемость:</strong> lambda должна быть короткой и понятной</li>
+                </ul>
+
+                <p>Отлично! Ты освоил lambda-функции - мощный инструмент для краткой записи простых операций! Lambda особенно полезны с map(), filter() и sorted(), делая код более компактным и выразительным. Теперь ты знаешь весь модуль о функциях! Следующий модуль посвятим работе с файлами!</p>
             </div>
 
             <div class="lesson-nav">
@@ -272,12 +991,6 @@
             </div>
         </div>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>Python для школьников © 2024</p>
-        </div>
-    </footer>
 
     <script src="../js/main.js"></script>
 </body>

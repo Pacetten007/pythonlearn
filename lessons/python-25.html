@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 30: Запись в файлы - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-25">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,21 +220,441 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 30: Запись в файлы</h1>
-                <div class="lesson-meta">Работа с файлами • 20 минут</div>
+                <div class="lesson-meta">Работа с файлами • 40 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>В прошлом уроке мы научились читать файлы. Но что если нужно <strong>сохранить</strong> данные? Записать результаты работы программы, создать отчет, сохранить настройки пользователя? Для этого используется запись в файлы!</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Запись в файлы позволяет:</p>
+                <ul>
+                    <li><strong>Сохранять результаты</strong> - программа может создавать отчеты и логи</li>
+                    <li><strong>Хранить данные постоянно</strong> - информация не теряется после закрытия программы</li>
+                    <li><strong>Экспортировать данные</strong> - для использования в других программах</li>
+                    <li><strong>Создавать конфигурационные файлы</strong> - настройки приложения</li>
+                    <li><strong>Вести журналы</strong> - логирование действий пользователя</li>
+                </ul>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="warning-block">
+                    <h4>⚠️ Важно для Skulpt!</h4>
+                    <p>Запись в файлы в браузерном редакторе Skulpt <strong>не поддерживается</strong>. Для работы с файлами тебе нужно запускать код локально на своем компьютере с установленным Python.</p>
+                    <p>Но изучать синтаксис и понимать принципы работы можно прямо здесь!</p>
                 </div>
 
-                <h2>Попробуй сам!</h2>
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Режимы записи: "w", "a", "x"</li>
+                        <li>Метод write() - запись строк</li>
+                        <li>Метод writelines() - запись списка строк</li>
+                        <li>Опасность режима "w" - перезапись файла!</li>
+                        <li>Режим "a" - добавление в конец файла</li>
+                        <li>Запись разных типов данных</li>
+                        <li>Создание новых файлов</li>
+                        <li>Лучшие практики при записи</li>
+                    </ul>
+                </div>
+
+                <h2>Режимы записи файлов</h2>
+                <p>При открытии файла для записи используются следующие режимы:</p>
+
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Режим</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Название</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Поведение</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>"w"</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Write (запись)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Создает новый или ПЕРЕЗАПИСЫВАЕТ существующий!</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>"a"</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Append (добавление)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Добавляет в конец, НЕ удаляя содержимое</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>"x"</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Exclusive create</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Создает новый, ошибка если файл существует</td>
+                    </tr>
+                </table>
+
+                <div class="warning-block">
+                    <h4>⚠️ ОПАСНОСТЬ режима "w"!</h4>
+                    <p>Режим "w" <strong>УДАЛЯЕТ</strong> все содержимое файла при открытии! Будь осторожен!</p>
+                </div>
+
+                <h2>Метод write() - Запись строки</h2>
+                <p>Метод <code>write()</code> записывает строку в файл:</p>
+
+                <div class="code-block">
+                    <pre># Запись в файл
+with open("output.txt", "w", encoding="utf-8") as file:
+    file.write("Привет, мир!\n")
+    file.write("Это вторая строка.\n")
+
+# Файл output.txt теперь содержит:
+# Привет, мир!
+# Это вторая строка.</pre>
+                </div>
+
+                <h3>Важно знать про write():</h3>
+                <ul>
+                    <li><strong>НЕ добавляет \n автоматически</strong> - нужно добавлять вручную!</li>
+                    <li><strong>Принимает только строки</strong> - другие типы нужно конвертировать</li>
+                    <li><strong>Возвращает количество записанных символов</strong></li>
+                    <li><strong>Можно вызывать многократно</strong> - строки добавляются по порядку</li>
+                </ul>
+
+                <h3>Примеры write():</h3>
+                <div class="code-block">
+                    <pre># Пример 1: Простая запись
+with open("hello.txt", "w", encoding="utf-8") as file:
+    file.write("Привет!\n")
+
+# Пример 2: Несколько строк
+with open("poem.txt", "w", encoding="utf-8") as file:
+    file.write("У лукоморья дуб зелёный,\n")
+    file.write("Златая цепь на дубе том.\n")
+    file.write("И днём и ночью кот учёный\n")
+    file.write("Всё ходит по цепи кругом.\n")
+
+# Пример 3: Без \n (всё в одну строку!)
+with open("oneline.txt", "w", encoding="utf-8") as file:
+    file.write("Первая часть ")
+    file.write("Вторая часть ")
+    file.write("Третья часть")
+# Файл содержит: Первая часть Вторая часть Третья часть</pre>
+                </div>
+
+                <h2>Метод writelines() - Запись списка строк</h2>
+                <p>Метод <code>writelines()</code> записывает список строк в файл:</p>
+
+                <div class="code-block">
+                    <pre>lines = [
+    "Первая строка\n",
+    "Вторая строка\n",
+    "Третья строка\n"
+]
+
+with open("output.txt", "w", encoding="utf-8") as file:
+    file.writelines(lines)</pre>
+                </div>
+
+                <h3>Важно про writelines():</h3>
+                <ul>
+                    <li><strong>Тоже НЕ добавляет \n</strong> - нужно включить в строки списка!</li>
+                    <li><strong>Принимает любой итерируемый объект</strong> - список, кортеж, и т.д.</li>
+                    <li><strong>Быстрее чем много write()</strong> - для большого количества строк</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre># Пример: Сохранить список студентов
+students = ["Иван Петров", "Мария Сидорова", "Петр Иванов"]
+
+with open("students.txt", "w", encoding="utf-8") as file:
+    # Добавляем \n к каждому имени
+    lines = [name + "\n" for name in students]
+    file.writelines(lines)
+
+# Или короче с генератором:
+with open("students.txt", "w", encoding="utf-8") as file:
+    file.writelines(name + "\n" for name in students)</pre>
+                </div>
+
+                <h2>Режим "w" - Перезапись файла</h2>
+                <p>Режим "w" создает новый файл или <strong>ПОЛНОСТЬЮ ПЕРЕЗАПИСЫВАЕТ</strong> существующий!</p>
+
+                <div class="code-block">
+                    <pre># Создаем файл с данными
+with open("important.txt", "w", encoding="utf-8") as file:
+    file.write("Важные данные\n")
+    file.write("Не удалять!\n")
+
+# ОПАСНО! Это УДАЛИТ предыдущее содержимое!
+with open("important.txt", "w", encoding="utf-8") as file:
+    file.write("Новые данные\n")
+
+# Теперь файл содержит только "Новые данные"
+# Старые данные потеряны навсегда!</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>⚠️ Будь осторожен с "w"!</h4>
+                    <p>Режим "w":</p>
+                    <ul>
+                        <li>Немедленно УДАЛЯЕТ все содержимое при открытии</li>
+                        <li>Даже если ты ничего не запишешь, файл станет пустым!</li>
+                        <li>Нет способа вернуть удаленные данные</li>
+                        <li>Используй "a" если хочешь добавить, а не заменить</li>
+                    </ul>
+                </div>
+
+                <h3>Когда использовать "w":</h3>
+                <ul>
+                    <li><strong>Создание нового файла</strong> - когда файла точно нет</li>
+                    <li><strong>Полная перезапись</strong> - когда старые данные не нужны</li>
+                    <li><strong>Генерация отчетов</strong> - каждый раз создается заново</li>
+                    <li><strong>Временные файлы</strong> - которые регулярно пересоздаются</li>
+                </ul>
+
+                <h2>Режим "a" - Добавление в конец</h2>
+                <p>Режим "a" (append) добавляет данные в <strong>конец файла</strong>, не удаляя существующее содержимое:</p>
+
+                <div class="code-block">
+                    <pre># Создаем файл с начальными данными
+with open("log.txt", "w", encoding="utf-8") as file:
+    file.write("=== Лог программы ===\n")
+
+# Добавляем записи (НЕ удаляя предыдущее!)
+with open("log.txt", "a", encoding="utf-8") as file:
+    file.write("Программа запущена\n")
+
+# Добавляем еще записи
+with open("log.txt", "a", encoding="utf-8") as file:
+    file.write("Пользователь вошел в систему\n")
+    file.write("Файл загружен\n")
+
+# Файл log.txt содержит:
+# === Лог программы ===
+# Программа запущена
+# Пользователь вошел в систему
+# Файл загружен</pre>
+                </div>
+
+                <h3>Когда использовать "a":</h3>
+                <ul>
+                    <li><strong>Логи</strong> - постоянное добавление записей</li>
+                    <li><strong>Накопление данных</strong> - сбор информации со временем</li>
+                    <li><strong>Дополнение файла</strong> - когда нужно сохранить старое</li>
+                    <li><strong>Журналы</strong> - история событий</li>
+                </ul>
+
+                <div class="info-block">
+                    <h4>✅ Безопасность режима "a":</h4>
+                    <p>Режим "a" безопасен - он <strong>НИКОГДА</strong> не удаляет существующие данные. Если файл не существует, он будет создан.</p>
+                </div>
+
+                <h2>Режим "x" - Эксклюзивное создание</h2>
+                <p>Режим "x" создает файл только если его еще НЕ существует. Если файл есть - выдает ошибку:</p>
+
+                <div class="code-block">
+                    <pre>try:
+    with open("newfile.txt", "x", encoding="utf-8") as file:
+        file.write("Это новый файл\n")
+    print("Файл успешно создан!")
+except FileExistsError:
+    print("Файл уже существует!")</pre>
+                </div>
+
+                <h3>Когда использовать "x":</h3>
+                <ul>
+                    <li><strong>Защита от перезаписи</strong> - гарантия, что не удалишь существующий файл</li>
+                    <li><strong>Уникальные файлы</strong> - когда нужна гарантия новизны</li>
+                    <li><strong>Критичные данные</strong> - безопасность от случайного удаления</li>
+                </ul>
+
+                <h2>Запись разных типов данных</h2>
+                <p>Метод <code>write()</code> принимает только строки! Другие типы нужно конвертировать:</p>
+
+                <h3>Запись чисел:</h3>
+                <div class="code-block">
+                    <pre>number = 42
+price = 99.99
+
+with open("numbers.txt", "w", encoding="utf-8") as file:
+    # НЕПРАВИЛЬНО - ошибка!
+    # file.write(number)  # TypeError!
+
+    # ПРАВИЛЬНО - конвертируем в строку
+    file.write(str(number) + "\n")
+    file.write(str(price) + "\n")
+
+    # Или с f-строками:
+    file.write(f"Число: {number}\n")
+    file.write(f"Цена: {price} руб.\n")</pre>
+                </div>
+
+                <h3>Запись списков:</h3>
+                <div class="code-block">
+                    <pre>scores = [85, 92, 78, 95, 88]
+
+with open("scores.txt", "w", encoding="utf-8") as file:
+    # Способ 1: По одному элементу
+    for score in scores:
+        file.write(str(score) + "\n")
+
+    # Способ 2: Все в одну строку
+    file.write(" ".join(map(str, scores)) + "\n")
+
+    # Способ 3: С описанием
+    for i, score in enumerate(scores, 1):
+        file.write(f"Тест {i}: {score} баллов\n")</pre>
+                </div>
+
+                <h3>Запись словарей:</h3>
+                <div class="code-block">
+                    <pre>config = {
+    "username": "admin",
+    "port": 8080,
+    "debug": True
+}
+
+with open("config.txt", "w", encoding="utf-8") as file:
+    for key, value in config.items():
+        file.write(f"{key}={value}\n")</pre>
+                </div>
+
+                <h2>Создание новых файлов</h2>
+                <p>Режимы "w", "a" и "x" создают файл автоматически, если он не существует:</p>
+
+                <div class="code-block">
+                    <pre># Режим "w" - создает или перезаписывает
+with open("new_file.txt", "w", encoding="utf-8") as file:
+    file.write("Новый файл создан!\n")
+
+# Режим "a" - создает или добавляет
+with open("log_file.txt", "a", encoding="utf-8") as file:
+    file.write("Первая запись в логе\n")
+
+# Режим "x" - создает, ошибка если существует
+try:
+    with open("unique_file.txt", "x", encoding="utf-8") as file:
+        file.write("Уникальный файл\n")
+except FileExistsError:
+    print("Файл уже есть!")</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Сохранение списка покупок</h3>
+                <div class="code-block">
+                    <pre>shopping_list = [
+    "Молоко - 2 литра",
+    "Хлеб - 1 батон",
+    "Яйца - 10 штук",
+    "Сыр - 500 грамм"
+]
+
+# Сохраняем список в файл
+with open("shopping.txt", "w", encoding="utf-8") as file:
+    file.write("=== Список покупок ===\n\n")
+    for i, item in enumerate(shopping_list, 1):
+        file.write(f"{i}. {item}\n")
+
+print("Список покупок сохранен в shopping.txt")</pre>
+                </div>
+
+                <h3>Пример 2: Журнал событий (лог)</h3>
+                <div class="code-block">
+                    <pre>from datetime import datetime
+
+def log_event(message):
+    """Добавляет событие в лог-файл"""
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    with open("events.log", "a", encoding="utf-8") as file:
+        file.write(f"[{timestamp}] {message}\n")
+
+# Использование
+log_event("Программа запущена")
+log_event("Пользователь вошел в систему")
+log_event("Файл загружен успешно")
+log_event("Программа завершена")</pre>
+                </div>
+
+                <h3>Пример 3: Сохранение результатов теста</h3>
+                <div class="code-block">
+                    <pre>students = [
+    {"name": "Иван", "score": 85},
+    {"name": "Мария", "score": 92},
+    {"name": "Петр", "score": 78},
+    {"name": "Анна", "score": 95}
+]
+
+# Сохраняем отчет
+with open("results.txt", "w", encoding="utf-8") as file:
+    file.write("=== Результаты тестирования ===\n\n")
+
+    for student in students:
+        name = student["name"]
+        score = student["score"]
+
+        # Определяем оценку
+        if score >= 90:
+            grade = "Отлично"
+        elif score >= 80:
+            grade = "Хорошо"
+        elif score >= 70:
+            grade = "Удовлетворительно"
+        else:
+            grade = "Неудовлетворительно"
+
+        file.write(f"{name}: {score} баллов ({grade})\n")
+
+    # Добавляем статистику
+    avg_score = sum(s["score"] for s in students) / len(students)
+    file.write(f"\nСредний балл: {avg_score:.2f}\n")
+
+print("Результаты сохранены в results.txt")</pre>
+                </div>
+
+                <h3>Пример 4: Создание HTML файла</h3>
+                <div class="code-block">
+                    <pre>title = "Моя страница"
+content = "Привет, это моя первая HTML страница!"
+
+with open("page.html", "w", encoding="utf-8") as file:
+    file.write("<!DOCTYPE html>\n")
+    file.write("<html>\n")
+    file.write("<head>\n")
+    file.write(f"    <title>{title}</title>\n")
+    file.write("</head>\n")
+    file.write("<body>\n")
+    file.write(f"    <h1>{title}</h1>\n")
+    file.write(f"    <p>{content}</p>\n")
+    file.write("</body>\n")
+    file.write("</html>\n")
+
+print("HTML файл создан!")</pre>
+                </div>
+
+                <h2>Лучшие практики</h2>
+
+                <div class="info-block">
+                    <h4>✅ Рекомендации при записи в файлы:</h4>
+                    <ul>
+                        <li><strong>Всегда используй with</strong> - гарантирует закрытие файла</li>
+                        <li><strong>Указывай encoding="utf-8"</strong> - для русского текста</li>
+                        <li><strong>Добавляй \n вручную</strong> - write() не делает это автоматически</li>
+                        <li><strong>Используй "a" для логов</strong> - безопасное добавление</li>
+                        <li><strong>Проверяй существование для "w"</strong> - чтобы не удалить важные данные</li>
+                        <li><strong>Конвертируй типы в строки</strong> - используй str() или f-strings</li>
+                    </ul>
+                </div>
+
+                <h3>Проверка существования файла:</h3>
+                <div class="code-block">
+                    <pre>import os
+
+filename = "important.txt"
+
+# Проверка перед перезаписью
+if os.path.exists(filename):
+    response = input(f"Файл {filename} существует. Перезаписать? (да/нет): ")
+    if response.lower() != "да":
+        print("Отмена.")
+        exit()
+
+# Теперь безопасно записываем
+with open(filename, "w", encoding="utf-8") as file:
+    file.write("Новые данные\n")</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +663,290 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># ⚠️ Запись в файлы не поддерживается в Skulpt!
+# Запусти этот код локально на своём компьютере.
+
+# Примеры синтаксиса записи в файлы:
+
+print("=== Пример 1: Режим 'w' (запись) ===")
+print("with open('output.txt', 'w', encoding='utf-8') as file:")
+print("    file.write('Привет, мир!\\n')")
+print("    file.write('Это вторая строка.\\n')")
+print()
+
+print("=== Пример 2: Режим 'a' (добавление) ===")
+print("with open('log.txt', 'a', encoding='utf-8') as file:")
+print("    file.write('Новая запись в логе\\n')")
+print()
+
+print("=== Пример 3: writelines() ===")
+print("lines = ['Первая\\n', 'Вторая\\n', 'Третья\\n']")
+print("with open('output.txt', 'w', encoding='utf-8') as file:")
+print("    file.writelines(lines)")
+print()
+
+print("=== Пример 4: Запись чисел ===")
+print("numbers = [1, 2, 3, 4, 5]")
+print("with open('numbers.txt', 'w', encoding='utf-8') as file:")
+print("    for num in numbers:")
+print("        file.write(str(num) + '\\n')")
+print()
+
+print("=== Симуляция записи ===")
+# Симулируем создание списка покупок
+shopping = ["Молоко", "Хлеб", "Яйца"]
+
+print("Содержимое файла 'shopping.txt':")
+print("=== Список покупок ===")
+for i, item in enumerate(shopping, 1):
+    print(f"{i}. {item}")
+print()
+
+print("Файл успешно создан (в реальной программе)!")</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Генератор отчета</h4>
+                    <p>Создай программу, которая:</p>
+                    <ol>
+                        <li>Запрашивает у пользователя список оценок (через запятую)</li>
+                        <li>Вычисляет средний балл</li>
+                        <li>Создает файл "report.txt" с отчетом</li>
+                        <li>Отчет должен содержать: все оценки, средний балл, количество оценок</li>
+                        <li>Форматируй отчет красиво с заголовками</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй метод split(",") для разбиения строки и map(int, ...) для конвертации в числа.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Система логирования</h4>
+                    <p>Создай простую систему логирования:</p>
+                    <ol>
+                        <li>Функция log(level, message) где level: INFO, WARNING, ERROR</li>
+                        <li>Добавляет запись в файл "app.log" с временной меткой</li>
+                        <li>Формат: [YYYY-MM-DD HH:MM:SS] LEVEL: message</li>
+                        <li>Используй режим "a" для добавления записей</li>
+                        <li>Протестируй с разными уровнями и сообщениями</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй модуль datetime для получения текущего времени.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Конвертер данных</h4>
+                    <p>Создай программу конвертации:</p>
+                    <ol>
+                        <li>Читает список студентов из input (имя и балл)</li>
+                        <li>Создает три файла: "excellent.txt", "good.txt", "poor.txt"</li>
+                        <li>Распределяет студентов по файлам по баллам (>=90, 70-89, <70)</li>
+                        <li>Каждый файл должен содержать только соответствующих студентов</li>
+                        <li>Добавь заголовки в каждый файл</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй отдельные with блоки для каждого файла.</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыл добавить \n</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - все в одну строку!
+with open("text.txt", "w", encoding="utf-8") as file:
+    file.write("Первая строка")
+    file.write("Вторая строка")
+# Файл содержит: Первая строкаВторая строка
+
+# ПРАВИЛЬНО - добавляем \n
+with open("text.txt", "w", encoding="utf-8") as file:
+    file.write("Первая строка\n")
+    file.write("Вторая строка\n")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Используешь "w" вместо "a"</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - каждый раз перезаписывает файл!
+for i in range(10):
+    with open("log.txt", "w", encoding="utf-8") as file:
+        file.write(f"Итерация {i}\n")
+# В файле останется только "Итерация 9"
+
+# ПРАВИЛЬНО - используй "a" для добавления
+for i in range(10):
+    with open("log.txt", "a", encoding="utf-8") as file:
+        file.write(f"Итерация {i}\n")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Не конвертируешь в строку</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - write() принимает только строки!
+number = 42
+with open("num.txt", "w") as file:
+    file.write(number)  # TypeError!
+
+# ПРАВИЛЬНО - конвертируй в строку
+with open("num.txt", "w", encoding="utf-8") as file:
+    file.write(str(number) + "\n")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Случайно удалил важный файл режимом "w"</h4>
+                    <div class="code-block">
+                        <pre># ОПАСНО - удаляет все данные!
+with open("important_data.txt", "w", encoding="utf-8") as file:
+    # Даже если ничего не запишешь, файл стал пустым!
+    pass
+
+# БЕЗОПАСНЕЕ - используй "x" или проверяй существование
+import os
+if not os.path.exists("important_data.txt"):
+    with open("important_data.txt", "w", encoding="utf-8") as file:
+        file.write("Новые данные\n")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Забыл про кодировку</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - проблемы с русским текстом
+with open("russian.txt", "w") as file:
+    file.write("Привет, мир!")  # Может быть кракозябры!
+
+# ПРАВИЛЬНО - указываем UTF-8
+with open("russian.txt", "w", encoding="utf-8") as file:
+    file.write("Привет, мир!")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Лишние \n в writelines()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - двойные переводы строк!
+lines = ["Первая\n", "Вторая\n", "Третья\n"]
+with open("text.txt", "w", encoding="utf-8") as file:
+    for line in lines:
+        file.writelines(line + "\n")  # Лишний \n!
+
+# ПРАВИЛЬНО - \n уже в строках
+lines = ["Первая\n", "Вторая\n", "Третья\n"]
+with open("text.txt", "w", encoding="utf-8") as file:
+    file.writelines(lines)</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что делает режим "w"?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Режим 'w' НЕ добавляет в конец, а перезаписывает файл.">Добавляет в конец файла</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Режим 'w' удаляет все содержимое и создает файл заново.">Перезаписывает весь файл</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Режим 'w' может создавать файл, если его нет.">Выдает ошибку если файла нет</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Режим 'w' используется для записи, а не чтения.">Только читает файл</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Добавляет ли write() автоматически \n?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! write() НЕ добавляет \\n автоматически - нужно делать это вручную.">Да, всегда</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! write() НЕ добавляет перевод строки, нужно явно писать \\n.">Нет, нужно добавлять вручную</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! write() НИКОГДА не добавляет \\n автоматически.">Только если строка короткая</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Режим не влияет на добавление \\n.">Зависит от режима файла</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Какой режим для добавления в конец файла?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Режим 'w' перезаписывает файл, а не добавляет.">w</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Режим 'a' (append) добавляет в конец файла, не удаляя старое содержимое.">a</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Режим 'r' используется для чтения, а не записи.">r</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Режим 'x' создает новый файл, но не добавляет в существующий.">x</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что делать, чтобы записать число в файл?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! write() принимает только строки, поэтому нужно конвертировать число через str().">Конвертировать в строку через str()</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! write() не принимает числа напрямую.">Передать напрямую в write()</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Используй обычный write(), а не специальный метод.">Использовать write_number()</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Режим файла не влияет на типы данных.">Открыть файл в бинарном режиме</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Когда используется режим "x"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Режим 'x' НЕ перезаписывает файл.">Для перезаписи файла</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Режим 'x' не добавляет в конец.">Для добавления в конец</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Режим 'x' создает файл только если его нет, иначе выдает ошибку - защита от случайной перезаписи.">Для создания нового файла с проверкой</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Режим 'x' используется для записи, а не чтения.">Для чтения файла</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Запись в файлы встречается на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ Задание 6:</strong> Обработка данных с сохранением результатов</li>
+                        <li><strong>ЕГЭ Задания 24-27:</strong> Создание отчетов и логов</li>
+                        <li>Типичные задачи:
+                            <ul>
+                                <li>Запись результатов обработки в файл</li>
+                                <li>Создание отчетов по данным</li>
+                                <li>Фильтрация и сохранение данных</li>
+                                <li>Логирование действий программы</li>
+                                <li>Экспорт данных в текстовые форматы</li>
+                            </ul>
+                        </li>
+                        <li>Важно знать разницу между "w" и "a"</li>
+                        <li>Понимать необходимость конвертации типов</li>
+                        <li>Уметь форматировать данные для записи</li>
+                        <li>Обрабатывать ошибки при записи</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Режим "w"</strong> - перезаписывает файл (ОПАСНО!)</li>
+                    <li><strong>Режим "a"</strong> - добавляет в конец (безопасно)</li>
+                    <li><strong>Режим "x"</strong> - создает новый, ошибка если существует</li>
+                    <li><strong>write(string)</strong> - записывает строку (НЕ добавляет \n!)</li>
+                    <li><strong>writelines(list)</strong> - записывает список строк</li>
+                    <li><strong>Конвертация типов</strong> - используй str() или f-strings</li>
+                    <li><strong>Всегда with</strong> - автоматически закрывает файл</li>
+                    <li><strong>encoding="utf-8"</strong> - для русского текста</li>
+                    <li><strong>Добавляй \n вручную</strong> - write() не делает это автоматически</li>
+                    <li><strong>"a" для логов</strong> - безопасное накопление данных</li>
+                </ul>
+
+                <p>Отлично! Теперь ты умеешь не только читать, но и записывать файлы! Это открывает множество возможностей: сохранение результатов, создание отчетов, ведение логов. В следующем уроке мы научимся обрабатывать текстовые данные!</p>
             </div>
 
             <div class="lesson-nav">
@@ -272,12 +956,6 @@
             </div>
         </div>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>Python для школьников © 2024</p>
-        </div>
-    </footer>
 
     <script src="../js/main.js"></script>
 </body>

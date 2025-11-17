@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 23: Создание функций - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-18">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,21 +220,379 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 23: Создание функций</h1>
-                <div class="lesson-meta">Функции • 25 минут</div>
+                <div class="lesson-meta">Функции • 45 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>Представь, что ты строишь дом. Вместо того чтобы каждый раз заново делать окно, ты используешь готовые оконные рамы. Функции в программировании работают точно так же - это готовые блоки кода, которые можно использовать снова и снова!</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>До этого момента мы писали программы линейно - строка за строкой. Но при создании больших программ это становится неудобно. Функции позволяют разбить программу на логические части, сделать код читаемым и избежать повторений.</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Зачем нужны функции?</h4>
+                    <ul>
+                        <li><strong>Переиспользование кода:</strong> Написал один раз - используй везде</li>
+                        <li><strong>Организация:</strong> Большая задача разбивается на маленькие понятные части</li>
+                        <li><strong>DRY принцип:</strong> Don't Repeat Yourself - не повторяйся</li>
+                        <li><strong>Читаемость:</strong> Код с функциями легче понять</li>
+                        <li><strong>Тестирование:</strong> Легче найти и исправить ошибки</li>
+                        <li><strong>Командная работа:</strong> Разные программисты пишут разные функции</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
+                <h2>Что такое функция?</h2>
+                <p>Функция - это именованный блок кода, который выполняет определенную задачу. Ты уже использовал встроенные функции Python: <code>print()</code>, <code>len()</code>, <code>input()</code>, <code>range()</code>. Теперь научимся создавать свои!</p>
+
+                <div class="code-block">
+                    <pre># Аналогия из жизни:
+# "Приготовить пиццу" - это функция
+# Каждый раз когда нужна пицца - ты её "вызываешь"
+# Не нужно каждый раз описывать весь процесс!</pre>
+                </div>
+
+                <h2>Базовый синтаксис функции</h2>
+                <p>Вот самая простая функция:</p>
+
+                <div class="code-block">
+                    <pre># Определение функции (создание)
+def greet():
+    print("Привет!")
+    print("Как дела?")
+
+# Вызов функции (использование)
+greet()  # Выведет: Привет! Как дела?
+
+# Можно вызвать много раз!
+greet()  # Привет! Как дела?
+greet()  # Привет! Как дела?</pre>
+                </div>
+
+                <h3>Разбор синтаксиса по частям:</h3>
+
+                <h4>1. Ключевое слово def</h4>
+                <p><code>def</code> - от английского "define" (определить). Сообщает Python: "Сейчас я создам функцию!"</p>
+
+                <h4>2. Имя функции</h4>
+                <p>После <code>def</code> идет имя функции. Правила те же, что для переменных:</p>
+                <ul>
+                    <li>Только буквы, цифры и подчеркивание</li>
+                    <li>Начинается с буквы или подчеркивания (не с цифры!)</li>
+                    <li>Регистр важен: <code>greet</code> и <code>Greet</code> - разные функции</li>
+                    <li>Используй понятные имена: <code>calculate_area</code>, а не <code>func1</code></li>
+                </ul>
+
+                <h4>3. Скобки ()</h4>
+                <p>Обязательны даже если функция без параметров! Скобки отличают функцию от переменной.</p>
+
+                <div class="code-block">
+                    <pre>def my_function():  # Правильно - со скобками
+    print("Работаю!")
+
+# def my_function  # Ошибка! Нет скобок</pre>
+                </div>
+
+                <h4>4. Двоеточие :</h4>
+                <p>После скобок обязательно двоеточие. Оно показывает начало блока кода функции.</p>
+
+                <h4>5. Тело функции (отступ 4 пробела)</h4>
+                <p>Весь код функции должен быть с отступом 4 пробела (или Tab). Это важно в Python!</p>
+
+                <div class="code-block">
+                    <pre>def correct_function():
+    print("Строка 1")  # 4 пробела
+    print("Строка 2")  # 4 пробела
+    print("Строка 3")  # 4 пробела
+
+# def wrong_function():
+# print("Ошибка!")  # Нет отступа - IndentationError!</pre>
+                </div>
+
+                <h2>Как работают функции?</h2>
+
+                <h3>Определение vs Вызов</h3>
+                <p>Важно понимать разницу!</p>
+
+                <div class="code-block">
+                    <pre># ОПРЕДЕЛЕНИЕ - создаем функцию (код не выполняется!)
+def say_hello():
+    print("Привет, мир!")
+
+# Пока ничего не произошло! Функция создана, но не вызвана.
+
+# ВЫЗОВ - используем функцию (код выполняется!)
+say_hello()  # Теперь выведет: Привет, мир!</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Важно!</h4>
+                    <p>Определение функции (def) само по себе не выполняет код внутри неё. Функция выполняется только когда её вызывают!</p>
+                </div>
+
+                <h2>Соглашения об именовании</h2>
+                <p>Хороший программист использует понятные имена функций:</p>
+
+                <div class="code-block">
+                    <pre># ХОРОШО - понятно что делает
+def print_menu():
+    print("1. Начать игру")
+    print("2. Выход")
+
+def calculate_sum():
+    result = 5 + 3
+    print(result)
+
+def draw_line():
+    print("-" * 30)
+
+# ПЛОХО - непонятно что делает
+def func1():
+    print("1. Начать игру")
+
+def f():
+    result = 5 + 3
+    print(result)
+
+def aaa():
+    print("-" * 30)</pre>
+                </div>
+
+                <h3>Соглашения Python (PEP 8):</h3>
+                <ul>
+                    <li>Используй <strong>строчные буквы</strong>: <code>my_function</code></li>
+                    <li>Слова разделяй <strong>подчеркиванием</strong>: <code>calculate_average</code></li>
+                    <li>Используй <strong>глаголы</strong> для действий: <code>print_report</code>, <code>calculate_tax</code>, <code>draw_circle</code></li>
+                    <li>Делай имена <strong>описательными</strong>: <code>validate_email</code> лучше чем <code>check</code></li>
+                </ul>
+
+                <h2>Документирование функций (Docstrings)</h2>
+                <p>Профессиональные программисты документируют свои функции. Для этого используются строки документации - <strong>docstrings</strong>:</p>
+
+                <div class="code-block">
+                    <pre>def greet():
+    """Выводит приветствие на экран."""
+    print("Привет!")
+
+def calculate_area():
+    """
+    Вычисляет площадь прямоугольника.
+    Использует фиксированные значения ширины и высоты.
+    """
+    width = 10
+    height = 5
+    area = width * height
+    print(f"Площадь: {area}")
+
+# Docstring пишется сразу после def, в тройных кавычках
+# Можно однострочный """ текст """
+# Или многострочный для длинных описаний</pre>
+                </div>
+
+                <p>Зачем нужны docstrings?</p>
+                <ul>
+                    <li>Объясняют что делает функция</li>
+                    <li>Помогают другим программистам (и тебе через месяц!)</li>
+                    <li>Встроенная справка: <code>help(function_name)</code></li>
+                    <li>Хороший тон в профессиональном программировании</li>
+                </ul>
+
+                <h2>Несколько вызовов функции</h2>
+                <p>Одну и ту же функцию можно вызывать сколько угодно раз:</p>
+
+                <div class="code-block">
+                    <pre>def print_star_line():
+    """Выводит линию из звездочек."""
+    print("*" * 40)
+
+# Вызываем 5 раз
+print_star_line()
+print("Заголовок")
+print_star_line()
+print("Текст")
+print_star_line()
+print("Подвал")
+print_star_line()
+
+# Результат:
+# ****************************************
+# Заголовок
+# ****************************************
+# Текст
+# ****************************************
+# Подвал
+# ****************************************</pre>
+                </div>
+
+                <h2>Функции вызывают другие функции</h2>
+                <p>Функции могут вызывать другие функции! Это помогает разбивать сложные задачи:</p>
+
+                <div class="code-block">
+                    <pre>def print_line():
+    """Выводит разделительную линию."""
+    print("-" * 50)
+
+def print_double_line():
+    """Выводит двойную разделительную линию."""
+    print("=" * 50)
+
+def show_menu():
+    """Отображает главное меню программы."""
+    print_double_line()
+    print("           ГЛАВНОЕ МЕНЮ")
+    print_double_line()
+    print("1. Новая игра")
+    print("2. Загрузить игру")
+    print("3. Настройки")
+    print("4. Выход")
+    print_line()
+
+# Вызываем главную функцию
+show_menu()
+
+# show_menu() внутри вызывает print_double_line() и print_line()!</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Приветствие пользователя</h3>
+                <div class="code-block">
+                    <pre>def welcome():
+    """Выводит приветственное сообщение."""
+    print("=" * 40)
+    print("  Добро пожаловать в программу!")
+    print("=" * 40)
+    print()
+
+welcome()
+print("Здесь основная программа...")
+welcome()  # Можно вызвать снова в конце</pre>
+                </div>
+
+                <h3>Пример 2: Рисование фигур</h3>
+                <div class="code-block">
+                    <pre>def draw_square():
+    """Рисует квадрат из символов."""
+    print("####")
+    print("#  #")
+    print("#  #")
+    print("####")
+
+def draw_triangle():
+    """Рисует треугольник из символов."""
+    print("  *  ")
+    print(" *** ")
+    print("*****")
+
+# Рисуем фигуры
+print("Квадрат:")
+draw_square()
+print()
+print("Треугольник:")
+draw_triangle()</pre>
+                </div>
+
+                <h3>Пример 3: Таблица умножения</h3>
+                <div class="code-block">
+                    <pre>def print_multiplication_table():
+    """Выводит таблицу умножения на 5."""
+    print("Таблица умножения на 5:")
+    for i in range(1, 11):
+        result = 5 * i
+        print(f"5 × {i} = {result}")
+
+print_multiplication_table()
+
+# Функция инкапсулирует сложный код
+# Можно легко вызвать в любом месте программы</pre>
+                </div>
+
+                <h3>Пример 4: Калькулятор меню</h3>
+                <div class="code-block">
+                    <pre>def show_title():
+    """Показывает заголовок программы."""
+    print("╔═══════════════════════════╗")
+    print("║     КАЛЬКУЛЯТОР v1.0      ║")
+    print("╚═══════════════════════════╝")
+
+def show_options():
+    """Показывает доступные операции."""
+    print("\nВыберите операцию:")
+    print("  1 - Сложение")
+    print("  2 - Вычитание")
+    print("  3 - Умножение")
+    print("  4 - Деление")
+    print("  0 - Выход")
+
+def show_separator():
+    """Показывает разделитель."""
+    print("-" * 29)
+
+# Используем функции вместе
+show_title()
+show_separator()
+show_options()
+show_separator()</pre>
+                </div>
+
+                <h3>Пример 5: Игровой интерфейс</h3>
+                <div class="code-block">
+                    <pre>def show_health_bar():
+    """Отображает полоску здоровья."""
+    health = 70  # 70%
+    hearts = "♥" * (health // 10)
+    empty = "♡" * (10 - health // 10)
+    print(f"Здоровье: [{hearts}{empty}] {health}%")
+
+def show_level_info():
+    """Отображает информацию об уровне."""
+    print("Уровень: 5")
+    print("Опыт: 450/500")
+
+def show_game_screen():
+    """Отображает игровой экран."""
+    print("\n" + "=" * 35)
+    print("       ПРИКЛЮЧЕНИЕ - Игра")
+    print("=" * 35)
+    show_health_bar()
+    show_level_info()
+    print("=" * 35)
+    print("Ты стоишь перед темной пещерой...")
+    print("Что будешь делать?")
+    print("=" * 35)
+
+show_game_screen()</pre>
+                </div>
+
+                <h3>Пример 6: Утилиты для работы с текстом</h3>
+                <div class="code-block">
+                    <pre>def print_header(text):
+    """Выводит текст как заголовок."""
+    length = len(text)
+    print("=" * (length + 4))
+    print(f"  {text}")
+    print("=" * (length + 4))
+
+def print_centered():
+    """Выводит центрированный текст."""
+    text = "Python"
+    spaces = " " * 17  # Центрирование
+    print(f"{spaces}{text}")
+
+def print_box():
+    """Выводит текст в рамке."""
+    print("┌─────────────────────┐")
+    print("│   Важное сообщение  │")
+    print("└─────────────────────┘")
+
+# Демонстрация
+print_header("Глава 1")
+print()
+print_centered()
+print()
+print_box()</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +601,358 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Пример 1: Простая функция
+def greet():
+    """Выводит приветствие."""
+    print("Привет, программист!")
+    print("Добро пожаловать в мир функций!")
+
+greet()
+print()
+
+# Пример 2: Несколько вызовов
+def print_separator():
+    """Печатает разделительную линию."""
+    print("-" * 40)
+
+print_separator()
+print("Раздел 1")
+print_separator()
+print("Раздел 2")
+print_separator()
+print()
+
+# Пример 3: Функции вызывают функции
+def print_stars():
+    """Печатает линию из звезд."""
+    print("*" * 40)
+
+def print_title():
+    """Печатает красивый заголовок."""
+    print_stars()
+    print("       PYTHON - ЛУЧШИЙ ЯЗЫК!")
+    print_stars()
+
+print_title()
+print()
+
+# Пример 4: Функция с циклом
+def countdown():
+    """Делает обратный отсчет."""
+    print("Запуск через:")
+    for i in range(5, 0, -1):
+        print(f"  {i}...")
+    print("СТАРТ!")
+
+countdown()
+print()
+
+# Пример 5: Таблица
+def print_times_table():
+    """Выводит таблицу умножения на 3."""
+    print("Таблица умножения на 3:")
+    for i in range(1, 6):
+        print(f"  3 × {i} = {3*i}")
+
+print_times_table()
+print()
+
+# Пример 6: Меню
+def show_menu():
+    """Показывает игровое меню."""
+    print("╔════════════════════════╗")
+    print("║    ГЛАВНОЕ МЕНЮ        ║")
+    print("╠════════════════════════╣")
+    print("║  1. Новая игра         ║")
+    print("║  2. Продолжить         ║")
+    print("║  3. Настройки          ║")
+    print("║  4. Выход              ║")
+    print("╚════════════════════════╝")
+
+show_menu()</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Создай функцию визитки</h4>
+                    <p>Создай функцию <code>print_business_card()</code>, которая выводит твою визитную карточку:</p>
+                    <ol>
+                        <li>Функция должна выводить рамку из символов</li>
+                        <li>Внутри рамки - твоё имя, возраст, город, хобби</li>
+                        <li>Добавь docstring с описанием</li>
+                        <li>Вызови функцию 2 раза, чтобы показать что она работает</li>
+                    </ol>
+                    <p><strong>Пример вывода:</strong></p>
+                    <pre>┌─────────────────────────┐
+│ Имя: Иван               │
+│ Возраст: 15 лет         │
+│ Город: Москва           │
+│ Хобби: Программирование │
+└─────────────────────────┘</pre>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Калькулятор фигур</h4>
+                    <p>Создай 3 функции для работы с прямоугольником:</p>
+                    <ol>
+                        <li><code>calculate_rectangle_area()</code> - вычисляет и выводит площадь (ширина=8, высота=5)</li>
+                        <li><code>calculate_rectangle_perimeter()</code> - вычисляет и выводит периметр (те же размеры)</li>
+                        <li><code>show_rectangle_info()</code> - вызывает обе предыдущие функции</li>
+                        <li>Добавь docstrings ко всем функциям</li>
+                        <li>Вызови <code>show_rectangle_info()</code></li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Площадь = ширина × высота, Периметр = 2 × (ширина + высота)</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Система уведомлений</h4>
+                    <p>Создай систему вывода разных типов сообщений:</p>
+                    <ol>
+                        <li><code>info_message()</code> - выводит информационное сообщение с префиксом [INFO]</li>
+                        <li><code>warning_message()</code> - выводит предупреждение с префиксом [WARNING]</li>
+                        <li><code>error_message()</code> - выводит ошибку с префиксом [ERROR]</li>
+                        <li><code>success_message()</code> - выводит успех с префиксом [SUCCESS]</li>
+                        <li>Создай функцию <code>test_messages()</code>, которая вызывает все 4 функции</li>
+                    </ol>
+                    <p><strong>Пример:</strong></p>
+                    <pre>[INFO] Программа запущена
+[WARNING] Низкий заряд батареи
+[ERROR] Файл не найден
+[SUCCESS] Данные сохранены</pre>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли скобки при вызове</h4>
+                    <div class="code-block">
+                        <pre>def say_hello():
+    print("Привет!")
+
+# НЕПРАВИЛЬНО - нет скобок
+say_hello  # Не вызовет функцию! Просто ссылка на неё
+
+# ПРАВИЛЬНО - со скобками
+say_hello()  # Вызовет и выведет "Привет!"</pre>
+                    </div>
+                    <p><strong>Объяснение:</strong> Без скобок Python думает что ты просто обращаешься к объекту функции, но не вызываешь её.</p>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильный отступ</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - нет отступа
+# def wrong():
+# print("Ошибка!")  # IndentationError
+
+# НЕПРАВИЛЬНО - разные отступы
+# def also_wrong():
+#     print("Строка 1")  # 4 пробела
+#       print("Строка 2")  # 6 пробелов - IndentationError!
+
+# ПРАВИЛЬНО - одинаковые отступы 4 пробела
+def correct():
+    print("Строка 1")  # 4 пробела
+    print("Строка 2")  # 4 пробела
+    print("Строка 3")  # 4 пробела</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Забыли двоеточие после def</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - нет двоеточия
+# def my_function()
+#     print("Привет")  # SyntaxError
+
+# ПРАВИЛЬНО - есть двоеточие
+def my_function():
+    print("Привет")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Вызов до определения</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - вызов ДО определения
+# greet()  # NameError: name 'greet' is not defined
+#
+# def greet():
+#     print("Привет!")
+
+# ПРАВИЛЬНО - сначала определяем, потом вызываем
+def greet():
+    print("Привет!")
+
+greet()  # Теперь работает!</pre>
+                    </div>
+                    <p><strong>Запомни:</strong> Python читает файл сверху вниз. Определяй функции в начале файла, вызывай в конце.</p>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Путаница с print внутри функции</h4>
+                    <div class="code-block">
+                        <pre>def calculate():
+    result = 10 + 5
+    # Забыли print - ничего не выведется!
+
+calculate()  # Функция выполнится, но ничего не покажет
+
+# Правильно:
+def calculate():
+    result = 10 + 5
+    print(f"Результат: {result}")
+
+calculate()  # Выведет: Результат: 15</pre>
+                    </div>
+                    <p><strong>Важно:</strong> Код внутри функции выполняется, но если нет print - ничего не выводится на экран.</p>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Опечатки в имени функции</h4>
+                    <div class="code-block">
+                        <pre>def calculate_sum():
+    print(5 + 3)
+
+# НЕПРАВИЛЬНО - опечатка
+# calculateSum()  # NameError: name 'calculateSum' is not defined
+
+# ПРАВИЛЬНО - точное имя
+calculate_sum()  # Работает!
+
+# Python различает регистр!
+# Calculate_Sum() - тоже не сработает</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 7: Пустая функция без pass</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - пустая функция
+# def my_function():
+#     # SyntaxError: тело функции не может быть пустым
+
+# ПРАВИЛЬНО - используй pass для пустой функции
+def my_function():
+    pass  # Заглушка, ничего не делает
+
+# Или добавь docstring
+def my_function():
+    """Эта функция пока ничего не делает."""
+    pass</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: Что делает ключевое слово def?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! def используется для определения (создания) новой функции.">Определяет (создает) новую функцию</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! def создает функцию, а не вызывает её.">Вызывает функцию</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! def для функций, а не для переменных.">Создает переменную</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! def - это определение функции.">Удаляет функцию</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Когда выполняется код внутри функции?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! def только создает функцию, но не запускает её.">Когда Python видит def</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Функция выполняется только при вызове (с круглыми скобками).">Когда функцию вызывают (с скобками)</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Функция работает только когда её явно вызвали.">Автоматически в конце программы</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Код внутри функции выполняется при вызове.">Никогда не выполняется</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Какой отступ нужен для тела функции?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! В Python отступ обязателен для обозначения блоков кода.">Отступ не нужен</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! 2 пробела не соответствуют стандарту PEP 8.">2 пробела</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Стандарт Python (PEP 8) - 4 пробела для отступа.">4 пробела (или 1 Tab)</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! 8 пробелов - слишком много.">8 пробелов</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что такое docstring?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Docstring - это строка документации, не имя.">Имя функции</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Docstring - строка в тройных кавычках, описывающая что делает функция.">Строка документации в тройных кавычках</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Параметр - это входные данные, а docstring - это документация.">Параметр функции</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Docstring документирует функцию, а не обрабатывает ошибки.">Обработчик ошибок</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Сколько раз можно вызвать одну функцию?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Функцию можно вызывать многократно.">Только один раз</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Ограничений на количество вызовов нет.">Максимум 10 раз</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Функцию можно вызывать сколько угодно раз - в этом и смысл переиспользования кода!">Сколько угодно раз</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Функции существуют именно для многократного использования.">Функции нельзя вызывать повторно</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Функции - базовая концепция программирования, критически важная для экзаменов:</p>
+                    <ul>
+                        <li><strong>ОГЭ:</strong> Задание 14 (написание программы) - использование функций делает код чище</li>
+                        <li><strong>ЕГЭ:</strong> Задания 24-27 (программирование) - функции обязательны для структурирования решения</li>
+                        <li><strong>ЕГЭ Задание 16:</strong> Анализ рекурсивных функций</li>
+                        <li>Применение на экзаменах:
+                            <ul>
+                                <li>Декомпозиция задачи - разбить на подзадачи (функции)</li>
+                                <li>Переиспользование логики - не дублировать код</li>
+                                <li>Читаемость решения - проверяющему легче понять</li>
+                                <li>Тестирование - легче найти ошибки</li>
+                            </ul>
+                        </li>
+                        <li>Даже простые функции показывают понимание структуры программы</li>
+                        <li>Функции - основа модульного программирования</li>
+                        <li>Знание функций обязательно для задач с рекурсией (ЕГЭ)</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Функция</strong> - именованный блок кода для выполнения задачи</li>
+                    <li><strong>Синтаксис:</strong> <code>def название():</code> с отступом 4 пробела</li>
+                    <li><strong>def</strong> - определяет функцию (код не выполняется)</li>
+                    <li><strong>название()</strong> - вызывает функцию (код выполняется)</li>
+                    <li><strong>Скобки ()</strong> обязательны при определении и вызове</li>
+                    <li><strong>Двоеточие :</strong> обязательно после def</li>
+                    <li><strong>Отступ</strong> - 4 пробела для тела функции</li>
+                    <li><strong>Имена функций:</strong> lowercase_with_underscores, описательные, глаголы</li>
+                    <li><strong>Docstring</strong> - документация в тройных кавычках</li>
+                    <li><strong>Переиспользование:</strong> функцию можно вызывать много раз</li>
+                    <li><strong>Композиция:</strong> функции могут вызывать другие функции</li>
+                    <li><strong>DRY принцип:</strong> Don't Repeat Yourself - используй функции!</li>
+                </ul>
+
+                <p>Отлично! Ты освоил основы создания функций. Это огромный шаг в программировании! Теперь твой код станет более организованным и профессиональным. В следующем уроке узнаем как передавать данные в функции через параметры!</p>
             </div>
 
             <div class="lesson-nav">
@@ -272,12 +962,6 @@
             </div>
         </div>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>Python для школьников © 2024</p>
-        </div>
-    </footer>
 
     <script src="../js/main.js"></script>
 </body>

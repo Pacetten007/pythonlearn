@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 25: Возврат значений - Python для школьников</title>
-    <link rel="stylesheet" href="../css/style.css"><script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 </head>
 <body data-lesson-id="python-20">
@@ -20,7 +21,7 @@
             <h2>Содержание курса</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
-        
+
         <div class="lesson-group">
             <div class="lesson-group-header">
                 <h3>Основы алгоритмики</h3>
@@ -219,21 +220,504 @@
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1>Урок 25: Возврат значений</h1>
-                <div class="lesson-meta">Функции • 20 минут</div>
+                <div class="lesson-meta">Функции • 45 минут</div>
             </div>
 
             <div class="lesson-content">
-<h2>Введение</h2>
-                <p>В этом уроке изучим важную тему Python для программирования и экзаменов.</p>
+                <h2>Введение</h2>
+                <p>До этого наши функции только выводили результаты на экран с помощью <code>print()</code>. Но что если нужно использовать результат функции в других вычислениях? Представь калькулятор: ты вводишь "5 + 3", и он не просто показывает "8", но и позволяет использовать этот результат дальше!</p>
 
-                <h2>Основные концепции</h2>
-                <p>Разберём ключевые операторы и функции.</p>
+                <p>Оператор <code>return</code> - это как кнопка "Отправить" в функции. Он возвращает результат работы обратно тому, кто вызвал функцию. Это делает функции по-настоящему мощными!</p>
 
-                <div class="code-block">
-                    <pre>print("Hello, World!")</pre>
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Что такое return и зачем он нужен</li>
+                        <li>Разница между print и return (ВАЖНО!)</li>
+                        <li>Как использовать возвращенные значения</li>
+                        <li>Возврат нескольких значений</li>
+                        <li>Ранний выход из функции</li>
+                        <li>Функции без явного return</li>
+                        <li>Возврат разных типов данных</li>
+                    </ul>
                 </div>
 
-                <h2>Попробуй сам!</h2>
+                <h2>Оператор return</h2>
+                <p>Самая простая функция с возвратом значения:</p>
+
+                <div class="code-block">
+                    <pre>def square(n):
+    """Возвращает квадрат числа."""
+    return n ** 2
+
+# Вызываем функцию и сохраняем результат
+result = square(5)
+print(result)  # 25
+
+# Используем напрямую
+print(square(7))  # 49
+
+# В вычислениях
+total = square(3) + square(4)
+print(total)  # 9 + 16 = 25</pre>
+                </div>
+
+                <h3>Как работает return:</h3>
+                <ol>
+                    <li>Функция выполняет свой код</li>
+                    <li>Доходит до <code>return</code></li>
+                    <li>Вычисляет выражение после <code>return</code></li>
+                    <li>Возвращает это значение вызывающему коду</li>
+                    <li>Функция завершается (код после return не выполняется!)</li>
+                </ol>
+
+                <h2>print() vs return - КРИТИЧЕСКИ ВАЖНО!</h2>
+                <p>Это самая частая ошибка начинающих! Запомни разницу:</p>
+
+                <div class="code-block">
+                    <pre># Функция с print
+def add_print(a, b):
+    """Выводит сумму, НО НЕ ВОЗВРАЩАЕТ!"""
+    result = a + b
+    print(result)  # Показывает на экране
+    # Функция возвращает None!
+
+# Функция с return
+def add_return(a, b):
+    """Возвращает сумму."""
+    result = a + b
+    return result  # Возвращает значение
+
+# Сравним:
+x = add_print(5, 3)   # Выведет: 8
+print(f"x = {x}")     # x = None (функция ничего не вернула!)
+
+y = add_return(5, 3)  # Ничего не выведет
+print(f"y = {y}")     # y = 8 (функция вернула значение!)</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Запомни навсегда!</h4>
+                    <ul>
+                        <li><strong>print()</strong> - выводит на экран, но НЕ возвращает значение</li>
+                        <li><strong>return</strong> - возвращает значение, но НЕ выводит на экран</li>
+                        <li><code>print()</code> для показа пользователю</li>
+                        <li><code>return</code> для передачи результата в программу</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <pre># print - не можем использовать результат
+def bad_double(n):
+    print(n * 2)
+
+result = bad_double(5)  # Выведет: 10
+x = result + 10  # ОШИБКА! result = None, нельзя сложить None + 10
+
+# return - можем использовать результат
+def good_double(n):
+    return n * 2
+
+result = good_double(5)  # Ничего не выведет
+x = result + 10  # Отлично! result = 10, x = 20</pre>
+                </div>
+
+                <h2>Использование возвращенных значений</h2>
+                <p>Возвращенное значение можно использовать по-разному:</p>
+
+                <h3>1. Сохранить в переменную</h3>
+                <div class="code-block">
+                    <pre>def add(a, b):
+    return a + b
+
+result = add(10, 20)
+print(result)  # 30</pre>
+                </div>
+
+                <h3>2. Использовать в выражении</h3>
+                <div class="code-block">
+                    <pre>def multiply(a, b):
+    return a * b
+
+# В арифметике
+total = multiply(5, 3) + multiply(2, 4)
+print(total)  # 15 + 8 = 23
+
+# В условии
+if multiply(7, 2) > 10:
+    print("Больше 10!")  # Выведет
+
+# В другой функции
+print(multiply(6, 7))  # 42</pre>
+                </div>
+
+                <h3>3. Передать в другую функцию</h3>
+                <div class="code-block">
+                    <pre>def square(n):
+    return n ** 2
+
+def double(n):
+    return n * 2
+
+# Композиция функций
+result = double(square(5))
+# Сначала: square(5) = 25
+# Затем: double(25) = 50
+print(result)  # 50
+
+# Можно писать сложные цепочки
+value = square(double(3))
+# double(3) = 6
+# square(6) = 36
+print(value)  # 36</pre>
+                </div>
+
+                <h3>4. Использовать в циклах</h3>
+                <div class="code-block">
+                    <pre>def cube(n):
+    return n ** 3
+
+# Список кубов
+cubes = []
+for i in range(1, 6):
+    cubes.append(cube(i))
+print(cubes)  # [1, 8, 27, 64, 125]
+
+# Или с list comprehension
+cubes = [cube(i) for i in range(1, 6)]
+print(cubes)  # [1, 8, 27, 64, 125]</pre>
+                </div>
+
+                <h2>Возврат разных типов данных</h2>
+                <p>Функция может возвращать любой тип данных!</p>
+
+                <h3>Число</h3>
+                <div class="code-block">
+                    <pre>def calculate_area(width, height):
+    return width * height
+
+area = calculate_area(10, 5)  # 50 (int)
+
+def calculate_average(numbers):
+    return sum(numbers) / len(numbers)
+
+avg = calculate_average([10, 20, 30])  # 20.0 (float)</pre>
+                </div>
+
+                <h3>Строка</h3>
+                <div class="code-block">
+                    <pre>def greet(name):
+    return f"Привет, {name}!"
+
+message = greet("Иван")
+print(message)  # Привет, Иван!
+
+def full_name(first, last):
+    return f"{first} {last}"
+
+name = full_name("Иван", "Петров")
+print(name)  # Иван Петров</pre>
+                </div>
+
+                <h3>Логическое значение (bool)</h3>
+                <div class="code-block">
+                    <pre>def is_even(n):
+    """Проверяет четность числа."""
+    return n % 2 == 0
+
+print(is_even(4))  # True
+print(is_even(7))  # False
+
+# Удобно в условиях
+if is_even(10):
+    print("Четное число!")
+
+def is_adult(age):
+    """Проверяет совершеннолетие."""
+    return age >= 18
+
+if is_adult(16):
+    print("Взрослый")
+else:
+    print("Несовершеннолетний")  # Выведет это</pre>
+                </div>
+
+                <h3>Список</h3>
+                <div class="code-block">
+                    <pre>def get_evens(numbers):
+    """Возвращает список четных чисел."""
+    evens = []
+    for n in numbers:
+        if n % 2 == 0:
+            evens.append(n)
+    return evens
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+even_numbers = get_evens(numbers)
+print(even_numbers)  # [2, 4, 6, 8]
+
+def create_range(start, end):
+    """Создает список чисел от start до end."""
+    return list(range(start, end + 1))
+
+nums = create_range(5, 10)
+print(nums)  # [5, 6, 7, 8, 9, 10]</pre>
+                </div>
+
+                <h3>Словарь</h3>
+                <div class="code-block">
+                    <pre>def create_student(name, age, grade):
+    """Создает словарь со студентом."""
+    return {
+        "name": name,
+        "age": age,
+        "grade": grade
+    }
+
+student = create_student("Иван", 16, 10)
+print(student)  # {'name': 'Иван', 'age': 16, 'grade': 10}
+print(student["name"])  # Иван</pre>
+                </div>
+
+                <h2>Возврат нескольких значений</h2>
+                <p>Python позволяет вернуть несколько значений через запятую!</p>
+
+                <div class="code-block">
+                    <pre>def min_max(numbers):
+    """Возвращает минимум и максимум списка."""
+    return min(numbers), max(numbers)
+
+# Возвращается кортеж (tuple)
+result = min_max([3, 1, 7, 2, 9, 4])
+print(result)  # (1, 9)
+print(type(result))  # <class 'tuple'>
+
+# Распаковка в переменные
+minimum, maximum = min_max([3, 1, 7, 2, 9, 4])
+print(f"Минимум: {minimum}")  # 1
+print(f"Максимум: {maximum}")  # 9</pre>
+                </div>
+
+                <div class="code-block">
+                    <pre># Несколько значений разных типов
+def analyze_number(n):
+    """Анализирует число."""
+    is_positive = n > 0
+    is_even = n % 2 == 0
+    square = n ** 2
+    return is_positive, is_even, square
+
+pos, even, sq = analyze_number(-4)
+print(f"Положительное: {pos}")  # False
+print(f"Четное: {even}")  # True
+print(f"Квадрат: {sq}")  # 16
+
+# Трюк: можно вернуть три и больше значений!
+def divide_with_remainder(a, b):
+    """Возвращает частное и остаток."""
+    quotient = a // b
+    remainder = a % b
+    return quotient, remainder
+
+q, r = divide_with_remainder(17, 5)
+print(f"17 ÷ 5 = {q} (остаток {r})")  # 17 ÷ 5 = 3 (остаток 2)</pre>
+                </div>
+
+                <h2>Ранний выход из функции</h2>
+                <p>return завершает функцию немедленно. Код после return не выполнится!</p>
+
+                <div class="code-block">
+                    <pre>def divide(a, b):
+    """Делит a на b с проверкой."""
+    if b == 0:
+        return "Ошибка: деление на ноль"
+        print("Эта строка НИКОГДА не выполнится!")
+    
+    return a / b
+
+print(divide(10, 2))  # 5.0
+print(divide(10, 0))  # Ошибка: деление на ноль
+
+# Еще пример - проверка возраста
+def check_age(age):
+    """Проверяет возраст для входа."""
+    if age < 0:
+        return "Ошибка: возраст не может быть отрицательным"
+    
+    if age < 18:
+        return "Доступ запрещен: вам нет 18 лет"
+    
+    if age > 120:
+        return "Ошибка: введите реальный возраст"
+    
+    return "Доступ разрешен"
+
+print(check_age(16))   # Доступ запрещен: вам нет 18 лет
+print(check_age(25))   # Доступ разрешен
+print(check_age(-5))   # Ошибка: возраст не может быть отрицательным</pre>
+                </div>
+
+                <h3>Использование для упрощения логики</h3>
+                <div class="code-block">
+                    <pre># БЕЗ раннего return - громоздко
+def get_grade_bad(score):
+    if score >= 90:
+        result = "Отлично"
+    else:
+        if score >= 70:
+            result = "Хорошо"
+        else:
+            if score >= 50:
+                result = "Удовлетворительно"
+            else:
+                result = "Неудовлетворительно"
+    return result
+
+# С ранним return - чисто и понятно!
+def get_grade_good(score):
+    if score >= 90:
+        return "Отлично"
+    if score >= 70:
+        return "Хорошо"
+    if score >= 50:
+        return "Удовлетворительно"
+    return "Неудовлетворительно"
+
+print(get_grade_good(85))  # Хорошо
+print(get_grade_good(95))  # Отлично</pre>
+                </div>
+
+                <h2>Функции без явного return</h2>
+                <p>Если функция не имеет return, она возвращает <code>None</code>:</p>
+
+                <div class="code-block">
+                    <pre>def print_hello():
+    """Функция без return."""
+    print("Привет!")
+    # Неявно: return None
+
+result = print_hello()  # Выведет: Привет!
+print(f"Результат: {result}")  # Результат: None
+
+# Проверка на None
+if result is None:
+    print("Функция ничего не вернула")
+
+# Функции с побочными эффектами (side effects)
+def add_to_list(item, lst):
+    """Добавляет элемент в список."""
+    lst.append(item)
+    # Нет return - изменяет список, но ничего не возвращает
+
+my_list = [1, 2, 3]
+result = add_to_list(4, my_list)
+print(my_list)  # [1, 2, 3, 4] - список изменен
+print(result)   # None - функция ничего не вернула</pre>
+                </div>
+
+                <h2>Практические примеры</h2>
+
+                <h3>Пример 1: Математические функции</h3>
+                <div class="code-block">
+                    <pre>def factorial(n):
+    """Вычисляет факториал числа."""
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+
+print(factorial(5))  # 120
+
+def fibonacci(n):
+    """Возвращает n-е число Фибоначчи."""
+    if n <= 1:
+        return n
+    a, b = 0, 1
+    for _ in range(n - 1):
+        a, b = b, a + b
+    return b
+
+print(fibonacci(10))  # 55</pre>
+                </div>
+
+                <h3>Пример 2: Валидация данных</h3>
+                <div class="code-block">
+                    <pre>def validate_email(email):
+    """Проверяет корректность email."""
+    if "@" not in email:
+        return False
+    if "." not in email:
+        return False
+    if len(email) < 5:
+        return False
+    return True
+
+print(validate_email("user@example.com"))  # True
+print(validate_email("invalid"))  # False
+
+def is_strong_password(password):
+    """Проверяет надежность пароля."""
+    if len(password) < 8:
+        return False
+    has_digit = any(c.isdigit() for c in password)
+    has_upper = any(c.isupper() for c in password)
+    return has_digit and has_upper
+
+print(is_strong_password("Weak1"))      # False (короткий)
+print(is_strong_password("Strong123"))  # True</pre>
+                </div>
+
+                <h3>Пример 3: Обработка списков</h3>
+                <div class="code-block">
+                    <pre>def sum_positive(numbers):
+    """Возвращает сумму положительных чисел."""
+    total = 0
+    for n in numbers:
+        if n > 0:
+            total += n
+    return total
+
+nums = [-5, 10, -3, 7, 2, -1]
+print(sum_positive(nums))  # 19
+
+def find_max(numbers):
+    """Находит максимальное число в списке."""
+    if not numbers:
+        return None
+    
+    max_num = numbers[0]
+    for n in numbers:
+        if n > max_num:
+            max_num = n
+    return max_num
+
+print(find_max([3, 7, 2, 9, 1]))  # 9
+print(find_max([]))  # None</pre>
+                </div>
+
+                <h3>Пример 4: Работа со строками</h3>
+                <div class="code-block">
+                    <pre>def count_vowels(text):
+    """Подсчитывает количество гласных."""
+    vowels = "аеёиоуыэюяАЕЁИОУЫЭЮЯ"
+    count = 0
+    for char in text:
+        if char in vowels:
+            count += 1
+    return count
+
+print(count_vowels("Привет мир"))  # 3
+
+def reverse_words(sentence):
+    """Переворачивает порядок слов."""
+    words = sentence.split()
+    reversed_words = words[::-1]
+    return " ".join(reversed_words)
+
+print(reverse_words("Python это круто"))  # круто это Python</pre>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
                 <div class="python-editor">
                     <div class="editor-header">
                         <h3>Python редактор</h3>
@@ -242,27 +726,365 @@
                             <button class="clear-btn">✕ Очистить</button>
                         </div>
                     </div>
-                    <textarea id="code-editor" spellcheck="false">print("Hello, World!")</textarea>
+                    <textarea id="code-editor" spellcheck="false"># Пример 1: Простой return
+def square(n):
+    """Возвращает квадрат числа."""
+    return n ** 2
+
+result = square(7)
+print(f"7² = {result}")
+print()
+
+# Пример 2: print vs return
+def add_print(a, b):
+    print(a + b)  # Выводит, но не возвращает
+
+def add_return(a, b):
+    return a + b  # Возвращает, но не выводит
+
+x = add_print(5, 3)   # Выведет 8
+y = add_return(5, 3)  # Ничего не выведет
+
+print(f"x = {x}")  # None
+print(f"y = {y}")  # 8
+print()
+
+# Пример 3: Использование в выражениях
+def multiply(a, b):
+    return a * b
+
+total = multiply(3, 4) + multiply(2, 5)
+print(f"Итого: {total}")  # 12 + 10 = 22
+print()
+
+# Пример 4: Возврат нескольких значений
+def stats(numbers):
+    """Возвращает сумму и среднее."""
+    total = sum(numbers)
+    average = total / len(numbers)
+    return total, average
+
+s, avg = stats([10, 20, 30, 40])
+print(f"Сумма: {s}, Среднее: {avg}")
+print()
+
+# Пример 5: Ранний выход
+def divide(a, b):
+    """Делит с проверкой."""
+    if b == 0:
+        return "Ошибка!"
+    return a / b
+
+print(divide(10, 2))  # 5.0
+print(divide(10, 0))  # Ошибка!
+print()
+
+# Пример 6: Разные типы возврата
+def is_even(n):
+    return n % 2 == 0  # bool
+
+def get_evens(nums):
+    return [n for n in nums if n % 2 == 0]  # list
+
+print(is_even(4))  # True
+print(get_evens([1,2,3,4,5]))  # [2, 4]
+print()
+
+# Пример 7: Композиция функций
+def double(n):
+    return n * 2
+
+def square(n):
+    return n ** 2
+
+result = square(double(5))
+print(f"square(double(5)) = {result}")  # 100</textarea>
                     <div class="output-container">
                         <h4>Результат:</h4>
                         <div id="output"></div>
                     </div>
                 </div>
 
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Калькулятор с return</h4>
+                    <p>Создай 4 функции-калькулятора:</p>
+                    <ol>
+                        <li><code>add(a, b)</code> - возвращает сумму</li>
+                        <li><code>subtract(a, b)</code> - возвращает разность</li>
+                        <li><code>multiply(a, b)</code> - возвращает произведение</li>
+                        <li><code>divide(a, b)</code> - возвращает частное (проверка на 0!)</li>
+                        <li>Используй результаты функций для вычисления: (10 + 5) * (20 - 8) / 2</li>
+                        <li>Выведи результат каждого шага</li>
+                    </ol>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Анализатор чисел</h4>
+                    <p>Создай функцию <code>analyze(n)</code>, которая:</p>
+                    <ol>
+                        <li>Принимает число n</li>
+                        <li>Возвращает КОРТЕЖ из 4 значений:
+                            <ul>
+                                <li>Четное ли число (True/False)</li>
+                                <li>Положительное ли (True/False)</li>
+                                <li>Квадрат числа</li>
+                                <li>Количество цифр в числе</li>
+                            </ul>
+                        </li>
+                        <li>Протестируй на числах: 42, -17, 0, 123</li>
+                        <li>Распакуй результат в переменные и выведи красиво</li>
+                    </ol>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Валидатор оценок</h4>
+                    <p>Создай функцию <code>validate_grade(grade)</code>:</p>
+                    <ol>
+                        <li>Принимает оценку (число)</li>
+                        <li>Возвращает кортеж: (валидна_ли, сообщение)</li>
+                        <li>Правила: оценка от 2 до 5, только целое число</li>
+                        <li>Если ошибка - возвращай (False, "текст ошибки")</li>
+                        <li>Если ОК - возвращай (True, "OK")</li>
+                        <li>Создай функцию <code>get_grade_name(grade)</code>, которая возвращает:
+                            <ul>
+                                <li>5 → "Отлично"</li>
+                                <li>4 → "Хорошо"</li>
+                                <li>3 → "Удовлетворительно"</li>
+                                <li>2 → "Неудовлетворительно"</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Путаница print и return</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - функция ничего не возвращает
+def add(a, b):
+    print(a + b)  # Только выводит!
+
+result = add(5, 3)  # result = None
+# total = result + 10  # TypeError! None + 10
+
+# ПРАВИЛЬНО - функция возвращает значение
+def add(a, b):
+    return a + b
+
+result = add(5, 3)  # result = 8
+total = result + 10  # total = 18</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Код после return</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - код после return не выполнится
+def bad_function(n):
+    return n * 2
+    print("Эта строка НИКОГДА не выполнится!")
+    n = n + 10  # И эта тоже!
+
+# ПРАВИЛЬНО - return в конце
+def good_function(n):
+    print(f"Вычисляю для {n}")
+    result = n * 2
+    return result</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Забыли return</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - забыли return
+def square(n):
+    result = n ** 2
+    # Забыли: return result
+
+x = square(5)
+print(x)  # None
+
+# ПРАВИЛЬНО
+def square(n):
+    result = n ** 2
+    return result
+
+x = square(5)
+print(x)  # 25</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: return в цикле (слишком рано)</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - return прерывает цикл после первой итерации!
+def sum_numbers(numbers):
+    for n in numbers:
+        return n  # Вернет только первое число!
+
+print(sum_numbers([1,2,3,4,5]))  # 1 (не сумма!)
+
+# ПРАВИЛЬНО - return после цикла
+def sum_numbers(numbers):
+    total = 0
+    for n in numbers:
+        total += n
+    return total  # Вернет сумму всех
+
+print(sum_numbers([1,2,3,4,5]))  # 15</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 5: Неправильная распаковка</h4>
+                    <div class="code-block">
+                        <pre>def stats(nums):
+    return sum(nums), len(nums), sum(nums)/len(nums)
+
+# НЕПРАВИЛЬНО - не хватает переменных
+# s, cnt = stats([1,2,3])  # ValueError: too many values to unpack
+
+# ПРАВИЛЬНО - количество переменных совпадает
+s, cnt, avg = stats([1,2,3])
+
+# Или взять весь кортеж
+result = stats([1,2,3])
+print(result)  # (6, 3, 2.0)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 6: Изменение вместо возврата</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - изменяет параметр, но не возвращает
+def double_list(lst):
+    for i in range(len(lst)):
+        lst[i] *= 2
+    # Нет return!
+
+nums = [1, 2, 3]
+result = double_list(nums)
+print(nums)    # [2, 4, 6] - изменен
+print(result)  # None - ничего не вернули
+
+# ПРАВИЛЬНО - возвращаем новый список
+def double_list(lst):
+    return [x * 2 for x in lst]
+
+nums = [1, 2, 3]
+doubled = double_list(nums)
+print(nums)    # [1, 2, 3] - не изменен
+print(doubled) # [2, 4, 6] - новый список</pre>
+                    </div>
+                </div>
+
                 <div class="quiz-container">
-                    <h3>Тест к уроку</h3>
+                    <h3>Проверь себя!</h3>
+
                     <div class="question">
-                        <h4>Вопрос 1: Как работает эта функция?</h4>
+                        <h4>Вопрос 1: В чем разница между print и return?</h4>
                         <ul class="options">
-                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Верно!">Правильно</label></li>
-                            <li><label><input type="radio" name="q1" data-correct="false">Неправильно</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это наоборот.">print возвращает значение, return выводит на экран</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! print показывает на экране, return передает значение программе.">print выводит на экран, return возвращает значение</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! Это разные вещи.">Они делают одно и то же</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет! return работает в функциях.">return можно использовать только вне функций</label></li>
                         </ul>
                         <button class="check-answer-btn">Проверить</button>
                         <div class="feedback"></div>
                     </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что произойдет после выполнения return?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Функция завершается после return.">Функция продолжит выполнение</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! return завершает функцию немедленно.">Функция немедленно завершится</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Код после return не выполняется.">Выполнится код после return</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! return не вызывает ошибок.">Возникнет ошибка</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что вернет функция без явного return?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Возвращается None, а не 0.">0</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Функция без return возвращает None.">None</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Возвращается специальное значение None.">Пустую строку</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет! Вернется None, а не ошибка.">Ошибку</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Как вернуть несколько значений?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Нельзя использовать несколько return подряд.">Написать несколько return подряд</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Перечисляем через запятую: return a, b, c">Перечислить через запятую: return a, b, c</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Python позволяет вернуть несколько значений.">Нельзя вернуть несколько значений</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет! Не нужны скобки.">return (a, b, c) обязательно в скобках</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Можно ли использовать return в условии if?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! return можно использовать где угодно в функции, в том числе внутри if.">Да, это нормально и часто используется</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! return отлично работает в if.">Нет, return должен быть только в конце</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! Это не вызовет ошибку.">Да, но вызовет ошибку</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет! return - это часть Python.">Нет, для этого есть break</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
                     <button class="btn-secondary" id="show-results">Показать результаты</button>
                     <div class="quiz-results"></div>
                 </div>
+
+                <div class="info-block">
+                    <h4>Связь с ОГЭ и ЕГЭ</h4>
+                    <p>Возврат значений - центральная концепция функций на экзаменах:</p>
+                    <ul>
+                        <li><strong>ОГЭ Задание 14:</strong> Функции должны возвращать результат обработки данных</li>
+                        <li><strong>ЕГЭ Задания 24-27:</strong> Сложные функции с возвратом списков, словарей, кортежей</li>
+                        <li><strong>ЕГЭ Задание 16:</strong> Рекурсивные функции обязательно используют return</li>
+                        <li>Применение на экзаменах:
+                            <ul>
+                                <li>Функции поиска - возвращают найденный элемент или индекс</li>
+                                <li>Функции валидации - возвращают True/False</li>
+                                <li>Функции обработки - возвращают новый список/словарь</li>
+                                <li>Математические функции - возвращают вычисленное значение</li>
+                                <li>Композиция функций - результат одной передаем в другую</li>
+                            </ul>
+                        </li>
+                        <li>Критически важно понимать разницу между print и return!</li>
+                        <li>Умение возвращать несколько значений через кортеж</li>
+                        <li>Ранний выход (early return) упрощает код на экзаменах</li>
+                    </ul>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>return</strong> - возвращает значение из функции</li>
+                    <li><strong>print vs return:</strong> print показывает, return передает значение</li>
+                    <li><strong>Использование:</strong> результат можно сохранить, использовать в выражениях</li>
+                    <li><strong>Типы:</strong> можно вернуть число, строку, список, словарь, bool, любой тип</li>
+                    <li><strong>Несколько значений:</strong> <code>return a, b, c</code> → возвращает кортеж</li>
+                    <li><strong>Ранний выход:</strong> return завершает функцию немедленно</li>
+                    <li><strong>Без return:</strong> функция возвращает None</li>
+                    <li><strong>Код после return:</strong> не выполняется никогда!</li>
+                    <li><strong>Композиция:</strong> результат одной функции в другую</li>
+                    <li><strong>Чистота:</strong> функции с return - чистые, без побочных эффектов</li>
+                </ul>
+
+                <p>Отлично! Ты освоил возврат значений из функций. Теперь твои функции могут не только выполнять действия, но и передавать результаты! Это делает их по-настоящему мощным инструментом. В следующем уроке узнаем где "живут" переменные в функциях - изучим область видимости!</p>
             </div>
 
             <div class="lesson-nav">
@@ -272,12 +1094,6 @@
             </div>
         </div>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>Python для школьников © 2024</p>
-        </div>
-    </footer>
 
     <script src="../js/main.js"></script>
 </body>

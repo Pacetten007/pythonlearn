@@ -647,9 +647,15 @@ print(f"\nСамое частое слово: {most_common} ({word_count[most_co
                 </div>
 
                 <h2>Интерактивные примеры</h2>
-                <div class="editor-container">
-                    <h4>Попробуй сам!</h4>
-                    <textarea id="code-editor" class="code-editor"># Пример 1: Создание и доступ
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Пример 1: Создание и доступ
 student = {
     "name": "Иван",
     "age": 16,
@@ -964,11 +970,6 @@ print(student)  # {'name': 'Петр', 'age': 16}
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>Python для школьников © 2024</p>
-        </div>
-    </footer>
 
     <script src="../js/main.js"></script>
 </body>
