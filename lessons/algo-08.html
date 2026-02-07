@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 35: Работа с числами - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="algo-10">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 35: Работа с числами</h1>
+                <div class="lesson-meta">Алгоритмы • 30 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>Числа - основа программирования! В этом уроке мы изучим полезные алгоритмы для работы с числами: проверка на простоту, нахождение НОД и НОК, работа с цифрами числа и многое другое. Эти алгоритмы часто встречаются в задачах ОГЭ и ЕГЭ.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Проверка числа на простоту</li>
+                        <li>Нахождение НОД (наибольший общий делитель)</li>
+                        <li>Нахождение НОК (наименьшее общее кратное)</li>
+                        <li>Работа с цифрами числа</li>
+                        <li>Разложение на простые множители</li>
+                        <li>Проверка на палиндром (числовой)</li>
+                    </ul>
+                </div>
+
+                <h2>1. Проверка на простое число</h2>
+                <p><strong>Простое число</strong> - это число, которое делится только на 1 и на само себя (например, 2, 3, 5, 7, 11, 13).</p>
+
+                <p>Алгоритм проверки:</p>
+                <ol>
+                    <li>Если число меньше 2, оно не простое</li>
+                    <li>Проверяем делители от 2 до √n</li>
+                    <li>Если нашли делитель, число не простое</li>
+                </ol>
+
+                <div class="code-block">
+                    <h4>Пример: Проверка на простое число</h4>
+                    <pre>def is_prime(n):
+    """Проверяет, является ли число простым"""
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    
+    # Проверяем только нечетные делители
+    for i in range(3, int(n ** 0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+# Примеры использования
+print(is_prime(7))   # True
+print(is_prime(10))  # False
+print(is_prime(17))  # True
+print(is_prime(1))   # False</pre>
+                </div>
+
+                <div class="note">
+                    <h4>💡 Почему проверяем до √n?</h4>
+                    <p>Если число n имеет делитель больше √n, то у него обязательно есть делитель меньше √n. Например, для 36: если есть делитель 9 (больше √36=6), то есть и делитель 4 (меньше 6).</p>
+                </div>
+
+                <h2>2. Нахождение НОД (алгоритм Евклида)</h2>
+                <p><strong>НОД (Наибольший Общий Делитель)</strong> двух чисел - это наибольшее число, на которое оба числа делятся без остатка.</p>
+
+                <p>Например, НОД(12, 18) = 6, потому что 12 = 6×2, а 18 = 6×3.</p>
+
+                <p><strong>Алгоритм Евклида</strong> - эффективный способ нахождения НОД:</p>
+                <ol>
+                    <li>Если одно число равно 0, НОД = второе число</li>
+                    <li>Иначе: НОД(a, b) = НОД(b, a % b)</li>
+                    <li>Повторяем до тех пор, пока одно из чисел не станет 0</li>
+                </ol>
+
+                <div class="code-block">
+                    <h4>Пример: Нахождение НОД</h4>
+                    <pre>def gcd(a, b):
+    """Находит НОД двух чисел (алгоритм Евклида)"""
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)  # abs нужен для отрицательных чисел
+
+# Примеры
+print(gcd(12, 18))    # 6
+print(gcd(48, 18))    # 6
+print(gcd(17, 5))     # 1 (взаимно простые)
+print(gcd(100, 25))   # 25</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Рекурсивная версия</h4>
+                    <pre>def gcd_recursive(a, b):
+    """НОД рекурсивно"""
+    if b == 0:
+        return abs(a)
+    return gcd_recursive(b, a % b)
+
+print(gcd_recursive(12, 18))  # 6</pre>
+                </div>
+
+                <h2>3. Нахождение НОК</h2>
+                <p><strong>НОК (Наименьшее Общее Кратное)</strong> двух чисел - это наименьшее число, которое делится на оба числа.</p>
+
+                <p>Например, НОК(4, 6) = 12, потому что 12 - наименьшее число, которое делится и на 4, и на 6.</p>
+
+                <p>Формула: <strong>НОК(a, b) = |a × b| / НОД(a, b)</strong></p>
+
+                <div class="code-block">
+                    <h4>Пример: Нахождение НОК</h4>
+                    <pre>def lcm(a, b):
+    """Находит НОК двух чисел"""
+    return abs(a * b) // gcd(a, b)
+
+# Примеры
+print(lcm(4, 6))      # 12
+print(lcm(12, 18))    # 36
+print(lcm(5, 7))      # 35
+print(lcm(10, 15))    # 30</pre>
+                </div>
+
+                <h2>4. Работа с цифрами числа</h2>
+                <p>Часто нужно работать с отдельными цифрами числа. Рассмотрим основные операции:</p>
+
+                <h3>4.1. Сумма цифр</h3>
+                <div class="code-block">
+                    <pre>def sum_of_digits(n):
+    """Находит сумму цифр числа"""
+    total = 0
+    n = abs(n)  # Работаем с положительным числом
+    while n > 0:
+        total += n % 10  # Берем последнюю цифру
+        n //= 10         # Убираем последнюю цифру
+    return total
+
+# Примеры
+print(sum_of_digits(123))    # 6 (1+2+3)
+print(sum_of_digits(4567))   # 22 (4+5+6+7)
+print(sum_of_digits(100))    # 1</pre>
+                </div>
+
+                <h3>4.2. Количество цифр</h3>
+                <div class="code-block">
+                    <pre>def count_digits(n):
+    """Считает количество цифр в числе"""
+    if n == 0:
+        return 1
+    count = 0
+    n = abs(n)
+    while n > 0:
+        count += 1
+        n //= 10
+    return count
+
+# Или через логарифм (быстрее для больших чисел)
+import math
+def count_digits_log(n):
+    if n == 0:
+        return 1
+    return int(math.log10(abs(n))) + 1
+
+print(count_digits(12345))   # 5
+print(count_digits(0))      # 1</pre>
+                </div>
+
+                <h3>4.3. Переворот числа</h3>
+                <div class="code-block">
+                    <pre>def reverse_number(n):
+    """Переворачивает число"""
+    reversed_num = 0
+    n = abs(n)
+    while n > 0:
+        reversed_num = reversed_num * 10 + n % 10
+        n //= 10
+    return reversed_num
+
+# Примеры
+print(reverse_number(123))   # 321
+print(reverse_number(100))   # 1
+print(reverse_number(5678))  # 8765</pre>
+                </div>
+
+                <h3>4.4. Проверка на числовой палиндром</h3>
+                <p><strong>Палиндром</strong> - число, которое читается одинаково слева направо и справа налево (например, 121, 1331, 12321).</p>
+
+                <div class="code-block">
+                    <pre>def is_palindrome(n):
+    """Проверяет, является ли число палиндромом"""
+    return n == reverse_number(n)
+
+# Примеры
+print(is_palindrome(121))    # True
+print(is_palindrome(123))    # False
+print(is_palindrome(1331))   # True
+print(is_palindrome(12321))  # True</pre>
+                </div>
+
+                <h2>5. Разложение на простые множители</h2>
+                <p>Любое число можно представить как произведение простых чисел. Например, 12 = 2×2×3, 60 = 2×2×3×5.</p>
+
+                <div class="code-block">
+                    <h4>Пример: Разложение на простые множители</h4>
+                    <pre>def prime_factors(n):
+    """Разлагает число на простые множители"""
+    factors = []
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            factors.append(d)
+            n //= d
+        d += 1
+    if n > 1:
+        factors.append(n)
+    return factors
+
+# Примеры
+print(prime_factors(12))   # [2, 2, 3]
+print(prime_factors(60))   # [2, 2, 3, 5]
+print(prime_factors(17))   # [17] (простое число)
+print(prime_factors(100))  # [2, 2, 5, 5]</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй написать свои функции для работы с числами:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Все функции из урока доступны здесь
+
+def is_prime(n):
+    """Проверяет, является ли число простым"""
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n ** 0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+def gcd(a, b):
+    """Находит НОД двух чисел"""
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
+
+def lcm(a, b):
+    """Находит НОК двух чисел"""
+    return abs(a * b) // gcd(a, b)
+
+def sum_of_digits(n):
+    """Находит сумму цифр числа"""
+    total = 0
+    n = abs(n)
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+def reverse_number(n):
+    """Переворачивает число"""
+    reversed_num = 0
+    n = abs(n)
+    while n > 0:
+        reversed_num = reversed_num * 10 + n % 10
+        n //= 10
+    return reversed_num
+
+def is_palindrome(n):
+    """Проверяет, является ли число палиндромом"""
+    return n == reverse_number(n)
+
+# Попробуй написать функцию, которая находит все простые числа до n
+def find_primes(n):
+    """Находит все простые числа от 2 до n"""
+    primes = []
+    for num in range(2, n + 1):
+        if is_prime(num):
+            primes.append(num)
+    return primes
+
+# Проверка
+print("Простые числа до 20:", find_primes(20))
+print("НОД(48, 18) =", gcd(48, 18))
+print("НОК(4, 6) =", lcm(4, 6))
+print("Сумма цифр 12345 =", sum_of_digits(12345))
+print("121 - палиндром?", is_palindrome(121))</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задачи</h2>
+
+                <div class="practice-task">
+                    <h4>Задача 1: Проверка на совершенное число</h4>
+                    <p><strong>Совершенное число</strong> - это число, равное сумме своих делителей (кроме самого числа). Например, 6 = 1 + 2 + 3.</p>
+                    <p>Напиши функцию <code>is_perfect(n)</code>, которая проверяет, является ли число совершенным.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Найди все делители числа (от 1 до n-1) и проверь, равна ли их сумма самому числу.</p>
+                    </details>
+                </div>
+
+                <div class="practice-task">
+                    <h4>Задача 2: Найти все делители числа</h4>
+                    <p>Напиши функцию <code>find_divisors(n)</code>, которая возвращает список всех делителей числа.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Проверяй числа от 1 до √n. Если i делит n, то n//i тоже делитель.</p>
+                    </details>
+                </div>
+
+                <div class="practice-task">
+                    <h4>Задача 3: Найти наибольшую цифру в числе</h4>
+                    <p>Напиши функцию <code>max_digit(n)</code>, которая находит наибольшую цифру в числе.</p>
+                </div>
+
+                <h2>8. Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли обработать граничные случаи</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - не обработаны случаи n < 2
+def is_prime(n):
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+
+# ПРАВИЛЬНО - проверяем граничные случаи
+def is_prime(n):
+    if n < 2:
+        return False
+    # ... остальной код</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неэффективная проверка простоты</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - медленно для больших чисел
+def is_prime(n):
+    for i in range(2, n):  # Проверяем все числа до n
+        if n % i == 0:
+            return False
+    return True
+
+# ПРАВИЛЬНО - проверяем только до √n
+def is_prime(n):
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильная работа с отрицательными числами</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - бесконечный цикл для отрицательных!
+def sum_of_digits(n):
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+# ПРАВИЛЬНО - работаем с модулем
+def sum_of_digits(n):
+    total = 0
+    n = abs(n)  # Работаем с модулем
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question">
+                        <h4>Вопрос 1: Что такое простое число?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это определение четного числа.">Число, которое делится на 2</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Простое число делится только на 1 и на само себя.">Число, которое делится только на 1 и на само себя</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, не все четные числа простые. Например, 4, 6, 8 - не простые.">Любое четное число</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, простые числа могут быть и маленькими, например 2, 3, 5, 7.">Число больше 10</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Чему равен НОД(12, 18)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, 2 - это делитель, но не наибольший. НОД(12, 18) = 6.">2</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, 3 - это делитель, но не наибольший. НОД(12, 18) = 6.">3</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! 12 = 6×2, а 18 = 6×3, поэтому НОД(12, 18) = 6.">6</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, 12 не делит 18 без остатка.">12</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Чему равен НОК(4, 6)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, 4 не делится на 6.">4</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, 6 не делится на 4.">6</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! 12 делится и на 4 (12 = 4×3), и на 6 (12 = 6×2), и это наименьшее такое число.">12</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, 24 делится на оба числа, но это не наименьшее. НОК(4, 6) = 12.">24</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Какое из чисел является палиндромом?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, 123 читается как 123, а наоборот - 321. Это не палиндром.">123</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! 121 читается одинаково слева направо и справа налево.">121</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, 456 читается как 456, а наоборот - 654. Это не палиндром.">456</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, 789 читается как 789, а наоборот - 987. Это не палиндром.">789</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Почему при проверке простоты достаточно проверять делители до √n?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Это верно, но не главная причина. Главное - математическое свойство делителей.">Это быстрее</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="true" data-explanation="Правильно! Если число n имеет делитель d > √n, то обязательно есть делитель n/d < √n. Поэтому достаточно проверить до √n.">Если есть делитель больше √n, то есть и делитель меньше √n</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Это не просто правило, а математическое свойство, которое можно доказать.">Это правило из математики</label></li>
+                            <li><label><input type="radio" name="q5" data-correct="false" data-explanation="Нет, это работает для всех чисел, не только четных.">Это работает только для четных чисел</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Простое число</strong> - делится только на 1 и на само себя</li>
+                    <li><strong>НОД</strong> находится эффективно алгоритмом Евклида</li>
+                    <li><strong>НОК(a, b) = |a × b| / НОД(a, b)</strong></li>
+                    <li><strong>Работа с цифрами</strong> - используй операции % 10 и // 10</li>
+                    <li><strong>Проверка простоты</strong> - достаточно проверять делители до √n</li>
+                    <li><strong>Всегда обрабатывай граничные случаи</strong> (0, 1, отрицательные числа)</li>
+                    <li><strong>Алгоритм Евклида</strong> - самый эффективный способ найти НОД</li>
+                </ul>
+
+                <p>Отлично! Ты изучил основные алгоритмы для работы с числами. Эти знания пригодятся при решении задач ОГЭ и ЕГЭ. В следующем уроке мы изучим строковые алгоритмы!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="algo-07.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="algo-11.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

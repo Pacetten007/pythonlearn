@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 47: Задачи ЕГЭ по логике - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-37">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 47: Задачи ЕГЭ по логике</h1>
+                <div class="lesson-meta">Логика • 50 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы разберем типичные задачи ЕГЭ по логике. Эти задачи встречаются в заданиях №2, №15 и других. Важно уметь не только решать их вручную, но и проверять ответы с помощью Python.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Задачи на построение таблиц истинности</li>
+                        <li>Задачи на поиск количества решений</li>
+                        <li>Задачи на упрощение логических выражений</li>
+                        <li>Задачи на множества и логику</li>
+                        <li>Типичные ошибки и как их избежать</li>
+                    </ul>
+                </div>
+
+                <h2>1. Задачи на таблицы истинности</h2>
+                <p>Это самый частый тип задач в ЕГЭ. Нужно построить таблицу истинности для логического выражения и найти количество решений.</p>
+
+                <div class="code-block">
+                    <h4>Задача 1: Построение таблицы истинности</h4>
+                    <pre>Условие: Постройте таблицу истинности для выражения:
+F = (A AND B) OR (NOT A AND NOT B)
+
+Решение в Python:
+def build_truth_table():
+    """Строит таблицу истинности для F = (A AND B) OR (NOT A AND NOT B)"""
+    print("A     B     A AND B    NOT A    NOT B    NOT A AND NOT B    F")
+    print("-" * 70)
+    
+    for A in [True, False]:
+        for B in [True, False]:
+            a_and_b = A and B
+            not_a = not A
+            not_b = not B
+            not_a_and_not_b = not_a and not_b
+            F = a_and_b or not_a_and_not_b
+            
+            print(f"{A!s:5} {B!s:5} {a_and_b!s:10} {not_a!s:7} {not_b!s:7} "
+                  f"{not_a_and_not_b!s:18} {F!s:5}")
+
+build_truth_table()
+
+# Результат показывает, что F = True только когда A = B
+# Это эквивалентно: F = (A AND B) OR (NOT A AND NOT B) = (A == B)</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача 2: Подсчет количества решений</h4>
+                    <pre>Условие: Сколько различных решений имеет уравнение:
+F = (X AND Y) OR (NOT X AND Z) = 1
+
+Решение в Python:
+def count_solutions():
+    """Подсчитывает количество решений уравнения"""
+    count = 0
+    solutions = []
+    
+    for X in [True, False]:
+        for Y in [True, False]:
+            for Z in [True, False]:
+                F = (X and Y) or (not X and Z)
+                if F:  # F = 1 (True)
+                    count += 1
+                    solutions.append((X, Y, Z))
+    
+    print(f"Количество решений: {count}")
+    print("Решения (X, Y, Z):")
+    for sol in solutions:
+        print(f"  {sol}")
+    
+    return count
+
+count_solutions()
+
+# Ответ: 5 решений</pre>
+                </div>
+
+                <h2>2. Задачи на поиск количества решений</h2>
+                <p>В таких задачах нужно найти, сколько различных наборов значений переменных удовлетворяют логическому уравнению.</p>
+
+                <div class="code-block">
+                    <h4>Задача 3: Количество решений системы уравнений</h4>
+                    <pre>Условие: Сколько решений имеет система уравнений:
+F1 = (X OR Y) AND (NOT X OR Z) = 1
+F2 = (Y OR Z) AND (NOT Y OR X) = 1
+
+Решение в Python:
+def solve_system():
+    """Решает систему логических уравнений"""
+    count = 0
+    solutions = []
+    
+    for X in [True, False]:
+        for Y in [True, False]:
+            for Z in [True, False]:
+                F1 = (X or Y) and (not X or Z)
+                F2 = (Y or Z) and (not Y or X)
+                
+                if F1 and F2:  # Оба уравнения выполнены
+                    count += 1
+                    solutions.append((X, Y, Z))
+    
+    print(f"Количество решений системы: {count}")
+    print("Решения (X, Y, Z):")
+    for sol in solutions:
+        print(f"  {sol}")
+    
+    return count
+
+solve_system()</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача 4: Поиск минимального количества переменных</h4>
+                    <pre>Условие: При каком минимальном количестве переменных выражение
+F = (A AND B) OR (C AND D) OR (E AND F)
+может быть истинным?
+
+Решение в Python:
+def find_min_variables():
+    """Находит минимальное количество переменных для истинности"""
+    # Выражение истинно, если хотя бы одна пара (X AND Y) истинна
+    # Минимальное количество: 2 переменные (например, A=True, B=True)
+    
+    # Проверяем все возможные комбинации
+    min_count = float('inf')
+    
+    for A in [True, False]:
+        for B in [True, False]:
+            for C in [True, False]:
+                for D in [True, False]:
+                    for E in [True, False]:
+                        for F in [True, False]:
+                            result = (A and B) or (C and D) or (E and F)
+                            if result:
+                                # Считаем количество True переменных
+                                true_count = sum([A, B, C, D, E, F])
+                                min_count = min(min_count, true_count)
+    
+    print(f"Минимальное количество переменных: {min_count}")
+    return min_count
+
+find_min_variables()
+
+# Ответ: 2 переменные</pre>
+                </div>
+
+                <h2>3. Задачи на упрощение выражений</h2>
+                <p>Нужно упростить логическое выражение, используя законы логики.</p>
+
+                <div class="code-block">
+                    <h4>Задача 5: Упрощение выражения</h4>
+                    <pre>Условие: Упростите выражение:
+F = (A AND B) OR (A AND NOT B) OR (NOT A AND B)
+
+Решение:
+Используем распределительный закон:
+F = A AND (B OR NOT B) OR (NOT A AND B)
+F = A AND True OR (NOT A AND B)
+F = A OR (NOT A AND B)
+F = (A OR NOT A) AND (A OR B)
+F = True AND (A OR B)
+F = A OR B
+
+Проверка в Python:
+def verify_simplification():
+    """Проверяет, что упрощение верно"""
+    for A in [True, False]:
+        for B in [True, False]:
+            original = (A and B) or (A and not B) or (not A and B)
+            simplified = A or B
+            
+            print(f"A={A}, B={B}:")
+            print(f"  Исходное: {original}")
+            print(f"  Упрощенное: {simplified}")
+            print(f"  Равны: {original == simplified}")
+
+verify_simplification()</pre>
+                </div>
+
+                <h2>4. Задачи на множества и логику</h2>
+                <p>В таких задачах логические операции применяются к множествам.</p>
+
+                <div class="code-block">
+                    <h4>Задача 6: Логика и множества</h4>
+                    <pre>Условие: Даны множества:
+A = {1, 2, 3, 4, 5}
+B = {3, 4, 5, 6, 7}
+C = {5, 6, 7, 8, 9}
+
+Найдите элементы, которые принадлежат:
+1. A AND B (пересечение)
+2. A OR B (объединение)
+3. NOT A (дополнение до универсального множества)
+4. (A AND B) OR C
+
+Решение в Python:
+def solve_sets():
+    """Решает задачи с множествами"""
+    A = {1, 2, 3, 4, 5}
+    B = {3, 4, 5, 6, 7}
+    C = {5, 6, 7, 8, 9}
+    universal = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    
+    # 1. A AND B (пересечение)
+    a_and_b = A & B
+    print(f"A AND B (пересечение): {a_and_b}")
+    
+    # 2. A OR B (объединение)
+    a_or_b = A | B
+    print(f"A OR B (объединение): {a_or_b}")
+    
+    # 3. NOT A (дополнение)
+    not_a = universal - A
+    print(f"NOT A (дополнение): {not_a}")
+    
+    # 4. (A AND B) OR C
+    result = (A & B) | C
+    print(f"(A AND B) OR C: {result}")
+    
+    return result
+
+solve_sets()</pre>
+                </div>
+
+                <h2>5. Комплексные задачи ЕГЭ</h2>
+                <p>Задачи, сочетающие несколько типов.</p>
+
+                <div class="code-block">
+                    <h4>Задача 7: Типичная задача ЕГЭ</h4>
+                    <pre>Условие: Сколько различных решений имеет уравнение:
+((X → Y) AND (Y → Z)) → (X → Z) = 1
+
+Где X → Y означает "если X, то Y" (импликация).
+
+Решение:
+Импликация X → Y эквивалентна NOT X OR Y.
+
+Решение в Python:
+def solve_implication():
+    """Решает задачу с импликацией"""
+    count = 0
+    solutions = []
+    
+    for X in [True, False]:
+        for Y in [True, False]:
+            for Z in [True, False]:
+                # X → Y = NOT X OR Y
+                x_implies_y = not X or Y
+                # Y → Z = NOT Y OR Z
+                y_implies_z = not Y or Z
+                # X → Z = NOT X OR Z
+                x_implies_z = not X or Z
+                
+                # ((X → Y) AND (Y → Z)) → (X → Z)
+                left = x_implies_y and y_implies_z
+                result = not left or x_implies_z
+                
+                if result:  # = 1
+                    count += 1
+                    solutions.append((X, Y, Z))
+    
+    print(f"Количество решений: {count}")
+    print("Решения (X, Y, Z):")
+    for sol in solutions:
+        print(f"  {sol}")
+    
+    return count
+
+solve_implication()
+
+# Ответ: 8 решений (все возможные комбинации)</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача 8: Задача на поиск значения</h4>
+                    <pre>Условие: При каких значениях переменных выражение
+F = (A OR B) AND (NOT A OR C) AND (NOT B OR NOT C)
+ложно?
+
+Решение в Python:
+def find_false_solutions():
+    """Находит решения, при которых выражение ложно"""
+    solutions = []
+    
+    for A in [True, False]:
+        for B in [True, False]:
+            for C in [True, False]:
+                F = (A or B) and (not A or C) and (not B or not C)
+                
+                if not F:  # F = False
+                    solutions.append((A, B, C))
+    
+    print(f"Количество решений, при которых F = False: {len(solutions)}")
+    print("Решения (A, B, C):")
+    for sol in solutions:
+        print(f"  {sol}")
+    
+    return solutions
+
+find_false_solutions()</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить задачи ЕГЭ с помощью Python:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Решение задач ЕГЭ по логике
+
+# Задача 1: Построение таблицы истинности
+print("=== Задача 1: Таблица истинности ===")
+print("F = (A AND B) OR (NOT A AND NOT B)")
+print("A     B     F")
+print("-" * 20)
+for A in [True, False]:
+    for B in [True, False]:
+        F = (A and B) or (not A and not B)
+        print(f"{A!s:5} {B!s:5} {F!s:5}")
+
+# Задача 2: Подсчет решений
+print("\n=== Задача 2: Количество решений ===")
+print("F = (X AND Y) OR (NOT X AND Z) = 1")
+count = 0
+for X in [True, False]:
+    for Y in [True, False]:
+        for Z in [True, False]:
+            F = (X and Y) or (not X and Z)
+            if F:
+                count += 1
+print(f"Количество решений: {count}")
+
+# Задача 3: Упрощение
+print("\n=== Задача 3: Проверка упрощения ===")
+print("F = (A AND B) OR (A AND NOT B) OR (NOT A AND B)")
+print("Упрощенное: F = A OR B")
+print("A     B     Исходное    Упрощенное    Равны")
+print("-" * 50)
+for A in [True, False]:
+    for B in [True, False]:
+        original = (A and B) or (A and not B) or (not A and B)
+        simplified = A or B
+        equal = original == simplified
+        print(f"{A!s:5} {B!s:5} {original!s:11} {simplified!s:13} {equal!s:5}")
+
+# Задача 4: Множества
+print("\n=== Задача 4: Множества ===")
+A = {1, 2, 3, 4, 5}
+B = {3, 4, 5, 6, 7}
+C = {5, 6, 7, 8, 9}
+print(f"A AND B (пересечение): {A & B}")
+print(f"A OR B (объединение): {A | B}")
+print(f"(A AND B) OR C: {(A & B) | C}")
+
+# Задача 5: Импликация
+print("\n=== Задача 5: Импликация ===")
+print("F = ((X → Y) AND (Y → Z)) → (X → Z) = 1")
+count = 0
+for X in [True, False]:
+    for Y in [True, False]:
+        for Z in [True, False]:
+            x_implies_y = not X or Y
+            y_implies_z = not Y or Z
+            x_implies_z = not X or Z
+            left = x_implies_y and y_implies_z
+            result = not left or x_implies_z
+            if result:
+                count += 1
+print(f"Количество решений: {count}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Таблица истинности</h4>
+                    <p>Постройте таблицу истинности для выражения: F = (A OR B) AND (NOT A OR NOT B). Сколько строк в таблице, где F = True?</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Создай все возможные комбинации True/False для A и B (всего 4 комбинации) и вычисли F для каждой.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Количество решений</h4>
+                    <p>Сколько различных решений имеет уравнение: (X AND Y) OR (NOT X AND NOT Y) = 1?</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Перебери все возможные комбинации значений X и Y (всего 4) и проверь, при каких F = True.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Упрощение</h4>
+                    <p>Упростите выражение: F = (A AND B) OR (A AND NOT B). Что получилось?</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй распределительный закон: A AND (B OR NOT B) = A AND True = A.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 4: Система уравнений</h4>
+                    <p>Сколько решений имеет система:
+F1 = (X OR Y) = 1
+F2 = (NOT X OR Z) = 1</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Перебери все комбинации X, Y, Z (всего 8) и проверь, при каких оба уравнения выполнены.</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки в задачах ЕГЭ</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неправильное понимание импликации</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильная импликация
+X → Y = X and Y  # Это неверно!
+
+# ПРАВИЛЬНО - импликация через OR
+X → Y = not X or Y
+# Импликация ложна только когда X=True и Y=False</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильный подсчет решений</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - не все комбинации проверены
+# Для 3 переменных нужно проверить 2³ = 8 комбинаций
+# Нельзя пропускать комбинации!
+
+# ПРАВИЛЬНО - перебрать все комбинации
+for X in [True, False]:
+    for Y in [True, False]:
+        for Z in [True, False]:
+            # Проверка условия
+            pass</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильное упрощение</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильное применение законов
+# (A AND B) OR (A AND C) ≠ A AND (B OR C)
+# Это верно только для AND, а не для OR!
+
+# ПРАВИЛЬНО - распределительный закон
+# (A AND B) OR (A AND C) = A AND (B OR C)  ✓
+# (A OR B) AND (A OR C) = A OR (B AND C)  ✓</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Путаница между AND и OR в множествах</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильные операции
+A = {1, 2, 3}
+B = {3, 4, 5}
+result = A and B  # Это не работает для множеств!
+
+# ПРАВИЛЬНО - используй операции множеств
+A = {1, 2, 3}
+B = {3, 4, 5}
+intersection = A & B  # Пересечение (AND)
+union = A | B         # Объединение (OR)
+difference = A - B    # Разность (NOT)</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Сколько различных решений имеет уравнение (X AND Y) = 1?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Проверь все комбинации: (True, True) - одно решение.">0</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! X AND Y = 1 только когда X=True и Y=True. Это одно решение.">1</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Для двух переменных всего 4 комбинации, но только одна дает True.">2</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это общее количество комбинаций, а не решений.">4</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Чему эквивалентна импликация X → Y?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Это не импликация, а конъюнкция.">X AND Y</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! Импликация X → Y эквивалентна NOT X OR Y.">NOT X OR Y</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. Это дизъюнкция, а не импликация.">X OR Y</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это отрицание, а не импликация.">NOT X</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько различных решений имеет уравнение (X OR Y) = 1?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. OR дает True для трех комбинаций: (True, True), (True, False), (False, True).">1</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-explanation="Неверно. Проверь все комбинации.">2</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-correct="true" data-explanation="Правильно! X OR Y = 1 для трех комбинаций: (True, True), (True, False), (False, True).">3</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Это общее количество комбинаций, но не все дают True.">4</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что означает операция A & B для множеств?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-correct="true" data-explanation="Правильно! A & B - это пересечение множеств (элементы, которые есть в обоих множествах).">Пересечение (элементы в обоих множествах)</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-explanation="Неверно. Объединение обозначается |, а не &.">Объединение (все элементы из обоих множеств)</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Разность обозначается -, а не &.">Разность (элементы только в A)</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Это не операция над множествами.">Логическое AND</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Сколько комбинаций нужно проверить для уравнения с 4 переменными?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Для n переменных нужно проверить 2ⁿ комбинаций.">4</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-explanation="Неверно. 2⁴ = 16, а не 8.">8</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-correct="true" data-explanation="Правильно! Для 4 переменных нужно проверить 2⁴ = 16 комбинаций.">16</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. 2⁴ = 16, а не 32.">32</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Таблицы истинности</strong> - помогают понять результат логических выражений</li>
+                    <li><strong>Подсчет решений</strong> - перебирай все возможные комбинации переменных</li>
+                    <li><strong>Количество комбинаций</strong> - для n переменных: 2ⁿ комбинаций</li>
+                    <li><strong>Импликация</strong> - X → Y = NOT X OR Y</li>
+                    <li><strong>Упрощение</strong> - используй законы логики для упрощения выражений</li>
+                    <li><strong>Множества</strong> - A & B (пересечение), A | B (объединение), A - B (разность)</li>
+                    <li><strong>Проверка в Python</strong> - всегда проверяй решение с помощью Python</li>
+                    <li><strong>Системы уравнений</strong> - проверяй, что все уравнения выполнены одновременно</li>
+                    <li><strong>Типичные ошибки</strong> - неправильная импликация, пропуск комбинаций, неправильное упрощение</li>
+                </ul>
+
+                <p>Отлично! Ты изучил типичные задачи ЕГЭ по логике и научился решать их с помощью Python. Эти навыки очень важны для успешной сдачи экзамена. В следующем разделе мы перейдем к графам и деревьям!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-36.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-38.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОГЭ: Массивы и списки - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="oge-03">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ОГЭ: Массивы и списки</h1>
+                <div class="lesson-meta">Подготовка к ОГЭ • 45 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы изучим задачи ОГЭ, связанные с массивами (списками) в Python. Это типичные задания, где нужно работать с коллекциями данных: находить элементы, изменять их, обрабатывать массив целиком.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Работа с элементами списка</li>
+                        <li>Поиск элементов в списке</li>
+                        <li>Обработка списков в циклах</li>
+                        <li>Изменение элементов списка</li>
+                        <li>Типичные задачи ОГЭ</li>
+                    </ul>
+                </div>
+
+                <h2>1. Работа с элементами списка</h2>
+                <p>В Python списки (массивы) индексируются с нуля. Важно помнить это при работе с задачами ОГЭ.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 1: Доступ к элементам</h4>
+                    <pre>Условие: Дан список a = [10, 20, 30, 40, 50]. Что выведет программа?
+print(a[0])
+print(a[2])
+print(a[-1])
+
+Решение:
+a = [10, 20, 30, 40, 50]
+a[0] = 10  (первый элемент, индекс 0)
+a[2] = 30  (третий элемент, индекс 2)
+a[-1] = 50 (последний элемент, отрицательный индекс)
+
+Ответ:
+10
+30
+50
+
+Проверка в Python:
+a = [10, 20, 30, 40, 50]
+print(f"a[0] = {a[0]}")   # 10
+print(f"a[2] = {a[2]}")   # 30
+print(f"a[-1] = {a[-1]}") # 50</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 2: Изменение элемента</h4>
+                    <pre>Условие: Дан список a = [1, 2, 3, 4, 5]. Выполняется команда a[2] = 10.
+Что будет в списке?
+
+Решение:
+a = [1, 2, 3, 4, 5]
+a[2] = 10  # Изменяем элемент с индексом 2 (третий элемент)
+# Список станет: [1, 2, 10, 4, 5]
+
+Ответ: [1, 2, 10, 4, 5]
+
+Проверка в Python:
+a = [1, 2, 3, 4, 5]
+print(f"До изменения: {a}")
+a[2] = 10
+print(f"После изменения: {a}")  # [1, 2, 10, 4, 5]</pre>
+                </div>
+
+                <h2>2. Поиск элементов в списке</h2>
+                <p>Часто нужно найти элемент в списке или проверить его наличие.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 3: Поиск максимального элемента</h4>
+                    <pre>Условие: Напишите программу, которая находит максимальный элемент в списке [5, 2, 8, 1, 9].
+
+Решение:
+a = [5, 2, 8, 1, 9]
+max_value = a[0]  # Предполагаем, что первый элемент максимальный
+for i in range(1, len(a)):
+    if a[i] > max_value:
+        max_value = a[i]
+print(max_value)
+
+Решение пошагово:
+1. max_value = 5
+2. i=1: a[1]=2, 2 > 5? Нет, max_value остается 5
+3. i=2: a[2]=8, 8 > 5? Да, max_value = 8
+4. i=3: a[3]=1, 1 > 8? Нет, max_value остается 8
+5. i=4: a[4]=9, 9 > 8? Да, max_value = 9
+
+Ответ: 9
+
+Проверка в Python:
+a = [5, 2, 8, 1, 9]
+max_value = a[0]
+for i in range(1, len(a)):
+    if a[i] > max_value:
+        max_value = a[i]
+    print(f"i={i}, a[{i}]={a[i]}, max_value={max_value}")
+print(f"Максимальный элемент: {max_value}")  # 9</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 4: Подсчет элементов</h4>
+                    <pre>Условие: Напишите программу, которая подсчитывает количество четных чисел в списке [1, 2, 3, 4, 5, 6].
+
+Решение:
+a = [1, 2, 3, 4, 5, 6]
+count = 0
+for i in range(len(a)):
+    if a[i] % 2 == 0:
+        count = count + 1
+print(count)
+
+Решение пошагово:
+1. count = 0
+2. i=0: a[0]=1, 1 % 2 = 1 ≠ 0, count остается 0
+3. i=1: a[1]=2, 2 % 2 = 0, count = 1
+4. i=2: a[2]=3, 3 % 2 = 1 ≠ 0, count остается 1
+5. i=3: a[3]=4, 4 % 2 = 0, count = 2
+6. i=4: a[4]=5, 5 % 2 = 1 ≠ 0, count остается 2
+7. i=5: a[5]=6, 6 % 2 = 0, count = 3
+
+Ответ: 3
+
+Проверка в Python:
+a = [1, 2, 3, 4, 5, 6]
+count = 0
+for i in range(len(a)):
+    if a[i] % 2 == 0:
+        count = count + 1
+        print(f"Найдено четное: a[{i}]={a[i]}, всего: {count}")
+print(f"Итого четных чисел: {count}")  # 3</pre>
+                </div>
+
+                <h2>3. Обработка списков в циклах</h2>
+                <p>Циклы позволяют обработать все элементы списка.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 5: Сумма элементов</h4>
+                    <pre>Условие: Напишите программу, которая вычисляет сумму всех элементов списка [1, 2, 3, 4, 5].
+
+Решение:
+a = [1, 2, 3, 4, 5]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+print(s)
+
+Решение пошагово:
+1. s = 0
+2. i=0: s = 0 + 1 = 1
+3. i=1: s = 1 + 2 = 3
+4. i=2: s = 3 + 3 = 6
+5. i=3: s = 6 + 4 = 10
+6. i=4: s = 10 + 5 = 15
+
+Ответ: 15
+
+Проверка в Python:
+a = [1, 2, 3, 4, 5]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+    print(f"i={i}, a[{i}]={a[i]}, s={s}")
+print(f"Итоговая сумма: {s}")  # 15</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 6: Поиск индекса элемента</h4>
+                    <pre>Условие: Напишите программу, которая находит индекс первого элемента, равного 5, в списке [2, 5, 3, 5, 7].
+
+Решение:
+a = [2, 5, 3, 5, 7]
+index = -1
+for i in range(len(a)):
+    if a[i] == 5:
+        index = i
+        break
+print(index)
+
+Решение пошагово:
+1. index = -1
+2. i=0: a[0]=2, 2 ≠ 5, index остается -1
+3. i=1: a[1]=5, 5 == 5, index = 1, break (выход из цикла)
+
+Ответ: 1
+
+Проверка в Python:
+a = [2, 5, 3, 5, 7]
+index = -1
+for i in range(len(a)):
+    if a[i] == 5:
+        index = i
+        print(f"Найден элемент 5 на позиции {i}")
+        break
+print(f"Индекс: {index}")  # 1</pre>
+                </div>
+
+                <h2>4. Изменение элементов списка</h2>
+                <p>В задачах ОГЭ часто нужно изменить элементы списка по определенному правилу.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 7: Удвоение элементов</h4>
+                    <pre>Условие: Напишите программу, которая удваивает каждый элемент списка [1, 2, 3, 4].
+
+Решение:
+a = [1, 2, 3, 4]
+for i in range(len(a)):
+    a[i] = a[i] * 2
+print(a)
+
+Решение пошагово:
+1. i=0: a[0] = 1 * 2 = 2, список: [2, 2, 3, 4]
+2. i=1: a[1] = 2 * 2 = 4, список: [2, 4, 3, 4]
+3. i=2: a[2] = 3 * 2 = 6, список: [2, 4, 6, 4]
+4. i=3: a[3] = 4 * 2 = 8, список: [2, 4, 6, 8]
+
+Ответ: [2, 4, 6, 8]
+
+Проверка в Python:
+a = [1, 2, 3, 4]
+print(f"До изменения: {a}")
+for i in range(len(a)):
+    a[i] = a[i] * 2
+    print(f"i={i}, a[{i}]={a[i]}, список: {a}")
+print(f"После изменения: {a}")  # [2, 4, 6, 8]</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 8: Замена элементов</h4>
+                    <pre>Условие: Напишите программу, которая заменяет все отрицательные числа на 0 в списке [5, -2, 3, -1, 4].
+
+Решение:
+a = [5, -2, 3, -1, 4]
+for i in range(len(a)):
+    if a[i] < 0:
+        a[i] = 0
+print(a)
+
+Решение пошагово:
+1. i=0: a[0]=5, 5 < 0? Нет, список: [5, -2, 3, -1, 4]
+2. i=1: a[1]=-2, -2 < 0? Да, a[1]=0, список: [5, 0, 3, -1, 4]
+3. i=2: a[2]=3, 3 < 0? Нет, список: [5, 0, 3, -1, 4]
+4. i=3: a[3]=-1, -1 < 0? Да, a[3]=0, список: [5, 0, 3, 0, 4]
+5. i=4: a[4]=4, 4 < 0? Нет, список: [5, 0, 3, 0, 4]
+
+Ответ: [5, 0, 3, 0, 4]
+
+Проверка в Python:
+a = [5, -2, 3, -1, 4]
+print(f"До изменения: {a}")
+for i in range(len(a)):
+    if a[i] < 0:
+        a[i] = 0
+        print(f"i={i}, заменено на 0, список: {a}")
+print(f"После изменения: {a}")  # [5, 0, 3, 0, 4]</pre>
+                </div>
+
+                <h2>5. Комплексные задачи</h2>
+                <p>Задачи, сочетающие несколько операций со списками.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 9: Среднее значение</h4>
+                    <pre>Условие: Напишите программу, которая вычисляет среднее арифметическое элементов списка [10, 20, 30, 40].
+
+Решение:
+a = [10, 20, 30, 40]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+average = s / len(a)
+print(average)
+
+Решение:
+1. s = 0
+2. Суммируем: s = 10 + 20 + 30 + 40 = 100
+3. average = 100 / 4 = 25.0
+
+Ответ: 25.0
+
+Проверка в Python:
+a = [10, 20, 30, 40]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+    print(f"i={i}, a[{i}]={a[i]}, s={s}")
+average = s / len(a)
+print(f"Среднее арифметическое: {average}")  # 25.0</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 10: Поиск минимального и максимального</h4>
+                    <pre>Условие: Напишите программу, которая находит минимальный и максимальный элементы в списке [7, 3, 9, 1, 5].
+
+Решение:
+a = [7, 3, 9, 1, 5]
+min_value = a[0]
+max_value = a[0]
+for i in range(1, len(a)):
+    if a[i] < min_value:
+        min_value = a[i]
+    if a[i] > max_value:
+        max_value = a[i]
+print(min_value, max_value)
+
+Ответ: 1 9
+
+Проверка в Python:
+a = [7, 3, 9, 1, 5]
+min_value = a[0]
+max_value = a[0]
+for i in range(1, len(a)):
+    if a[i] < min_value:
+        min_value = a[i]
+    if a[i] > max_value:
+        max_value = a[i]
+    print(f"i={i}, a[{i}]={a[i]}, min={min_value}, max={max_value}")
+print(f"Минимум: {min_value}, Максимум: {max_value}")  # 1, 9</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить задачи со списками:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Работа со списками в ОГЭ
+
+# Задача 1: Доступ к элементам
+print("=== Задача 1: Доступ к элементам ===")
+a = [10, 20, 30, 40, 50]
+print(f"a[0] = {a[0]}")
+print(f"a[2] = {a[2]}")
+print(f"a[-1] = {a[-1]}")
+
+# Задача 2: Изменение элемента
+print("\n=== Задача 2: Изменение элемента ===")
+a = [1, 2, 3, 4, 5]
+print(f"До: {a}")
+a[2] = 10
+print(f"После: {a}")
+
+# Задача 3: Поиск максимального
+print("\n=== Задача 3: Максимальный элемент ===")
+a = [5, 2, 8, 1, 9]
+max_value = a[0]
+for i in range(1, len(a)):
+    if a[i] > max_value:
+        max_value = a[i]
+print(f"Максимум: {max_value}")
+
+# Задача 4: Подсчет четных
+print("\n=== Задача 4: Подсчет четных ===")
+a = [1, 2, 3, 4, 5, 6]
+count = 0
+for i in range(len(a)):
+    if a[i] % 2 == 0:
+        count = count + 1
+print(f"Четных чисел: {count}")
+
+# Задача 5: Сумма элементов
+print("\n=== Задача 5: Сумма элементов ===")
+a = [1, 2, 3, 4, 5]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+print(f"Сумма: {s}")
+
+# Задача 6: Удвоение элементов
+print("\n=== Задача 6: Удвоение элементов ===")
+a = [1, 2, 3, 4]
+print(f"До: {a}")
+for i in range(len(a)):
+    a[i] = a[i] * 2
+print(f"После: {a}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Доступ к элементам</h4>
+                    <p>Дан список a = [15, 25, 35, 45]. Что выведет программа: print(a[1], a[-1])?</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>a[1] - это второй элемент (индекс 1), a[-1] - последний элемент.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Поиск минимального</h4>
+                    <p>Напиши программу, которая находит минимальный элемент в списке [8, 3, 5, 2, 7].</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй цикл for и переменную для хранения минимального значения. Сравнивай каждый элемент с текущим минимумом.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Подсчет положительных</h4>
+                    <p>Напиши программу, которая подсчитывает количество положительных чисел в списке [5, -3, 2, -1, 4].</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй условие if a[i] > 0 для проверки положительности.</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Выход за границы списка</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - выход за границы
+a = [1, 2, 3]
+print(a[3])  # Ошибка! Индексы: 0, 1, 2 (всего 3 элемента)
+
+# ПРАВИЛЬНО - проверяй границы
+a = [1, 2, 3]
+if len(a) > 3:
+    print(a[3])
+else:
+    print("Индекс вне диапазона")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильная инициализация</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильная инициализация для поиска максимума
+a = [5, 2, 8, 1]
+max_value = 0  # Если все элементы отрицательные, это даст неправильный результат!
+
+# ПРАВИЛЬНО - инициализируй первым элементом
+a = [5, 2, 8, 1]
+max_value = a[0]  # Используй первый элемент как начальное значение
+for i in range(1, len(a)):
+    if a[i] > max_value:
+        max_value = a[i]</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Изменение списка во время итерации</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - изменение размера списка во время итерации
+a = [1, 2, 3, 4, 5]
+for i in range(len(a)):
+    if a[i] % 2 == 0:
+        a.remove(a[i])  # Опасно! Может пропустить элементы
+
+# ПРАВИЛЬНО - создай новый список или используй индексы
+a = [1, 2, 3, 4, 5]
+result = []
+for i in range(len(a)):
+    if a[i] % 2 != 0:  # Оставляем только нечетные
+        result.append(a[i])
+print(result)</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Что выведет программа: a=[10,20,30]; print(a[0])?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-correct="true" data-explanation="Правильно! a[0] - это первый элемент списка.">10</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-explanation="Неверно. a[0] - это первый элемент, а не второй.">20</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. a[0] - это первый элемент, а не третий.">30</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Проверь индексацию списков.">0</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что выведет программа: a=[1,2,3]; a[1]=5; print(a)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. a[1] изменяется, а не a[0].">[5, 2, 3]</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! a[1] (второй элемент) заменяется на 5.">[1, 5, 3]</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. a[1] изменяется, а не a[2].">[1, 2, 5]</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Проверь, какой элемент изменяется.">[1, 2, 3]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что выведет программа: a=[5,2,8,1]; max=a[0]; for i in range(1,len(a)): if a[i]>max: max=a[i]; print(max)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Проверь алгоритм поиска максимума.">5</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-explanation="Неверно. 8 больше 5, но есть еще больший элемент.">8</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-correct="true" data-explanation="Правильно! Алгоритм находит максимальный элемент: 8.">8</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Проверь все элементы списка.">1</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Сколько четных чисел в списке [1, 2, 3, 4, 5, 6]?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Проверь все элементы: 2, 4, 6 - это 3 числа.">2</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! Четные числа: 2, 4, 6 - всего 3.">3</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Проверь определение четности.">4</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Это общее количество элементов.">6</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что выведет программа: a=[1,2,3]; for i in range(len(a)): a[i]=a[i]*2; print(a)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Это исходный список.">[1, 2, 3]</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! Каждый элемент удваивается: 1*2=2, 2*2=4, 3*2=6.">[2, 4, 6]</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Проверь операцию умножения.">[2, 2, 2]</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это неправильный расчет.">[3, 4, 5]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Индексация</strong> - списки индексируются с 0, последний элемент имеет индекс -1</li>
+                    <li><strong>Доступ к элементам</strong> - используй a[i] для доступа к элементу с индексом i</li>
+                    <li><strong>Изменение элементов</strong> - a[i] = значение для изменения элемента</li>
+                    <li><strong>Поиск максимума/минимума</strong> - инициализируй первым элементом, сравнивай с остальными</li>
+                    <li><strong>Подсчет элементов</strong> - используй счетчик и условие в цикле</li>
+                    <li><strong>Сумма элементов</strong> - накапливай сумму в переменной, проходя по всем элементам</li>
+                    <li><strong>Циклы по списку</strong> - используй for i in range(len(a)) для перебора всех элементов</li>
+                    <li><strong>Границы</strong> - всегда проверяй, что индекс не выходит за границы списка</li>
+                    <li><strong>Практика</strong> - решай задачи пошагово, отслеживай изменения списка</li>
+                </ul>
+
+                <p>Отлично! Ты изучил работу со списками в задачах ОГЭ. Эти навыки очень важны для успешной сдачи экзамена. В следующем уроке мы изучим работу со строками!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="oge-02.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="oge-04.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

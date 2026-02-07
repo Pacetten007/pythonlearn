@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 34: Простые сортировки - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="algo-07">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 34: Сортировка - Простые методы</h1>
+                <div class="lesson-meta">Алгоритмы • 30 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>Представь, что у тебя есть список оценок: <code>[3, 5, 2, 4, 5]</code>, и тебе нужно расположить их по возрастанию: <code>[2, 3, 4, 5, 5]</code>. Как это сделать? Для этого существуют алгоритмы сортировки!</p>
+
+                <p>Сортировка - одна из самых важных операций в программировании. Отсортированные данные легче искать, анализировать и обрабатывать. В этом уроке мы изучим три простых алгоритма сортировки, которые легко понять и реализовать.</p>
+
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Пузырьковая сортировка (Bubble Sort) - самая простая</li>
+                        <li>Сортировка выбором (Selection Sort) - интуитивно понятная</li>
+                        <li>Сортировка вставками (Insertion Sort) - эффективная для небольших списков</li>
+                        <li>Сравнение алгоритмов - когда какой использовать</li>
+                        <li>Встроенная функция sorted() в Python</li>
+                        <li>Практические примеры и задачи</li>
+                    </ul>
+                </div>
+
+                <h2>Пузырьковая сортировка (Bubble Sort)</h2>
+                <p><strong>Пузырьковая сортировка</strong> - самый простой алгоритм сортировки. Он работает как пузырьки в воде: большие элементы "всплывают" наверх, а маленькие "тонут" вниз.</p>
+
+                <h3>Как работает пузырьковая сортировка:</h3>
+                <ol>
+                    <li>Сравниваем соседние элементы</li>
+                    <li>Если они в неправильном порядке - меняем их местами</li>
+                    <li>Повторяем для всех пар элементов</li>
+                    <li>После первого прохода самый большой элемент окажется в конце</li>
+                    <li>Повторяем процесс для оставшихся элементов</li>
+                </ol>
+
+                <div class="code-block">
+                    <pre># Пузырьковая сортировка
+def bubble_sort(arr):
+    """Сортирует список по возрастанию методом пузырька"""
+    n = len(arr)
+    
+    # Проходим по списку n-1 раз
+    for i in range(n - 1):
+        # В каждом проходе сравниваем соседние элементы
+        for j in range(n - 1 - i):
+            # Если текущий элемент больше следующего - меняем местами
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    
+    return arr
+
+# Пример
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = bubble_sort(numbers.copy())
+print(f"Исходный: {numbers}")
+print(f"Отсортированный: {sorted_numbers}")</pre>
+                </div>
+
+                <h3>Визуализация пузырьковой сортировки:</h3>
+                <p>Сортируем список <code>[64, 34, 25, 12, 22, 11, 90]</code>:</p>
+                <div class="code-block">
+                    <pre>Проход 1: [64, 34, 25, 12, 22, 11, 90]
+          Сравниваем 64 и 34 → меняем → [34, 64, 25, 12, 22, 11, 90]
+          Сравниваем 64 и 25 → меняем → [34, 25, 64, 12, 22, 11, 90]
+          ... продолжаем ...
+          Результат: [34, 25, 12, 22, 11, 64, 90] (90 на месте!)
+
+Проход 2: [34, 25, 12, 22, 11, 64, 90]
+          ... продолжаем ...
+          Результат: [25, 12, 22, 11, 34, 64, 90] (64 и 90 на месте!)
+
+... и так далее, пока весь список не отсортирован</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Почему "пузырьковая"?</h4>
+                    <p>Большие элементы постепенно "всплывают" к концу списка, как пузырьки воздуха в воде!</p>
+                </div>
+
+                <h2>Сортировка выбором (Selection Sort)</h2>
+                <p><strong>Сортировка выбором</strong> работает по принципу: находим минимальный элемент и ставим его на первое место, затем находим следующий минимальный и ставим на второе место, и так далее.</p>
+
+                <h3>Как работает сортировка выбором:</h3>
+                <ol>
+                    <li>Находим минимальный элемент в неотсортированной части</li>
+                    <li>Меняем его местами с первым элементом неотсортированной части</li>
+                    <li>Повторяем для оставшихся элементов</li>
+                </ol>
+
+                <div class="code-block">
+                    <pre># Сортировка выбором
+def selection_sort(arr):
+    """Сортирует список выбором минимального элемента"""
+    n = len(arr)
+    
+    for i in range(n):
+        # Находим индекс минимального элемента в неотсортированной части
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        
+        # Меняем местами минимальный элемент с первым неотсортированным
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    
+    return arr
+
+# Пример
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = selection_sort(numbers.copy())
+print(f"Исходный: {numbers}")
+print(f"Отсортированный: {sorted_numbers}")</pre>
+                </div>
+
+                <h3>Визуализация сортировки выбором:</h3>
+                <p>Сортируем список <code>[64, 34, 25, 12, 22, 11, 90]</code>:</p>
+                <div class="code-block">
+                    <pre>Шаг 1: Находим минимум (11) → ставим на позицию 0
+       [11, 34, 25, 12, 22, 64, 90]
+
+Шаг 2: Находим минимум в оставшихся (12) → ставим на позицию 1
+       [11, 12, 25, 34, 22, 64, 90]
+
+Шаг 3: Находим минимум в оставшихся (22) → ставим на позицию 2
+       [11, 12, 22, 34, 25, 64, 90]
+
+... и так далее</pre>
+                </div>
+
+                <h2>Сортировка вставками (Insertion Sort)</h2>
+                <p><strong>Сортировка вставками</strong> работает как сортировка карт в руке: берем каждый элемент и вставляем его в правильное место среди уже отсортированных элементов.</p>
+
+                <h3>Как работает сортировка вставками:</h3>
+                <ol>
+                    <li>Первый элемент считаем отсортированным</li>
+                    <li>Берем следующий элемент</li>
+                    <li>Вставляем его в правильное место среди отсортированных</li>
+                    <li>Повторяем для всех элементов</li>
+                </ol>
+
+                <div class="code-block">
+                    <pre># Сортировка вставками
+def insertion_sort(arr):
+    """Сортирует список методом вставок"""
+    n = len(arr)
+    
+    for i in range(1, n):
+        # Текущий элемент, который нужно вставить
+        key = arr[i]
+        j = i - 1
+        
+        # Сдвигаем элементы, которые больше key, вправо
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        
+        # Вставляем key в правильное место
+        arr[j + 1] = key
+    
+    return arr
+
+# Пример
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = insertion_sort(numbers.copy())
+print(f"Исходный: {numbers}")
+print(f"Отсортированный: {sorted_numbers}")</pre>
+                </div>
+
+                <h3>Визуализация сортировки вставками:</h3>
+                <p>Сортируем список <code>[64, 34, 25, 12, 22, 11, 90]</code>:</p>
+                <div class="code-block">
+                    <pre>Шаг 1: [64] | [34, 25, 12, 22, 11, 90]
+       Вставляем 34 → [34, 64] | [25, 12, 22, 11, 90]
+
+Шаг 2: [34, 64] | [25, 12, 22, 11, 90]
+       Вставляем 25 → [25, 34, 64] | [12, 22, 11, 90]
+
+Шаг 3: [25, 34, 64] | [12, 22, 11, 90]
+       Вставляем 12 → [12, 25, 34, 64] | [22, 11, 90]
+
+... и так далее</pre>
+                </div>
+
+                <h2>Сравнение алгоритмов</h2>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Алгоритм</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Сложность</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Преимущества</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Недостатки</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Пузырьковая</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">O(n²)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Простота, легко понять</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Очень медленная</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Выбором</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">O(n²)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Минимум обменов</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Медленная</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Вставками</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">O(n²)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Быстрая для почти отсортированных данных</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Медленная для больших списков</td>
+                    </tr>
+                </table>
+
+                <div class="warning-block">
+                    <h4>⚠️ Важно!</h4>
+                    <p>Все три алгоритма имеют сложность O(n²), что означает, что для списка из n элементов нужно примерно n² операций. Для больших списков (1000+ элементов) эти алгоритмы работают очень медленно!</p>
+                    <p>В следующем уроке мы изучим быстрые сортировки (Quick Sort, Merge Sort), которые работают за O(n log n).</p>
+                </div>
+
+                <h2>Встроенная функция sorted() в Python</h2>
+                <p>В Python есть встроенная функция <code>sorted()</code>, которая использует эффективный алгоритм Timsort (комбинация сортировки слиянием и вставками):</p>
+
+                <div class="code-block">
+                    <pre># Встроенная сортировка Python
+numbers = [64, 34, 25, 12, 22, 11, 90]
+
+# sorted() возвращает новый отсортированный список
+sorted_numbers = sorted(numbers)
+print(f"Исходный: {numbers}")
+print(f"Отсортированный: {sorted_numbers}")
+
+# Метод sort() сортирует список на месте
+numbers_copy = numbers.copy()
+numbers_copy.sort()
+print(f"После sort(): {numbers_copy}")
+
+# Сортировка по убыванию
+descending = sorted(numbers, reverse=True)
+print(f"По убыванию: {descending}")</pre>
+                </div>
+
+                <div class="info-block">
+                    <h4>Когда использовать встроенную сортировку?</h4>
+                    <ul>
+                        <li><strong>Всегда в реальных проектах</strong> - она быстрая и оптимизированная</li>
+                        <li><strong>Для изучения</strong> - полезно понимать, как работают алгоритмы</li>
+                        <li><strong>На экзаменах</strong> - могут попросить реализовать алгоритм вручную</li>
+                    </ul>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Пузырьковая сортировка
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n - 1):
+        for j in range(n - 1 - i):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+
+# Сортировка выбором
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
+
+# Сортировка вставками
+def insertion_sort(arr):
+    n = len(arr)
+    for i in range(1, n):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+    return arr
+
+# Тестируем все три алгоритма
+test_list = [64, 34, 25, 12, 22, 11, 90]
+print("Исходный список:", test_list)
+print()
+
+print("=== Пузырьковая сортировка ===")
+result1 = bubble_sort(test_list.copy())
+print("Результат:", result1)
+print()
+
+print("=== Сортировка выбором ===")
+result2 = selection_sort(test_list.copy())
+print("Результат:", result2)
+print()
+
+print("=== Сортировка вставками ===")
+result3 = insertion_sort(test_list.copy())
+print("Результат:", result3)
+print()
+
+print("=== Встроенная sorted() ===")
+result4 = sorted(test_list)
+print("Результат:", result4)
+print()
+
+# Проверяем, что все результаты одинаковые
+print("Все алгоритмы дали одинаковый результат:", 
+      result1 == result2 == result3 == result4)</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Сортировка оценок</h4>
+                    <p>Создай программу для сортировки оценок студентов:</p>
+                    <ol>
+                        <li>Создай список оценок: [5, 3, 4, 2, 5, 4, 3, 5]</li>
+                        <li>Реализуй пузырьковую сортировку</li>
+                        <li>Отсортируй оценки по возрастанию</li>
+                        <li>Отсортируй оценки по убыванию (измени условие сравнения)</li>
+                        <li>Выведи оба результата</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Для сортировки по убыванию измени условие <code>if arr[j] > arr[j + 1]</code> на <code>if arr[j] < arr[j + 1]</code>.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Сортировка имен</h4>
+                    <p>Создай программу для сортировки списка имен:</p>
+                    <ol>
+                        <li>Создай список имен: ["Иван", "Мария", "Петр", "Анна", "Дмитрий"]</li>
+                        <li>Реализуй сортировку выбором</li>
+                        <li>Отсортируй имена по алфавиту</li>
+                        <li>Подсчитай, сколько обменов элементов было сделано</li>
+                        <li>Выведи отсортированный список и количество обменов</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Добавь счетчик обменов в функцию сортировки.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Сравнение алгоритмов</h4>
+                    <p>Создай программу для сравнения времени работы алгоритмов:</p>
+                    <ol>
+                        <li>Создай большой список из 100 случайных чисел</li>
+                        <li>Запусти все три алгоритма сортировки</li>
+                        <li>Подсчитай количество сравнений для каждого алгоритма</li>
+                        <li>Сравни результаты</li>
+                        <li>Выведи, какой алгоритм сделал меньше всего сравнений</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Добавь счетчик сравнений в каждую функцию.</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Изменение исходного списка</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - исходный список изменится!
+numbers = [3, 1, 4, 2]
+bubble_sort(numbers)
+print(numbers)  # [1, 2, 3, 4] - исходный список изменен!
+
+# ПРАВИЛЬНО - используй копию
+numbers = [3, 1, 4, 2]
+sorted_numbers = bubble_sort(numbers.copy())
+print(numbers)  # [3, 1, 4, 2] - исходный не изменен
+print(sorted_numbers)  # [1, 2, 3, 4]</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильные границы циклов</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - выйдет за границы списка
+for i in range(n):  # i может быть n-1
+    for j in range(n):  # j может быть n-1, arr[j+1] выйдет за границы!
+        if arr[j] > arr[j + 1]:
+
+# ПРАВИЛЬНО - учитывай границы
+for i in range(n - 1):
+    for j in range(n - 1 - i):
+        if arr[j] > arr[j + 1]:</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Использование простых сортировок для больших данных</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - очень медленно для больших списков
+big_list = list(range(10000, 0, -1))  # 10000 элементов
+bubble_sort(big_list)  # Будет работать очень долго!
+
+# ПРАВИЛЬНО - используй встроенную sorted()
+big_list = list(range(10000, 0, -1))
+sorted_list = sorted(big_list)  # Быстро!</pre>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <h3>Проверь себя!</h3>
+
+                    <div class="question">
+                        <h4>Вопрос 1: Какая сложность у пузырьковой сортировки?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Пузырьковая сортировка имеет сложность O(n²), так как использует два вложенных цикла.">O(n²) - квадратичная</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это сложность быстрых сортировок.">O(n log n) - логарифмическая</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, это неверно.">O(n) - линейная</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Какой алгоритм сортировки лучше использовать для почти отсортированного списка?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, пузырьковая сортировка будет делать много лишних проходов.">Пузырьковая сортировка</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Сортировка вставками очень эффективна для почти отсортированных данных, так как делает минимум операций.">Сортировка вставками</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, сортировка выбором всегда делает одинаковое количество операций.">Сортировка выбором</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что делает пузырьковая сортировка на каждом проходе?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Пузырьковая сортировка сравнивает соседние элементы и меняет их местами, если они в неправильном порядке.">Сравнивает соседние элементы и меняет их местами</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, это делает сортировка выбором.">Находит минимальный элемент и ставит его на место</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, это делает сортировка вставками.">Вставляет элемент в правильное место среди отсортированных</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Какой алгоритм делает минимум обменов элементов?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, пузырьковая делает много обменов.">Пузырьковая сортировка</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! Сортировка выбором делает ровно n-1 обмен, так как на каждом шаге меняет местами только один элемент.">Сортировка выбором</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, сортировка вставками может делать много обменов при сдвиге элементов.">Сортировка вставками</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Пузырьковая сортировка</strong> - простой алгоритм, сравнивает соседние элементы, сложность O(n²)</li>
+                    <li><strong>Сортировка выбором</strong> - находит минимальный элемент и ставит на место, сложность O(n²), минимум обменов</li>
+                    <li><strong>Сортировка вставками</strong> - вставляет элементы в правильное место, сложность O(n²), эффективна для почти отсортированных данных</li>
+                    <li><strong>Все три алгоритма</strong> имеют сложность O(n²) и медленные для больших списков</li>
+                    <li><strong>Встроенная sorted()</strong> в Python использует эффективный алгоритм Timsort</li>
+                    <li><strong>Для реальных проектов</strong> всегда используй встроенную сортировку</li>
+                    <li><strong>Для изучения и экзаменов</strong> важно понимать, как работают алгоритмы</li>
+                    <li><strong>Не забывай делать копию</strong> списка перед сортировкой, чтобы не изменить исходный</li>
+                </ul>
+
+                <p>Отлично! Ты изучил три простых алгоритма сортировки. В следующем уроке мы изучим быстрые сортировки (Quick Sort и Merge Sort), которые работают намного быстрее для больших списков!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="algo-06.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="algo-08.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

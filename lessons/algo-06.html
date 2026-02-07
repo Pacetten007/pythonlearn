@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 33: Поиск в списке - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="algo-06">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 33: Поиск в списке</h1>
+                <div class="lesson-meta">Алгоритмы • 25 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>Представь, что у тебя есть список из 1000 имен, и тебе нужно найти, есть ли там имя "Иван". Как ты будешь искать? Ты можешь просматривать список по порядку от начала до конца - это <strong>линейный поиск</strong>. А если список отсортирован по алфавиту, ты можешь использовать более умный способ - <strong>бинарный поиск</strong>.</p>
+
+                <p>Алгоритмы поиска - это одна из самых важных тем в программировании. Они используются везде: в базах данных, поисковых системах, играх, приложениях. Понимание разных алгоритмов поиска поможет тебе писать эффективные программы и решать задачи на экзаменах.</p>
+
+                <div class="info-block">
+                    <h4>Что изучим в этом уроке:</h4>
+                    <ul>
+                        <li>Линейный поиск - простой и универсальный</li>
+                        <li>Бинарный поиск - быстрый для отсортированных данных</li>
+                        <li>Сравнение алгоритмов - когда какой использовать</li>
+                        <li>Встроенные методы Python (in, index, find)</li>
+                        <li>Сложность алгоритмов (O-нотация)</li>
+                        <li>Практические задачи и примеры</li>
+                    </ul>
+                </div>
+
+                <h2>Линейный поиск (Linear Search)</h2>
+                <p><strong>Линейный поиск</strong> - самый простой алгоритм поиска. Он проверяет каждый элемент списка по порядку, пока не найдет нужный или не дойдет до конца.</p>
+
+                <h3>Как работает линейный поиск:</h3>
+                <ol>
+                    <li>Начинаем с первого элемента</li>
+                    <li>Сравниваем его с искомым значением</li>
+                    <li>Если совпадает - элемент найден!</li>
+                    <li>Если нет - переходим к следующему элементу</li>
+                    <li>Повторяем, пока не найдем или не закончится список</li>
+                </ol>
+
+                <div class="code-block">
+                    <pre># Линейный поиск - простая функция
+def linear_search(arr, target):
+    """Ищет target в списке arr, возвращает индекс или -1"""
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # Найден! Возвращаем индекс
+    return -1  # Не найден
+
+# Пример использования
+numbers = [5, 2, 8, 1, 9, 3]
+index = linear_search(numbers, 8)
+if index != -1:
+    print(f"Число 8 найдено на позиции {index}")
+else:
+    print("Число 8 не найдено")</pre>
+                </div>
+
+                <h3>Пошаговый пример:</h3>
+                <p>Ищем число <strong>8</strong> в списке <code>[5, 2, 8, 1, 9, 3]</code>:</p>
+                <ol>
+                    <li>Проверяем индекс 0: <code>5 == 8</code>? Нет, идем дальше</li>
+                    <li>Проверяем индекс 1: <code>2 == 8</code>? Нет, идем дальше</li>
+                    <li>Проверяем индекс 2: <code>8 == 8</code>? <strong>Да! Найдено на позиции 2</strong></li>
+                </ol>
+
+                <h3>Линейный поиск - поиск всех вхождений:</h3>
+                <div class="code-block">
+                    <pre># Найти ВСЕ позиции элемента
+def linear_search_all(arr, target):
+    """Возвращает список всех индексов, где найден target"""
+    indices = []
+    for i in range(len(arr)):
+        if arr[i] == target:
+            indices.append(i)
+    return indices
+
+# Пример
+numbers = [5, 2, 8, 2, 9, 2]
+indices = linear_search_all(numbers, 2)
+print(f"Число 2 найдено на позициях: {indices}")  # [1, 3, 5]</pre>
+                </div>
+
+                <h2>Бинарный поиск (Binary Search)</h2>
+                <p><strong>Бинарный поиск</strong> - это быстрый алгоритм, но работает <strong>только с отсортированными списками</strong>. Он делит список пополам и отбрасывает ту половину, где точно нет искомого элемента.</p>
+
+                <div class="warning-block">
+                    <h4>⚠️ Важно!</h4>
+                    <p>Бинарный поиск работает <strong>только с отсортированными данными</strong>! Если список не отсортирован, сначала отсортируй его или используй линейный поиск.</p>
+                </div>
+
+                <h3>Как работает бинарный поиск:</h3>
+                <ol>
+                    <li>Находим средний элемент списка</li>
+                    <li>Сравниваем его с искомым значением</li>
+                    <li>Если совпадает - элемент найден!</li>
+                    <li>Если искомое меньше - ищем в левой половине</li>
+                    <li>Если искомое больше - ищем в правой половине</li>
+                    <li>Повторяем, пока не найдем или не останется элементов</li>
+                </ol>
+
+                <div class="code-block">
+                    <pre># Бинарный поиск (итеративный вариант)
+def binary_search(arr, target):
+    """Ищет target в ОТСОРТИРОВАННОМ списке arr"""
+    left = 0
+    right = len(arr) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2  # Средний индекс
+        
+        if arr[mid] == target:
+            return mid  # Найден!
+        elif arr[mid] < target:
+            left = mid + 1  # Ищем справа
+        else:
+            right = mid - 1  # Ищем слева
+    
+    return -1  # Не найден
+
+# Пример (список ДОЛЖЕН быть отсортирован!)
+numbers = [1, 2, 3, 5, 8, 9, 12, 15]
+index = binary_search(numbers, 8)
+print(f"Число 8 найдено на позиции {index}")  # 4</pre>
+                </div>
+
+                <h3>Визуализация бинарного поиска:</h3>
+                <p>Ищем число <strong>8</strong> в отсортированном списке <code>[1, 2, 3, 5, 8, 9, 12, 15]</code>:</p>
+                <div class="code-block">
+                    <pre>Шаг 1: [1, 2, 3, 5, 8, 9, 12, 15]
+        left=0, right=7, mid=3, arr[3]=5
+        5 < 8, ищем справа → left=4
+
+Шаг 2: [8, 9, 12, 15]
+        left=4, right=7, mid=5, arr[5]=9
+        9 > 8, ищем слева → right=4
+
+Шаг 3: [8]
+        left=4, right=4, mid=4, arr[4]=8
+        8 == 8 → НАЙДЕНО на позиции 4!</pre>
+                </div>
+
+                <h3>Бинарный поиск - рекурсивный вариант:</h3>
+                <div class="code-block">
+                    <pre># Бинарный поиск (рекурсивный)
+def binary_search_recursive(arr, target, left=0, right=None):
+    """Рекурсивный вариант бинарного поиска"""
+    if right is None:
+        right = len(arr) - 1
+    
+    if left > right:
+        return -1  # Не найден
+    
+    mid = (left + right) // 2
+    
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] < target:
+        return binary_search_recursive(arr, target, mid + 1, right)
+    else:
+        return binary_search_recursive(arr, target, left, mid - 1)
+
+# Пример
+numbers = [1, 2, 3, 5, 8, 9, 12, 15]
+index = binary_search_recursive(numbers, 8)
+print(f"Найдено на позиции {index}")</pre>
+                </div>
+
+                <h2>Сравнение алгоритмов</h2>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Характеристика</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Линейный поиск</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Бинарный поиск</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Сложность</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">O(n) - линейная</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">O(log n) - логарифмическая</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Требования</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Любой список</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Отсортированный список</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Скорость</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Медленнее</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Быстрее</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Память</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">O(1) - константная</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">O(1) - константная</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Когда использовать</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Небольшие списки, неотсортированные данные</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Большие отсортированные списки</td>
+                    </tr>
+                </table>
+
+                <div class="info-block">
+                    <h4>Пример производительности:</h4>
+                    <ul>
+                        <li><strong>Список из 1000 элементов:</strong> Линейный поиск - до 1000 проверок, Бинарный - до 10 проверок</li>
+                        <li><strong>Список из 1 000 000 элементов:</strong> Линейный поиск - до 1 000 000 проверок, Бинарный - до 20 проверок</li>
+                    </ul>
+                    <p>Видишь разницу? Бинарный поиск намного быстрее для больших списков!</p>
+                </div>
+
+                <h2>Встроенные методы Python</h2>
+                <p>В Python есть встроенные способы поиска, которые используют оптимизированные алгоритмы:</p>
+
+                <h3>1. Оператор in</h3>
+                <div class="code-block">
+                    <pre># Проверка наличия элемента
+numbers = [5, 2, 8, 1, 9]
+if 8 in numbers:
+    print("Число 8 найдено!")
+else:
+    print("Число 8 не найдено")</pre>
+                </div>
+
+                <h3>2. Метод index()</h3>
+                <div class="code-block">
+                    <pre># Найти индекс элемента
+numbers = [5, 2, 8, 1, 9]
+try:
+    index = numbers.index(8)
+    print(f"Число 8 на позиции {index}")
+except ValueError:
+    print("Число 8 не найдено")</pre>
+                </div>
+
+                <h3>3. Метод count()</h3>
+                <div class="code-block">
+                    <pre># Подсчитать количество вхождений
+numbers = [5, 2, 8, 2, 9, 2]
+count = numbers.count(2)
+print(f"Число 2 встречается {count} раз")  # 3</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>⚠️ Важно понимать:</h4>
+                    <p>Встроенные методы Python (in, index) используют оптимизированные алгоритмы. Для небольших списков они работают быстро, но для больших отсортированных списков бинарный поиск может быть быстрее.</p>
+                </div>
+
+                <h2>Интерактивные примеры</h2>
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Линейный поиск
+def linear_search(arr, target):
+    """Линейный поиск - проверяет каждый элемент"""
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+# Бинарный поиск
+def binary_search(arr, target):
+    """Бинарный поиск - работает только с отсортированными списками"""
+    left = 0
+    right = len(arr) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+# Тестируем линейный поиск
+print("=== Линейный поиск ===")
+numbers = [5, 2, 8, 1, 9, 3, 7, 4]
+target = 8
+index = linear_search(numbers, target)
+if index != -1:
+    print(f"Число {target} найдено на позиции {index}")
+else:
+    print(f"Число {target} не найдено")
+
+# Тестируем бинарный поиск
+print("\n=== Бинарный поиск ===")
+sorted_numbers = sorted(numbers)  # Сортируем для бинарного поиска
+print(f"Отсортированный список: {sorted_numbers}")
+target = 8
+index = binary_search(sorted_numbers, target)
+if index != -1:
+    print(f"Число {target} найдено на позиции {index}")
+else:
+    print(f"Число {target} не найдено")
+
+# Сравнение с встроенными методами
+print("\n=== Встроенные методы Python ===")
+if target in numbers:
+    print(f"Оператор 'in': число {target} найдено")
+    print(f"Метод index(): число {target} на позиции {numbers.index(target)}")
+    print(f"Метод count(): число {target} встречается {numbers.count(target)} раз")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Поиск в списке студентов</h4>
+                    <p>Создай программу для поиска студента по имени:</p>
+                    <ol>
+                        <li>Создай список имен студентов: ["Иван", "Мария", "Петр", "Анна", "Дмитрий"]</li>
+                        <li>Реализуй функцию линейного поиска</li>
+                        <li>Найди позицию студента "Петр"</li>
+                        <li>Проверь, есть ли студент "Ольга" в списке</li>
+                        <li>Выведи результат поиска</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Используй функцию linear_search из примера выше.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Бинарный поиск оценок</h4>
+                    <p>Создай программу для поиска оценки в отсортированном списке:</p>
+                    <ol>
+                        <li>Создай отсортированный список оценок: [2, 3, 4, 4, 5, 5, 5]</li>
+                        <li>Реализуй функцию бинарного поиска</li>
+                        <li>Найди первую позицию, где встречается оценка 5</li>
+                        <li>Найди последнюю позицию, где встречается оценка 5</li>
+                        <li>Подсчитай, сколько раз встречается оценка 5</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Для поиска первого и последнего вхождения модифицируй бинарный поиск.</p>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Сравнение производительности</h4>
+                    <p>Создай программу для сравнения скорости поиска:</p>
+                    <ol>
+                        <li>Создай большой список из 10000 случайных чисел</li>
+                        <li>Отсортируй список</li>
+                        <li>Используй линейный поиск для поиска элемента</li>
+                        <li>Используй бинарный поиск для поиска того же элемента</li>
+                        <li>Сравни количество проверок (можно добавить счетчик)</li>
+                        <li>Выведи результаты сравнения</li>
+                    </ol>
+                    <p><strong>Подсказка:</strong> Добавь счетчик в каждую функцию для подсчета количества сравнений.</p>
+                </div>
+
+                <h2>Типичные ошибки начинающих</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Бинарный поиск на неотсортированном списке</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - список не отсортирован!
+numbers = [5, 2, 8, 1, 9]
+index = binary_search(numbers, 8)  # Может не найти или найти неправильно!
+
+# ПРАВИЛЬНО - сначала отсортируй
+numbers = [5, 2, 8, 1, 9]
+sorted_numbers = sorted(numbers)
+index = binary_search(sorted_numbers, 8)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Забыл обработать случай "не найдено"</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - не обработал случай, когда элемент не найден
+index = linear_search(numbers, 100)
+print(numbers[index])  # Ошибка, если index = -1!
+
+# ПРАВИЛЬНО - проверь результат
+index = linear_search(numbers, 100)
+if index != -1:
+    print(numbers[index])
+else:
+    print("Элемент не найден")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильные границы в бинарном поиске</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильные границы
+while left < right:  # Может пропустить элемент!
+    mid = (left + right) // 2
+    # ...
+
+# ПРАВИЛЬНО - используй <=
+while left <= right:
+    mid = (left + right) // 2
+    # ...</pre>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <h3>Проверь себя!</h3>
+
+                    <div class="question">
+                        <h4>Вопрос 1: Какой алгоритм поиска работает быстрее для отсортированного списка из 1000 элементов?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" data-correct="true" data-explanation="Правильно! Бинарный поиск работает за O(log n), что намного быстрее линейного O(n) для больших списков.">Бинарный поиск</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Неправильно. Линейный поиск работает за O(n) и медленнее бинарного для отсортированных данных.">Линейный поиск</label></li>
+                            <li><label><input type="radio" name="q1" data-correct="false" data-explanation="Нет, они работают с разной скоростью.">Оба одинаково быстрые</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Можно ли использовать бинарный поиск на неотсортированном списке?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет! Бинарный поиск работает только с отсортированными данными. На неотсортированном списке он может дать неправильный результат.">Да, можно</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="true" data-explanation="Правильно! Бинарный поиск требует отсортированный список, иначе он не будет работать корректно.">Нет, список должен быть отсортирован</label></li>
+                            <li><label><input type="radio" name="q2" data-correct="false" data-explanation="Нет, это не так.">Можно, но только для чисел</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Какая сложность у линейного поиска?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" data-correct="true" data-explanation="Правильно! Линейный поиск имеет сложность O(n), так как в худшем случае нужно проверить все n элементов.">O(n) - линейная</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, это сложность бинарного поиска.">O(log n) - логарифмическая</label></li>
+                            <li><label><input type="radio" name="q3" data-correct="false" data-explanation="Нет, это неверно.">O(1) - константная</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Сколько проверок в худшем случае нужно для бинарного поиска в списке из 1000 элементов?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, это слишком много. Бинарный поиск намного быстрее.">1000 проверок</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="true" data-explanation="Правильно! log₂(1000) ≈ 10, так что бинарный поиск найдет элемент максимум за 10 проверок.">Около 10 проверок</label></li>
+                            <li><label><input type="radio" name="q4" data-correct="false" data-explanation="Нет, это неверно.">500 проверок</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>Резюме урока</h2>
+                <ul>
+                    <li><strong>Линейный поиск</strong> - простой алгоритм, проверяет каждый элемент по порядку, сложность O(n)</li>
+                    <li><strong>Бинарный поиск</strong> - быстрый алгоритм для отсортированных данных, сложность O(log n)</li>
+                    <li><strong>Бинарный поиск требует</strong> отсортированный список, иначе не работает корректно</li>
+                    <li><strong>Встроенные методы Python</strong> (in, index, count) используют оптимизированные алгоритмы</li>
+                    <li><strong>Для небольших списков</strong> разница в скорости незначительна</li>
+                    <li><strong>Для больших отсортированных списков</strong> бинарный поиск намного быстрее</li>
+                    <li><strong>Всегда проверяй результат</strong> поиска на случай, если элемент не найден</li>
+                </ul>
+
+                <p>Отлично! Ты изучил два основных алгоритма поиска. В следующем уроке мы изучим алгоритмы сортировки, которые помогут подготовить данные для бинарного поиска!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-27.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="algo-07.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="../js/main.js"></script>
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

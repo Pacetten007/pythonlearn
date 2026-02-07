@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ: Программирование сложное - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="ege-03">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ЕГЭ: Программирование сложное</h1>
+                <div class="lesson-meta">Подготовка к ЕГЭ • 60 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы разберем сложные задачи ЕГЭ по программированию. Это типичные задания №22-27, где нужно написать эффективные программы для решения сложных задач: работа с большими данными, оптимизация алгоритмов, обработка сложных структур данных.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Оптимизация алгоритмов</li>
+                        <li>Работа с большими данными</li>
+                        <li>Сложные структуры данных</li>
+                        <li>Эффективные алгоритмы поиска</li>
+                        <li>Типичные задачи ЕГЭ высокого уровня</li>
+                    </ul>
+                </div>
+
+                <h2>1. Оптимизация алгоритмов</h2>
+                <p>В сложных задачах важно не только решить задачу, но и сделать это эффективно.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 1: Эффективный поиск пар</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит количество пар элементов, сумма которых равна заданному числу.
+Список: [1, 2, 3, 4, 5], сумма: 6
+
+Решение (эффективное):
+a = [1, 2, 3, 4, 5]
+target = 6
+count = 0
+
+for i in range(len(a)):
+    for j in range(i + 1, len(a)):
+        if a[i] + a[j] == target:
+            count = count + 1
+            print(f"Пара: ({a[i]}, {a[j]})")
+
+print(count)
+
+Решение пошагово:
+- i=0: проверяем пары с элементами после индекса 0
+  (1,2)=3, (1,3)=4, (1,4)=5, (1,5)=6 ✓
+- i=1: проверяем пары с элементами после индекса 1
+  (2,3)=5, (2,4)=6 ✓, (2,5)=7
+- i=2: проверяем пары с элементами после индекса 2
+  (3,4)=7, (3,5)=8
+- i=3: проверяем пары с элементами после индекса 3
+  (4,5)=9
+
+Ответ: 2 пары
+
+Проверка в Python:
+a = [1, 2, 3, 4, 5]
+target = 6
+count = 0
+
+for i in range(len(a)):
+    for j in range(i + 1, len(a)):
+        if a[i] + a[j] == target:
+            count = count + 1
+            print(f"Пара: ({a[i]}, {a[j]}), всего: {count}")
+
+print(f"Итого пар с суммой {target}: {count}")  # 2</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 2: Поиск подмассива с максимальной суммой</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит максимальную сумму подмассива (последовательных элементов).
+Список: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+
+Решение (алгоритм Кадане):
+a = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+max_sum = a[0]
+current_sum = a[0]
+
+for i in range(1, len(a)):
+    current_sum = max(a[i], current_sum + a[i])
+    max_sum = max(max_sum, current_sum)
+
+print(max_sum)
+
+Решение пошагово:
+- i=0: current_sum = -2, max_sum = -2
+- i=1: current_sum = max(1, -2+1) = 1, max_sum = max(-2, 1) = 1
+- i=2: current_sum = max(-3, 1-3) = -2, max_sum = max(1, -2) = 1
+- i=3: current_sum = max(4, -2+4) = 4, max_sum = max(1, 4) = 4
+- i=4: current_sum = max(-1, 4-1) = 3, max_sum = max(4, 3) = 4
+- i=5: current_sum = max(2, 3+2) = 5, max_sum = max(4, 5) = 5
+- i=6: current_sum = max(1, 5+1) = 6, max_sum = max(5, 6) = 6
+- i=7: current_sum = max(-5, 6-5) = 1, max_sum = max(6, 1) = 6
+- i=8: current_sum = max(4, 1+4) = 5, max_sum = max(6, 5) = 6
+
+Ответ: 6 (подмассив [4, -1, 2, 1])
+
+Проверка в Python:
+a = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+max_sum = a[0]
+current_sum = a[0]
+
+for i in range(1, len(a)):
+    current_sum = max(a[i], current_sum + a[i])
+    max_sum = max(max_sum, current_sum)
+    print(f"i={i}, a[{i}]={a[i]}, current_sum={current_sum}, max_sum={max_sum}")
+
+print(f"Максимальная сумма подмассива: {max_sum}")  # 6</pre>
+                </div>
+
+                <h2>2. Работа с большими данными</h2>
+                <p>В таких задачах нужно обрабатывать большие объемы данных эффективно.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 3: Подсчет частоты элементов</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит элемент, встречающийся чаще всего.
+Список: [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+
+Решение:
+a = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+frequency = {}
+
+# Подсчитываем частоту каждого элемента
+for num in a:
+    if num in frequency:
+        frequency[num] = frequency[num] + 1
+    else:
+        frequency[num] = 1
+
+# Находим элемент с максимальной частотой
+max_freq = 0
+most_common = None
+for num, freq in frequency.items():
+    if freq > max_freq:
+        max_freq = freq
+        most_common = num
+
+print(most_common)
+
+Ответ: 4 (встречается 4 раза)
+
+Проверка в Python:
+a = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+frequency = {}
+
+for num in a:
+    if num in frequency:
+        frequency[num] = frequency[num] + 1
+    else:
+        frequency[num] = 1
+    print(f"Элемент {num}: частота = {frequency[num]}")
+
+max_freq = 0
+most_common = None
+for num, freq in frequency.items():
+    if freq > max_freq:
+        max_freq = freq
+        most_common = num
+    print(f"Элемент {num}: частота {freq}, текущий максимум: {most_common}")
+
+print(f"Самый частый элемент: {most_common} (встречается {max_freq} раз)")  # 4</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 4: Группировка данных</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая группирует числа по четности и находит сумму каждой группы.
+Список: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+Решение:
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+sum_even = 0
+sum_odd = 0
+
+for num in a:
+    if num % 2 == 0:
+        sum_even = sum_even + num
+    else:
+        sum_odd = sum_odd + num
+
+print(f"Сумма четных: {sum_even}, сумма нечетных: {sum_odd}")
+
+Ответ:
+Сумма четных: 30 (2+4+6+8+10)
+Сумма нечетных: 25 (1+3+5+7+9)
+
+Проверка в Python:
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+sum_even = 0
+sum_odd = 0
+
+for num in a:
+    if num % 2 == 0:
+        sum_even = sum_even + num
+        print(f"Четное {num}: сумма четных = {sum_even}")
+    else:
+        sum_odd = sum_odd + num
+        print(f"Нечетное {num}: сумма нечетных = {sum_odd}")
+
+print(f"Сумма четных: {sum_even}, сумма нечетных: {sum_odd}")</pre>
+                </div>
+
+                <h2>3. Сложные структуры данных</h2>
+                <p>В таких задачах нужно работать с вложенными структурами и сложными отношениями.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 5: Обработка вложенных списков</h4>
+                    <pre>Условие: Дан список списков. Напишите программу, которая находит сумму всех элементов во всех вложенных списках.
+Список: [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
+
+Решение:
+matrix = [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
+total_sum = 0
+
+for row in matrix:
+    for element in row:
+        total_sum = total_sum + element
+
+print(total_sum)
+
+Решение:
+1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45
+
+Ответ: 45
+
+Проверка в Python:
+matrix = [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
+total_sum = 0
+
+for row in matrix:
+    for element in row:
+        total_sum = total_sum + element
+        print(f"Элемент {element}, сумма: {total_sum}")
+
+print(f"Итоговая сумма: {total_sum}")  # 45</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 6: Транспонирование матрицы</h4>
+                    <pre>Условие: Данная матрица. Напишите программу, которая транспонирует матрицу (меняет строки и столбцы местами).
+Матрица: [[1, 2, 3], [4, 5, 6]]
+
+Решение:
+matrix = [[1, 2, 3], [4, 5, 6]]
+transposed = []
+
+# Создаем новую матрицу
+for j in range(len(matrix[0])):
+    new_row = []
+    for i in range(len(matrix)):
+        new_row.append(matrix[i][j])
+    transposed.append(new_row)
+
+print(transposed)
+
+Решение:
+Исходная матрица:
+[1, 2, 3]
+[4, 5, 6]
+
+Транспонированная:
+[1, 4]
+[2, 5]
+[3, 6]
+
+Ответ: [[1, 4], [2, 5], [3, 6]]
+
+Проверка в Python:
+matrix = [[1, 2, 3], [4, 5, 6]]
+transposed = []
+
+for j in range(len(matrix[0])):
+    new_row = []
+    for i in range(len(matrix)):
+        new_row.append(matrix[i][j])
+    transposed.append(new_row)
+    print(f"Столбец {j}: {new_row}")
+
+print(f"Транспонированная матрица: {transposed}")</pre>
+                </div>
+
+                <h2>4. Эффективные алгоритмы поиска</h2>
+                <p>В таких задачах нужно использовать эффективные алгоритмы для поиска.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 7: Поиск всех вхождений</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит все индексы, где встречается заданное число.
+Список: [1, 2, 3, 2, 4, 2, 5], число: 2
+
+Решение:
+a = [1, 2, 3, 2, 4, 2, 5]
+target = 2
+indices = []
+
+for i in range(len(a)):
+    if a[i] == target:
+        indices.append(i)
+
+print(indices)
+
+Ответ: [1, 3, 5]
+
+Проверка в Python:
+a = [1, 2, 3, 2, 4, 2, 5]
+target = 2
+indices = []
+
+for i in range(len(a)):
+    if a[i] == target:
+        indices.append(i)
+        print(f"Найдено {target} на позиции {i}, индексы: {indices}")
+
+print(f"Все индексы элемента {target}: {indices}")  # [1, 3, 5]</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 8: Поиск уникальных элементов</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит все уникальные элементы (встречаются только один раз).
+Список: [1, 2, 2, 3, 4, 4, 5, 6, 6]
+
+Решение:
+a = [1, 2, 2, 3, 4, 4, 5, 6, 6]
+frequency = {}
+
+# Подсчитываем частоту
+for num in a:
+    if num in frequency:
+        frequency[num] = frequency[num] + 1
+    else:
+        frequency[num] = 1
+
+# Находим уникальные элементы
+unique = []
+for num, freq in frequency.items():
+    if freq == 1:
+        unique.append(num)
+
+print(unique)
+
+Ответ: [1, 3, 5]
+
+Проверка в Python:
+a = [1, 2, 2, 3, 4, 4, 5, 6, 6]
+frequency = {}
+
+for num in a:
+    if num in frequency:
+        frequency[num] = frequency[num] + 1
+    else:
+        frequency[num] = 1
+
+unique = []
+for num, freq in frequency.items():
+    if freq == 1:
+        unique.append(num)
+        print(f"Уникальный элемент: {num}")
+
+print(f"Уникальные элементы: {unique}")  # [1, 3, 5]</pre>
+                </div>
+
+                <h2>5. Комплексные задачи</h2>
+                <p>Задачи, требующие комбинации нескольких техник.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 9: Анализ последовательностей</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит длину самой длинной последовательности одинаковых элементов.
+Список: [1, 1, 2, 2, 2, 3, 3, 1, 1, 1, 1]
+
+Решение:
+a = [1, 1, 2, 2, 2, 3, 3, 1, 1, 1, 1]
+max_length = 1
+current_length = 1
+
+for i in range(1, len(a)):
+    if a[i] == a[i-1]:
+        current_length = current_length + 1
+    else:
+        if current_length > max_length:
+            max_length = current_length
+        current_length = 1
+
+if current_length > max_length:
+    max_length = current_length
+
+print(max_length)
+
+Решение пошагово:
+- i=1: a[1]=1 == a[0]=1, current_length = 2
+- i=2: a[2]=2 != a[1]=1, max_length = 2, current_length = 1
+- i=3: a[3]=2 == a[2]=2, current_length = 2
+- i=4: a[4]=2 == a[3]=2, current_length = 3
+- i=5: a[5]=3 != a[4]=2, max_length = 3, current_length = 1
+- i=6: a[6]=3 == a[5]=3, current_length = 2
+- i=7: a[7]=1 != a[6]=3, max_length = 3, current_length = 1
+- i=8: a[8]=1 == a[7]=1, current_length = 2
+- i=9: a[9]=1 == a[8]=1, current_length = 3
+- i=10: a[10]=1 == a[9]=1, current_length = 4
+- Конец: max_length = max(3, 4) = 4
+
+Ответ: 4
+
+Проверка в Python:
+a = [1, 1, 2, 2, 2, 3, 3, 1, 1, 1, 1]
+max_length = 1
+current_length = 1
+
+for i in range(1, len(a)):
+    if a[i] == a[i-1]:
+        current_length = current_length + 1
+        print(f"i={i}, одинаковые, длина={current_length}")
+    else:
+        if current_length > max_length:
+            max_length = current_length
+        current_length = 1
+        print(f"i={i}, разные, max_length={max_length}")
+
+if current_length > max_length:
+    max_length = current_length
+
+print(f"Максимальная длина последовательности: {max_length}")  # 4</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 10: Многокритериальный поиск</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит количество элементов, которые больше среднего арифметического и являются четными.
+Список: [10, 20, 30, 40, 50]
+
+Решение:
+a = [10, 20, 30, 40, 50]
+
+# Находим среднее арифметическое
+s = 0
+for num in a:
+    s = s + num
+average = s / len(a)
+
+# Подсчитываем элементы, удовлетворяющие условиям
+count = 0
+for num in a:
+    if num > average and num % 2 == 0:
+        count = count + 1
+
+print(count)
+
+Решение:
+1. Среднее: (10+20+30+40+50)/5 = 30
+2. Элементы > 30 и четные: 40, 50
+3. Количество: 2
+
+Ответ: 2
+
+Проверка в Python:
+a = [10, 20, 30, 40, 50]
+s = 0
+for num in a:
+    s = s + num
+average = s / len(a)
+print(f"Среднее арифметическое: {average}")
+
+count = 0
+for num in a:
+    if num > average and num % 2 == 0:
+        count = count + 1
+        print(f"Элемент {num} удовлетворяет условиям, всего: {count}")
+
+print(f"Итого элементов: {count}")  # 2</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить сложные задачи ЕГЭ:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Сложные задачи ЕГЭ по программированию
+
+# Задача 1: Поиск пар с заданной суммой
+print("=== Задача 1: Поиск пар ===")
+a = [1, 2, 3, 4, 5]
+target = 6
+count = 0
+
+for i in range(len(a)):
+    for j in range(i + 1, len(a)):
+        if a[i] + a[j] == target:
+            count = count + 1
+            print(f"Пара: ({a[i]}, {a[j]})")
+
+print(f"Всего пар с суммой {target}: {count}")
+
+# Задача 2: Максимальная сумма подмассива
+print("\n=== Задача 2: Максимальная сумма подмассива ===")
+a = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+max_sum = a[0]
+current_sum = a[0]
+
+for i in range(1, len(a)):
+    current_sum = max(a[i], current_sum + a[i])
+    max_sum = max(max_sum, current_sum)
+
+print(f"Максимальная сумма подмассива: {max_sum}")
+
+# Задача 3: Подсчет частоты
+print("\n=== Задача 3: Самый частый элемент ===")
+a = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+frequency = {}
+
+for num in a:
+    if num in frequency:
+        frequency[num] = frequency[num] + 1
+    else:
+        frequency[num] = 1
+
+max_freq = 0
+most_common = None
+for num, freq in frequency.items():
+    if freq > max_freq:
+        max_freq = freq
+        most_common = num
+
+print(f"Самый частый элемент: {most_common} (встречается {max_freq} раз)")
+
+# Задача 4: Транспонирование матрицы
+print("\n=== Задача 4: Транспонирование ===")
+matrix = [[1, 2, 3], [4, 5, 6]]
+transposed = []
+
+for j in range(len(matrix[0])):
+    new_row = []
+    for i in range(len(matrix)):
+        new_row.append(matrix[i][j])
+    transposed.append(new_row)
+
+print(f"Исходная: {matrix}")
+print(f"Транспонированная: {transposed}")
+
+# Задача 5: Длина последовательности
+print("\n=== Задача 5: Длина последовательности ===")
+a = [1, 1, 2, 2, 2, 3, 3, 1, 1, 1, 1]
+max_length = 1
+current_length = 1
+
+for i in range(1, len(a)):
+    if a[i] == a[i-1]:
+        current_length = current_length + 1
+    else:
+        if current_length > max_length:
+            max_length = current_length
+        current_length = 1
+
+if current_length > max_length:
+    max_length = current_length
+
+print(f"Максимальная длина последовательности: {max_length}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Поиск трех элементов</h4>
+                    <p>Напиши программу, которая находит количество троек элементов, сумма которых равна заданному числу. Список: [1, 2, 3, 4, 5], сумма: 6.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй три вложенных цикла: for i in range(len(a)), for j in range(i+1, len(a)), for k in range(j+1, len(a)).</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Поиск медианы</h4>
+                    <p>Напиши программу, которая находит медиану списка (элемент, который будет в середине после сортировки). Список: [5, 2, 8, 1, 9, 3, 7].</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Отсортируй список и возьми элемент в середине. Если длина четная, возьми среднее двух центральных элементов.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Поиск пересечения множеств</h4>
+                    <p>Напиши программу, которая находит пересечение двух списков (элементы, которые есть в обоих списках). Списки: [1, 2, 3, 4, 5] и [3, 4, 5, 6, 7].</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Для каждого элемента первого списка проверь, есть ли он во втором списке. Добавь в результат, если есть.</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неэффективный алгоритм</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - проверяем все пары дважды
+a = [1, 2, 3, 4]
+for i in range(len(a)):
+    for j in range(len(a)):  # Включает пары (i, i) и проверяет (i, j) и (j, i)
+        if i != j and a[i] + a[j] == target:
+            count += 1
+
+# ПРАВИЛЬНО - проверяем каждую пару только один раз
+a = [1, 2, 3, 4]
+for i in range(len(a)):
+    for j in range(i + 1, len(a)):  # Только уникальные пары
+        if a[i] + a[j] == target:
+            count += 1</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильная инициализация для алгоритма Кадане</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильная инициализация
+a = [-2, 1, -3, 4]
+max_sum = 0  # Неправильно! Может быть отрицательное число
+current_sum = 0
+
+# ПРАВИЛЬНО - инициализируй первым элементом
+a = [-2, 1, -3, 4]
+max_sum = a[0]  # Правильно: учитывает отрицательные числа
+current_sum = a[0]</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Забыли проверить последнюю последовательность</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - забыли проверить после цикла
+a = [1, 1, 1, 1]
+max_length = 1
+current_length = 1
+
+for i in range(1, len(a)):
+    if a[i] == a[i-1]:
+        current_length += 1
+    else:
+        max_length = max(max_length, current_length)
+        current_length = 1
+# Забыли проверить current_length после цикла!
+
+# ПРАВИЛЬНО - проверяй после цикла
+a = [1, 1, 1, 1]
+max_length = 1
+current_length = 1
+
+for i in range(1, len(a)):
+    if a[i] == a[i-1]:
+        current_length += 1
+    else:
+        max_length = max(max_length, current_length)
+        current_length = 1
+
+max_length = max(max_length, current_length)  # Важно!</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Сколько пар элементов с суммой 5 в списке [1, 2, 3, 4]?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Проверь все пары: (1,4) и (2,3).">1</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! Пары: (1,4) и (2,3), всего 2.">2</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Проверь все возможные пары.">3</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это общее количество элементов.">4</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Чему равна максимальная сумма подмассива в списке [-1, 2, -3, 4]?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Проверь алгоритм Кадане: подмассив [2] или [4].">2</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-explanation="Неверно. Проверь все возможные подмассивы.">3</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-correct="true" data-explanation="Правильно! Максимальная сумма подмассива [4] = 4.">4</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это сумма всех элементов, но не максимальная подмассива.">2</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Какой элемент встречается чаще всего в списке [1, 2, 2, 3, 3, 3, 4]?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Элемент 2 встречается 2 раза.">2</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! Элемент 3 встречается 3 раза, это максимум.">3</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Элемент 4 встречается 1 раз.">4</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Проверь частоту каждого элемента.">1</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Чему равна транспонированная матрица для [[1, 2], [3, 4]]?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-correct="true" data-explanation="Правильно! Транспонирование меняет строки и столбцы: [1,3] и [2,4].">[[1, 3], [2, 4]]</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-explanation="Неверно. Это исходная матрица, а не транспонированная.">[[1, 2], [3, 4]]</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Проверь операцию транспонирования.">[[2, 1], [4, 3]]</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Это неправильное транспонирование.">[[1, 4], [2, 3]]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Какая максимальная длина последовательности одинаковых элементов в списке [1, 1, 2, 2, 2, 2, 3]?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Проверь последовательности: 1,1 (длина 2) и 2,2,2,2 (длина 4).">2</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-explanation="Неверно. Проверь все последовательности одинаковых элементов.">3</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-correct="true" data-explanation="Правильно! Последовательность из четырех двоек имеет длину 4.">4</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это неправильный расчет.">5</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Оптимизация</strong> - избегай повторных проверок, используй эффективные алгоритмы</li>
+                    <li><strong>Алгоритм Кадане</strong> - эффективный способ найти максимальную сумму подмассива</li>
+                    <li><strong>Словари для частоты</strong> - используй словари для подсчета частоты элементов</li>
+                    <li><strong>Вложенные циклы</strong> - используй правильные границы для избежания дублирования</li>
+                    <li><strong>Транспонирование</strong> - меняй индексы i и j местами</li>
+                    <li><strong>Последовательности</strong> - отслеживай текущую длину и обновляй максимум</li>
+                    <li><strong>Проверка после цикла</strong> - не забывай проверить последнее состояние после цикла</li>
+                    <li><strong>Инициализация</strong> - правильно инициализируй переменные с учетом всех случаев</li>
+                    <li><strong>Практика</strong> - решай задачи пошагово, проверяй на граничных случаях</li>
+                </ul>
+
+                <p>Отлично! Ты изучил сложные задачи ЕГЭ по программированию. Эти навыки очень важны для успешной сдачи экзамена. В следующем уроке мы изучим работу с файлами!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="ege-02.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="ege-04.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

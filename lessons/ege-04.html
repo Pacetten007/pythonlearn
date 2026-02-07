@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ: Файлы - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="ege-04">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ЕГЭ: Файлы</h1>
+                <div class="lesson-meta">Подготовка к ЕГЭ • 60 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы разберем задачи ЕГЭ по работе с файлами. Это типичные задания, где нужно читать данные из файлов, обрабатывать их и записывать результаты. В ЕГЭ часто встречаются задачи на обработку больших файлов, поиск данных, подсчет статистики.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Чтение данных из файлов</li>
+                        <li>Запись данных в файлы</li>
+                        <li>Обработка данных из файлов</li>
+                        <li>Работа с большими файлами</li>
+                        <li>Типичные задачи ЕГЭ по файлам</li>
+                    </ul>
+                </div>
+
+                <h2>1. Чтение данных из файлов</h2>
+                <p>В ЕГЭ часто нужно читать данные из файла и обрабатывать их.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 1: Подсчет строк в файле</h4>
+                    <pre>Условие: Дан файл с числами, по одному на строку. Напишите программу, которая подсчитывает количество строк в файле.
+Файл "data.txt":
+10
+20
+30
+40
+50
+
+Решение:
+f = open("data.txt", "r")
+count = 0
+for line in f:
+    count = count + 1
+f.close()
+print(count)
+
+Решение пошагово:
+1. Открываем файл для чтения
+2. Читаем каждую строку
+3. Увеличиваем счетчик
+4. Закрываем файл
+5. Выводим результат
+
+Ответ: 5
+
+Проверка в Python:
+# Создаем тестовый файл
+f = open("data.txt", "w")
+f.write("10\n20\n30\n40\n50\n")
+f.close()
+
+# Читаем и подсчитываем
+f = open("data.txt", "r")
+count = 0
+for line in f:
+    count = count + 1
+    print(f"Строка {count}: {line.strip()}")
+f.close()
+print(f"Всего строк: {count}")  # 5</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 2: Сумма чисел из файла</h4>
+                    <pre>Условие: Дан файл с числами, по одному на строку. Напишите программу, которая находит сумму всех чисел.
+Файл "numbers.txt":
+5
+10
+15
+20
+
+Решение:
+f = open("numbers.txt", "r")
+s = 0
+for line in f:
+    num = int(line.strip())
+    s = s + num
+f.close()
+print(s)
+
+Решение пошагово:
+1. Открываем файл
+2. Инициализируем сумму = 0
+3. Читаем каждую строку
+4. Преобразуем в число (убираем пробелы)
+5. Добавляем к сумме
+6. Закрываем файл
+
+Ответ: 50 (5+10+15+20)
+
+Проверка в Python:
+# Создаем тестовый файл
+f = open("numbers.txt", "w")
+f.write("5\n10\n15\n20\n")
+f.close()
+
+# Читаем и суммируем
+f = open("numbers.txt", "r")
+s = 0
+for line in f:
+    num = int(line.strip())
+    s = s + num
+    print(f"Число: {num}, сумма: {s}")
+f.close()
+print(f"Итоговая сумма: {s}")  # 50</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 3: Максимальное число из файла</h4>
+                    <pre>Условие: Дан файл с числами. Напишите программу, которая находит максимальное число.
+Файл "data.txt":
+12
+45
+23
+67
+34
+
+Решение:
+f = open("data.txt", "r")
+max_num = None
+for line in f:
+    num = int(line.strip())
+    if max_num == None or num > max_num:
+        max_num = num
+f.close()
+print(max_num)
+
+Решение пошагово:
+1. Открываем файл
+2. Инициализируем max_num = None
+3. Читаем каждую строку
+4. Преобразуем в число
+5. Если это первое число или больше текущего максимума, обновляем
+6. Закрываем файл
+
+Ответ: 67
+
+Проверка в Python:
+# Создаем тестовый файл
+f = open("data.txt", "w")
+f.write("12\n45\n23\n67\n34\n")
+f.close()
+
+# Находим максимум
+f = open("data.txt", "r")
+max_num = None
+for line in f:
+    num = int(line.strip())
+    if max_num == None or num > max_num:
+        max_num = num
+    print(f"Число: {num}, максимум: {max_num}")
+f.close()
+print(f"Максимальное число: {max_num}")  # 67</pre>
+                </div>
+
+                <h2>2. Запись данных в файлы</h2>
+                <p>В ЕГЭ часто нужно записывать результаты обработки в файл.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 4: Запись результатов</h4>
+                    <pre>Условие: Дан файл с числами. Напишите программу, которая записывает в новый файл только четные числа.
+Входной файл "input.txt":
+1
+2
+3
+4
+5
+6
+
+Решение:
+# Читаем из входного файла
+f_in = open("input.txt", "r")
+even_numbers = []
+for line in f_in:
+    num = int(line.strip())
+    if num % 2 == 0:
+        even_numbers.append(num)
+f_in.close()
+
+# Записываем в выходной файл
+f_out = open("output.txt", "w")
+for num in even_numbers:
+    f_out.write(str(num) + "\n")
+f_out.close()
+
+Решение пошагово:
+1. Открываем входной файл для чтения
+2. Читаем числа и отбираем четные
+3. Закрываем входной файл
+4. Открываем выходной файл для записи
+5. Записываем четные числа
+6. Закрываем выходной файл
+
+Выходной файл "output.txt":
+2
+4
+6
+
+Проверка в Python:
+# Создаем входной файл
+f = open("input.txt", "w")
+f.write("1\n2\n3\n4\n5\n6\n")
+f.close()
+
+# Обрабатываем
+f_in = open("input.txt", "r")
+even_numbers = []
+for line in f_in:
+    num = int(line.strip())
+    if num % 2 == 0:
+        even_numbers.append(num)
+        print(f"Четное число: {num}")
+f_in.close()
+
+# Записываем результат
+f_out = open("output.txt", "w")
+for num in even_numbers:
+    f_out.write(str(num) + "\n")
+f_out.close()
+print(f"Записано чисел: {len(even_numbers)}")  # 3</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 5: Подсчет и запись статистики</h4>
+                    <pre>Условие: Дан файл с числами. Напишите программу, которая записывает в файл статистику: количество, сумму, среднее.
+Входной файл "data.txt":
+10
+20
+30
+40
+
+Решение:
+# Читаем данные
+f_in = open("data.txt", "r")
+numbers = []
+for line in f_in:
+    numbers.append(int(line.strip()))
+f_in.close()
+
+# Вычисляем статистику
+count = len(numbers)
+s = 0
+for num in numbers:
+    s = s + num
+average = s / count
+
+# Записываем результат
+f_out = open("result.txt", "w")
+f_out.write(f"Количество: {count}\n")
+f_out.write(f"Сумма: {s}\n")
+f_out.write(f"Среднее: {average}\n")
+f_out.close()
+
+Выходной файл "result.txt":
+Количество: 4
+Сумма: 100
+Среднее: 25.0
+
+Проверка в Python:
+# Создаем входной файл
+f = open("data.txt", "w")
+f.write("10\n20\n30\n40\n")
+f.close()
+
+# Обрабатываем
+f_in = open("data.txt", "r")
+numbers = []
+for line in f_in:
+    numbers.append(int(line.strip()))
+f_in.close()
+
+count = len(numbers)
+s = 0
+for num in numbers:
+    s = s + num
+average = s / count
+
+# Записываем
+f_out = open("result.txt", "w")
+f_out.write(f"Количество: {count}\n")
+f_out.write(f"Сумма: {s}\n")
+f_out.write(f"Среднее: {average}\n")
+f_out.close()
+print(f"Статистика записана: {count} чисел, сумма {s}, среднее {average}")</pre>
+                </div>
+
+                <h2>3. Обработка данных из файлов</h2>
+                <p>В таких задачах нужно читать данные, обрабатывать их и записывать результаты.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 6: Фильтрация данных</h4>
+                    <pre>Условие: Дан файл с числами. Напишите программу, которая записывает в новый файл числа, большие заданного значения.
+Входной файл "input.txt", порог: 25
+15
+30
+20
+40
+10
+35
+
+Решение:
+threshold = 25
+f_in = open("input.txt", "r")
+result = []
+for line in f_in:
+    num = int(line.strip())
+    if num > threshold:
+        result.append(num)
+f_in.close()
+
+f_out = open("output.txt", "w")
+for num in result:
+    f_out.write(str(num) + "\n")
+f_out.close()
+
+Выходной файл "output.txt":
+30
+40
+35
+
+Проверка в Python:
+# Создаем входной файл
+f = open("input.txt", "w")
+f.write("15\n30\n20\n40\n10\n35\n")
+f.close()
+
+# Фильтруем
+threshold = 25
+f_in = open("input.txt", "r")
+result = []
+for line in f_in:
+    num = int(line.strip())
+    if num > threshold:
+        result.append(num)
+        print(f"Число {num} > {threshold}")
+f_in.close()
+
+# Записываем
+f_out = open("output.txt", "w")
+for num in result:
+    f_out.write(str(num) + "\n")
+f_out.close()
+print(f"Записано чисел: {len(result)}")  # 3</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 7: Поиск элементов по условию</h4>
+                    <pre>Условие: Дан файл с числами. Напишите программу, которая находит количество чисел, кратных заданному.
+Входной файл "data.txt", делитель: 3
+12
+15
+20
+18
+25
+21
+
+Решение:
+divisor = 3
+f = open("data.txt", "r")
+count = 0
+for line in f:
+    num = int(line.strip())
+    if num % divisor == 0:
+        count = count + 1
+f.close()
+print(count)
+
+Решение пошагово:
+1. Открываем файл
+2. Инициализируем счетчик = 0
+3. Читаем каждое число
+4. Проверяем, делится ли на 3
+5. Если да, увеличиваем счетчик
+6. Закрываем файл
+
+Ответ: 4 (12, 15, 18, 21)
+
+Проверка в Python:
+# Создаем файл
+f = open("data.txt", "w")
+f.write("12\n15\n20\n18\n25\n21\n")
+f.close()
+
+# Подсчитываем
+divisor = 3
+f = open("data.txt", "r")
+count = 0
+for line in f:
+    num = int(line.strip())
+    if num % divisor == 0:
+        count = count + 1
+        print(f"Число {num} кратно {divisor}, всего: {count}")
+f.close()
+print(f"Итого кратных {divisor}: {count}")  # 4</pre>
+                </div>
+
+                <h2>4. Работа с большими файлами</h2>
+                <p>В ЕГЭ часто нужно обрабатывать файлы построчно, не загружая все в память.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 8: Обработка построчно</h4>
+                    <pre>Условие: Дан большой файл с числами. Напишите программу, которая находит сумму всех чисел, обрабатывая файл построчно.
+Файл "bigdata.txt" (может быть очень большим)
+
+Решение:
+f = open("bigdata.txt", "r")
+s = 0
+count = 0
+for line in f:
+    num = int(line.strip())
+    s = s + num
+    count = count + 1
+f.close()
+print(f"Сумма: {s}, количество: {count}")
+
+Важно: Обрабатываем построчно, не загружая весь файл в память!
+
+Проверка в Python:
+# Создаем тестовый файл
+f = open("bigdata.txt", "w")
+for i in range(1, 101):
+    f.write(str(i) + "\n")
+f.close()
+
+# Обрабатываем построчно
+f = open("bigdata.txt", "r")
+s = 0
+count = 0
+for line in f:
+    num = int(line.strip())
+    s = s + num
+    count = count + 1
+    if count <= 5:
+        print(f"Число {num}, сумма: {s}")
+f.close()
+print(f"Итого: сумма {s}, количество {count}")  # сумма 5050, количество 100</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 9: Поиск максимума в большом файле</h4>
+                    <pre>Условие: Дан большой файл с числами. Напишите программу, которая находит максимальное число, обрабатывая файл построчно.
+Файл "numbers.txt"
+
+Решение:
+f = open("numbers.txt", "r")
+max_num = None
+for line in f:
+    num = int(line.strip())
+    if max_num == None or num > max_num:
+        max_num = num
+f.close()
+print(max_num)
+
+Важно: Не нужно хранить все числа в памяти, обрабатываем по одному!
+
+Проверка в Python:
+# Создаем файл
+f = open("numbers.txt", "w")
+f.write("45\n12\n78\n23\n56\n90\n34\n")
+f.close()
+
+# Находим максимум
+f = open("numbers.txt", "r")
+max_num = None
+for line in f:
+    num = int(line.strip())
+    if max_num == None or num > max_num:
+        max_num = num
+        print(f"Новый максимум: {max_num}")
+f.close()
+print(f"Максимальное число: {max_num}")  # 90</pre>
+                </div>
+
+                <h2>5. Комплексные задачи</h2>
+                <p>Задачи, требующие комбинации нескольких операций с файлами.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 10: Анализ и запись результатов</h4>
+                    <pre>Условие: Дан файл с числами. Напишите программу, которая находит количество четных и нечетных чисел и записывает результат в файл.
+Входной файл "data.txt":
+1
+2
+3
+4
+5
+6
+7
+8
+
+Решение:
+f_in = open("data.txt", "r")
+even_count = 0
+odd_count = 0
+for line in f_in:
+    num = int(line.strip())
+    if num % 2 == 0:
+        even_count = even_count + 1
+    else:
+        odd_count = odd_count + 1
+f_in.close()
+
+f_out = open("result.txt", "w")
+f_out.write(f"Четных: {even_count}\n")
+f_out.write(f"Нечетных: {odd_count}\n")
+f_out.close()
+
+Выходной файл "result.txt":
+Четных: 4
+Нечетных: 4
+
+Проверка в Python:
+# Создаем входной файл
+f = open("data.txt", "w")
+f.write("1\n2\n3\n4\n5\n6\n7\n8\n")
+f.close()
+
+# Анализируем
+f_in = open("data.txt", "r")
+even_count = 0
+odd_count = 0
+for line in f_in:
+    num = int(line.strip())
+    if num % 2 == 0:
+        even_count = even_count + 1
+    else:
+        odd_count = odd_count + 1
+f_in.close()
+
+# Записываем результат
+f_out = open("result.txt", "w")
+f_out.write(f"Четных: {even_count}\n")
+f_out.write(f"Нечетных: {odd_count}\n")
+f_out.close()
+print(f"Четных: {even_count}, нечетных: {odd_count}")</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 11: Сортировка и запись</h4>
+                    <pre>Условие: Дан файл с числами. Напишите программу, которая сортирует числа и записывает их в новый файл.
+Входной файл "input.txt":
+45
+12
+78
+23
+56
+
+Решение:
+# Читаем числа
+f_in = open("input.txt", "r")
+numbers = []
+for line in f_in:
+    numbers.append(int(line.strip()))
+f_in.close()
+
+# Сортируем
+numbers.sort()
+
+# Записываем
+f_out = open("output.txt", "w")
+for num in numbers:
+    f_out.write(str(num) + "\n")
+f_out.close()
+
+Выходной файл "output.txt":
+12
+23
+45
+56
+78
+
+Проверка в Python:
+# Создаем входной файл
+f = open("input.txt", "w")
+f.write("45\n12\n78\n23\n56\n")
+f.close()
+
+# Читаем и сортируем
+f_in = open("input.txt", "r")
+numbers = []
+for line in f_in:
+    numbers.append(int(line.strip()))
+f_in.close()
+
+print(f"Исходные: {numbers}")
+numbers.sort()
+print(f"Отсортированные: {numbers}")
+
+# Записываем
+f_out = open("output.txt", "w")
+for num in numbers:
+    f_out.write(str(num) + "\n")
+f_out.close()
+print("Файл записан")</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить задачи ЕГЭ по работе с файлами:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Задачи ЕГЭ по работе с файлами
+
+# Задача 1: Подсчет строк в файле
+print("=== Задача 1: Подсчет строк ===")
+# Создаем тестовый файл
+f = open("test1.txt", "w")
+f.write("10\n20\n30\n")
+f.close()
+
+# Подсчитываем строки
+f = open("test1.txt", "r")
+count = 0
+for line in f:
+    count = count + 1
+f.close()
+print(f"Количество строк: {count}")
+
+# Задача 2: Сумма чисел из файла
+print("\n=== Задача 2: Сумма чисел ===")
+# Создаем тестовый файл
+f = open("test2.txt", "w")
+f.write("5\n10\n15\n20\n")
+f.close()
+
+# Суммируем
+f = open("test2.txt", "r")
+s = 0
+for line in f:
+    num = int(line.strip())
+    s = s + num
+f.close()
+print(f"Сумма: {s}")
+
+# Задача 3: Максимальное число
+print("\n=== Задача 3: Максимальное число ===")
+# Создаем тестовый файл
+f = open("test3.txt", "w")
+f.write("12\n45\n23\n67\n34\n")
+f.close()
+
+# Находим максимум
+f = open("test3.txt", "r")
+max_num = None
+for line in f:
+    num = int(line.strip())
+    if max_num == None or num > max_num:
+        max_num = num
+f.close()
+print(f"Максимальное число: {max_num}")
+
+# Задача 4: Фильтрация четных чисел
+print("\n=== Задача 4: Четные числа ===")
+# Создаем входной файл
+f = open("input.txt", "w")
+f.write("1\n2\n3\n4\n5\n6\n")
+f.close()
+
+# Фильтруем
+f_in = open("input.txt", "r")
+even = []
+for line in f_in:
+    num = int(line.strip())
+    if num % 2 == 0:
+        even.append(num)
+f_in.close()
+
+# Записываем результат
+f_out = open("output.txt", "w")
+for num in even:
+    f_out.write(str(num) + "\n")
+f_out.close()
+print(f"Четные числа: {even}")
+
+# Задача 5: Статистика
+print("\n=== Задача 5: Статистика ===")
+# Создаем файл
+f = open("data.txt", "w")
+f.write("10\n20\n30\n40\n")
+f.close()
+
+# Обрабатываем
+f = open("data.txt", "r")
+numbers = []
+for line in f:
+    numbers.append(int(line.strip()))
+f.close()
+
+count = len(numbers)
+s = 0
+for num in numbers:
+    s = s + num
+average = s / count
+
+print(f"Количество: {count}")
+print(f"Сумма: {s}")
+print(f"Среднее: {average}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Подсчет положительных чисел</h4>
+                    <p>Напиши программу, которая читает числа из файла "numbers.txt" и подсчитывает количество положительных чисел. Результат запиши в файл "result.txt".</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Читай числа построчно, проверяй условие num > 0, увеличивай счетчик, затем запиши результат в файл.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Поиск минимального числа</h4>
+                    <p>Напиши программу, которая находит минимальное число в файле "data.txt" и записывает его в файл "min.txt".</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй переменную min_num, инициализируй первым числом, затем сравнивай с остальными.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Подсчет чисел в диапазоне</h4>
+                    <p>Напиши программу, которая подсчитывает количество чисел из файла "input.txt", которые находятся в диапазоне от 10 до 50 включительно.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Проверяй условие: num >= 10 and num <= 50.</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли закрыть файл</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - файл не закрыт
+f = open("data.txt", "r")
+for line in f:
+    print(line)
+# Файл остался открытым!
+
+# ПРАВИЛЬНО - всегда закрывай файл
+f = open("data.txt", "r")
+for line in f:
+    print(line)
+f.close()  # Важно!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Не убрали символ новой строки</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - остался символ \n
+f = open("data.txt", "r")
+for line in f:
+    num = int(line)  # Ошибка! line содержит "10\n"
+
+# ПРАВИЛЬНО - используй strip()
+f = open("data.txt", "r")
+for line in f:
+    num = int(line.strip())  # Убираем пробелы и \n</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильная инициализация для поиска максимума</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - инициализация нулем может быть неправильной
+f = open("data.txt", "r")
+max_num = 0  # Что если все числа отрицательные?
+for line in f:
+    num = int(line.strip())
+    if num > max_num:
+        max_num = num
+
+# ПРАВИЛЬНО - используй None или первое число
+f = open("data.txt", "r")
+max_num = None
+for line in f:
+    num = int(line.strip())
+    if max_num == None or num > max_num:
+        max_num = num</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Забыли преобразовать строку в число</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - строка вместо числа
+f = open("data.txt", "r")
+s = 0
+for line in f:
+    s = s + line  # Ошибка! line - это строка
+
+# ПРАВИЛЬНО - преобразуй в число
+f = open("data.txt", "r")
+s = 0
+for line in f:
+    num = int(line.strip())
+    s = s + num</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Как правильно прочитать все числа из файла?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Нужно использовать strip() для удаления символа новой строки.">f = open("file.txt"); numbers = f.readlines()</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! Используем strip() для удаления \n и int() для преобразования.">f = open("file.txt"); numbers = [int(line.strip()) for line in f]; f.close()</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. read() читает весь файл как одну строку.">f = open("file.txt"); numbers = f.read()</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Нужно преобразовать строки в числа.">f = open("file.txt"); numbers = f.readlines(); f.close()</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Сколько строк в файле, если он содержит: "10\n20\n30"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Каждая строка заканчивается \n, последняя может не иметь \n.">2</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-explanation="Неверно. Подсчитай количество чисел.">4</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-correct="true" data-explanation="Правильно! Три числа на трех строках: 10, 20, 30.">3</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это количество символов, а не строк.">6</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Как правильно записать число в файл?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Нужно преобразовать число в строку.">f = open("file.txt", "w"); f.write(42); f.close()</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! Преобразуем число в строку с помощью str().">f = open("file.txt", "w"); f.write(str(42) + "\n"); f.close()</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. write() принимает только строки.">f = open("file.txt", "w"); f.write(42 + "\n"); f.close()</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Нужно открыть файл в режиме записи.">f = open("file.txt", "r"); f.write("42"); f.close()</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что произойдет, если не закрыть файл после чтения?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Файл останется открытым, что может вызвать проблемы.">Ничего, файл закроется автоматически</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! Файл останется открытым, что может вызвать проблемы с памятью и доступом.">Файл останется открытым, возможны проблемы</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Программа не упадет, но это плохая практика.">Программа упадет с ошибкой</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Файл не удалится автоматически.">Файл будет автоматически удален</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как правильно найти максимальное число в файле?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Инициализация нулем не сработает для отрицательных чисел.">max_num = 0; for line in f: if int(line) > max_num: max_num = int(line)</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! Используем None для инициализации и strip() для удаления \n.">max_num = None; for line in f: num = int(line.strip()); if max_num == None or num > max_num: max_num = num</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Нужно использовать strip() и проверку на None.">max_num = -1000; for line in f: if int(line) > max_num: max_num = int(line)</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Нужно преобразовать строку в число.">max_num = None; for line in f: if line > max_num: max_num = line</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Открытие файлов</strong> - используй open("filename", "r") для чтения, open("filename", "w") для записи</li>
+                    <li><strong>Чтение построчно</strong> - используй цикл for line in f для обработки больших файлов</li>
+                    <li><strong>Обработка строк</strong> - всегда используй strip() для удаления пробелов и символа новой строки</li>
+                    <li><strong>Преобразование</strong> - используй int() для преобразования строк в числа</li>
+                    <li><strong>Закрытие файлов</strong> - всегда закрывай файлы с помощью close() после работы</li>
+                    <li><strong>Запись в файл</strong> - преобразуй числа в строки с помощью str() перед записью</li>
+                    <li><strong>Инициализация</strong> - используй None для поиска максимума/минимума, если не знаешь диапазон</li>
+                    <li><strong>Большие файлы</strong> - обрабатывай построчно, не загружай весь файл в память</li>
+                    <li><strong>Практика</strong> - всегда проверяй работу программы на тестовых данных</li>
+                </ul>
+
+                <p>Отлично! Ты изучил работу с файлами для ЕГЭ. Эти навыки очень важны для успешной сдачи экзамена. В следующем уроке мы изучим рекурсию!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="ege-03.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="ege-05.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

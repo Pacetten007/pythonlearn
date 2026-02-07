@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 45: Логика в Python - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-35">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 45: Логика в Python</h1>
+                <div class="lesson-meta">Логика • 40 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы изучим особенности работы логики в Python. Python имеет некоторые уникальные особенности логических операций, которые отличают его от других языков программирования. Эти знания помогут писать более эффективный и понятный код.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Короткое замыкание (short-circuit evaluation)</li>
+                        <li>Логические значения различных типов данных</li>
+                        <li>Возвращаемые значения логических операций</li>
+                        <li>Использование логики в условиях и циклах</li>
+                        <li>Практические паттерны программирования</li>
+                    </ul>
+                </div>
+
+                <h2>1. Короткое замыкание (Short-Circuit Evaluation)</h2>
+                <p>Python использует короткое замыкание для логических операций. Это означает, что Python не вычисляет правую часть выражения, если результат уже известен из левой части.</p>
+
+                <h3>1.1. Операция AND</h3>
+                <p>Для операции <code>and</code>: если левая часть равна <code>False</code>, правая часть не вычисляется.</p>
+
+                <div class="code-block">
+                    <h4>Пример короткого замыкания с AND:</h4>
+                    <pre># Пример 1: Левая часть False
+result = False and some_function()
+# some_function() НЕ будет вызвана, так как результат уже известен
+
+# Пример 2: Левая часть True
+result = True and some_function()
+# some_function() БУДЕТ вызвана, так как нужно проверить правую часть
+
+# Практический пример
+def divide(a, b):
+    return a / b
+
+# Безопасная проверка деления
+x = 0
+y = 5
+
+# Если x == 0, деление не выполнится (избежим ошибки!)
+if x != 0 and divide(y, x) > 10:
+    print("Результат больше 10")
+else:
+    print("Деление не выполнено или результат <= 10")</pre>
+                </div>
+
+                <h3>1.2. Операция OR</h3>
+                <p>Для операции <code>or</code>: если левая часть равна <code>True</code>, правая часть не вычисляется.</p>
+
+                <div class="code-block">
+                    <h4>Пример короткого замыкания с OR:</h4>
+                    <pre># Пример 1: Левая часть True
+result = True or some_function()
+# some_function() НЕ будет вызвана, так как результат уже известен
+
+# Пример 2: Левая часть False
+result = False or some_function()
+# some_function() БУДЕТ вызвана, так как нужно проверить правую часть
+
+# Практический пример
+def get_default_value():
+    print("Вычисление значения по умолчанию")
+    return 42
+
+x = 10
+
+# Если x уже задан, значение по умолчанию не вычисляется
+value = x or get_default_value()
+print(f"Значение: {value}")  # 10 (get_default_value не вызвана)
+
+x = 0
+value = x or get_default_value()
+print(f"Значение: {value}")  # 42 (get_default_value вызвана)</pre>
+                </div>
+
+                <h2>2. Логические значения различных типов данных</h2>
+                <p>В Python все объекты имеют логическое значение. Некоторые считаются "ложными" (falsy), остальные - "истинными" (truthy).</p>
+
+                <div class="code-block">
+                    <h4>Falsy значения (считаются False):</h4>
+                    <pre># Следующие значения считаются False:
+False           # Логическое False
+None            # Отсутствие значения
+0               # Ноль (любой числовой тип)
+0.0             # Ноль с плавающей точкой
+0j              # Комплексный ноль
+""              # Пустая строка
+[]              # Пустой список
+()              # Пустой кортеж
+{}              # Пустой словарь
+set()           # Пустое множество
+
+# Проверка
+falsy_values = [False, None, 0, 0.0, "", [], (), {}, set()]
+
+for value in falsy_values:
+    print(f"{repr(value):15} -> {bool(value)}")</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Truthy значения (считаются True):</h4>
+                    <pre># Все остальные значения считаются True:
+True            # Логическое True
+1, -1, 100      # Любое ненулевое число
+"hello"         # Непустая строка
+[1, 2, 3]       # Непустой список
+(1, 2)          # Непустой кортеж
+{"a": 1}        # Непустой словарь
+{1, 2, 3}       # Непустое множество
+
+# Проверка
+truthy_values = [True, 1, -1, "hello", [1], (1,), {"a": 1}, {1}]
+
+for value in truthy_values:
+    print(f"{repr(value):15} -> {bool(value)}")</pre>
+                </div>
+
+                <h2>3. Возвращаемые значения логических операций</h2>
+                <p>В Python логические операции <code>and</code> и <code>or</code> возвращают не обязательно <code>True</code> или <code>False</code>, а последнее вычисленное значение!</p>
+
+                <div class="code-block">
+                    <h4>Операция AND:</h4>
+                    <pre># AND возвращает:
+# - Первое falsy значение (если есть)
+# - Или последнее значение (если все truthy)
+
+print(True and 5)        # 5 (последнее значение)
+print(False and 5)       # False (первое falsy)
+print(0 and 5)           # 0 (первое falsy)
+print(3 and 5)           # 5 (последнее значение)
+print("" and "hello")    # "" (первое falsy)
+print("hi" and "hello")  # "hello" (последнее значение)</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Операция OR:</h4>
+                    <pre># OR возвращает:
+# - Первое truthy значение (если есть)
+# - Или последнее значение (если все falsy)
+
+print(True or 5)         # True (первое truthy)
+print(False or 5)        # 5 (первое truthy)
+print(0 or 5)            # 5 (первое truthy)
+print(3 or 5)            # 3 (первое truthy)
+print("" or "hello")      # "hello" (первое truthy)
+print("hi" or "hello")    # "hi" (первое truthy)
+print(0 or "" or None)   # None (последнее значение, все falsy)</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Практическое применение:</h4>
+                    <pre># Установка значения по умолчанию
+def greet(name=None):
+    name = name or "Гость"
+    print(f"Привет, {name}!")
+
+greet("Иван")    # Привет, Иван!
+greet()          # Привет, Гость!
+
+# Проверка и получение значения
+def get_first_item(items):
+    return items and items[0]  # Вернет первый элемент или None
+
+print(get_first_item([1, 2, 3]))  # 1
+print(get_first_item([]))          # None (пустой список)</pre>
+                </div>
+
+                <h2>4. Использование логики в условиях</h2>
+                <p>Логические операции широко используются в условиях для проверки различных условий.</p>
+
+                <div class="code-block">
+                    <h4>Пример 1: Проверка множественных условий</h4>
+                    <pre># Проверка, что число в диапазоне и четное
+number = 8
+
+if 1 <= number <= 10 and number % 2 == 0:
+    print(f"Число {number} в диапазоне [1, 10] и четное")
+
+# Проверка, что строка не пустая и содержит только буквы
+text = "Hello"
+
+if text and text.isalpha():
+    print(f"Строка '{text}' не пустая и содержит только буквы")</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 2: Использование OR для значений по умолчанию</h4>
+                    <pre># Функция с необязательным параметром
+def process_data(data=None):
+    data = data or []  # Если data не передан, используем пустой список
+    print(f"Обработка {len(data)} элементов")
+
+process_data([1, 2, 3])  # Обработка 3 элементов
+process_data()           # Обработка 0 элементов
+
+# Проверка наличия значения
+user_name = ""
+display_name = user_name or "Анонимный пользователь"
+print(display_name)  # Анонимный пользователь</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 3: Проверка списка перед доступом</h4>
+                    <pre># Безопасный доступ к элементу списка
+def get_item(items, index):
+    # Проверяем, что список не пустой И индекс в допустимых пределах
+    if items and 0 <= index < len(items):
+        return items[index]
+    return None
+
+my_list = [1, 2, 3]
+print(get_item(my_list, 1))    # 2
+print(get_item(my_list, 10))    # None
+print(get_item([], 0))          # None</pre>
+                </div>
+
+                <h2>5. Использование логики в циклах</h2>
+                <p>Логические операции также используются в циклах для контроля выполнения.</p>
+
+                <div class="code-block">
+                    <h4>Пример 1: Цикл с условием</h4>
+                    <pre># Продолжать цикл, пока список не пустой И есть элементы для обработки
+items = [1, 2, 3, 4, 5]
+processed = []
+
+while items and len(processed) < 3:
+    item = items.pop(0)
+    processed.append(item)
+    print(f"Обработан элемент: {item}")
+
+print(f"Обработано элементов: {len(processed)}")</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 2: Поиск с использованием логики</h4>
+                    <pre># Найти первый элемент, удовлетворяющий условию
+numbers = [1, 3, 5, 8, 9, 12]
+
+# Найти первое четное число
+found = None
+for num in numbers:
+    if num % 2 == 0:
+        found = num
+        break
+
+# Или более элегантно с использованием генератора
+found = next((num for num in numbers if num % 2 == 0), None)
+
+if found:
+    print(f"Найдено четное число: {found}")
+else:
+    print("Четных чисел не найдено")</pre>
+                </div>
+
+                <h2>6. Практические паттерны программирования</h2>
+
+                <div class="code-block">
+                    <h4>Паттерн 1: Значение по умолчанию</h4>
+                    <pre># Использование OR для установки значения по умолчанию
+def calculate_total(items=None, discount=0):
+    items = items or []  # Если items не передан, используем пустой список
+    total = sum(items)
+    return total * (1 - discount)
+
+print(calculate_total([10, 20, 30], 0.1))  # 54.0
+print(calculate_total())                   # 0.0</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Паттерн 2: Проверка перед выполнением</h4>
+                    <pre># Выполнить действие только если условие выполнено
+def safe_divide(a, b):
+    # Используем короткое замыкание для безопасного деления
+    return b != 0 and a / b
+
+result = safe_divide(10, 2)
+if result:
+    print(f"Результат: {result}")  # Результат: 5.0
+
+result = safe_divide(10, 0)
+if not result:
+    print("Деление на ноль невозможно")</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Паттерн 3: Фильтрация данных</h4>
+                    <pre># Отфильтровать список, оставив только валидные элементы
+def is_valid(item):
+    # Элемент валиден, если он не None и не пустой
+    return item is not None and item != ""
+
+data = ["hello", "", None, "world", "   ", "python"]
+
+# Фильтрация с использованием логики
+valid_data = [item for item in data if is_valid(item)]
+print(f"Валидные данные: {valid_data}")  # ['hello', 'world', 'python']</pre>
+                </div>
+
+                <h2>7. Интерактивный редактор</h2>
+                <p>Попробуй сам использовать логику в Python:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Логика в Python
+
+# 1. Короткое замыкание
+print("=== Короткое замыкание ===")
+def expensive_operation():
+    print("Выполняется дорогая операция")
+    return True
+
+# Если левая часть False, правая не вычисляется
+result = False and expensive_operation()
+print(f"Результат: {result}")
+
+# Если левая часть True, правая вычисляется
+result = True and expensive_operation()
+print(f"Результат: {result}")
+
+# 2. Логические значения типов
+print("\n=== Логические значения ===")
+falsy = [False, None, 0, "", [], {}]
+for val in falsy:
+    print(f"{repr(val):10} -> {bool(val)}")
+
+truthy = [True, 1, "hello", [1], {"a": 1}]
+for val in truthy:
+    print(f"{repr(val):10} -> {bool(val)}")
+
+# 3. Возвращаемые значения
+print("\n=== Возвращаемые значения ===")
+print(f"True and 5 = {True and 5}")
+print(f"False or 5 = {False or 5}")
+print(f"0 or 'hello' = {0 or 'hello'}")
+
+# 4. Практическое применение
+print("\n=== Практическое применение ===")
+def greet(name=None):
+    name = name or "Гость"
+    return f"Привет, {name}!"
+
+print(greet("Иван"))
+print(greet())
+
+# Безопасное деление
+def safe_divide(a, b):
+    return b != 0 and a / b
+
+print(f"\n10 / 2 = {safe_divide(10, 2)}")
+print(f"10 / 0 = {safe_divide(10, 0)}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>8. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Безопасная функция</h4>
+                    <p>Напиши функцию <code>safe_get(lst, index)</code>, которая безопасно получает элемент списка по индексу. Функция должна возвращать элемент, если индекс валиден, иначе возвращать None.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй короткое замыкание: проверь, что список не пустой И индекс в допустимых пределах.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Значение по умолчанию</h4>
+                    <p>Напиши функцию <code>get_config(key, default=None)</code>, которая возвращает значение из словаря конфигурации или значение по умолчанию, если ключа нет.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй операцию OR: <code>config.get(key) or default</code> или <code>config.get(key, default)</code>.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Фильтрация списка</h4>
+                    <p>Напиши функцию, которая фильтрует список, оставляя только непустые строки длиной больше 3 символов.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй list comprehension с условием: <code>[item for item in lst if item and len(item) > 3]</code>.</p>
+                    </details>
+                </div>
+
+                <h2>9. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Путаница между == и is</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - использование == для сравнения с None
+if value == None:
+    print("Значение отсутствует")
+
+# ПРАВИЛЬНО - использование is для сравнения с None
+if value is None:
+    print("Значение отсутствует")
+
+# Примечание: для других значений используй ==
+if value == 0:
+    print("Значение равно нулю")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильное использование and/or для значений по умолчанию</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - если 0 это валидное значение
+def process_number(num):
+    num = num or 10  # Если num = 0, заменится на 10!
+    return num * 2
+
+# ПРАВИЛЬНО - явная проверка на None
+def process_number(num):
+    if num is None:
+        num = 10
+    return num * 2
+
+# Или с использованием тернарного оператора
+def process_number(num):
+    num = 10 if num is None else num
+    return num * 2</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Игнорирование короткого замыкания</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - может вызвать ошибку
+def get_item(items, index):
+    if items[index] and items[index] > 0:  # Ошибка, если index вне диапазона
+        return items[index]
+
+# ПРАВИЛЬНО - используй короткое замыкание
+def get_item(items, index):
+    if 0 <= index < len(items) and items[index] > 0:
+        return items[index]
+    return None</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неправильное понимание возвращаемых значений</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - ожидание True/False
+result = "hello" and "world"
+if result == True:  # Это никогда не будет True!
+    print("Ошибка!")
+
+# ПРАВИЛЬНО - понимание, что возвращается последнее значение
+result = "hello" and "world"
+if result:  # Проверяем truthiness
+    print(f"Результат: {result}")  # Результат: world</pre>
+                    </div>
+                </div>
+
+                <h2>10. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Что вернет выражение True and 5?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. AND возвращает последнее значение, если все truthy.">True</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! AND возвращает последнее значение (5), так как оба операнда truthy.">5</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. AND не возвращает False, если оба операнда truthy.">False</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это не строка.">"5"</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что вернет выражение False or "hello"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. OR возвращает первое truthy значение.">False</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! OR возвращает первое truthy значение, которым является 'hello'.">"hello"</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. OR не возвращает True, а возвращает само значение.">True</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. OR возвращает строку 'hello', а не число.">0</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Какое из следующих значений считается falsy в Python?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Пустая строка считается falsy, но непустая - truthy.">"hello"</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! Пустая строка '' считается falsy в Python.">""</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Непустой список считается truthy.">[1, 2, 3]</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Любое ненулевое число считается truthy.">-1</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что произойдет при выполнении: False and expensive_function()?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Благодаря короткому замыканию функция не будет вызвана.">expensive_function() будет вызвана</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! Благодаря короткому замыканию, так как левая часть False, правая часть не вычисляется.">expensive_function() НЕ будет вызвана</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Короткое замыкание работает для AND, когда левая часть False.">Будет ошибка</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Короткое замыкание предотвращает вызов функции.">Результат будет None</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что вернет выражение 0 or "" or None?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. OR возвращает последнее значение, если все falsy.">0</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-explanation="Неверно. OR возвращает последнее значение, если все falsy.">""</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-correct="true" data-explanation="Правильно! OR возвращает последнее значение (None), так как все операнды falsy.">None</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. OR не возвращает False, а возвращает последнее значение.">False</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>11. Резюме урока</h2>
+                <ul>
+                    <li><strong>Короткое замыкание</strong> - Python не вычисляет правую часть, если результат уже известен</li>
+                    <li><strong>Falsy значения</strong> - False, None, 0, "", [], (), {}, set() считаются False</li>
+                    <li><strong>Truthy значения</strong> - все остальные значения считаются True</li>
+                    <li><strong>AND возвращает</strong> - первое falsy значение или последнее значение</li>
+                    <li><strong>OR возвращает</strong> - первое truthy значение или последнее значение</li>
+                    <li><strong>Практическое применение</strong> - установка значений по умолчанию, безопасные проверки, фильтрация</li>
+                    <li><strong>Сравнение с None</strong> - используй <code>is None</code>, а не <code>== None</code></li>
+                    <li><strong>Осторожность с 0</strong> - если 0 это валидное значение, не используй <code>or</code> для значения по умолчанию</li>
+                    <li><strong>Эффективность</strong> - короткое замыкание помогает избежать ненужных вычислений</li>
+                </ul>
+
+                <p>Отлично! Ты изучил особенности работы логики в Python. Эти знания помогут писать более эффективный и понятный код. В следующем уроке мы изучим логические функции!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-34.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-36.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

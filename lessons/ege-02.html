@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ: Программирование среднее - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="ege-02">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ЕГЭ: Программирование среднее</h1>
+                <div class="lesson-meta">Подготовка к ЕГЭ • 60 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы разберем задачи ЕГЭ среднего уровня сложности по программированию. Это типичные задания №13-21, где нужно написать более сложные программы: работа с несколькими списками, обработка строк, поиск паттернов, работа с вложенными структурами данных.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Работа с несколькими списками</li>
+                        <li>Обработка строк и поиск подстрок</li>
+                        <li>Работа с вложенными структурами</li>
+                        <li>Поиск паттернов и последовательностей</li>
+                        <li>Типичные задачи ЕГЭ среднего уровня</li>
+                    </ul>
+                </div>
+
+                <h2>1. Работа с несколькими списками</h2>
+                <p>В таких задачах нужно обрабатывать несколько списков одновременно или сравнивать их.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 1: Поиск общих элементов</h4>
+                    <pre>Условие: Даны два списка. Напишите программу, которая находит количество общих элементов.
+Списки: [1, 2, 3, 4, 5] и [3, 4, 5, 6, 7]
+
+Решение:
+a = [1, 2, 3, 4, 5]
+b = [3, 4, 5, 6, 7]
+count = 0
+for i in range(len(a)):
+    if a[i] in b:
+        count = count + 1
+print(count)
+
+Решение:
+Общие элементы: 3, 4, 5
+Количество: 3
+
+Ответ: 3
+
+Проверка в Python:
+a = [1, 2, 3, 4, 5]
+b = [3, 4, 5, 6, 7]
+count = 0
+for i in range(len(a)):
+    if a[i] in b:
+        count = count + 1
+        print(f"Найден общий элемент: {a[i]}, всего: {count}")
+print(f"Итого общих элементов: {count}")  # 3</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 2: Сравнение списков по позициям</h4>
+                    <pre>Условие: Даны два списка одинаковой длины. Напишите программу, которая находит количество позиций, где элементы первого списка больше элементов второго.
+Списки: [5, 3, 8, 2] и [3, 4, 5, 1]
+
+Решение:
+a = [5, 3, 8, 2]
+b = [3, 4, 5, 1]
+count = 0
+for i in range(len(a)):
+    if a[i] > b[i]:
+        count = count + 1
+print(count)
+
+Решение пошагово:
+- i=0: a[0]=5, b[0]=3, 5 > 3 → count = 1
+- i=1: a[1]=3, b[1]=4, 3 > 4 → нет
+- i=2: a[2]=8, b[2]=5, 8 > 5 → count = 2
+- i=3: a[3]=2, b[3]=1, 2 > 1 → count = 3
+
+Ответ: 3
+
+Проверка в Python:
+a = [5, 3, 8, 2]
+b = [3, 4, 5, 1]
+count = 0
+for i in range(len(a)):
+    if a[i] > b[i]:
+        count = count + 1
+        print(f"Позиция {i}: {a[i]} > {b[i]}, всего: {count}")
+print(f"Итого позиций: {count}")  # 3</pre>
+                </div>
+
+                <h2>2. Обработка строк и поиск подстрок</h2>
+                <p>В таких задачах нужно искать подстроки, анализировать структуру строк.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 3: Поиск подстроки</h4>
+                    <pre>Условие: Дана строка. Напишите программу, которая находит количество вхождений подстроки "ab" в строке.
+Строка: "abracadabra"
+
+Решение:
+s = "abracadabra"
+substring = "ab"
+count = 0
+for i in range(len(s) - len(substring) + 1):
+    if s[i:i+len(substring)] == substring:
+        count = count + 1
+print(count)
+
+Решение пошагово:
+- i=0: s[0:2] = "ab" → совпадает, count = 1
+- i=1: s[1:3] = "br" → не совпадает
+- i=2: s[2:4] = "ra" → не совпадает
+- i=3: s[3:5] = "ac" → не совпадает
+- i=4: s[4:6] = "ad" → не совпадает
+- i=5: s[5:7] = "ab" → совпадает, count = 2
+- и т.д.
+
+Ответ: 2
+
+Проверка в Python:
+s = "abracadabra"
+substring = "ab"
+count = 0
+for i in range(len(s) - len(substring) + 1):
+    if s[i:i+len(substring)] == substring:
+        count = count + 1
+        print(f"Найдено на позиции {i}, всего: {count}")
+print(f"Итого вхождений '{substring}': {count}")  # 2</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 4: Анализ структуры строки</h4>
+                    <pre>Условие: Дана строка. Напишите программу, которая проверяет, является ли строка палиндромом (читается одинаково слева направо и справа налево).
+Строка: "radar"
+
+Решение:
+s = "radar"
+is_palindrome = True
+for i in range(len(s) // 2):
+    if s[i] != s[len(s) - 1 - i]:
+        is_palindrome = False
+        break
+print(is_palindrome)
+
+Решение:
+- i=0: s[0]='r', s[4]='r', совпадают
+- i=1: s[1]='a', s[3]='a', совпадают
+- i=2: s[2]='d', s[2]='d', совпадают (середина)
+
+Ответ: True
+
+Проверка в Python:
+s = "radar"
+is_palindrome = True
+for i in range(len(s) // 2):
+    if s[i] != s[len(s) - 1 - i]:
+        is_palindrome = False
+        print(f"Не совпадают: s[{i}]='{s[i]}', s[{len(s)-1-i}]='{s[len(s)-1-i]}'")
+        break
+    else:
+        print(f"Совпадают: s[{i}]='{s[i]}', s[{len(s)-1-i}]='{s[len(s)-1-i]}'")
+print(f"Палиндром: {is_palindrome}")  # True</pre>
+                </div>
+
+                <h2>3. Работа с вложенными структурами</h2>
+                <p>В таких задачах нужно обрабатывать списки списков или другие вложенные структуры.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 5: Обработка матрицы</h4>
+                    <pre>Условие: Дана матрица (список списков). Напишите программу, которая находит сумму всех элементов матрицы.
+Матрица: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+Решение:
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+s = 0
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        s = s + matrix[i][j]
+print(s)
+
+Решение:
+1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45
+
+Ответ: 45
+
+Проверка в Python:
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+s = 0
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        s = s + matrix[i][j]
+        print(f"matrix[{i}][{j}]={matrix[i][j]}, s={s}")
+print(f"Итоговая сумма: {s}")  # 45</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 6: Поиск в матрице</h4>
+                    <pre>Условие: Дана матрица. Напишите программу, которая находит максимальный элемент в матрице.
+Матрица: [[5, 2, 8], [1, 9, 3], [4, 7, 6]]
+
+Решение:
+matrix = [[5, 2, 8], [1, 9, 3], [4, 7, 6]]
+max_value = matrix[0][0]
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        if matrix[i][j] > max_value:
+            max_value = matrix[i][j]
+print(max_value)
+
+Ответ: 9
+
+Проверка в Python:
+matrix = [[5, 2, 8], [1, 9, 3], [4, 7, 6]]
+max_value = matrix[0][0]
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        if matrix[i][j] > max_value:
+            max_value = matrix[i][j]
+            print(f"Новый максимум: matrix[{i}][{j}]={matrix[i][j]}")
+print(f"Максимальный элемент: {max_value}")  # 9</pre>
+                </div>
+
+                <h2>4. Поиск паттернов и последовательностей</h2>
+                <p>В таких задачах нужно найти определенные паттерны или последовательности в данных.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 7: Поиск возрастающей последовательности</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит длину самой длинной возрастающей последовательности.
+Список: [1, 3, 2, 4, 5, 3, 6]
+
+Решение:
+a = [1, 3, 2, 4, 5, 3, 6]
+max_length = 1
+current_length = 1
+
+for i in range(1, len(a)):
+    if a[i] > a[i-1]:
+        current_length = current_length + 1
+    else:
+        if current_length > max_length:
+            max_length = current_length
+        current_length = 1
+
+if current_length > max_length:
+    max_length = current_length
+
+print(max_length)
+
+Решение пошагово:
+- i=1: a[1]=3 > a[0]=1, current_length = 2
+- i=2: a[2]=2 < a[1]=3, сохраняем max_length=2, current_length = 1
+- i=3: a[3]=4 > a[2]=2, current_length = 2
+- i=4: a[4]=5 > a[3]=4, current_length = 3
+- i=5: a[5]=3 < a[4]=5, сохраняем max_length=3, current_length = 1
+- i=6: a[6]=6 > a[5]=3, current_length = 2
+
+Ответ: 3
+
+Проверка в Python:
+a = [1, 3, 2, 4, 5, 3, 6]
+max_length = 1
+current_length = 1
+
+for i in range(1, len(a)):
+    if a[i] > a[i-1]:
+        current_length = current_length + 1
+        print(f"i={i}, возрастает, длина={current_length}")
+    else:
+        if current_length > max_length:
+            max_length = current_length
+        current_length = 1
+        print(f"i={i}, не возрастает, max_length={max_length}")
+
+if current_length > max_length:
+    max_length = current_length
+
+print(f"Максимальная длина: {max_length}")  # 3</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 8: Поиск повторяющихся элементов</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит количество элементов, которые встречаются более одного раза.
+Список: [1, 2, 3, 2, 4, 2, 5, 3]
+
+Решение:
+a = [1, 2, 3, 2, 4, 2, 5, 3]
+count = 0
+seen = []
+
+for i in range(len(a)):
+    if a[i] not in seen:
+        # Проверяем, есть ли еще такие элементы
+        occurrences = 0
+        for j in range(len(a)):
+            if a[j] == a[i]:
+                occurrences = occurrences + 1
+        if occurrences > 1:
+            count = count + 1
+            seen.append(a[i])
+
+print(count)
+
+Решение:
+- Элемент 1: встречается 1 раз → не считаем
+- Элемент 2: встречается 3 раза → считаем
+- Элемент 3: встречается 2 раза → считаем
+- Элемент 4: встречается 1 раз → не считаем
+- Элемент 5: встречается 1 раз → не считаем
+
+Ответ: 2
+
+Проверка в Python:
+a = [1, 2, 3, 2, 4, 2, 5, 3]
+count = 0
+seen = []
+
+for i in range(len(a)):
+    if a[i] not in seen:
+        occurrences = 0
+        for j in range(len(a)):
+            if a[j] == a[i]:
+                occurrences = occurrences + 1
+        if occurrences > 1:
+            count = count + 1
+            seen.append(a[i])
+            print(f"Элемент {a[i]} встречается {occurrences} раз(а)")
+
+print(f"Итого элементов, встречающихся более 1 раза: {count}")  # 2</pre>
+                </div>
+
+                <h2>5. Комплексные задачи</h2>
+                <p>Задачи, сочетающие несколько техник.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 9: Обработка строк и списков</h4>
+                    <pre>Условие: Дан список строк. Напишите программу, которая находит количество строк, содержащих подстроку "ab".
+Список: ["abc", "def", "abab", "xyz", "cab"]
+
+Решение:
+strings = ["abc", "def", "abab", "xyz", "cab"]
+count = 0
+substring = "ab"
+
+for i in range(len(strings)):
+    found = False
+    for j in range(len(strings[i]) - len(substring) + 1):
+        if strings[i][j:j+len(substring)] == substring:
+            found = True
+            break
+    if found:
+        count = count + 1
+
+print(count)
+
+Решение:
+- "abc": содержит "ab" → count = 1
+- "def": не содержит "ab"
+- "abab": содержит "ab" → count = 2
+- "xyz": не содержит "ab"
+- "cab": содержит "ab" → count = 3
+
+Ответ: 3
+
+Проверка в Python:
+strings = ["abc", "def", "abab", "xyz", "cab"]
+count = 0
+substring = "ab"
+
+for i in range(len(strings)):
+    found = False
+    for j in range(len(strings[i]) - len(substring) + 1):
+        if strings[i][j:j+len(substring)] == substring:
+            found = True
+            break
+    if found:
+        count = count + 1
+        print(f"Строка '{strings[i]}' содержит '{substring}', всего: {count}")
+
+print(f"Итого строк с '{substring}': {count}")  # 3</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 10: Работа с условиями и циклами</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит количество локальных максимумов (элементов, которые больше обоих соседей).
+Список: [1, 3, 2, 5, 4, 6, 3]
+
+Решение:
+a = [1, 3, 2, 5, 4, 6, 3]
+count = 0
+
+for i in range(1, len(a) - 1):
+    if a[i] > a[i-1] and a[i] > a[i+1]:
+        count = count + 1
+
+print(count)
+
+Решение:
+- i=1: a[1]=3, a[0]=1, a[2]=2, 3 > 1 и 3 > 2 → локальный максимум, count = 1
+- i=2: a[2]=2, a[1]=3, a[3]=5, 2 не больше 3 → нет
+- i=3: a[3]=5, a[2]=2, a[4]=4, 5 > 2 и 5 > 4 → локальный максимум, count = 2
+- i=4: a[4]=4, a[3]=5, a[5]=6, 4 не больше 5 → нет
+- i=5: a[5]=6, a[4]=4, a[6]=3, 6 > 4 и 6 > 3 → локальный максимум, count = 3
+
+Ответ: 3
+
+Проверка в Python:
+a = [1, 3, 2, 5, 4, 6, 3]
+count = 0
+
+for i in range(1, len(a) - 1):
+    if a[i] > a[i-1] and a[i] > a[i+1]:
+        count = count + 1
+        print(f"Локальный максимум на позиции {i}: {a[i]} > {a[i-1]} и {a[i]} > {a[i+1]}, всего: {count}")
+
+print(f"Итого локальных максимумов: {count}")  # 3</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить задачи среднего уровня:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Задачи ЕГЭ среднего уровня
+
+# Задача 1: Общие элементы
+print("=== Задача 1: Общие элементы ===")
+a = [1, 2, 3, 4, 5]
+b = [3, 4, 5, 6, 7]
+count = 0
+for i in range(len(a)):
+    if a[i] in b:
+        count = count + 1
+print(f"Общих элементов: {count}")
+
+# Задача 2: Поиск подстроки
+print("\n=== Задача 2: Поиск подстроки ===")
+s = "abracadabra"
+substring = "ab"
+count = 0
+for i in range(len(s) - len(substring) + 1):
+    if s[i:i+len(substring)] == substring:
+        count = count + 1
+print(f"Вхождений '{substring}': {count}")
+
+# Задача 3: Палиндром
+print("\n=== Задача 3: Палиндром ===")
+s = "radar"
+is_palindrome = True
+for i in range(len(s) // 2):
+    if s[i] != s[len(s) - 1 - i]:
+        is_palindrome = False
+        break
+print(f"Палиндром: {is_palindrome}")
+
+# Задача 4: Сумма матрицы
+print("\n=== Задача 4: Сумма матрицы ===")
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+s = 0
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        s = s + matrix[i][j]
+print(f"Сумма элементов: {s}")
+
+# Задача 5: Локальные максимумы
+print("\n=== Задача 5: Локальные максимумы ===")
+a = [1, 3, 2, 5, 4, 6, 3]
+count = 0
+for i in range(1, len(a) - 1):
+    if a[i] > a[i-1] and a[i] > a[i+1]:
+        count = count + 1
+print(f"Локальных максимумов: {count}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Объединение списков</h4>
+                    <p>Напиши программу, которая создает новый список, содержащий все элементы из двух списков без повторений. Списки: [1, 2, 3] и [3, 4, 5].</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй два цикла: один для первого списка, другой для второго. Проверяй, есть ли элемент уже в новом списке перед добавлением.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Поиск самой длинной подстроки</h4>
+                    <p>Напиши программу, которая находит самую длинную подстроку из одинаковых символов в строке "aaabbbcccdd".</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Перебирай все возможные подстроки и проверяй, все ли символы в них одинаковы. Сохраняй самую длинную.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Транспонирование матрицы</h4>
+                    <p>Напиши программу, которая транспонирует матрицу (меняет строки и столбцы местами). Матрица: [[1, 2, 3], [4, 5, 6]].</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Создай новую матрицу, где элемент [i][j] новой матрицы равен элементу [j][i] исходной матрицы.</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Выход за границы при поиске подстроки</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - выход за границы
+s = "abc"
+substring = "ab"
+for i in range(len(s)):  # i может быть len(s)-1
+    if s[i:i+len(substring)] == substring:  # Ошибка, если i+len(substring) > len(s)
+        print("Найдено")
+
+# ПРАВИЛЬНО - учитывай длину подстроки
+s = "abc"
+substring = "ab"
+for i in range(len(s) - len(substring) + 1):  # Правильный диапазон
+    if s[i:i+len(substring)] == substring:
+        print("Найдено")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильная обработка границ в локальных максимумах</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - проверка границ
+a = [1, 3, 2]
+for i in range(len(a)):  # i=0 и i=len(a)-1 не имеют обоих соседей!
+    if a[i] > a[i-1] and a[i] > a[i+1]:  # Ошибка на границах
+        count += 1
+
+# ПРАВИЛЬНО - пропускай границы
+a = [1, 3, 2]
+for i in range(1, len(a) - 1):  # Пропускаем первый и последний элементы
+    if a[i] > a[i-1] and a[i] > a[i+1]:
+        count += 1</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильная работа с вложенными циклами</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - путаница с индексами
+matrix = [[1, 2], [3, 4]]
+for i in range(len(matrix)):
+    for j in range(len(matrix)):  # Неправильно! Должно быть len(matrix[i])
+        print(matrix[i][j])
+
+# ПРАВИЛЬНО - используй правильную длину для внутреннего цикла
+matrix = [[1, 2], [3, 4]]
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):  # Правильно: длина текущей строки
+        print(matrix[i][j])</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Сколько общих элементов в списках [1, 2, 3, 4] и [3, 4, 5, 6]?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Проверь все элементы: 3 и 4 - это 2 общих элемента.">1</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! Общие элементы: 3 и 4, всего 2.">2</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Проверь все элементы.">3</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это общее количество элементов в одном списке.">4</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Сколько раз подстрока "ab" встречается в строке "abracadabra"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Проверь все позиции: 'ab' встречается на позициях 0 и 7.">1</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! 'ab' встречается на позициях 0 и 7, всего 2 раза.">2</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. Проверь все позиции в строке.">3</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это неправильный подсчет.">4</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Является ли строка "level" палиндромом?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-correct="true" data-explanation="Правильно! 'level' читается одинаково слева направо и справа налево.">Да</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-explanation="Неверно. Проверь: 'level' = 'level' в обратном порядке.">Нет</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Это не число, а логическое значение.">5</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Проверь определение палиндрома.">"level"</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Чему равна сумма всех элементов матрицы [[1, 2], [3, 4]]?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Проверь сумму: 1+2+3+4.">8</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-explanation="Неверно. Проверь сумму всех элементов.">9</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-correct="true" data-explanation="Правильно! 1 + 2 + 3 + 4 = 10.">10</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Это неправильный расчет.">12</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Сколько локальных максимумов в списке [1, 3, 2, 5, 4]?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Проверь позиции 1 и 3: они больше обоих соседей.">1</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! Позиция 1 (3) и позиция 3 (5) - локальные максимумы, всего 2.">2</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Проверь определение локального максимума.">3</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это неправильный расчет.">4</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Работа с несколькими списками</strong> - используй вложенные циклы или оператор in для сравнения</li>
+                    <li><strong>Поиск подстроки</strong> - диапазон цикла: range(len(s) - len(substring) + 1)</li>
+                    <li><strong>Палиндром</strong> - сравнивай символы с начала и конца, до середины</li>
+                    <li><strong>Работа с матрицами</strong> - используй вложенные циклы, проверяй границы</li>
+                    <li><strong>Локальные максимумы</strong> - пропускай границы, проверяй оба соседа</li>
+                    <li><strong>Поиск паттернов</strong> - отслеживай текущее состояние и обновляй максимум</li>
+                    <li><strong>Границы</strong> - всегда проверяй, что индексы не выходят за границы</li>
+                    <li><strong>Вложенные циклы</strong> - используй правильную длину для внутреннего цикла</li>
+                    <li><strong>Практика</strong> - решай задачи пошагово, проверяй на разных входных данных</li>
+                </ul>
+
+                <p>Отлично! Ты изучил задачи ЕГЭ среднего уровня сложности. Эти навыки очень важны для успешной сдачи экзамена. В следующем уроке мы изучим сложные задачи по программированию!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="ege-01.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="ege-03.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 38: Двоичная система - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-28">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 38: Двоичная система счисления</h1>
+                <div class="lesson-meta">Системы счисления • 40 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>Двоичная система счисления - это основа всей компьютерной техники! Все данные в компьютере хранятся и обрабатываются в двоичном виде (0 и 1). Понимание двоичной системы необходимо для:</p>
+
+                <ul>
+                    <li><strong>Подготовки к ЕГЭ</strong> - задачи на системы счисления</li>
+                    <li><strong>Понимания работы компьютера</strong> - как хранятся данные</li>
+                    <li><strong>Программирования</strong> - работа с битами и байтами</li>
+                    <li><strong>Сетей и безопасности</strong> - кодирование информации</li>
+                </ul>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Что такое системы счисления</li>
+                        <li>Двоичная система (основание 2)</li>
+                        <li>Перевод из десятичной в двоичную</li>
+                        <li>Перевод из двоичной в десятичную</li>
+                        <li>Арифметика в двоичной системе</li>
+                        <li>Работа с двоичными числами в Python</li>
+                    </ul>
+                </div>
+
+                <h2>1. Что такое системы счисления?</h2>
+                <p><strong>Система счисления</strong> - это способ записи чисел с помощью определенного набора символов (цифр).</p>
+
+                <div class="code-block">
+                    <h4>Примеры систем счисления:</h4>
+                    <pre>Десятичная система (основание 10):
+- Использует цифры: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+- Пример: 123 = 1×10² + 2×10¹ + 3×10⁰
+
+Двоичная система (основание 2):
+- Использует цифры: 0, 1
+- Пример: 1011₂ = 1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8 + 0 + 2 + 1 = 11₁₀</pre>
+                </div>
+
+                <div class="note">
+                    <h4>💡 Позиционная система</h4>
+                    <p>В позиционной системе значение цифры зависит от её позиции (разряда). Чем левее цифра, тем больше её "вес".</p>
+                </div>
+
+                <h2>2. Двоичная система счисления</h2>
+                <p>Двоичная система использует только две цифры: <strong>0</strong> и <strong>1</strong>. Каждая позиция (разряд) представляет степень двойки.</p>
+
+                <div class="code-block">
+                    <h4>Разряды в двоичном числе:</h4>
+                    <pre>Позиция:  7  6  5  4  3  2  1  0
+Степень: 2⁷ 2⁶ 2⁵ 2⁴ 2³ 2² 2¹ 2⁰
+Значение: 128 64 32 16  8  4  2  1
+
+Пример: 10110101₂
+        1  0  1  1  0  1  0  1
+        ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓
+        128+0+32+16+0+4+0+1 = 181₁₀</pre>
+                </div>
+
+                <div class="diagram">
+                    <svg class="diagram-svg" width="100%" height="200" viewBox="0 0 500 200" style="max-width: 500px;">
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0,0 0,6 9,3" fill="#1e293b"/>
+                            </marker>
+                        </defs>
+                        <rect x="50" y="40" width="400" height="150" fill="#dbeafe" stroke="#6366f1" stroke-width="2" rx="5"></rect>                        <text x="250" y="80" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">1011₂ (двоичное)</text>
+                        <path d="M 250 100 L 250 130" stroke="#1e293b" stroke-width="3" marker-end="url(#arrowhead)"/>
+                        <text x="250" y="155" text-anchor="middle" font-size="16" font-weight="bold" fill="#10b981">11₁₀ (десятичное)</text>
+                        <text x="250" y="175" text-anchor="middle" font-size="12" fill="#64748b">1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8 + 0 + 2 + 1</text>
+                    </svg>
+                </div>
+
+                <h2>3. Перевод из десятичной в двоичную</h2>
+                <p>Есть два основных способа перевода: <strong>метод деления на 2</strong> и <strong>метод вычитания степеней двойки</strong>.</p>
+
+                <div class="code-block">
+                    <h4>Способ 1: Деление на 2</h4>
+                    <pre>Переведем 13₁₀ в двоичную систему:
+
+13 ÷ 2 = 6 (остаток 1) ← младший разряд
+ 6 ÷ 2 = 3 (остаток 0)
+ 3 ÷ 2 = 1 (остаток 1)
+ 1 ÷ 2 = 0 (остаток 1) ← старший разряд
+
+Читаем остатки снизу вверх: 1101₂
+
+Проверка: 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8 + 4 + 0 + 1 = 13 ✓</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Способ 2: Вычитание степеней двойки</h4>
+                    <pre>Переведем 25₁₀ в двоичную систему:
+
+Степени двойки: 16, 8, 4, 2, 1
+
+25 - 16 = 9  → записываем 1
+ 9 -  8 = 1  → записываем 1
+ 1 -  4 = ?  → записываем 0 (не помещается)
+ 1 -  2 = ?  → записываем 0 (не помещается)
+ 1 -  1 = 0  → записываем 1
+
+Результат: 11001₂
+
+Проверка: 1×2⁴ + 1×2³ + 0×2² + 0×2¹ + 1×2⁰ = 16 + 8 + 0 + 0 + 1 = 25 ✓</pre>
+                </div>
+
+                <h2>4. Перевод из двоичной в десятичную</h2>
+                <p>Чтобы перевести двоичное число в десятичное, нужно умножить каждую цифру на соответствующую степень двойки и сложить результаты.</p>
+
+                <div class="code-block">
+                    <h4>Пример: Перевод 101101₂ в десятичную</h4>
+                    <pre>101101₂ = 1×2⁵ + 0×2⁴ + 1×2³ + 1×2² + 0×2¹ + 1×2⁰
+       = 1×32 + 0×16 + 1×8 + 1×4 + 0×2 + 1×1
+       = 32 + 0 + 8 + 4 + 0 + 1
+       = 45₁₀
+
+Проверка: 101101₂ = 45₁₀ ✓</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Алгоритм перевода:</h4>
+                    <pre>def binary_to_decimal(binary_str):
+    """Переводит двоичное число в десятичное"""
+    decimal = 0
+    # Проходим по каждой цифре справа налево
+    for i, digit in enumerate(reversed(binary_str)):
+        if digit == '1':
+            decimal += 2 ** i
+    return decimal
+
+# Примеры
+print(binary_to_decimal("1011"))    # 11
+print(binary_to_decimal("11001"))   # 25
+print(binary_to_decimal("101101"))  # 45</pre>
+                </div>
+
+                <h2>5. Арифметика в двоичной системе</h2>
+
+                <div class="code-block">
+                    <h4>Сложение в двоичной системе</h4>
+                    <pre>Правила сложения:
+0 + 0 = 0
+0 + 1 = 1
+1 + 0 = 1
+1 + 1 = 10 (0, перенос 1)
+
+Пример: 1011₂ + 1101₂
+
+   1011
+ + 1101
+ ------
+  11000
+
+Проверка: 11₁₀ + 13₁₀ = 24₁₀ = 11000₂ ✓</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Вычитание в двоичной системе</h4>
+                    <pre>Правила вычитания:
+0 - 0 = 0
+1 - 0 = 1
+1 - 1 = 0
+10 - 1 = 1 (занимаем 1 из старшего разряда)
+
+Пример: 1101₂ - 1011₂
+
+   1101
+ - 1011
+ ------
+   0010
+
+Проверка: 13₁₀ - 11₁₀ = 2₁₀ = 10₂ ✓</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Умножение в двоичной системе</h4>
+                    <pre>Умножение в двоичной системе очень простое:
+0 × 0 = 0
+0 × 1 = 0
+1 × 0 = 0
+1 × 1 = 1
+
+Пример: 1011₂ × 101₂
+
+     1011
+   ×  101
+   ------
+     1011
+    0000
+   1011
+   ------
+   110111
+
+Проверка: 11₁₀ × 5₁₀ = 55₁₀ = 110111₂ ✓</pre>
+                </div>
+
+                <h2>6. Работа с двоичными числами в Python</h2>
+                <p>Python предоставляет встроенные функции для работы с системами счисления.</p>
+
+                <div class="code-block">
+                    <h4>Встроенные функции Python</h4>
+                    <pre># Перевод из десятичной в двоичную
+decimal = 13
+binary = bin(decimal)
+print(binary)  # 0b1101 (префикс 0b означает двоичное)
+
+# Убрать префикс
+binary_str = bin(decimal)[2:]
+print(binary_str)  # 1101
+
+# Перевод из двоичной в десятичную
+binary_str = "1101"
+decimal = int(binary_str, 2)  # второй аргумент - основание системы
+print(decimal)  # 13
+
+# Форматирование с ведущими нулями
+binary_8bit = format(13, '08b')  # 8 бит с ведущими нулями
+print(binary_8bit)  # 00001101</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Полезные функции для работы с двоичными числами</h4>
+                    <pre>def decimal_to_binary(n):
+    """Переводит десятичное число в двоичное (без префикса)"""
+    if n == 0:
+        return "0"
+    binary = ""
+    while n > 0:
+        binary = str(n % 2) + binary
+        n //= 2
+    return binary
+
+def binary_to_decimal(binary_str):
+    """Переводит двоичное число в десятичное"""
+    return int(binary_str, 2)
+
+def add_binary(a, b):
+    """Складывает два двоичных числа"""
+    num1 = int(a, 2)
+    num2 = int(b, 2)
+    result = num1 + num2
+    return bin(result)[2:]
+
+# Примеры
+print(decimal_to_binary(13))      # 1101
+print(binary_to_decimal("1101"))  # 13
+print(add_binary("1011", "1101")) # 11000</pre>
+                </div>
+
+                <h2>7. Интерактивный редактор</h2>
+                <p>Попробуй поработать с двоичными числами:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Встроенные функции Python для работы с двоичными числами
+
+# Перевод из десятичной в двоичную
+print("=== Перевод из десятичной в двоичную ===")
+numbers = [5, 13, 25, 100]
+for num in numbers:
+    binary = bin(num)[2:]  # Убираем префикс 0b
+    print(f"{num}₁₀ = {binary}₂")
+
+# Перевод из двоичной в десятичную
+print("\n=== Перевод из двоичной в десятичную ===")
+binary_numbers = ["1011", "11001", "101101", "11111111"]
+for binary in binary_numbers:
+    decimal = int(binary, 2)
+    print(f"{binary}₂ = {decimal}₁₀")
+
+# Сложение двоичных чисел
+print("\n=== Сложение двоичных чисел ===")
+def add_binary(a, b):
+    """Складывает два двоичных числа"""
+    num1 = int(a, 2)
+    num2 = int(b, 2)
+    result = num1 + num2
+    return bin(result)[2:]
+
+print(f"1011₂ + 1101₂ = {add_binary('1011', '1101')}₂")
+print(f"Проверка: 11₁₀ + 13₁₀ = {11 + 13}₁₀")
+
+# Форматирование с ведущими нулями
+print("\n=== Форматирование ===")
+num = 13
+print(f"13 в 8-битном формате: {format(num, '08b')}")
+print(f"13 в 16-битном формате: {format(num, '016b')}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>8. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Перевод чисел</h4>
+                    <p>Переведи следующие числа из десятичной в двоичную систему:</p>
+                    <ul>
+                        <li>7₁₀ = ?₂</li>
+                        <li>15₁₀ = ?₂</li>
+                        <li>42₁₀ = ?₂</li>
+                        <li>128₁₀ = ?₂</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй метод деления на 2 или функцию <code>bin()</code> в Python.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Обратный перевод</h4>
+                    <p>Переведи следующие двоичные числа в десятичную систему:</p>
+                    <ul>
+                        <li>1111₂ = ?₁₀</li>
+                        <li>101010₂ = ?₁₀</li>
+                        <li>1000000₂ = ?₁₀</li>
+                        <li>11111111₂ = ?₁₀</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Умножай каждую цифру на соответствующую степень двойки или используй <code>int(binary, 2)</code>.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Сложение двоичных чисел</h4>
+                    <p>Выполни сложение в двоичной системе:</p>
+                    <ul>
+                        <li>1011₂ + 1101₂ = ?</li>
+                        <li>1111₂ + 1₂ = ?</li>
+                        <li>1010₂ + 1010₂ = ?</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Складывай столбиком, не забывай про перенос единицы при 1+1=10.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 4: Написать функцию перевода</h4>
+                    <p>Напиши функцию <code>decimal_to_binary(n)</code>, которая переводит десятичное число в двоичное без использования <code>bin()</code>.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй метод деления на 2 и собирай остатки в строку.</p>
+                    </details>
+                </div>
+
+                <h2>9. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли про префикс 0b</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО
+binary = bin(13)
+print(binary)  # Выведет "0b1101" - с префиксом!
+
+# ПРАВИЛЬНО
+binary = bin(13)[2:]  # Убираем первые 2 символа
+print(binary)  # Выведет "1101"</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильный порядок разрядов</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - читаем остатки сверху вниз
+13 ÷ 2 = 6 (остаток 1) ← это НЕ старший разряд!
+ 6 ÷ 2 = 3 (остаток 0)
+ 3 ÷ 2 = 1 (остаток 1)
+ 1 ÷ 2 = 0 (остаток 1)
+
+# ПРАВИЛЬНО - читаем остатки снизу вверх
+# Последний остаток (1) - старший разряд
+# Первый остаток (1) - младший разряд
+# Результат: 1101₂ (читаем снизу вверх)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Путаница с основанием в int()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - забыли указать основание
+binary = "1101"
+decimal = int(binary)  # Будет интерпретировано как десятичное!
+print(decimal)  # 1101 (неправильно!)
+
+# ПРАВИЛЬНО - указываем основание 2
+binary = "1101"
+decimal = int(binary, 2)  # Второй аргумент - основание системы
+print(decimal)  # 13 (правильно!)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неправильное сложение с переносом</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - забыли про перенос
+   1011
+ + 1101
+ ------
+   2112  # Это не двоичное число!
+
+# ПРАВИЛЬНО - учитываем перенос
+   1011
+ + 1101
+ ------
+  11000  # 1+1=10, записываем 0, переносим 1</pre>
+                    </div>
+                </div>
+
+                <h2>10. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Чему равно число 1011₂ в десятичной системе?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Это 1011₁₀, а не результат перевода.">1011</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-explanation="Неверно. Проверь расчет: 1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8 + 0 + 2 + 1 = 11.">9</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-correct="true" data-explanation="Правильно! 1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8 + 0 + 2 + 1 = 11.">11</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это 13₁₀ = 1101₂.">13</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Как перевести 25₁₀ в двоичную систему методом деления?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Это результат деления 25 на 2, но нужно продолжать делить.">12 (остаток 1)</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! 25÷2=12(1), 12÷2=6(0), 6÷2=3(0), 3÷2=1(1), 1÷2=0(1). Читаем снизу вверх: 11001₂.">11001₂</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. Это 19₁₀ = 10011₂.">10011₂</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Проверь расчет еще раз.">11100₂</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что выведет код: print(bin(13))?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Функция bin() всегда возвращает строку с префиксом 0b.">1101</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! Функция bin() возвращает строку с префиксом 0b, означающим двоичное число.">0b1101</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Это десятичное число 13, а не результат bin().">13</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Это неправильный формат.">13b</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Чему равно 1011₂ + 1101₂?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Это неправильное сложение, не учитывается перенос.">2112₂</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! 11₁₀ + 13₁₀ = 24₁₀ = 11000₂. При сложении: 1+1=10 (0 и перенос 1).">11000₂</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Это 12₁₀ = 1100₂.">1100₂</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Проверь сложение столбиком с учетом переноса.">10110₂</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как правильно перевести двоичную строку в десятичное число?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Без указания основания 2, int() будет интерпретировать строку как десятичное число.">int("1101")</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! Второй аргумент 2 указывает, что число в двоичной системе счисления.">int("1101", 2)</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Это неправильный синтаксис.">int("1101", base=10)</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. bin() переводит из десятичной в двоичную, а не наоборот.">bin("1101")</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>11. Резюме урока</h2>
+                <ul>
+                    <li><strong>Двоичная система</strong> использует только цифры 0 и 1 (основание 2)</li>
+                    <li><strong>Перевод из 10 в 2</strong>: метод деления на 2 или вычитания степеней двойки</li>
+                    <li><strong>Перевод из 2 в 10</strong>: умножение каждой цифры на степень двойки и сложение</li>
+                    <li><strong>Арифметика</strong>: сложение, вычитание, умножение по правилам двоичной системы</li>
+                    <li><strong>Python функции</strong>: <code>bin()</code> для перевода в двоичную, <code>int(binary, 2)</code> для перевода в десятичную</li>
+                    <li><strong>Префикс 0b</strong>: функция <code>bin()</code> возвращает строку с префиксом, его нужно убирать <code>[2:]</code></li>
+                    <li><strong>Форматирование</strong>: <code>format(num, '08b')</code> для форматирования с ведущими нулями</li>
+                    <li><strong>Порядок разрядов</strong>: при делении на 2 остатки читаются снизу вверх</li>
+                </ul>
+
+                <p>Отлично! Ты изучил основы двоичной системы счисления. Это фундаментальная тема для понимания работы компьютера и решения задач ЕГЭ. В следующем уроке мы изучим восьмеричную и шестнадцатеричную системы!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="algo-10.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-29.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

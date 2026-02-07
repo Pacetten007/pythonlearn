@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 36: Строковые алгоритмы - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="algo-09">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 36: Строковые алгоритмы</h1>
+                <div class="lesson-meta">Алгоритмы • 30 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>Строки - одна из самых важных структур данных в программировании! В этом уроке мы изучим полезные алгоритмы для работы со строками: поиск подстрок, проверка на палиндром, подсчет символов и многое другое. Эти алгоритмы часто встречаются в задачах ОГЭ и ЕГЭ.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Поиск подстроки в строке</li>
+                        <li>Подсчет символов и слов</li>
+                        <li>Проверка на палиндром (строковый)</li>
+                        <li>Переворот строки</li>
+                        <li>Удаление пробелов и лишних символов</li>
+                        <li>Замена символов и подстрок</li>
+                        <li>Разделение и объединение строк</li>
+                    </ul>
+                </div>
+
+                <h2>1. Поиск подстроки в строке</h2>
+                <p>Одна из самых частых задач - найти, содержится ли одна строка в другой.</p>
+
+                <h3>1.1. Простой поиск (встроенный метод)</h3>
+                <div class="code-block">
+                    <h4>Пример: Использование оператора in</h4>
+                    <pre>text = "Привет, мир!"
+substring = "мир"
+
+# Простой способ
+if substring in text:
+    print(f"'{substring}' найдено в строке")
+    index = text.find(substring)  # Находит индекс первого вхождения
+    print(f"Индекс: {index}")
+else:
+    print(f"'{substring}' не найдено")
+
+# Метод find() возвращает -1, если не найдено
+index = text.find("Python")
+if index != -1:
+    print(f"Найдено на позиции {index}")
+else:
+    print("Не найдено")</pre>
+                </div>
+
+                <h3>1.2. Поиск всех вхождений</h3>
+                <div class="code-block">
+                    <h4>Пример: Найти все вхождения подстроки</h4>
+                    <pre>def find_all_occurrences(text, substring):
+    """Находит все индексы, где встречается подстрока"""
+    indices = []
+    start = 0
+    while True:
+        index = text.find(substring, start)
+        if index == -1:
+            break
+        indices.append(index)
+        start = index + 1
+    return indices
+
+# Пример
+text = "банан банан банан"
+substring = "банан"
+indices = find_all_occurrences(text, substring)
+print(f"'{substring}' найдено на позициях: {indices}")</pre>
+                </div>
+
+                <h3>1.3. Поиск подстроки вручную (алгоритм)</h3>
+                <div class="code-block">
+                    <h4>Пример: Реализация поиска без встроенных методов</h4>
+                    <pre>def find_substring(text, substring):
+    """Находит первое вхождение подстроки вручную"""
+    n = len(text)
+    m = len(substring)
+    
+    if m == 0:
+        return 0
+    if m > n:
+        return -1
+    
+    for i in range(n - m + 1):
+        # Проверяем, совпадает ли подстрока начиная с позиции i
+        match = True
+        for j in range(m):
+            if text[i + j] != substring[j]:
+                match = False
+                break
+        if match:
+            return i
+    return -1
+
+# Пример
+text = "программирование"
+substring = "грам"
+index = find_substring(text, substring)
+print(f"'{substring}' найдено на позиции: {index}")</pre>
+                </div>
+
+                <h2>2. Подсчет символов и слов</h2>
+                <p>Часто нужно посчитать, сколько раз встречается определенный символ или слово.</p>
+
+                <h3>2.1. Подсчет символов</h3>
+                <div class="code-block">
+                    <h4>Пример: Подсчет символов</h4>
+                    <pre>def count_char(text, char):
+    """Подсчитывает количество вхождений символа"""
+    count = 0
+    for c in text:
+        if c == char:
+            count += 1
+    return count
+
+# Или используя метод count()
+text = "программирование"
+count_a = text.count('а')
+print(f"Буква 'а' встречается {count_a} раз")
+
+# Подсчет всех символов
+def count_all_chars(text):
+    """Подсчитывает частоту каждого символа"""
+    char_count = {}
+    for char in text:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+    return char_count
+
+text = "привет"
+char_freq = count_all_chars(text)
+print(char_freq)  # {'п': 1, 'р': 1, 'и': 1, 'в': 1, 'е': 1, 'т': 1}</pre>
+                </div>
+
+                <h3>2.2. Подсчет слов</h3>
+                <div class="code-block">
+                    <h4>Пример: Подсчет слов в строке</h4>
+                    <pre>def count_words(text):
+    """Подсчитывает количество слов в строке"""
+    words = text.split()  # Разделяет по пробелам
+    return len(words)
+
+# Пример
+text = "Python это язык программирования"
+word_count = count_words(text)
+print(f"Количество слов: {word_count}")
+
+# Подсчет конкретного слова
+def count_word_occurrences(text, word):
+    """Подсчитывает количество вхождений слова"""
+    words = text.split()
+    count = 0
+    for w in words:
+        if w.lower() == word.lower():  # Без учета регистра
+            count += 1
+    return count
+
+text = "кот собака кот мышь кот"
+count = count_word_occurrences(text, "кот")
+print(f"Слово 'кот' встречается {count} раз")</pre>
+                </div>
+
+                <h2>3. Проверка на палиндром (строковый)</h2>
+                <p><strong>Палиндром</strong> - это строка, которая читается одинаково слева направо и справа налево (например, "топот", "казак", "а роза упала на лапу Азора").</p>
+
+                <div class="code-block">
+                    <h4>Пример: Проверка на палиндром</h4>
+                    <pre>def is_palindrome(text):
+    """Проверяет, является ли строка палиндромом"""
+    # Убираем пробелы и приводим к нижнему регистру
+    cleaned = text.replace(" ", "").lower()
+    # Сравниваем строку с перевернутой
+    return cleaned == cleaned[::-1]
+
+# Примеры
+print(is_palindrome("топот"))      # True
+print(is_palindrome("казак"))      # True
+print(is_palindrome("привет"))     # False
+print(is_palindrome("А роза упала на лапу Азора"))  # True</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Альтернативный способ (посимвольное сравнение)</h4>
+                    <pre>def is_palindrome_manual(text):
+    """Проверка палиндрома посимвольно"""
+    cleaned = text.replace(" ", "").lower()
+    n = len(cleaned)
+    for i in range(n // 2):
+        if cleaned[i] != cleaned[n - 1 - i]:
+            return False
+    return True
+
+print(is_palindrome_manual("топот"))  # True</pre>
+                </div>
+
+                <h2>4. Переворот строки</h2>
+                <p>Переворот строки - создание строки, в которой символы идут в обратном порядке.</p>
+
+                <div class="code-block">
+                    <h4>Пример: Переворот строки</h4>
+                    <pre>def reverse_string(text):
+    """Переворачивает строку"""
+    return text[::-1]
+
+# Или вручную
+def reverse_string_manual(text):
+    """Переворачивает строку вручную"""
+    reversed_text = ""
+    for i in range(len(text) - 1, -1, -1):
+        reversed_text += text[i]
+    return reversed_text
+
+# Примеры
+text = "привет"
+reversed_text = reverse_string(text)
+print(f"'{text}' → '{reversed_text}'")  # 'привет' → 'тевирп'</pre>
+                </div>
+
+                <h2>5. Удаление пробелов и лишних символов</h2>
+                <p>Часто нужно очистить строку от лишних пробелов или символов.</p>
+
+                <div class="code-block">
+                    <h4>Пример: Удаление пробелов</h4>
+                    <pre>text = "  привет  мир  "
+
+# Удаление пробелов с начала и конца
+trimmed = text.strip()
+print(f"'{trimmed}'")  # 'привет  мир'
+
+# Удаление всех пробелов
+no_spaces = text.replace(" ", "")
+print(f"'{no_spaces}'")  # 'приветмир'
+
+# Удаление пробелов с начала
+left_trimmed = text.lstrip()
+print(f"'{left_trimmed}'")  # 'привет  мир  '
+
+# Удаление пробелов с конца
+right_trimmed = text.rstrip()
+print(f"'{right_trimmed}'")  # '  привет  мир'</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример: Удаление всех пробелов вручную</h4>
+                    <pre>def remove_spaces(text):
+    """Удаляет все пробелы из строки"""
+    result = ""
+    for char in text:
+        if char != " ":
+            result += char
+    return result
+
+text = "привет мир Python"
+cleaned = remove_spaces(text)
+print(f"'{text}' → '{cleaned}'")</pre>
+                </div>
+
+                <h2>6. Замена символов и подстрок</h2>
+                <p>Замена - это изменение части строки на другую.</p>
+
+                <div class="code-block">
+                    <h4>Пример: Замена символов</h4>
+                    <pre>text = "привет мир"
+
+# Замена всех вхождений
+new_text = text.replace("мир", "Python")
+print(new_text)  # "привет Python"
+
+# Замена только первого вхождения
+def replace_first(text, old, new):
+    """Заменяет только первое вхождение"""
+    index = text.find(old)
+    if index == -1:
+        return text
+    return text[:index] + new + text[index + len(old):]
+
+text = "кот кот кот"
+new_text = replace_first(text, "кот", "собака")
+print(new_text)  # "собака кот кот"</pre>
+                </div>
+
+                <h2>7. Разделение и объединение строк</h2>
+                <p>Разделение строки на части и объединение частей в одну строку.</p>
+
+                <div class="code-block">
+                    <h4>Пример: Разделение строки</h4>
+                    <pre>text = "яблоко,банан,апельсин"
+
+# Разделение по запятой
+fruits = text.split(",")
+print(fruits)  # ['яблоко', 'банан', 'апельсин']
+
+# Разделение по пробелам
+text = "привет мир Python"
+words = text.split()
+print(words)  # ['привет', 'мир', 'Python']
+
+# Разделение с ограничением количества частей
+text = "один два три четыре"
+parts = text.split(" ", 2)  # Максимум 2 разделения
+print(parts)  # ['один', 'два', 'три четыре']</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример: Объединение строк</h4>
+                    <pre>words = ["привет", "мир", "Python"]
+
+# Объединение через пробел
+sentence = " ".join(words)
+print(sentence)  # "привет мир Python"
+
+# Объединение через запятую
+fruits = ["яблоко", "банан", "апельсин"]
+fruits_str = ", ".join(fruits)
+print(fruits_str)  # "яблоко, банан, апельсин"
+
+# Объединение без разделителя
+text = "".join(words)
+print(text)  # "приветмирPython"</pre>
+                </div>
+
+                <h2>8. Интерактивный редактор</h2>
+                <p>Попробуй написать свои функции для работы со строками:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Все функции из урока доступны здесь
+
+def find_substring(text, substring):
+    """Находит первое вхождение подстроки"""
+    n = len(text)
+    m = len(substring)
+    if m == 0:
+        return 0
+    if m > n:
+        return -1
+    for i in range(n - m + 1):
+        match = True
+        for j in range(m):
+            if text[i + j] != substring[j]:
+                match = False
+                break
+        if match:
+            return i
+    return -1
+
+def is_palindrome(text):
+    """Проверяет, является ли строка палиндромом"""
+    cleaned = text.replace(" ", "").lower()
+    return cleaned == cleaned[::-1]
+
+def count_char(text, char):
+    """Подсчитывает количество вхождений символа"""
+    count = 0
+    for c in text:
+        if c == char:
+            count += 1
+    return count
+
+# Попробуй написать функцию, которая находит самое длинное слово в строке
+def longest_word(text):
+    """Находит самое длинное слово в строке"""
+    words = text.split()
+    if not words:
+        return ""
+    longest = words[0]
+    for word in words:
+        if len(word) > len(longest):
+            longest = word
+    return longest
+
+# Проверка
+text = "Python это замечательный язык программирования"
+print("Исходная строка:", text)
+print("Самое длинное слово:", longest_word(text))
+print("Количество букв 'а':", count_char(text, 'а'))
+print("'язык' найдено на позиции:", find_substring(text, "язык"))
+print("'топот' - палиндром?", is_palindrome("топот"))</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>9. Практические задачи</h2>
+
+                <div class="practice-block">
+                    <h4>Задача 1: Подсчет гласных букв</h4>
+                    <p>Напиши функцию <code>count_vowels(text)</code>, которая подсчитывает количество гласных букв (а, е, ё, и, о, у, ы, э, ю, я) в строке.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Создай строку с гласными буквами и проверяй, входит ли каждый символ текста в эту строку.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задача 2: Удаление дубликатов символов</h4>
+                    <p>Напиши функцию <code>remove_duplicates(text)</code>, которая удаляет все повторяющиеся подряд символы, оставляя только один. Например, "аабббвв" → "абв".</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Проходи по строке и добавляй символ в результат только если он отличается от предыдущего.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задача 3: Проверка на анаграмму</h4>
+                    <p>Две строки являются анаграммами, если они содержат одинаковые символы в разном порядке. Напиши функцию <code>is_anagram(str1, str2)</code>, которая проверяет, являются ли две строки анаграммами.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Отсортируй обе строки и сравни их. Не забудь убрать пробелы и привести к одному регистру.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задача 4: Подсчет слов определенной длины</h4>
+                    <p>Напиши функцию <code>count_words_of_length(text, length)</code>, которая подсчитывает количество слов заданной длины в строке.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Раздели строку на слова и проверь длину каждого слова.</p>
+                    </details>
+                </div>
+
+                <h2>10. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Изменение строки напрямую</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - строки неизменяемы!
+text = "привет"
+text[0] = "П"  # Ошибка! TypeError
+
+# ПРАВИЛЬНО - создай новую строку
+text = "привет"
+new_text = "П" + text[1:]
+print(new_text)  # "Привет"</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильное сравнение строк с учетом регистра</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - регистр важен
+text1 = "Привет"
+text2 = "привет"
+if text1 == text2:  # False!
+    print("Равны")
+
+# ПРАВИЛЬНО - приведи к одному регистру
+text1 = "Привет"
+text2 = "привет"
+if text1.lower() == text2.lower():
+    print("Равны")  # Выполнится</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Забыли обработать пустую строку</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - не обработан случай пустой строки
+def first_char(text):
+    return text[0]  # Ошибка, если text пустая!
+
+# ПРАВИЛЬНО - проверь длину
+def first_char(text):
+    if len(text) == 0:
+        return None
+    return text[0]</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неэффективное конкатенирование строк в цикле</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - медленно для больших строк
+result = ""
+for i in range(1000):
+    result += "a"  # Каждый раз создается новая строка!
+
+# ПРАВИЛЬНО - используй список и join()
+result_list = []
+for i in range(1000):
+    result_list.append("a")
+result = "".join(result_list)  # Быстро!</pre>
+                    </div>
+                </div>
+
+                <h2>11. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Что вернет метод find(), если подстрока не найдена?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. 0 - это валидный индекс (начало строки).">0</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! Метод find() возвращает -1, если подстрока не найдена.">-1</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. None возвращается только в некоторых других методах.">None</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. False - это булево значение, а не индекс.">False</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Какая строка является палиндромом?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. 'привет' читается как 'тевирп' в обратном порядке.">привет</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! 'топот' читается одинаково в обоих направлениях.">топот</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. 'Python' читается как 'nohtyP' в обратном порядке.">Python</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. 'алгоритм' не является палиндромом.">алгоритм</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что делает метод split() без аргументов?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. split() разделяет строку, а не объединяет.">Объединяет строки</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! split() без аргументов разделяет строку по пробелам.">Разделяет строку по пробелам</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. split() не переворачивает строку.">Переворачивает строку</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. split() не удаляет пробелы, а использует их как разделители.">Удаляет все пробелы</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Какой срез строки переворачивает её?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. [::-1] переворачивает строку, а не [::1].">[::1]</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! [::-1] означает: взять все элементы с шагом -1, то есть в обратном порядке.">[::-1]</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. [1:] берет все элементы кроме первого.">[1:]</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. [:1] берет только первый элемент.">[:1]</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Почему конкатенация строк в цикле неэффективна?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Проблема не в этом.">Строки нельзя изменять</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! При каждой конкатенации создается новая строка, что очень медленно для больших объемов данных.">Каждая операция создает новую строку</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Это не связано с регистром.">Нужно учитывать регистр</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Проблема в другом.">Строки автоматически сортируются</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>12. Резюме урока</h2>
+                <ul>
+                    <li><strong>Поиск подстроки</strong> - используй <code>in</code>, <code>find()</code> или реализуй алгоритм вручную</li>
+                    <li><strong>Подсчет символов</strong> - используй цикл или метод <code>count()</code></li>
+                    <li><strong>Палиндром</strong> - строка, которая читается одинаково в обоих направлениях</li>
+                    <li><strong>Переворот строки</strong> - используй срез <code>[::-1]</code></li>
+                    <li><strong>Разделение строки</strong> - метод <code>split()</code></li>
+                    <li><strong>Объединение строк</strong> - метод <code>join()</code></li>
+                    <li><strong>Строки неизменяемы</strong> - нельзя изменить символ напрямую, нужно создавать новую строку</li>
+                    <li><strong>Для эффективной конкатенации</strong> используй список и <code>join()</code></li>
+                    <li><strong>Всегда обрабатывай граничные случаи</strong> (пустая строка, отсутствие подстроки)</li>
+                </ul>
+
+                <p>Отлично! Ты изучил основные алгоритмы для работы со строками. Эти знания пригодятся при решении задач ОГЭ и ЕГЭ. В следующем уроке мы изучим перебор и комбинаторику!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="algo-08.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="algo-10.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

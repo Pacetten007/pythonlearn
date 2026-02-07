@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОГЭ: Строки - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="oge-04">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ОГЭ: Строки</h1>
+                <div class="lesson-meta">Подготовка к ОГЭ • 45 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы изучим задачи ОГЭ, связанные со строками в Python. Это типичные задания, где нужно работать с текстовыми данными: обрабатывать символы, искать подстроки, изменять строки.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Работа с символами строки</li>
+                        <li>Поиск и подсчет символов</li>
+                        <li>Обработка строк в циклах</li>
+                        <li>Методы работы со строками</li>
+                        <li>Типичные задачи ОГЭ</li>
+                    </ul>
+                </div>
+
+                <h2>1. Работа с символами строки</h2>
+                <p>В Python строки можно обрабатывать как последовательности символов. Каждый символ имеет свой индекс.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 1: Доступ к символам</h4>
+                    <pre>Условие: Данная строка s = "Python". Что выведет программа?
+print(s[0])
+print(s[2])
+print(s[-1])
+
+Решение:
+s = "Python"
+s[0] = 'P'  (первый символ, индекс 0)
+s[2] = 't'  (третий символ, индекс 2)
+s[-1] = 'n' (последний символ, отрицательный индекс)
+
+Ответ:
+P
+t
+n
+
+Проверка в Python:
+s = "Python"
+print(f"s[0] = '{s[0]}'")   # P
+print(f"s[2] = '{s[2]}'")   # t
+print(f"s[-1] = '{s[-1]}'") # n</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 2: Длина строки</h4>
+                    <pre>Условие: Данная строка s = "Hello". Что выведет программа?
+print(len(s))
+
+Решение:
+s = "Hello"
+Длина строки = количество символов = 5
+
+Ответ: 5
+
+Проверка в Python:
+s = "Hello"
+print(f"Длина строки '{s}': {len(s)}")  # 5</pre>
+                </div>
+
+                <h2>2. Поиск и подсчет символов</h2>
+                <p>В задачах ОГЭ часто нужно найти или подсчитать определенные символы в строке.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 3: Подсчет символов</h4>
+                    <pre>Условие: Напишите программу, которая подсчитывает количество букв 'a' в строке "banana".
+
+Решение:
+s = "banana"
+count = 0
+for i in range(len(s)):
+    if s[i] == 'a':
+        count = count + 1
+print(count)
+
+Решение пошагово:
+1. count = 0
+2. i=0: s[0]='b', 'b' != 'a', count остается 0
+3. i=1: s[1]='a', 'a' == 'a', count = 1
+4. i=2: s[2]='n', 'n' != 'a', count остается 1
+5. i=3: s[3]='a', 'a' == 'a', count = 2
+6. i=4: s[4]='n', 'n' != 'a', count остается 2
+7. i=5: s[5]='a', 'a' == 'a', count = 3
+
+Ответ: 3
+
+Проверка в Python:
+s = "banana"
+count = 0
+for i in range(len(s)):
+    if s[i] == 'a':
+        count = count + 1
+        print(f"Найдена 'a' на позиции {i}, всего: {count}")
+print(f"Итого букв 'a': {count}")  # 3</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 4: Поиск символа</h4>
+                    <pre>Условие: Напишите программу, которая находит индекс первого вхождения символа 'o' в строке "Hello".
+
+Решение:
+s = "Hello"
+index = -1
+for i in range(len(s)):
+    if s[i] == 'o':
+        index = i
+        break
+print(index)
+
+Решение пошагово:
+1. index = -1
+2. i=0: s[0]='H', 'H' != 'o', index остается -1
+3. i=1: s[1]='e', 'e' != 'o', index остается -1
+4. i=2: s[2]='l', 'l' != 'o', index остается -1
+5. i=3: s[3]='l', 'l' != 'o', index остается -1
+6. i=4: s[4]='o', 'o' == 'o', index = 4, break
+
+Ответ: 4
+
+Проверка в Python:
+s = "Hello"
+index = -1
+for i in range(len(s)):
+    if s[i] == 'o':
+        index = i
+        print(f"Найден 'o' на позиции {i}")
+        break
+print(f"Индекс: {index}")  # 4</pre>
+                </div>
+
+                <h2>3. Обработка строк в циклах</h2>
+                <p>Циклы позволяют обработать все символы строки.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 5: Перебор символов</h4>
+                    <pre>Условие: Напишите программу, которая выводит все символы строки "Python" по одному на строке.
+
+Решение:
+s = "Python"
+for i in range(len(s)):
+    print(s[i])
+
+Ответ:
+P
+y
+t
+h
+o
+n
+
+Проверка в Python:
+s = "Python"
+for i in range(len(s)):
+    print(f"Символ {i}: '{s[i]}'")</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 6: Проверка условия для символов</h4>
+                    <pre>Условие: Напишите программу, которая подсчитывает количество цифр в строке "abc123def456".
+
+Решение:
+s = "abc123def456"
+count = 0
+for i in range(len(s)):
+    if s[i].isdigit():
+        count = count + 1
+print(count)
+
+Решение пошагово:
+1. count = 0
+2. Перебираем все символы:
+   - 'a', 'b', 'c' - не цифры
+   - '1', '2', '3' - цифры, count = 3
+   - 'd', 'e', 'f' - не цифры
+   - '4', '5', '6' - цифры, count = 6
+
+Ответ: 6
+
+Проверка в Python:
+s = "abc123def456"
+count = 0
+for i in range(len(s)):
+    if s[i].isdigit():
+        count = count + 1
+        print(f"Найдена цифра '{s[i]}' на позиции {i}, всего: {count}")
+print(f"Итого цифр: {count}")  # 6</pre>
+                </div>
+
+                <h2>4. Методы работы со строками</h2>
+                <p>В Python есть встроенные методы для работы со строками.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 7: Подсчет заглавных букв</h4>
+                    <pre>Условие: Напишите программу, которая подсчитывает количество заглавных букв в строке "Hello World".
+
+Решение:
+s = "Hello World"
+count = 0
+for i in range(len(s)):
+    if s[i].isupper():
+        count = count + 1
+print(count)
+
+Решение:
+1. count = 0
+2. Перебираем символы:
+   - 'H' - заглавная, count = 1
+   - 'e', 'l', 'l', 'o' - строчные
+   - ' ' - пробел
+   - 'W' - заглавная, count = 2
+   - 'o', 'r', 'l', 'd' - строчные
+
+Ответ: 2
+
+Проверка в Python:
+s = "Hello World"
+count = 0
+for i in range(len(s)):
+    if s[i].isupper():
+        count = count + 1
+        print(f"Найдена заглавная '{s[i]}' на позиции {i}, всего: {count}")
+print(f"Итого заглавных букв: {count}")  # 2</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 8: Проверка на букву</h4>
+                    <pre>Условие: Напишите программу, которая проверяет, содержит ли строка "Hello123" только буквы.
+
+Решение:
+s = "Hello123"
+only_letters = True
+for i in range(len(s)):
+    if not s[i].isalpha():
+        only_letters = False
+        break
+print(only_letters)
+
+Решение:
+1. only_letters = True
+2. Перебираем символы:
+   - 'H', 'e', 'l', 'l', 'o' - буквы
+   - '1' - не буква, only_letters = False, break
+
+Ответ: False
+
+Проверка в Python:
+s = "Hello123"
+only_letters = True
+for i in range(len(s)):
+    if not s[i].isalpha():
+        only_letters = False
+        print(f"Найден не-буквенный символ '{s[i]}' на позиции {i}")
+        break
+print(f"Только буквы: {only_letters}")  # False</pre>
+                </div>
+
+                <h2>5. Комплексные задачи</h2>
+                <p>Задачи, сочетающие несколько операций со строками.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 9: Подсчет гласных</h4>
+                    <pre>Условие: Напишите программу, которая подсчитывает количество гласных букв в строке "Hello".
+
+Решение:
+s = "Hello"
+vowels = "aeiouAEIOU"
+count = 0
+for i in range(len(s)):
+    if s[i] in vowels:
+        count = count + 1
+print(count)
+
+Решение:
+1. count = 0
+2. Перебираем символы:
+   - 'H' - не гласная
+   - 'e' - гласная, count = 1
+   - 'l' - не гласная
+   - 'l' - не гласная
+   - 'o' - гласная, count = 2
+
+Ответ: 2
+
+Проверка в Python:
+s = "Hello"
+vowels = "aeiouAEIOU"
+count = 0
+for i in range(len(s)):
+    if s[i] in vowels:
+        count = count + 1
+        print(f"Найдена гласная '{s[i]}' на позиции {i}, всего: {count}")
+print(f"Итого гласных: {count}")  # 2</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 10: Обратная строка</h4>
+                    <pre>Условие: Напишите программу, которая создает обратную строку для "Python".
+
+Решение:
+s = "Python"
+reverse = ""
+for i in range(len(s) - 1, -1, -1):
+    reverse = reverse + s[i]
+print(reverse)
+
+Решение пошагово:
+1. reverse = ""
+2. Цикл идет от последнего индекса к первому:
+   - i=5: s[5]='n', reverse = "" + 'n' = "n"
+   - i=4: s[4]='o', reverse = "n" + 'o' = "no"
+   - i=3: s[3]='h', reverse = "no" + 'h' = "noh"
+   - i=2: s[2]='t', reverse = "noh" + 't' = "noht"
+   - i=1: s[1]='y', reverse = "noht" + 'y' = "nohty"
+   - i=0: s[0]='P', reverse = "nohty" + 'P' = "nohtyP"
+
+Ответ: nohtyP
+
+Проверка в Python:
+s = "Python"
+reverse = ""
+for i in range(len(s) - 1, -1, -1):
+    reverse = reverse + s[i]
+    print(f"i={i}, s[{i}]='{s[i]}', reverse='{reverse}'")
+print(f"Обратная строка: {reverse}")  # nohtyP</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить задачи со строками:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Работа со строками в ОГЭ
+
+# Задача 1: Доступ к символам
+print("=== Задача 1: Доступ к символам ===")
+s = "Python"
+print(f"s[0] = '{s[0]}'")
+print(f"s[2] = '{s[2]}'")
+print(f"s[-1] = '{s[-1]}'")
+
+# Задача 2: Длина строки
+print("\n=== Задача 2: Длина строки ===")
+s = "Hello"
+print(f"Длина '{s}': {len(s)}")
+
+# Задача 3: Подсчет символов
+print("\n=== Задача 3: Подсчет 'a' ===")
+s = "banana"
+count = 0
+for i in range(len(s)):
+    if s[i] == 'a':
+        count = count + 1
+print(f"Букв 'a' в '{s}': {count}")
+
+# Задача 4: Поиск символа
+print("\n=== Задача 4: Поиск 'o' ===")
+s = "Hello"
+index = -1
+for i in range(len(s)):
+    if s[i] == 'o':
+        index = i
+        break
+print(f"Индекс 'o' в '{s}': {index}")
+
+# Задача 5: Подсчет цифр
+print("\n=== Задача 5: Подсчет цифр ===")
+s = "abc123def456"
+count = 0
+for i in range(len(s)):
+    if s[i].isdigit():
+        count = count + 1
+print(f"Цифр в '{s}': {count}")
+
+# Задача 6: Подсчет заглавных
+print("\n=== Задача 6: Подсчет заглавных ===")
+s = "Hello World"
+count = 0
+for i in range(len(s)):
+    if s[i].isupper():
+        count = count + 1
+print(f"Заглавных букв в '{s}': {count}")
+
+# Задача 7: Подсчет гласных
+print("\n=== Задача 7: Подсчет гласных ===")
+s = "Hello"
+vowels = "aeiouAEIOU"
+count = 0
+for i in range(len(s)):
+    if s[i] in vowels:
+        count = count + 1
+print(f"Гласных букв в '{s}': {count}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Доступ к символам</h4>
+                    <p>Данная строка s = "Python". Что выведет программа: print(s[1], s[-2])?</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>s[1] - это второй символ (индекс 1), s[-2] - это предпоследний символ.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Подсчет символов</h4>
+                    <p>Напиши программу, которая подсчитывает количество букв 'l' в строке "Hello".</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй цикл for и условие if s[i] == 'l' для подсчета.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Проверка на цифры</h4>
+                    <p>Напиши программу, которая проверяет, содержит ли строка "12345" только цифры.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй метод isdigit() для каждого символа в цикле.</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Выход за границы строки</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - выход за границы
+s = "Hello"
+print(s[5])  # Ошибка! Индексы: 0, 1, 2, 3, 4 (всего 5 символов)
+
+# ПРАВИЛЬНО - проверяй границы
+s = "Hello"
+if len(s) > 5:
+    print(s[5])
+else:
+    print("Индекс вне диапазона")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Путаница с регистром</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - не учитываешь регистр
+s = "Hello"
+if s[0] == 'h':  # 'H' != 'h'
+    print("Найдено")
+
+# ПРАВИЛЬНО - учитывай регистр или используй методы
+s = "Hello"
+if s[0] == 'H':  # Правильно
+    print("Найдено")
+
+# Или используй lower() для сравнения без учета регистра
+if s[0].lower() == 'h':  # 'H'.lower() = 'h'
+    print("Найдено")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильное использование методов</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - вызываешь метод на числе
+s = "Hello"
+for i in range(len(s)):
+    if i.isalpha():  # Ошибка! i - это число, а не строка
+        print(s[i])
+
+# ПРАВИЛЬНО - вызывай метод на символе строки
+s = "Hello"
+for i in range(len(s)):
+    if s[i].isalpha():  # Правильно: s[i] - это символ (строка)
+        print(s[i])</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Что выведет программа: s="Python"; print(s[0])?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-correct="true" data-explanation="Правильно! s[0] - это первый символ строки.">P</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-explanation="Неверно. s[0] - это первый символ, а не второй.">y</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. s[0] - это первый символ, а не третий.">t</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Проверь индексацию строк.">0</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что выведет программа: s="Hello"; print(len(s))?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Проверь количество символов в 'Hello'.">4</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! 'Hello' содержит 5 символов.">5</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. Проверь количество символов.">6</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это неправильный расчет.">10</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько букв 'l' в строке "Hello"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Проверь все символы в 'Hello'.">1</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! В 'Hello' есть две буквы 'l' на позициях 2 и 3.">2</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Проверь все символы.">3</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Это неправильный подсчет.">0</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что выведет программа: s="abc123"; count=0; for i in range(len(s)): if s[i].isdigit(): count+=1; print(count)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Проверь количество цифр в 'abc123'.">1</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-explanation="Неверно. Проверь все символы: '1', '2', '3' - это 3 цифры.">2</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-correct="true" data-explanation="Правильно! В 'abc123' есть три цифры: '1', '2', '3'.">3</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Это общее количество символов, а не цифр.">6</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что выведет программа: s="Hello"; print(s[-1])?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. s[-1] - это последний символ, а не первый.">H</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-explanation="Неверно. s[-1] - это последний символ.">e</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-correct="true" data-explanation="Правильно! s[-1] - это последний символ строки 'Hello'.">o</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Проверь отрицательные индексы.">l</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Индексация</strong> - строки индексируются с 0, последний символ имеет индекс -1</li>
+                    <li><strong>Доступ к символам</strong> - используй s[i] для доступа к символу с индексом i</li>
+                    <li><strong>Длина строки</strong> - len(s) возвращает количество символов</li>
+                    <li><strong>Подсчет символов</strong> - используй счетчик и условие в цикле</li>
+                    <li><strong>Поиск символа</strong> - перебирай символы и сравнивай с искомым</li>
+                    <li><strong>Методы строк</strong> - isdigit(), isalpha(), isupper(), islower() для проверки символов</li>
+                    <li><strong>Циклы по строке</strong> - используй for i in range(len(s)) для перебора всех символов</li>
+                    <li><strong>Границы</strong> - всегда проверяй, что индекс не выходит за границы строки</li>
+                    <li><strong>Регистр</strong> - учитывай регистр при сравнении символов</li>
+                    <li><strong>Практика</strong> - решай задачи пошагово, отслеживай изменения переменных</li>
+                </ul>
+
+                <p>Отлично! Ты изучил работу со строками в задачах ОГЭ. Эти навыки очень важны для успешной сдачи экзамена. Теперь ты готов к решению задач ОГЭ по Python! В следующем разделе мы перейдем к подготовке к ЕГЭ!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="oge-03.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="ege-01.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

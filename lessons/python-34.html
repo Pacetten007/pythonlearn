@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 44: Логические выражения - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-34">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 44: Логические выражения</h1>
+                <div class="lesson-meta">Логика • 45 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы научимся строить и упрощать сложные логические выражения. Это важный навык для написания понятного кода и решения задач ЕГЭ по информатике.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Построение сложных логических выражений</li>
+                        <li>Таблицы истинности для сложных выражений</li>
+                        <li>Законы де Моргана</li>
+                        <li>Упрощение логических выражений</li>
+                        <li>Применение в программировании</li>
+                    </ul>
+                </div>
+
+                <h2>1. Построение логических выражений</h2>
+                <p>Логическое выражение — это комбинация логических операций, которая возвращает True или False.</p>
+
+                <div class="code-block">
+                    <h4>Примеры простых выражений:</h4>
+                    <pre># Простые логические выражения
+x = 5
+y = 10
+
+# Сравнения возвращают логические значения
+print(x > 3)        # True
+print(y < 5)        # False
+print(x == 5)       # True
+print(x != y)       # True
+
+# Комбинации с логическими операциями
+print(x > 3 and y < 15)   # True and True = True
+print(x > 3 or y < 5)     # True or False = True
+print(not x > 10)          # not False = True</pre>
+                </div>
+
+                <h2>2. Сложные логические выражения</h2>
+                <p>Сложные выражения содержат несколько логических операций. Важно правильно расставлять скобки!</p>
+
+                <div class="code-block">
+                    <h4>Пример 1: Проверка диапазона</h4>
+                    <pre># Проверка, что число в диапазоне [10, 20]
+number = 15
+
+# Способ 1: с использованием AND
+in_range = number >= 10 and number <= 20
+print(f"Число {number} в диапазоне [10, 20]: {in_range}")  # True
+
+# Способ 2: более читаемый вариант
+in_range = (number >= 10) and (number <= 20)
+print(f"Число {number} в диапазоне [10, 20]: {in_range}")  # True</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 2: Проверка нескольких условий</h4>
+                    <pre># Проверка, что число четное И положительное
+number = 8
+
+is_even_positive = (number > 0) and (number % 2 == 0)
+print(f"Число {number} четное и положительное: {is_even_positive}")  # True
+
+# Проверка, что число отрицательное ИЛИ равно нулю
+number = -5
+is_non_positive = (number < 0) or (number == 0)
+print(f"Число {number} отрицательное или равно нулю: {is_non_positive}")  # True</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 3: Сложное условие</h4>
+                    <pre># Проверка, что число делится на 3 ИЛИ на 5, но НЕ на 15
+number = 9
+
+condition = ((number % 3 == 0) or (number % 5 == 0)) and (number % 15 != 0)
+print(f"Число {number} делится на 3 или 5, но не на 15: {condition}")  # True
+
+# Проверка для числа 15
+number = 15
+condition = ((number % 3 == 0) or (number % 5 == 0)) and (number % 15 != 0)
+print(f"Число {number} делится на 3 или 5, но не на 15: {condition}")  # False</pre>
+                </div>
+
+                <h2>3. Таблицы истинности для сложных выражений</h2>
+                <p>Таблицы истинности помогают понять, когда сложное выражение истинно, а когда ложно.</p>
+
+                <div class="code-block">
+                    <h4>Таблица истинности для (A AND B) OR C:</h4>
+                    <pre>A     B     C     A AND B    (A AND B) OR C
+True  True  True  True       True
+True  True  False True       True
+True  False True  False      True
+True  False False False      False
+False True  True  False      True
+False True  False False      False
+False False True  False      True
+False False False False      False</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Таблица истинности для NOT (A OR B):</h4>
+                    <pre>A     B     A OR B    NOT (A OR B)
+True  True  True      False
+True  False True      False
+False True  True      False
+False False False     True</pre>
+                </div>
+
+                <h2>4. Законы де Моргана</h2>
+                <p>Законы де Моргана позволяют упрощать логические выражения:</p>
+
+                <div class="code-block">
+                    <h4>Закон 1: NOT (A AND B) = (NOT A) OR (NOT B)</h4>
+                    <pre># Эти выражения эквивалентны:
+# not (A and B) = (not A) or (not B)
+
+A = True
+B = False
+
+result1 = not (A and B)
+result2 = (not A) or (not B)
+
+print(f"not (A and B) = {result1}")        # True
+print(f"(not A) or (not B) = {result2}")   # True
+print(f"Они равны: {result1 == result2}")  # True</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Закон 2: NOT (A OR B) = (NOT A) AND (NOT B)</h4>
+                    <pre># Эти выражения эквивалентны:
+# not (A or B) = (not A) and (not B)
+
+A = True
+B = False
+
+result1 = not (A or B)
+result2 = (not A) and (not B)
+
+print(f"not (A or B) = {result1}")          # False
+print(f"(not A) and (not B) = {result2}")  # False
+print(f"Они равны: {result1 == result2}")  # True</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Практическое применение законов де Моргана:</h4>
+                    <pre># Условие: число НЕ в диапазоне [10, 20]
+number = 25
+
+# Способ 1: прямое условие
+not_in_range1 = not (number >= 10 and number <= 20)
+
+# Способ 2: используя закон де Моргана
+not_in_range2 = (number < 10) or (number > 20)
+
+print(f"Число {number} не в диапазоне [10, 20]: {not_in_range1}")  # True
+print(f"Число {number} не в диапазоне [10, 20]: {not_in_range2}")  # True
+print(f"Они равны: {not_in_range1 == not_in_range2}")  # True</pre>
+                </div>
+
+                <h2>5. Упрощение логических выражений</h2>
+                <p>Упрощение делает код более читаемым и понятным.</p>
+
+                <div class="code-block">
+                    <h4>Пример 1: Упрощение с использованием законов</h4>
+                    <pre># Исходное выражение: not (x > 5 and y < 10)
+x = 3
+y = 7
+
+# Упрощенное: (x <= 5) or (y >= 10)
+result1 = not (x > 5 and y < 10)
+result2 = (x <= 5) or (y >= 10)
+
+print(f"not (x > 5 and y < 10) = {result1}")  # True
+print(f"(x <= 5) or (y >= 10) = {result2}")   # True</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 2: Упрощение двойного отрицания</h4>
+                    <pre># Двойное отрицание: not (not A) = A
+A = True
+
+result1 = not (not A)
+print(f"not (not A) = {result1}")  # True
+print(f"A = {A}")                  # True
+print(f"Они равны: {result1 == A}")  # True</pre>
+                </div>
+
+                <h2>6. Применение в программировании</h2>
+
+                <div class="code-block">
+                    <h4>Пример 1: Валидация данных</h4>
+                    <pre># Проверка, что пароль валиден
+password = "MyPass123"
+min_length = 8
+has_upper = any(c.isupper() for c in password)
+has_lower = any(c.islower() for c in password)
+has_digit = any(c.isdigit() for c in password)
+
+# Сложное условие: все требования должны быть выполнены
+is_valid = (len(password) >= min_length and 
+            has_upper and 
+            has_lower and 
+            has_digit)
+
+print(f"Пароль валиден: {is_valid}")  # True
+
+# Проверка, что пароль НЕ валиден
+is_invalid = not is_valid
+# Или используя закон де Моргана:
+is_invalid2 = (len(password) < min_length or 
+               not has_upper or 
+               not has_lower or 
+               not has_digit)
+
+print(f"Пароль не валиден: {is_invalid}")   # False
+print(f"Пароль не валиден: {is_invalid2}")  # False</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 2: Проверка условий в цикле</h4>
+                    <pre># Продолжать цикл, пока число в диапазоне И не равно 0
+number = 5
+
+# Условие для продолжения цикла
+while (number >= 1 and number <= 10) and number != 0:
+    print(f"Число: {number}")
+    number -= 1
+    if number < 1:
+        break
+
+# Упрощенное условие (так как number != 0 избыточно, если number >= 1)
+number = 5
+while number >= 1 and number <= 10:
+    print(f"Число: {number}")
+    number -= 1
+    if number < 1:
+        break</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 3: Фильтрация данных</h4>
+                    <pre># Найти числа, которые четные ИЛИ делятся на 3, но НЕ делятся на 6
+numbers = [2, 3, 4, 6, 8, 9, 12, 15]
+
+filtered = []
+for num in numbers:
+    # Условие: (четное ИЛИ делится на 3) И НЕ делится на 6
+    condition = ((num % 2 == 0) or (num % 3 == 0)) and (num % 6 != 0)
+    if condition:
+        filtered.append(num)
+
+print(f"Исходный список: {numbers}")
+print(f"Отфильтрованный: {filtered}")  # [2, 3, 4, 8, 9, 15]</pre>
+                </div>
+
+                <h2>7. Интерактивный редактор</h2>
+                <p>Попробуй сам построить и упростить логические выражения:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Логические выражения
+
+# 1. Проверка диапазона
+print("=== Проверка диапазона ===")
+number = 15
+in_range = (number >= 10) and (number <= 20)
+print(f"Число {number} в диапазоне [10, 20]: {in_range}")
+
+# 2. Сложное условие
+print("\n=== Сложное условие ===")
+x = 9
+condition = ((x % 3 == 0) or (x % 5 == 0)) and (x % 15 != 0)
+print(f"Число {x} делится на 3 или 5, но не на 15: {condition}")
+
+# 3. Законы де Моргана
+print("\n=== Законы де Моргана ===")
+A = True
+B = False
+result1 = not (A and B)
+result2 = (not A) or (not B)
+print(f"not (A and B) = {result1}")
+print(f"(not A) or (not B) = {result2}")
+print(f"Они равны: {result1 == result2}")
+
+# 4. Практическое применение
+print("\n=== Валидация пароля ===")
+password = "MyPass123"
+min_length = 8
+has_upper = any(c.isupper() for c in password)
+has_lower = any(c.islower() for c in password)
+has_digit = any(c.isdigit() for c in password)
+
+is_valid = (len(password) >= min_length and 
+            has_upper and 
+            has_lower and 
+            has_digit)
+print(f"Пароль валиден: {is_valid}")
+
+# 5. Фильтрация данных
+print("\n=== Фильтрация данных ===")
+numbers = [2, 3, 4, 6, 8, 9, 12, 15]
+filtered = [num for num in numbers 
+            if ((num % 2 == 0) or (num % 3 == 0)) and (num % 6 != 0)]
+print(f"Исходный список: {numbers}")
+print(f"Отфильтрованный: {filtered}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>8. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Построить таблицу истинности</h4>
+                    <p>Построй таблицу истинности для выражения: (A OR B) AND NOT C</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Создай все 8 комбинаций значений для A, B, C и вычисли результат для каждой.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Упростить выражение</h4>
+                    <p>Упрости выражение: NOT (x > 5 OR y < 10), используя закон де Моргана.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй закон: NOT (A OR B) = (NOT A) AND (NOT B). Замени операции сравнения на противоположные.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Написать условие</h4>
+                    <p>Напиши логическое выражение для проверки, что число:</p>
+                    <ul>
+                        <li>Положительное И четное ИЛИ</li>
+                        <li>Отрицательное И нечетное</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй скобки для группировки: (условие1 И условие2) ИЛИ (условие3 И условие4).</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 4: Применить закон де Моргана</h4>
+                    <p>Перепиши условие "НЕ (возраст >= 18 И есть права)" используя закон де Моргана.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>NOT (A AND B) = (NOT A) OR (NOT B). Замени операции сравнения на противоположные.</p>
+                    </details>
+                </div>
+
+                <h2>9. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неправильный приоритет операций</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - может дать неожиданный результат
+result = x > 5 and y < 10 or z == 0
+# Непонятно, что выполнится первым: (x > 5 and y < 10) or z == 0
+# или x > 5 and (y < 10 or z == 0)
+
+# ПРАВИЛЬНО - используй скобки для ясности
+result = (x > 5 and y < 10) or z == 0
+# Или
+result = x > 5 and (y < 10 or z == 0)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильное применение закона де Моргана</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - забыли изменить операции сравнения
+# not (x > 5 and y < 10)
+# Неправильно: (x > 5) or (y < 10)  # Это не эквивалентно!
+
+# ПРАВИЛЬНО - нужно изменить операции сравнения
+# not (x > 5 and y < 10)
+# Правильно: (x <= 5) or (y >= 10)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Избыточные условия</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - избыточное условие
+# (x > 0) and (x != 0)
+# Если x > 0, то x != 0 автоматически
+
+# ПРАВИЛЬНО - упрости выражение
+# x > 0  # Этого достаточно</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Путаница между AND и OR</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильная логика
+# "Число в диапазоне [10, 20]"
+in_range = (number >= 10) or (number <= 20)
+# Это вернет True для ЛЮБОГО числа!
+
+# ПРАВИЛЬНО - используй AND для обязательных условий
+in_range = (number >= 10) and (number <= 20)
+# Число должно быть >= 10 И <= 20 одновременно</pre>
+                    </div>
+                </div>
+
+                <h2>10. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Чему равно выражение (True OR False) AND True?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Сначала (True or False) = True, затем True and True = True.">False</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! Сначала (True or False) = True, затем True and True = True.">True</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Это логическое выражение, не число.">1</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это логическое выражение, не строка.">"True"</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Как упростить выражение NOT (A AND B) по закону де Моргана?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Это неправильное применение закона.">(NOT A) AND (NOT B)</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! По закону де Моргана: NOT (A AND B) = (NOT A) OR (NOT B).">(NOT A) OR (NOT B)</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. Это не упрощение, а исходное выражение.">NOT (A AND B)</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это неправильное применение закона.">A OR B</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Как правильно записать условие "число в диапазоне [10, 20]"?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Это вернет True для любого числа >= 10 или <= 20, что неправильно.">(number >= 10) OR (number <= 20)</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! Число должно быть >= 10 И <= 20 одновременно.">(number >= 10) AND (number <= 20)</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Это неправильный синтаксис.">number >= 10 <= 20</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Это неверная логика.">10 <= number OR number <= 20</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Чему равно выражение NOT (True OR False)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-correct="true" data-explanation="Правильно! Сначала (True or False) = True, затем not True = False.">False</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-explanation="Неверно. Сначала вычисляется (True or False) = True, затем not True = False.">True</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Это не число, а логическое значение.">0</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Это не строка, а логическое значение.">"False"</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как упростить выражение NOT (x > 5 AND y < 10) по закону де Моргана?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Нужно изменить операции сравнения на противоположные.">(x > 5) OR (y < 10)</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! NOT (x > 5 AND y < 10) = (x <= 5) OR (y >= 10).">(x <= 5) OR (y >= 10)</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Это неправильное применение закона.">(x <= 5) AND (y >= 10)</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это не упрощение, а исходное выражение.">NOT (x > 5 AND y < 10)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>11. Резюме урока</h2>
+                <ul>
+                    <li><strong>Логическое выражение</strong> - комбинация логических операций, возвращающая True или False</li>
+                    <li><strong>Сложные выражения</strong> - содержат несколько операций, требуют правильной расстановки скобок</li>
+                    <li><strong>Таблицы истинности</strong> - помогают понять результат сложных выражений</li>
+                    <li><strong>Законы де Моргана</strong>:
+                        <ul>
+                            <li>NOT (A AND B) = (NOT A) OR (NOT B)</li>
+                            <li>NOT (A OR B) = (NOT A) AND (NOT B)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Упрощение</strong> - делает код более читаемым и понятным</li>
+                    <li><strong>Приоритет операций</strong> - not (высший), and (средний), or (низший)</li>
+                    <li><strong>Скобки</strong> - всегда используй скобки в сложных выражениях для ясности</li>
+                    <li><strong>Изменение операций</strong> - при применении законов де Моргана не забывай менять операции сравнения</li>
+                    <li><strong>Практика</strong> - логические выражения используются везде: в условиях, циклах, фильтрации данных</li>
+                </ul>
+
+                <p>Отлично! Ты научился строить и упрощать сложные логические выражения. Эти навыки очень важны для написания качественного кода и решения задач ЕГЭ. В следующем уроке мы изучим логику в Python более подробно!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-33.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-35.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

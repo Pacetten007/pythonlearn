@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 42: Задачи ЕГЭ по системам счисления - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-32">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 42: Задачи ЕГЭ по системам счисления</h1>
+                <div class="lesson-meta">Системы счисления • 50 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы разберем типичные задачи ЕГЭ по системам счисления. Эти задачи встречаются в заданиях №1, №16 и других. Важно уметь не только решать их вручную, но и проверять ответы с помощью Python.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Задачи на перевод между системами счисления</li>
+                        <li>Задачи на поиск основания системы счисления</li>
+                        <li>Задачи на арифметику в различных системах</li>
+                        <li>Задачи на количество цифр в записи числа</li>
+                        <li>Типичные ошибки и как их избежать</li>
+                    </ul>
+                </div>
+
+                <h2>1. Задачи на перевод между системами счисления</h2>
+                <p>Это самый частый тип задач в ЕГЭ. Нужно перевести число из одной системы в другую.</p>
+
+                <div class="code-block">
+                    <h4>Задача 1: Перевод из двоичной в десятичную</h4>
+                    <pre>Условие: Переведите число 101101₂ в десятичную систему счисления.
+
+Решение:
+101101₂ = 1×2⁵ + 0×2⁴ + 1×2³ + 1×2² + 0×2¹ + 1×2⁰
+        = 1×32 + 0×16 + 1×8 + 1×4 + 0×2 + 1×1
+        = 32 + 0 + 8 + 4 + 0 + 1
+        = 45₁₀
+
+Проверка в Python:
+binary = "101101"
+decimal = int(binary, 2)
+print(decimal)  # 45</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача 2: Перевод из десятичной в восьмеричную</h4>
+                    <pre>Условие: Переведите число 125₁₀ в восьмеричную систему счисления.
+
+Решение методом деления:
+125 ÷ 8 = 15 (остаток 5)
+ 15 ÷ 8 =  1 (остаток 7)
+  1 ÷ 8 =  0 (остаток 1)
+
+Читаем остатки снизу вверх: 175₈
+
+Проверка в Python:
+decimal = 125
+octal = oct(decimal)[2:]
+print(octal)  # 175
+
+Обратная проверка:
+octal_str = "175"
+decimal_check = int(octal_str, 8)
+print(decimal_check)  # 125</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача 3: Перевод через промежуточную систему</h4>
+                    <pre>Условие: Переведите число 175₈ в шестнадцатеричную систему.
+
+Решение через десятичную:
+1. 175₈ → десятичная:
+   175₈ = 1×8² + 7×8¹ + 5×8⁰ = 64 + 56 + 5 = 125₁₀
+
+2. 125₁₀ → шестнадцатеричная:
+   125 ÷ 16 = 7 (остаток 13 = D)
+    7 ÷ 16 = 0 (остаток 7)
+   
+   Результат: 7D₁₆
+
+Проверка в Python:
+octal = "175"
+decimal = int(octal, 8)
+hexadecimal = hex(decimal)[2:].upper()
+print(hexadecimal)  # 7D</pre>
+                </div>
+
+                <h2>2. Задачи на поиск основания системы счисления</h2>
+                <p>В таких задачах нужно найти основание системы счисления, при котором равенство верно.</p>
+
+                <div class="code-block">
+                    <h4>Задача 4: Найти основание системы</h4>
+                    <pre>Условие: В системе счисления с некоторым основанием число 12 записывается как 110.
+Найдите это основание.
+
+Решение:
+Пусть основание = x
+110ₓ = 1×x² + 1×x¹ + 0×x⁰ = x² + x
+
+По условию: x² + x = 12
+x² + x - 12 = 0
+
+Решаем квадратное уравнение:
+D = 1 + 48 = 49
+x = (-1 + 7) / 2 = 3
+
+Ответ: основание = 3
+
+Проверка в Python:
+def find_base(number_str, decimal_value):
+    """Находит основание системы счисления"""
+    for base in range(2, 17):  # Проверяем основания от 2 до 16
+        try:
+            if int(number_str, base) == decimal_value:
+                return base
+        except:
+            continue
+    return None
+
+base = find_base("110", 12)
+print(f"Основание: {base}")  # 3
+print(f"Проверка: 110₃ = {int('110', 3)}₁₀")  # 12</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача 5: Найти основание по равенству</h4>
+                    <pre>Условие: В некоторой системе счисления 23 + 25 = 52. Найдите основание этой системы.
+
+Решение:
+Пусть основание = x
+23ₓ + 25ₓ = 52ₓ
+
+Переведем в десятичную:
+(2x + 3) + (2x + 5) = 5x + 2
+4x + 8 = 5x + 2
+x = 6
+
+Ответ: основание = 6
+
+Проверка в Python:
+def solve_equation():
+    for base in range(3, 17):
+        num1 = int("23", base)
+        num2 = int("25", base)
+        result = int("52", base)
+        if num1 + num2 == result:
+            return base
+    return None
+
+base = solve_equation()
+print(f"Основание: {base}")  # 6
+print(f"Проверка: 23₆ + 25₆ = {int('23', 6) + int('25', 6)}₁₀ = {int('52', 6)}₁₀")</pre>
+                </div>
+
+                <h2>3. Задачи на арифметику в системах счисления</h2>
+                <p>Нужно выполнить арифметические операции в различных системах счисления.</p>
+
+                <div class="code-block">
+                    <h4>Задача 6: Сложение в двоичной системе</h4>
+                    <pre>Условие: Вычислите сумму чисел 1011₂ + 1101₂. Ответ запишите в двоичной системе.
+
+Решение столбиком:
+   1011
+ + 1101
+ ------
+  11000
+
+Проверка в Python:
+a = int("1011", 2)
+b = int("1101", 2)
+result = a + b
+binary_result = bin(result)[2:]
+print(f"1011₂ + 1101₂ = {binary_result}₂")
+print(f"Проверка: {a}₁₀ + {b}₁₀ = {result}₁₀ = {binary_result}₂")</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача 7: Вычитание в восьмеричной системе</h4>
+                    <pre>Условие: Вычислите разность 443₈ - 175₈. Ответ запишите в восьмеричной системе.
+
+Решение:
+Переводим в десятичную, вычитаем, переводим обратно:
+443₈ = 291₁₀
+175₈ = 125₁₀
+291 - 125 = 166₁₀ = 246₈
+
+Проверка в Python:
+a = int("443", 8)
+b = int("175", 8)
+result = a - b
+octal_result = oct(result)[2:]
+print(f"443₈ - 175₈ = {octal_result}₈")
+print(f"Проверка: {a}₁₀ - {b}₁₀ = {result}₁₀ = {octal_result}₈")</pre>
+                </div>
+
+                <h2>4. Задачи на количество цифр</h2>
+                <p>Нужно найти, сколько цифр потребуется для записи числа в определенной системе счисления.</p>
+
+                <div class="code-block">
+                    <h4>Задача 8: Количество цифр в записи числа</h4>
+                    <pre>Условие: Сколько цифр в двоичной записи числа 255?
+
+Решение:
+Нужно найти наименьшую степень двойки, которая больше 255:
+2⁷ = 128 < 255
+2⁸ = 256 > 255
+
+Значит, для записи числа 255 в двоичной системе нужно 8 цифр.
+
+Проверка:
+255₁₀ = 11111111₂ (8 цифр)
+
+Проверка в Python:
+number = 255
+binary = bin(number)[2:]
+print(f"Число {number}₁₀ в двоичной системе: {binary}₂")
+print(f"Количество цифр: {len(binary)}")  # 8</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача 9: Общая формула для количества цифр</h4>
+                    <pre>Условие: Сколько цифр в восьмеричной записи числа 1000?
+
+Решение:
+Нужно найти наименьшую степень 8, которая больше 1000:
+8³ = 512 < 1000
+8⁴ = 4096 > 1000
+
+Значит, нужно 4 цифры.
+
+Общая формула:
+Количество цифр = ⌊log_base(N)⌋ + 1
+
+Проверка в Python:
+import math
+
+def count_digits(number, base):
+    """Считает количество цифр в записи числа в системе с основанием base"""
+    if number == 0:
+        return 1
+    return int(math.log(number, base)) + 1
+
+number = 1000
+octal = oct(number)[2:]
+digits_count = count_digits(number, 8)
+print(f"Число {number}₁₀ в восьмеричной системе: {octal}₈")
+print(f"Количество цифр: {digits_count} (проверка: {len(octal)})")</pre>
+                </div>
+
+                <h2>5. Комплексные задачи</h2>
+                <p>Задачи, сочетающие несколько типов.</p>
+
+                <div class="code-block">
+                    <h4>Задача 10: ЕГЭ-типичная задача</h4>
+                    <pre>Условие: Сколько единиц в двоичной записи числа 1025?
+
+Решение:
+Переводим 1025 в двоичную систему:
+1025 ÷ 2 = 512 (остаток 1)
+ 512 ÷ 2 = 256 (остаток 0)
+ 256 ÷ 2 = 128 (остаток 0)
+ 128 ÷ 2 =  64 (остаток 0)
+  64 ÷ 2 =  32 (остаток 0)
+  32 ÷ 2 =  16 (остаток 0)
+  16 ÷ 2 =   8 (остаток 0)
+   8 ÷ 2 =   4 (остаток 0)
+   4 ÷ 2 =   2 (остаток 0)
+   2 ÷ 2 =   1 (остаток 0)
+   1 ÷ 2 =   0 (остаток 1)
+
+1025₁₀ = 10000000001₂
+
+Считаем единицы: их 2.
+
+Проверка в Python:
+number = 1025
+binary = bin(number)[2:]
+ones_count = binary.count('1')
+print(f"Число {number}₁₀ = {binary}₂")
+print(f"Количество единиц: {ones_count}")  # 2</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача 11: Задача на диапазон</h4>
+                    <pre>Условие: Сколько существует чисел, двоичная запись которых содержит ровно 5 единиц,
+а десятичная запись оканчивается на 0?
+
+Решение в Python:
+def count_numbers():
+    count = 0
+    for num in range(1, 10000):  # Проверяем числа до 10000
+        binary = bin(num)[2:]
+        # Проверяем: 5 единиц в двоичной и оканчивается на 0 в десятичной
+        if binary.count('1') == 5 and num % 10 == 0:
+            count += 1
+            print(f"Найдено: {num}₁₀ = {binary}₂")
+    return count
+
+result = count_numbers()
+print(f"\nВсего таких чисел: {result}")</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить задачи ЕГЭ с помощью Python:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Решение задач ЕГЭ по системам счисления
+
+# Задача 1: Перевод из двоичной в десятичную
+print("=== Задача 1 ===")
+binary = "101101"
+decimal = int(binary, 2)
+print(f"{binary}₂ = {decimal}₁₀")
+
+# Задача 2: Перевод из десятичной в восьмеричную
+print("\n=== Задача 2 ===")
+decimal = 125
+octal = oct(decimal)[2:]
+print(f"{decimal}₁₀ = {octal}₈")
+
+# Задача 3: Найти основание системы
+print("\n=== Задача 3 ===")
+def find_base(number_str, decimal_value):
+    for base in range(2, 17):
+        try:
+            if int(number_str, base) == decimal_value:
+                return base
+        except:
+            continue
+    return None
+
+base = find_base("110", 12)
+print(f"Основание для 110ₓ = 12₁₀: {base}")
+
+# Задача 4: Сложение в двоичной системе
+print("\n=== Задача 4 ===")
+a = int("1011", 2)
+b = int("1101", 2)
+result = a + b
+binary_result = bin(result)[2:]
+print(f"1011₂ + 1101₂ = {binary_result}₂")
+
+# Задача 5: Количество единиц в двоичной записи
+print("\n=== Задача 5 ===")
+number = 1025
+binary = bin(number)[2:]
+ones_count = binary.count('1')
+print(f"Число {number}₁₀ = {binary}₂")
+print(f"Количество единиц: {ones_count}")
+
+# Задача 6: Количество цифр в записи
+print("\n=== Задача 6 ===")
+number = 255
+binary = bin(number)[2:]
+print(f"Число {number}₁₀ в двоичной системе: {binary}₂")
+print(f"Количество цифр: {len(binary)}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Перевод чисел</h4>
+                    <p>Переведи следующие числа:</p>
+                    <ul>
+                        <li>11111111₂ → ?₁₀</li>
+                        <li>255₁₀ → ?₈</li>
+                        <li>FF₁₆ → ?₂</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй функции int(), bin(), oct(), hex() для проверки ответов.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Найти основание</h4>
+                    <p>В системе счисления с некоторым основанием число 25 записывается как 100. Найдите это основание.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Составь уравнение: 1×x² + 0×x¹ + 0×x⁰ = 25, где x - основание системы.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Арифметика</h4>
+                    <p>Вычислите 1A5₁₆ + 2B3₁₆. Ответ запишите в шестнадцатеричной системе.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Переведи в десятичную, сложи, переведи обратно в шестнадцатеричную.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 4: Количество единиц</h4>
+                    <p>Сколько единиц в двоичной записи числа 2024?</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй bin(2024)[2:].count('1') для проверки.</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки в задачах ЕГЭ</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неправильный порядок остатков</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - читаем остатки сверху вниз
+125 ÷ 8 = 15 (остаток 5) ← это НЕ старший разряд!
+ 15 ÷ 8 =  1 (остаток 7)
+  1 ÷ 8 =  0 (остаток 1)
+
+# ПРАВИЛЬНО - читаем остатки снизу вверх
+# Последний остаток (1) - старший разряд
+# Первый остаток (5) - младший разряд
+# Результат: 175₈</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Забыли про буквы в шестнадцатеричной системе</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - использовали неправильные символы
+hex_num = "1G5"  # G не существует!
+# int(hex_num, 16) выдаст ошибку
+
+# ПРАВИЛЬНО - используем только 0-9 и A-F
+hex_num = "1A5"  # A = 10
+decimal = int(hex_num, 16)
+print(decimal)  # 421</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильное решение уравнения для поиска основания</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильно составили уравнение
+# Для 110ₓ = 12₁₀
+# Неправильно: 1 + 1 + 0 = 12 (это не так!)
+
+# ПРАВИЛЬНО - учитываем позиции разрядов
+# 110ₓ = 1×x² + 1×x¹ + 0×x⁰ = x² + x
+# x² + x = 12
+# x² + x - 12 = 0
+# x = 3</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неправильный подсчет количества цифр</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильная формула
+# Для числа 255 в двоичной системе
+# Неправильно: log₂(255) ≈ 7.99, значит 7 цифр
+
+# ПРАВИЛЬНО - формула: ⌊log_base(N)⌋ + 1
+# log₂(255) ≈ 7.99, значит ⌊7.99⌋ + 1 = 7 + 1 = 8 цифр
+# Проверка: 255₁₀ = 11111111₂ (8 цифр)</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Чему равно число 101101₂ в десятичной системе?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Это неправильный расчет.">37</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! 1×2⁵ + 0×2⁴ + 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 32 + 0 + 8 + 4 + 0 + 1 = 45.">45</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Проверь расчет еще раз.">53</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это 101101₁₀, а не результат перевода.">101101</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: В системе счисления с некоторым основанием число 12 записывается как 110. Какое это основание?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. 110₂ = 6₁₀, а не 12.">2</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! 110₃ = 1×3² + 1×3¹ + 0×3⁰ = 9 + 3 + 0 = 12.">3</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. 110₄ = 1×4² + 1×4¹ + 0×4⁰ = 16 + 4 + 0 = 20.">4</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Проверь расчет.">5</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько единиц в двоичной записи числа 255?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. 255₁₀ = 11111111₂, в нем 8 единиц.">4</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-explanation="Неверно. Проверь: 255₁₀ = 11111111₂.">6</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. 255₁₀ = 11111111₂ содержит 8 единиц.">7</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-correct="true" data-explanation="Правильно! 255₁₀ = 11111111₂, в нем 8 единиц.">8</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Чему равно 1011₂ + 1101₂ в двоичной системе?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Это неправильное сложение без учета переносов.">2112₂</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! 11₁₀ + 13₁₀ = 24₁₀ = 11000₂. При сложении учитываются переносы.">11000₂</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Это 12₁₀ = 1100₂.">1100₂</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Проверь сложение столбиком.">10110₂</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Сколько цифр в двоичной записи числа 1024?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. 1024 = 2¹⁰, значит нужно 11 цифр (от 2⁰ до 2¹⁰).">10</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! 1024 = 2¹⁰, значит в двоичной записи будет 11 цифр: 10000000000₂.">11</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Проверь: 1024₁₀ = 10000000000₂ (11 цифр).">9</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это неправильный расчет.">12</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Перевод между системами</strong> - используй int(), bin(), oct(), hex() для проверки</li>
+                    <li><strong>Поиск основания</strong> - составь уравнение, учитывая позиции разрядов</li>
+                    <li><strong>Арифметика</strong> - переведи в десятичную, выполни операцию, переведи обратно</li>
+                    <li><strong>Количество цифр</strong> - формула: ⌊log_base(N)⌋ + 1, или просто len(bin(N)[2:])</li>
+                    <li><strong>Количество единиц</strong> - используй bin(N)[2:].count('1')</li>
+                    <li><strong>Порядок остатков</strong> - при делении читай остатки снизу вверх</li>
+                    <li><strong>Буквы в hex</strong> - помни, что A=10, B=11, C=12, D=13, E=14, F=15</li>
+                    <li><strong>Проверка ответов</strong> - всегда проверяй решение с помощью Python</li>
+                    <li><strong>Типичные ошибки</strong> - неправильный порядок остатков, забытые буквы, неправильные уравнения</li>
+                </ul>
+
+                <p>Отлично! Ты изучил типичные задачи ЕГЭ по системам счисления и научился решать их с помощью Python. Эти навыки очень важны для успешной сдачи экзамена. В следующем разделе мы перейдем к логике!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-31.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-33.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

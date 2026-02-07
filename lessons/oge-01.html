@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОГЭ: Анализ программ - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="oge-01">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ОГЭ: Анализ программ</h1>
+                <div class="lesson-meta">Подготовка к ОГЭ • 45 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы изучим задачи ОГЭ на анализ программ. Это типичные задания, где нужно определить, что выведет программа, какое значение примет переменная, или найти ошибку в коде. Важно уметь читать код и понимать, как он работает.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Определение результата выполнения программы</li>
+                        <li>Отслеживание изменений переменных</li>
+                        <li>Анализ циклов и условий</li>
+                        <li>Поиск ошибок в коде</li>
+                        <li>Типичные задачи ОГЭ</li>
+                    </ul>
+                </div>
+
+                <h2>1. Определение результата выполнения программы</h2>
+                <p>В задачах ОГЭ часто нужно определить, что выведет программа при выполнении.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 1: Что выведет программа?</h4>
+                    <pre>Программа:
+a = 5
+b = 3
+c = a + b
+print(c)
+
+Что выведет программа?
+
+Решение:
+1. a = 5 (переменной a присваивается значение 5)
+2. b = 3 (переменной b присваивается значение 3)
+3. c = a + b = 5 + 3 = 8
+4. print(c) выводит значение c
+
+Ответ: 8
+
+Проверка в Python:
+a = 5
+b = 3
+c = a + b
+print(c)  # 8</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 2: Анализ с условиями</h4>
+                    <pre>Программа:
+x = 10
+if x > 5:
+    print("Больше 5")
+else:
+    print("Не больше 5")
+
+Что выведет программа?
+
+Решение:
+1. x = 10
+2. Проверка условия: x > 5 → 10 > 5 → True
+3. Выполняется блок if: print("Больше 5")
+
+Ответ: Больше 5
+
+Проверка в Python:
+x = 10
+if x > 5:
+    print("Больше 5")
+else:
+    print("Не больше 5")  # Больше 5</pre>
+                </div>
+
+                <h2>2. Отслеживание изменений переменных</h2>
+                <p>Нужно пошагово отслеживать, как изменяются переменные в программе.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 3: Изменение переменной в цикле</h4>
+                    <pre>Программа:
+s = 0
+for i in range(1, 4):
+    s = s + i
+print(s)
+
+Что выведет программа?
+
+Решение пошагово:
+1. s = 0
+2. Цикл for i in range(1, 4):
+   - i = 1: s = 0 + 1 = 1
+   - i = 2: s = 1 + 2 = 3
+   - i = 3: s = 3 + 3 = 6
+3. print(s) выводит 6
+
+Ответ: 6
+
+Проверка в Python:
+s = 0
+for i in range(1, 4):
+    s = s + i
+    print(f"i={i}, s={s}")  # Для отладки
+print(s)  # 6</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 4: Вложенные циклы</h4>
+                    <pre>Программа:
+count = 0
+for i in range(2):
+    for j in range(3):
+        count = count + 1
+print(count)
+
+Что выведет программа?
+
+Решение:
+Внешний цикл: i = 0, 1 (2 итерации)
+Внутренний цикл: j = 0, 1, 2 (3 итерации)
+
+Итерации:
+- i=0: j=0 → count=1, j=1 → count=2, j=2 → count=3
+- i=1: j=0 → count=4, j=1 → count=5, j=2 → count=6
+
+Ответ: 6
+
+Проверка в Python:
+count = 0
+for i in range(2):
+    for j in range(3):
+        count = count + 1
+        print(f"i={i}, j={j}, count={count}")
+print(count)  # 6</pre>
+                </div>
+
+                <h2>3. Анализ циклов и условий</h2>
+                <p>Важно понимать, сколько раз выполнится цикл и какие условия сработают.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 5: Цикл while</h4>
+                    <pre>Программа:
+n = 5
+k = 0
+while n > 0:
+    k = k + 1
+    n = n - 2
+print(k)
+
+Что выведет программа?
+
+Решение пошагово:
+1. n = 5, k = 0
+2. Итерация 1: n > 0 (5 > 0) → True
+   k = 0 + 1 = 1
+   n = 5 - 2 = 3
+3. Итерация 2: n > 0 (3 > 0) → True
+   k = 1 + 1 = 2
+   n = 3 - 2 = 1
+4. Итерация 3: n > 0 (1 > 0) → True
+   k = 2 + 1 = 3
+   n = 1 - 2 = -1
+5. Итерация 4: n > 0 (-1 > 0) → False, цикл завершается
+6. print(k) выводит 3
+
+Ответ: 3
+
+Проверка в Python:
+n = 5
+k = 0
+while n > 0:
+    k = k + 1
+    n = n - 2
+    print(f"k={k}, n={n}")
+print(k)  # 3</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 6: Условие в цикле</h4>
+                    <pre>Программа:
+s = 0
+for i in range(1, 6):
+    if i % 2 == 0:
+        s = s + i
+print(s)
+
+Что выведет программа?
+
+Решение:
+Цикл перебирает i от 1 до 5:
+- i=1: 1 % 2 = 1 ≠ 0 → условие False, s не меняется
+- i=2: 2 % 2 = 0 → условие True, s = 0 + 2 = 2
+- i=3: 3 % 2 = 1 ≠ 0 → условие False, s не меняется
+- i=4: 4 % 2 = 0 → условие True, s = 2 + 4 = 6
+- i=5: 5 % 2 = 1 ≠ 0 → условие False, s не меняется
+
+Ответ: 6 (сумма четных чисел от 1 до 5)
+
+Проверка в Python:
+s = 0
+for i in range(1, 6):
+    if i % 2 == 0:
+        s = s + i
+        print(f"i={i} четное, s={s}")
+print(s)  # 6</pre>
+                </div>
+
+                <h2>4. Поиск ошибок в коде</h2>
+                <p>Иногда нужно найти ошибку в программе или определить, что программа делает неправильно.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 7: Поиск ошибки</h4>
+                    <pre>Программа должна вычислить сумму чисел от 1 до 5:
+s = 0
+for i in range(1, 5):
+    s = s + i
+print(s)
+
+Что выведет программа? Есть ли ошибка?
+
+Решение:
+1. s = 0
+2. Цикл for i in range(1, 5):
+   - i = 1: s = 0 + 1 = 1
+   - i = 2: s = 1 + 2 = 3
+   - i = 3: s = 3 + 3 = 6
+   - i = 4: s = 6 + 4 = 10
+3. print(s) выводит 10
+
+Ошибка: range(1, 5) не включает 5!
+Должно быть range(1, 6) для суммы от 1 до 5.
+
+Правильный ответ: программа выведет 10, но должна вывести 15 (1+2+3+4+5)
+
+Проверка в Python:
+# Неправильная версия
+s = 0
+for i in range(1, 5):
+    s = s + i
+print(f"Неправильно: {s}")  # 10
+
+# Правильная версия
+s = 0
+for i in range(1, 6):
+    s = s + i
+print(f"Правильно: {s}")  # 15</pre>
+                </div>
+
+                <h2>5. Интерактивный редактор</h2>
+                <p>Попробуй сам проанализировать программы:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Анализ программ
+
+# Задача 1: Простое вычисление
+print("=== Задача 1 ===")
+a = 5
+b = 3
+c = a + b
+print(f"c = {c}")
+
+# Задача 2: Условие
+print("\n=== Задача 2 ===")
+x = 10
+if x > 5:
+    print("Больше 5")
+else:
+    print("Не больше 5")
+
+# Задача 3: Цикл for
+print("\n=== Задача 3 ===")
+s = 0
+for i in range(1, 4):
+    s = s + i
+    print(f"i={i}, s={s}")
+print(f"Итоговое s = {s}")
+
+# Задача 4: Вложенные циклы
+print("\n=== Задача 4 ===")
+count = 0
+for i in range(2):
+    for j in range(3):
+        count = count + 1
+        print(f"i={i}, j={j}, count={count}")
+print(f"Итоговое count = {count}")
+
+# Задача 5: Цикл while
+print("\n=== Задача 5 ===")
+n = 5
+k = 0
+while n > 0:
+    k = k + 1
+    n = n - 2
+    print(f"k={k}, n={n}")
+print(f"Итоговое k = {k}")
+
+# Задача 6: Условие в цикле
+print("\n=== Задача 6 ===")
+s = 0
+for i in range(1, 6):
+    if i % 2 == 0:
+        s = s + i
+        print(f"i={i} четное, s={s}")
+print(f"Итоговое s = {s}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>6. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Простая программа</h4>
+                    <p>Что выведет программа?</p>
+                    <pre>a = 7
+b = 4
+c = a - b
+print(c)</pre>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Выполни вычисления пошагово: a - b = 7 - 4 = 3</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Цикл с накоплением</h4>
+                    <p>Что выведет программа?</p>
+                    <pre>s = 0
+for i in range(3):
+    s = s + 2
+print(s)</pre>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Цикл выполнится 3 раза (i = 0, 1, 2), каждый раз s увеличивается на 2.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Условие в цикле</h4>
+                    <p>Что выведет программа?</p>
+                    <pre>count = 0
+for i in range(1, 5):
+    if i > 2:
+        count = count + 1
+print(count)</pre>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Проверь каждое значение i: какие из них больше 2?</p>
+                    </details>
+                </div>
+
+                <h2>7. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неправильное понимание range()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - путаница с range
+# range(1, 5) включает числа: 1, 2, 3, 4 (НЕ включает 5!)
+# range(5) включает числа: 0, 1, 2, 3, 4
+
+# ПРАВИЛЬНО - помни границы
+# range(1, 6) включает: 1, 2, 3, 4, 5
+# range(5) включает: 0, 1, 2, 3, 4</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неучет начального значения</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - забыли начальное значение
+s = 0
+for i in range(1, 4):
+    s = s + i
+# Неправильно думать, что s начинается с 1
+
+# ПРАВИЛЬНО - учитывай начальное значение
+s = 0  # Начальное значение
+for i in range(1, 4):
+    s = s + i  # s = 0 + 1 = 1, затем 1 + 2 = 3, затем 3 + 3 = 6</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильный подсчет итераций</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильный подсчет
+# for i in range(2, 5):
+# Неправильно: думать, что это 5 итераций
+
+# ПРАВИЛЬНО - считай правильно
+# range(2, 5) включает: 2, 3, 4 (всего 3 итерации)
+# range(5) включает: 0, 1, 2, 3, 4 (всего 5 итераций)</pre>
+                    </div>
+                </div>
+
+                <h2>8. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Что выведет программа: a=5; b=3; print(a+b)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Это результат умножения.">15</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! 5 + 3 = 8.">8</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Это результат вычитания.">2</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Проверь вычисление.">53</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что выведет программа: s=0; for i in range(1,4): s=s+i; print(s)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Это только последнее значение i.">3</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-explanation="Неверно. Проверь сумму: 1+2+3.">5</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-correct="true" data-explanation="Правильно! s = 0+1+2+3 = 6.">6</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это неправильный расчет.">10</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько итераций выполнит цикл: for i in range(2, 5)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. range(2, 5) включает 2, 3, 4.">2</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! range(2, 5) включает числа 2, 3, 4 - всего 3 итерации.">3</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. 5 не включается в range(2, 5).">4</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Проверь границы range.">5</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что выведет программа: x=7; if x>5: print("Да") else: print("Нет")?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-correct="true" data-explanation="Правильно! 7 > 5, поэтому выполнится блок if.">Да</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-explanation="Неверно. 7 > 5, поэтому условие True.">Нет</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Это не строка, а логическое значение.">True</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Проверь условие.">7</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что выведет программа: count=0; for i in range(2): for j in range(2): count+=1; print(count)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Это количество итераций внешнего цикла.">2</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-explanation="Неверно. Это количество итераций внутреннего цикла.">2</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-correct="true" data-explanation="Правильно! Внешний цикл 2 раза, внутренний 2 раза, всего 2×2=4 итерации.">4</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это неправильный расчет.">6</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>9. Резюме урока</h2>
+                <ul>
+                    <li><strong>Анализ программ</strong> - нужно пошагово выполнять код и отслеживать изменения переменных</li>
+                    <li><strong>range()</strong> - помни, что range(a, b) включает числа от a до b-1</li>
+                    <li><strong>Циклы</strong> - считай количество итераций и отслеживай изменения переменных</li>
+                    <li><strong>Условия</strong> - проверяй, когда условие True, а когда False</li>
+                    <li><strong>Вложенные циклы</strong> - количество итераций = внешний цикл × внутренний цикл</li>
+                    <li><strong>Начальные значения</strong> - всегда учитывай начальное значение переменных</li>
+                    <li><strong>Пошаговый анализ</strong> - записывай значения переменных на каждом шаге</li>
+                    <li><strong>Проверка</strong> - всегда проверяй ответ, запустив программу</li>
+                </ul>
+
+                <p>Отлично! Ты изучил основы анализа программ. Эти навыки очень важны для успешной сдачи ОГЭ. В следующем уроке мы изучим простые задачи по программированию!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-37.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="oge-02.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

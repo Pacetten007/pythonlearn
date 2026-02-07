@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ: Обработка больших данных - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="ege-06">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ЕГЭ: Обработка больших данных</h1>
+                <div class="lesson-meta">Подготовка к ЕГЭ • 60 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы разберем задачи ЕГЭ по обработке больших данных. В таких задачах нужно эффективно обрабатывать большие объемы информации, используя оптимальные алгоритмы и техники: построчная обработка файлов, использование генераторов, минимизация использования памяти, эффективные структуры данных.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Построчная обработка больших файлов</li>
+                        <li>Эффективные алгоритмы для больших данных</li>
+                        <li>Минимизация использования памяти</li>
+                        <li>Оптимизация времени выполнения</li>
+                        <li>Типичные задачи ЕГЭ на большие данные</li>
+                    </ul>
+                </div>
+
+                <h2>1. Построчная обработка файлов</h2>
+                <p>При работе с большими файлами нельзя загружать весь файл в память. Нужно обрабатывать данные построчно.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 1: Подсчет строк в большом файле</h4>
+                    <pre>Условие: В файле input.txt содержится очень много строк. Напишите программу, которая подсчитывает количество строк, не загружая весь файл в память.
+
+Решение:
+count = 0
+with open('input.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        count = count + 1
+print(count)
+
+Объяснение:
+- Используем with open() для автоматического закрытия файла
+- Читаем файл построчно с помощью цикла for
+- Каждая строка обрабатывается отдельно, не загружая весь файл
+- Счетчик увеличивается на каждой итерации
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('test.txt', 'w', encoding='utf-8') as f:
+    for i in range(1000):
+        f.write(f"Строка {i}\n")
+
+# Подсчитываем строки
+count = 0
+with open('test.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        count = count + 1
+print(f"Количество строк: {count}")  # 1000</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 2: Поиск максимума в большом файле</h4>
+                    <pre>Условие: В файле numbers.txt каждая строка содержит одно число. Напишите программу, которая находит максимальное число, не загружая все числа в память.
+
+Решение:
+max_num = None
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if max_num is None or num > max_num:
+            max_num = num
+print(max_num)
+
+Объяснение:
+- Инициализируем max_num как None
+- Читаем файл построчно
+- Преобразуем каждую строку в число
+- Обновляем максимум при необходимости
+- Используем только одну переменную для хранения максимума
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('numbers.txt', 'w', encoding='utf-8') as f:
+    for i in range(10000):
+        f.write(f"{i}\n")
+
+# Находим максимум
+max_num = None
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if max_num is None or num > max_num:
+            max_num = num
+print(f"Максимальное число: {max_num}")  # 9999</pre>
+                </div>
+
+                <h2>2. Эффективные алгоритмы</h2>
+                <p>Для больших данных нужно выбирать алгоритмы с минимальной сложностью и использовать эффективные структуры данных.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 3: Подсчет уникальных элементов</h4>
+                    <pre>Условие: В файле data.txt каждая строка содержит число. Напишите программу, которая подсчитывает количество уникальных чисел, используя минимальную память.
+
+Решение:
+unique = set()
+with open('data.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        unique.add(num)
+print(len(unique))
+
+Объяснение:
+- Используем множество (set) для хранения уникальных элементов
+- Множество автоматически удаляет дубликаты
+- Читаем файл построчно, не загружая все данные
+- len(unique) дает количество уникальных элементов
+
+Проверка в Python:
+# Создаем тестовый файл с повторяющимися числами
+with open('data.txt', 'w', encoding='utf-8') as f:
+    for i in range(1000):
+        f.write(f"{i % 100}\n")  # Числа от 0 до 99 повторяются
+
+# Подсчитываем уникальные
+unique = set()
+with open('data.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        unique.add(num)
+print(f"Уникальных чисел: {len(unique)}")  # 100</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 4: Сумма чисел в большом файле</h4>
+                    <pre>Условие: В файле numbers.txt каждая строка содержит одно число. Напишите программу, которая вычисляет сумму всех чисел, не загружая их все в память.
+
+Решение:
+total = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        total = total + num
+print(total)
+
+Объяснение:
+- Используем одну переменную total для накопления суммы
+- Читаем файл построчно
+- Добавляем каждое число к сумме
+- Не храним все числа в списке
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('numbers.txt', 'w', encoding='utf-8') as f:
+    for i in range(1, 1001):
+        f.write(f"{i}\n")
+
+# Вычисляем сумму
+total = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        total = total + num
+print(f"Сумма: {total}")  # 500500 (сумма 1+2+...+1000)</pre>
+                </div>
+
+                <h2>3. Фильтрация и поиск</h2>
+                <p>При работе с большими данными нужно эффективно фильтровать и искать нужную информацию.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 5: Подсчет элементов по условию</h4>
+                    <pre>Условие: В файле numbers.txt каждая строка содержит число. Напишите программу, которая подсчитывает количество четных чисел.
+
+Решение:
+count = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if num % 2 == 0:
+            count = count + 1
+print(count)
+
+Объяснение:
+- Читаем файл построчно
+- Проверяем каждое число на четность
+- Увеличиваем счетчик только для четных чисел
+- Не сохраняем все числа в память
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('numbers.txt', 'w', encoding='utf-8') as f:
+    for i in range(1, 1001):
+        f.write(f"{i}\n")
+
+# Подсчитываем четные
+count = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if num % 2 == 0:
+            count = count + 1
+print(f"Четных чисел: {count}")  # 500</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 6: Поиск элементов в диапазоне</h4>
+                    <pre>Условие: В файле numbers.txt каждая строка содержит число. Напишите программу, которая находит количество чисел в диапазоне от 100 до 200.
+
+Решение:
+count = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if 100 <= num <= 200:
+            count = count + 1
+print(count)
+
+Объяснение:
+- Читаем файл построчно
+- Проверяем, попадает ли число в диапазон [100, 200]
+- Подсчитываем только подходящие числа
+- Не сохраняем все числа в память
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('numbers.txt', 'w', encoding='utf-8') as f:
+    for i in range(1, 1001):
+        f.write(f"{i}\n")
+
+# Подсчитываем числа в диапазоне
+count = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if 100 <= num <= 200:
+            count = count + 1
+print(f"Чисел в диапазоне [100, 200]: {count}")  # 101</pre>
+                </div>
+
+                <h2>4. Агрегация данных</h2>
+                <p>При обработке больших данных часто нужно вычислять статистику: среднее, минимум, максимум, количество.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 7: Вычисление среднего значения</h4>
+                    <pre>Условие: В файле numbers.txt каждая строка содержит число. Напишите программу, которая вычисляет среднее арифметическое всех чисел.
+
+Решение:
+total = 0
+count = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        total = total + num
+        count = count + 1
+if count > 0:
+    average = total / count
+    print(average)
+else:
+    print(0)
+
+Объяснение:
+- Используем две переменные: total (сумма) и count (количество)
+- Читаем файл построчно
+- Накапливаем сумму и количество
+- Вычисляем среднее как total / count
+- Проверяем деление на ноль
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('numbers.txt', 'w', encoding='utf-8') as f:
+    for i in range(1, 101):
+        f.write(f"{i}\n")
+
+# Вычисляем среднее
+total = 0
+count = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        total = total + num
+        count = count + 1
+if count > 0:
+    average = total / count
+    print(f"Среднее значение: {average}")  # 50.5</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 8: Поиск минимума и максимума</h4>
+                    <pre>Условие: В файле numbers.txt каждая строка содержит число. Напишите программу, которая находит минимальное и максимальное число.
+
+Решение:
+min_num = None
+max_num = None
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if min_num is None or num < min_num:
+            min_num = num
+        if max_num is None or num > max_num:
+            max_num = num
+print(f"Минимум: {min_num}, Максимум: {max_num}")
+
+Объяснение:
+- Используем две переменные для минимума и максимума
+- Инициализируем их как None
+- Обновляем при чтении каждого числа
+- Не сохраняем все числа в память
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('numbers.txt', 'w', encoding='utf-8') as f:
+    for i in [5, 2, 8, 1, 9, 3, 7, 4, 6]:
+        f.write(f"{i}\n")
+
+# Находим минимум и максимум
+min_num = None
+max_num = None
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if min_num is None or num < min_num:
+            min_num = num
+        if max_num is None or num > max_num:
+            max_num = num
+print(f"Минимум: {min_num}, Максимум: {max_num}")  # Минимум: 1, Максимум: 9</pre>
+                </div>
+
+                <h2>5. Обработка строковых данных</h2>
+                <p>При работе с большими текстовыми файлами нужно эффективно обрабатывать строки.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 9: Подсчет слов в большом файле</h4>
+                    <pre>Условие: В файле text.txt содержится текст. Напишите программу, которая подсчитывает общее количество слов в файле.
+
+Решение:
+word_count = 0
+with open('text.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        words = line.split()
+        word_count = word_count + len(words)
+print(word_count)
+
+Объяснение:
+- Читаем файл построчно
+- Разбиваем каждую строку на слова с помощью split()
+- Подсчитываем слова в каждой строке
+- Накапливаем общее количество
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('text.txt', 'w', encoding='utf-8') as f:
+    f.write("Привет мир\n")
+    f.write("Python это язык программирования\n")
+    f.write("Изучаем обработку больших данных\n")
+
+# Подсчитываем слова
+word_count = 0
+with open('text.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        words = line.split()
+        word_count = word_count + len(words)
+print(f"Всего слов: {word_count}")  # 11</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 10: Поиск строк по условию</h4>
+                    <pre>Условие: В файле data.txt каждая строка содержит текст. Напишите программу, которая подсчитывает количество строк, содержащих слово "Python".
+
+Решение:
+count = 0
+with open('data.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        if 'Python' in line:
+            count = count + 1
+print(count)
+
+Объяснение:
+- Читаем файл построчно
+- Проверяем наличие слова "Python" в каждой строке
+- Подсчитываем подходящие строки
+- Не загружаем весь файл в память
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('data.txt', 'w', encoding='utf-8') as f:
+    f.write("Python это язык\n")
+    f.write("Изучаем программирование\n")
+    f.write("Python для школьников\n")
+    f.write("Алгоритмы и структуры данных\n")
+
+# Подсчитываем строки с "Python"
+count = 0
+with open('data.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        if 'Python' in line:
+            count = count + 1
+print(f"Строк с 'Python': {count}")  # 2</pre>
+                </div>
+
+                <h2>6. Комплексные задачи</h2>
+                <p>Задачи, требующие комбинации техник обработки больших данных.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 11: Анализ и запись результатов</h4>
+                    <pre>Условие: В файле input.txt каждая строка содержит число. Напишите программу, которая находит количество положительных чисел и записывает результат в файл output.txt.
+
+Решение:
+count = 0
+with open('input.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if num > 0:
+            count = count + 1
+
+with open('output.txt', 'w', encoding='utf-8') as f:
+    f.write(str(count))
+
+Объяснение:
+- Читаем input.txt построчно
+- Подсчитываем положительные числа
+- Записываем результат в output.txt
+- Не сохраняем все числа в память
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('input.txt', 'w', encoding='utf-8') as f:
+    for i in [-5, 3, -2, 7, -1, 4, -3, 6]:
+        f.write(f"{i}\n")
+
+# Обрабатываем
+count = 0
+with open('input.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if num > 0:
+            count = count + 1
+
+# Записываем результат
+with open('output.txt', 'w', encoding='utf-8') as f:
+    f.write(str(count))
+
+# Проверяем результат
+with open('output.txt', 'r', encoding='utf-8') as f:
+    result = int(f.read())
+    print(f"Положительных чисел: {result}")  # 4</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 12: Фильтрация и запись</h4>
+                    <pre>Условие: В файле input.txt каждая строка содержит число. Напишите программу, которая записывает в файл output.txt только четные числа.
+
+Решение:
+with open('input.txt', 'r', encoding='utf-8') as f:
+    with open('output.txt', 'w', encoding='utf-8') as out:
+        for line in f:
+            num = int(line.strip())
+            if num % 2 == 0:
+                out.write(str(num) + '\n')
+
+Объяснение:
+- Открываем оба файла одновременно
+- Читаем input.txt построчно
+- Фильтруем четные числа
+- Записываем их в output.txt
+- Не сохраняем все числа в память
+
+Проверка в Python:
+# Создаем тестовый файл
+with open('input.txt', 'w', encoding='utf-8') as f:
+    for i in range(1, 11):
+        f.write(f"{i}\n")
+
+# Фильтруем и записываем
+with open('input.txt', 'r', encoding='utf-8') as f:
+    with open('output.txt', 'w', encoding='utf-8') as out:
+        for line in f:
+            num = int(line.strip())
+            if num % 2 == 0:
+                out.write(str(num) + '\n')
+
+# Проверяем результат
+with open('output.txt', 'r', encoding='utf-8') as f:
+    numbers = [int(line.strip()) for line in f]
+    print(f"Четные числа: {numbers}")  # [2, 4, 6, 8, 10]</pre>
+                </div>
+
+                <h2>7. Интерактивный редактор</h2>
+                <p>Попробуй решить задачи ЕГЭ по обработке больших данных:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Задачи ЕГЭ по обработке больших данных
+
+# Задача 1: Подсчет строк в файле
+print("=== Задача 1: Подсчет строк ===")
+# Создаем тестовый файл
+with open('test.txt', 'w', encoding='utf-8') as f:
+    for i in range(100):
+        f.write(f"Строка {i}\n")
+
+# Подсчитываем строки
+count = 0
+with open('test.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        count = count + 1
+print(f"Количество строк: {count}")
+
+# Задача 2: Поиск максимума
+print("\n=== Задача 2: Поиск максимума ===")
+# Создаем тестовый файл
+with open('numbers.txt', 'w', encoding='utf-8') as f:
+    for i in range(1, 1001):
+        f.write(f"{i}\n")
+
+# Находим максимум
+max_num = None
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if max_num is None or num > max_num:
+            max_num = num
+print(f"Максимальное число: {max_num}")
+
+# Задача 3: Подсчет уникальных элементов
+print("\n=== Задача 3: Уникальные элементы ===")
+# Создаем тестовый файл
+with open('data.txt', 'w', encoding='utf-8') as f:
+    for i in range(200):
+        f.write(f"{i % 50}\n")  # Числа от 0 до 49 повторяются
+
+# Подсчитываем уникальные
+unique = set()
+with open('data.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        unique.add(num)
+print(f"Уникальных чисел: {len(unique)}")
+
+# Задача 4: Сумма чисел
+print("\n=== Задача 4: Сумма чисел ===")
+total = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        total = total + num
+print(f"Сумма: {total}")
+
+# Задача 5: Подсчет четных чисел
+print("\n=== Задача 5: Подсчет четных ===")
+count = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if num % 2 == 0:
+            count = count + 1
+print(f"Четных чисел: {count}")
+
+# Задача 6: Среднее значение
+print("\n=== Задача 6: Среднее значение ===")
+total = 0
+count = 0
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        total = total + num
+        count = count + 1
+if count > 0:
+    average = total / count
+    print(f"Среднее значение: {average}")
+
+# Задача 7: Минимум и максимум
+print("\n=== Задача 7: Минимум и максимум ===")
+min_num = None
+max_num = None
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if min_num is None or num < min_num:
+            min_num = num
+        if max_num is None or num > max_num:
+            max_num = num
+print(f"Минимум: {min_num}, Максимум: {max_num}")
+
+# Задача 8: Подсчет слов
+print("\n=== Задача 8: Подсчет слов ===")
+# Создаем тестовый файл
+with open('text.txt', 'w', encoding='utf-8') as f:
+    f.write("Python это язык программирования\n")
+    f.write("Обработка больших данных\n")
+    f.write("Эффективные алгоритмы\n")
+
+# Подсчитываем слова
+word_count = 0
+with open('text.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        words = line.split()
+        word_count = word_count + len(words)
+print(f"Всего слов: {word_count}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>8. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Подсчет чисел в диапазоне</h4>
+                    <p>В файле numbers.txt каждая строка содержит число. Напиши программу, которая подсчитывает количество чисел, кратных 7, в диапазоне от 1 до 1000.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Читай файл построчно, проверяй каждое число на кратность 7 (num % 7 == 0) и попадание в диапазон (1 <= num <= 1000).</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Поиск и запись</h4>
+                    <p>В файле input.txt каждая строка содержит число. Напиши программу, которая находит все числа, большие 100, и записывает их в файл output.txt.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Открой оба файла одновременно, читай input.txt построчно, проверяй условие (num > 100) и записывай подходящие числа в output.txt.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Статистика по файлу</h4>
+                    <p>В файле data.txt каждая строка содержит число. Напиши программу, которая вычисляет сумму, среднее, минимум и максимум всех чисел.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй переменные для суммы, количества, минимума и максимума. Читай файл построчно и обновляй все значения за один проход.</p>
+                    </details>
+                </div>
+
+                <h2>9. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Загрузка всего файла в память</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - загружает весь файл в память
+with open('large_file.txt', 'r', encoding='utf-8') as f:
+    lines = f.readlines()  # Ошибка! Загружает весь файл
+    for line in lines:
+        # обработка
+
+# ПРАВИЛЬНО - построчная обработка
+with open('large_file.txt', 'r', encoding='utf-8') as f:
+    for line in f:  # Читает построчно
+        # обработка</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Сохранение всех данных в список</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - сохраняет все числа в список
+numbers = []
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        numbers.append(int(line.strip()))  # Ошибка! Тратит много памяти
+max_num = max(numbers)
+
+# ПРАВИЛЬНО - обрабатывает по одному числу
+max_num = None
+with open('numbers.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line.strip())
+        if max_num is None or num > max_num:
+            max_num = num</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильная обработка пустых строк</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - может упасть на пустой строке
+with open('data.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        num = int(line)  # Ошибка! Может быть пустая строка
+
+# ПРАВИЛЬНО - обрабатывает пустые строки
+with open('data.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        line = line.strip()
+        if line:  # Проверяем, что строка не пустая
+            num = int(line)
+            # обработка</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неправильная работа с кодировкой</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - может не работать с русским текстом
+with open('text.txt', 'r') as f:  # Ошибка! Нет указания кодировки
+    for line in f:
+        # обработка
+
+# ПРАВИЛЬНО - указываем кодировку
+with open('text.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        # обработка</pre>
+                    </div>
+                </div>
+
+                <h2>10. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Как правильно обработать большой файл?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Это загрузит весь файл в память.">Использовать readlines()</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! Построчная обработка не загружает весь файл в память.">Читать построчно в цикле for</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Это тоже загрузит весь файл.">Использовать read()</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это неэффективно для больших файлов.">Сохранить все строки в список</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Как найти максимум в большом файле чисел?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Это загрузит все числа в память.">Сохранить все числа в список и использовать max()</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! Используем одну переменную и обновляем её при чтении каждого числа.">Использовать одну переменную и обновлять её построчно</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. Это неэффективно.">Загрузить весь файл в память</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это не решит проблему памяти.">Использовать sorted()</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Как подсчитать уникальные элементы в большом файле?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Это загрузит все элементы в память.">Сохранить все элементы в список и использовать set()</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! Множество эффективно хранит уникальные элементы и читаем файл построчно.">Использовать set() и добавлять элементы построчно</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Словарь не нужен для этой задачи.">Использовать словарь</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Это неэффективно.">Использовать список и проверять наличие элемента</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Как правильно обработать пустые строки в файле?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Это может вызвать ошибку.">Сразу преобразовывать в число</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! Нужно проверить, что строка не пустая перед обработкой.">Проверить строку на пустоту перед обработкой</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Это не решит проблему.">Использовать try-except</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Это не нужно.">Пропускать все строки</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Какую кодировку нужно указывать при работе с русским текстом?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Это может не работать с русским текстом.">Не указывать кодировку</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! UTF-8 поддерживает русский текст и является стандартом.">encoding='utf-8'</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Это не стандартная кодировка для Python.">encoding='ascii'</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это не кодировка, а режим открытия.">mode='r'</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>11. Резюме урока</h2>
+                <ul>
+                    <li><strong>Построчная обработка</strong> - читай файлы построчно с помощью цикла for, не загружая весь файл в память</li>
+                    <li><strong>Минимизация памяти</strong> - используй переменные для накопления результатов, а не списки для хранения всех данных</li>
+                    <li><strong>Эффективные структуры</strong> - используй set() для уникальных элементов, одну переменную для максимума/минимума</li>
+                    <li><strong>Обработка пустых строк</strong> - всегда проверяй строку на пустоту перед преобразованием</li>
+                    <li><strong>Кодировка</strong> - всегда указывай encoding='utf-8' при работе с русским текстом</li>
+                    <li><strong>Одновременная работа</strong> - можно открывать несколько файлов одновременно с помощью вложенных with</li>
+                    <li><strong>Агрегация</strong> - вычисляй сумму, среднее, минимум, максимум за один проход по файлу</li>
+                    <li><strong>Фильтрация</strong> - проверяй условия при чтении и записывай только нужные данные</li>
+                    <li><strong>Практика</strong> - решай задачи построчно, не сохраняя все данные в память</li>
+                </ul>
+
+                <p>Отлично! Ты изучил обработку больших данных для ЕГЭ. Эти навыки очень важны для успешной сдачи экзамена, особенно при работе с реальными задачами, где данные могут быть очень большими!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="ege-05.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="ege-07.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

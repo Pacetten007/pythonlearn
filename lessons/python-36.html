@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 46: Логические функции - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-36">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 46: Логические функции</h1>
+                <div class="lesson-meta">Логика • 40 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы изучим встроенные логические функции Python и научимся создавать собственные логические функции. Эти функции помогают проверять условия для коллекций данных и делают код более читаемым и эффективным.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Встроенные функции all() и any()</li>
+                        <li>Создание собственных логических функций</li>
+                        <li>Применение логических функций с генераторами</li>
+                        <li>Практические примеры использования</li>
+                        <li>Оптимизация кода с помощью логических функций</li>
+                    </ul>
+                </div>
+
+                <h2>1. Функция all()</h2>
+                <p>Функция <code>all()</code> возвращает <code>True</code>, если <strong>все</strong> элементы итерируемого объекта истинны (truthy). Если хотя бы один элемент ложный (falsy), возвращает <code>False</code>.</p>
+
+                <div class="code-block">
+                    <h4>Синтаксис:</h4>
+                    <pre>all(iterable)  # Возвращает True, если все элементы истинны</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Примеры использования:</h4>
+                    <pre># Все элементы True
+print(all([True, True, True]))      # True
+
+# Есть хотя бы один False
+print(all([True, False, True]))     # False
+
+# Работа с числами
+print(all([1, 2, 3, 4]))            # True (все ненулевые)
+print(all([1, 2, 0, 4]))            # False (есть 0)
+
+# Работа со строками
+print(all(["hello", "world"]))      # True (непустые строки)
+print(all(["hello", "", "world"]))   # False (есть пустая строка)
+
+# Пустой список
+print(all([]))                      # True (важно: пустой список возвращает True!)
+
+# Проверка условий
+numbers = [10, 20, 30, 40]
+all_positive = all(x > 0 for x in numbers)
+print(f"Все числа положительные: {all_positive}")  # True
+
+numbers = [10, -5, 30, 40]
+all_positive = all(x > 0 for x in numbers)
+print(f"Все числа положительные: {all_positive}")  # False</pre>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Важно!</h4>
+                    <p>Функция <code>all()</code> возвращает <code>True</code> для пустого списка! Это может быть неожиданным, но это стандартное поведение в Python.</p>
+                </div>
+
+                <h2>2. Функция any()</h2>
+                <p>Функция <code>any()</code> возвращает <code>True</code>, если <strong>хотя бы один</strong> элемент итерируемого объекта истинен (truthy). Если все элементы ложные (falsy), возвращает <code>False</code>.</p>
+
+                <div class="code-block">
+                    <h4>Синтаксис:</h4>
+                    <pre>any(iterable)  # Возвращает True, если хотя бы один элемент истинен</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Примеры использования:</h4>
+                    <pre># Есть хотя бы один True
+print(any([False, False, True]))    # True
+
+# Все элементы False
+print(any([False, False, False]))  # False
+
+# Работа с числами
+print(any([0, 0, 0, 5]))           # True (есть ненулевое число)
+print(any([0, 0, 0, 0]))            # False (все нули)
+
+# Работа со строками
+print(any(["", "", "hello"]))       # True (есть непустая строка)
+print(any(["", "", ""]))            # False (все пустые)
+
+# Пустой список
+print(any([]))                      # False (важно: пустой список возвращает False!)
+
+# Проверка условий
+numbers = [10, -5, 30, 40]
+has_negative = any(x < 0 for x in numbers)
+print(f"Есть отрицательные числа: {has_negative}")  # True
+
+numbers = [10, 20, 30, 40]
+has_negative = any(x < 0 for x in numbers)
+print(f"Есть отрицательные числа: {has_negative}")  # False</pre>
+                </div>
+
+                <h2>3. Сравнение all() и any()</h2>
+                <p>Давайте сравним эти функции на примерах:</p>
+
+                <div class="code-block">
+                    <h4>Таблица сравнения:</h4>
+                    <pre># Примеры для понимания разницы
+test_cases = [
+    [True, True, True],
+    [True, False, True],
+    [False, False, False],
+    [1, 2, 3],
+    [1, 0, 3],
+    [0, 0, 0],
+    [],
+]
+
+for case in test_cases:
+    print(f"{case:25} -> all: {all(case):5}, any: {any(case):5}")</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Логическая связь:</h4>
+                    <pre># all() и any() связаны через отрицание
+values = [True, False, True]
+
+# not all() эквивалентно any(not x for x in values)
+print(f"all(values) = {all(values)}")                    # False
+print(f"not all(values) = {not all(values)}")            # True
+print(f"any(not x for x in values) = {any(not x for x in values)}")  # True
+
+# not any() эквивалентно all(not x for x in values)
+print(f"any(values) = {any(values)}")                     # True
+print(f"not any(values) = {not any(values)}")            # False
+print(f"all(not x for x in values) = {all(not x for x in values)}")  # False</pre>
+                </div>
+
+                <h2>4. Практические примеры</h2>
+
+                <div class="code-block">
+                    <h4>Пример 1: Валидация данных</h4>
+                    <pre># Проверка, что все поля формы заполнены
+form_data = {
+    "name": "Иван",
+    "email": "ivan@example.com",
+    "age": 25
+}
+
+# Проверка, что все значения непустые
+all_filled = all(form_data.values())
+print(f"Все поля заполнены: {all_filled}")  # True
+
+# Если есть пустое поле
+form_data["phone"] = ""
+all_filled = all(form_data.values())
+print(f"Все поля заполнены: {all_filled}")  # False</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 2: Проверка оценок</h4>
+                    <pre># Проверка, что все оценки положительные
+grades = [5, 4, 5, 3, 4]
+
+# Все оценки >= 3 (удовлетворительно)
+all_passing = all(grade >= 3 for grade in grades)
+print(f"Все оценки удовлетворительные: {all_passing}")  # True
+
+# Есть хотя бы одна отличная оценка (5)
+has_excellent = any(grade == 5 for grade in grades)
+print(f"Есть отличные оценки: {has_excellent}")  # True
+
+# Все оценки отличные
+all_excellent = all(grade == 5 for grade in grades)
+print(f"Все оценки отличные: {all_excellent}")  # False</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 3: Проверка пароля</h4>
+                    <pre># Проверка сложности пароля
+def is_strong_password(password):
+    """Проверяет, что пароль сильный"""
+    if not password:
+        return False
+    
+    # Проверяем, что есть хотя бы одна заглавная буква
+    has_upper = any(c.isupper() for c in password)
+    # Проверяем, что есть хотя бы одна строчная буква
+    has_lower = any(c.islower() for c in password)
+    # Проверяем, что есть хотя бы одна цифра
+    has_digit = any(c.isdigit() for c in password)
+    # Проверяем, что есть хотя бы один спецсимвол
+    has_special = any(c in "!@#$%^&*" for c in password)
+    # Проверяем длину
+    is_long_enough = len(password) >= 8
+    
+    # Все условия должны быть выполнены
+    return all([has_upper, has_lower, has_digit, has_special, is_long_enough])
+
+# Тестирование
+passwords = ["MyPass123!", "mypass123", "MYPASS123!", "MyPass!"]
+
+for pwd in passwords:
+    print(f"'{pwd}' - сильный: {is_strong_password(pwd)}")</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 4: Фильтрация данных</h4>
+                    <pre># Найти студентов, у которых все оценки >= 4
+students = [
+    {"name": "Иван", "grades": [5, 4, 5, 4]},
+    {"name": "Мария", "grades": [3, 4, 5, 4]},
+    {"name": "Петр", "grades": [5, 5, 5, 5]},
+]
+
+# Студенты с хорошими оценками (все >= 4)
+good_students = [
+    student for student in students
+    if all(grade >= 4 for grade in student["grades"])
+]
+
+print("Студенты с хорошими оценками:")
+for student in good_students:
+    print(f"  {student['name']}: {student['grades']}")
+
+# Студенты, у которых есть хотя бы одна пятерка
+excellent_students = [
+    student for student in students
+    if any(grade == 5 for grade in student["grades"])
+]
+
+print("\nСтуденты с пятерками:")
+for student in excellent_students:
+    print(f"  {student['name']}: {student['grades']}")</pre>
+                </div>
+
+                <h2>5. Создание собственных логических функций</h2>
+                <p>Мы можем создавать собственные логические функции для проверки различных условий.</p>
+
+                <div class="code-block">
+                    <h4>Пример 1: Функция проверки четности</h4>
+                    <pre>def all_even(numbers):
+    """Проверяет, что все числа четные"""
+    return all(n % 2 == 0 for n in numbers)
+
+def any_odd(numbers):
+    """Проверяет, есть ли хотя бы одно нечетное число"""
+    return any(n % 2 != 0 for n in numbers)
+
+# Тестирование
+numbers1 = [2, 4, 6, 8]
+numbers2 = [2, 4, 5, 8]
+
+print(f"Все четные в {numbers1}: {all_even(numbers1)}")  # True
+print(f"Все четные в {numbers2}: {all_even(numbers2)}")  # False
+print(f"Есть нечетное в {numbers2}: {any_odd(numbers2)}")  # True</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 2: Функция проверки диапазона</h4>
+                    <pre>def all_in_range(numbers, min_val, max_val):
+    """Проверяет, что все числа в заданном диапазоне"""
+    return all(min_val <= n <= max_val for n in numbers)
+
+def any_out_of_range(numbers, min_val, max_val):
+    """Проверяет, есть ли числа вне диапазона"""
+    return any(n < min_val or n > max_val for n in numbers)
+
+# Тестирование
+numbers = [10, 15, 20, 25, 30]
+print(f"Все в диапазоне [10, 30]: {all_in_range(numbers, 10, 30)}")  # True
+print(f"Есть вне диапазона [15, 25]: {any_out_of_range(numbers, 15, 25)}")  # True</pre>
+                </div>
+
+                <h2>6. Оптимизация с помощью генераторов</h2>
+                <p>Функции <code>all()</code> и <code>any()</code> используют короткое замыкание, что делает их эффективными при работе с генераторами.</p>
+
+                <div class="code-block">
+                    <h4>Пример с генератором:</h4>
+                    <pre># Проверка большого списка чисел
+# Генератор не создает весь список в памяти
+def check_large_list():
+    # Генератор создает числа по требованию
+    numbers = (x for x in range(1000000))
+    
+    # all() остановится на первом False
+    # Не нужно проверять все миллион чисел!
+    result = all(x < 100 for x in numbers)
+    return result
+
+# any() остановится на первом True
+def find_first_positive():
+    numbers = (x for x in range(-1000000, 1000000))
+    result = any(x > 0 for x in numbers)
+    return result
+
+print(f"Все числа < 100: {check_large_list()}")  # False (остановится на 100)
+print(f"Есть положительное: {find_first_positive()}")  # True (остановится на 1)</pre>
+                </div>
+
+                <h2>7. Интерактивный редактор</h2>
+                <p>Попробуй сам использовать логические функции:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Логические функции в Python
+
+# 1. Функция all()
+print("=== Функция all() ===")
+print(f"all([True, True, True]) = {all([True, True, True])}")
+print(f"all([True, False, True]) = {all([True, False, True])}")
+print(f"all([1, 2, 3]) = {all([1, 2, 3])}")
+print(f"all([1, 0, 3]) = {all([1, 0, 3])}")
+print(f"all([]) = {all([])}")  # True для пустого списка!
+
+# 2. Функция any()
+print("\n=== Функция any() ===")
+print(f"any([False, False, True]) = {any([False, False, True])}")
+print(f"any([False, False, False]) = {any([False, False, False])}")
+print(f"any([0, 0, 5]) = {any([0, 0, 5])}")
+print(f"any([0, 0, 0]) = {any([0, 0, 0])}")
+print(f"any([]) = {any([])}")  # False для пустого списка!
+
+# 3. Практические примеры
+print("\n=== Практические примеры ===")
+# Проверка оценок
+grades = [5, 4, 5, 3, 4]
+all_passing = all(grade >= 3 for grade in grades)
+has_excellent = any(grade == 5 for grade in grades)
+print(f"Оценки: {grades}")
+print(f"Все удовлетворительные: {all_passing}")
+print(f"Есть пятерки: {has_excellent}")
+
+# Проверка пароля
+password = "MyPass123!"
+has_upper = any(c.isupper() for c in password)
+has_lower = any(c.islower() for c in password)
+has_digit = any(c.isdigit() for c in password)
+is_strong = all([has_upper, has_lower, has_digit, len(password) >= 8])
+print(f"\nПароль: {password}")
+print(f"Сильный пароль: {is_strong}")
+
+# Проверка чисел
+numbers = [10, 20, 30, 40]
+all_positive = all(x > 0 for x in numbers)
+has_negative = any(x < 0 for x in numbers)
+print(f"\nЧисла: {numbers}")
+print(f"Все положительные: {all_positive}")
+print(f"Есть отрицательные: {has_negative}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>8. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Проверка списка</h4>
+                    <p>Напиши функцию <code>is_valid_list(lst)</code>, которая проверяет, что все элементы списка непустые строки.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй <code>all()</code> с генератором: <code>all(item and isinstance(item, str) for item in lst)</code>.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Поиск простых чисел</h4>
+                    <p>Напиши функцию <code>has_prime(numbers)</code>, которая проверяет, есть ли в списке хотя бы одно простое число.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Создай функцию проверки простоты числа и используй <code>any()</code> с генератором.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Валидация данных</h4>
+                    <p>Напиши функцию <code>validate_user(user_data)</code>, которая проверяет, что в словаре user_data есть все обязательные поля: "name", "email", "age", и что age > 0.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй <code>all()</code> для проверки наличия всех ключей и их значений.</p>
+                    </details>
+                </div>
+
+                <h2>9. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неправильное понимание пустого списка</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неожиданное поведение
+if all([]):  # Это True!
+    print("Все элементы истинны")  # Это выполнится!
+
+# ПРАВИЛЬНО - явная проверка на пустоту
+def check_all(items):
+    if not items:
+        return False  # Или другое значение по умолчанию
+    return all(items)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Использование списка вместо генератора</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - создает весь список в памяти
+large_list = [x for x in range(1000000)]
+result = all(x < 100 for x in large_list)  # Много памяти!
+
+# ПРАВИЛЬНО - используй генератор
+large_generator = (x for x in range(1000000))
+result = all(x < 100 for x in large_generator)  # Эффективно!</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Путаница между all() и any()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильная логика
+# "Проверить, что все числа положительные"
+numbers = [1, 2, 3]
+result = any(x > 0 for x in numbers)  # Это вернет True для любого положительного!
+
+# ПРАВИЛЬНО - используй all() для проверки всех элементов
+numbers = [1, 2, 3]
+result = all(x > 0 for x in numbers)  # Проверяет, что ВСЕ положительные</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неправильное использование с условиями</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - избыточная проверка
+numbers = [1, 2, 3]
+if all(x > 0 for x in numbers) == True:  # == True избыточно
+    print("Все положительные")
+
+# ПРАВИЛЬНО - просто используй результат
+numbers = [1, 2, 3]
+if all(x > 0 for x in numbers):
+    print("Все положительные")</pre>
+                    </div>
+                </div>
+
+                <h2>10. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Что вернет all([True, False, True])?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. all() возвращает False, если хотя бы один элемент False.">True</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! all() возвращает False, так как есть элемент False.">False</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. all() возвращает логическое значение, не список.">[True, False, True]</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. all() возвращает одно логическое значение.">None</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что вернет any([False, False, False])?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. any() возвращает False, если все элементы False.">True</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! any() возвращает False, так как все элементы False.">False</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. any() возвращает логическое значение, не список.">[False, False, False]</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. any() возвращает логическое значение.">None</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что вернет all([])?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-correct="true" data-explanation="Правильно! all() возвращает True для пустого списка (это стандартное поведение Python).">True</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-explanation="Неверно. all() возвращает True для пустого списка.">False</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. all() возвращает логическое значение.">[]</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. all() возвращает логическое значение.">None</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что вернет any([])?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. any() возвращает False для пустого списка.">True</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! any() возвращает False для пустого списка (это стандартное поведение Python).">False</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. any() возвращает логическое значение.">[]</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. any() возвращает логическое значение.">None</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как проверить, что все числа в списке положительные?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. any() проверяет, есть ли хотя бы одно положительное, а не все.">any(x > 0 for x in numbers)</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! all() проверяет, что все числа положительные.">all(x > 0 for x in numbers)</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Это неправильный синтаксис.">all(numbers > 0)</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это неправильный синтаксис.">any(numbers > 0)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>11. Резюме урока</h2>
+                <ul>
+                    <li><strong>all(iterable)</strong> - возвращает True, если все элементы истинны</li>
+                    <li><strong>any(iterable)</strong> - возвращает True, если хотя бы один элемент истинен</li>
+                    <li><strong>Пустой список</strong> - all([]) = True, any([]) = False (важно помнить!)</li>
+                    <li><strong>Короткое замыкание</strong> - функции останавливаются на первом решающем значении</li>
+                    <li><strong>Генераторы</strong> - эффективно использовать с all() и any() для больших данных</li>
+                    <li><strong>Практическое применение</strong> - валидация данных, проверка условий, фильтрация</li>
+                    <li><strong>Собственные функции</strong> - можно создавать логические функции на основе all() и any()</li>
+                    <li><strong>Оптимизация</strong> - генераторы вместо списков для экономии памяти</li>
+                    <li><strong>Логическая связь</strong> - not all() эквивалентно any(not x), и наоборот</li>
+                </ul>
+
+                <p>Отлично! Ты изучил встроенные логические функции Python. Эти функции очень полезны для проверки условий в коллекциях данных и делают код более читаемым и эффективным. В следующем уроке мы изучим задачи ЕГЭ по логике!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-35.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-37.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

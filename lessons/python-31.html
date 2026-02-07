@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 41: Системы счисления в Python - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-31">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 41: Системы счисления в Python</h1>
+                <div class="lesson-meta">Системы счисления • 35 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>Python предоставляет мощные встроенные функции для работы с различными системами счисления. В этом уроке мы систематизируем все знания о системах счисления и научимся эффективно использовать Python для работы с ними.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Встроенные функции для перевода между системами счисления</li>
+                        <li>Форматирование чисел в различных системах</li>
+                        <li>Создание собственных функций для работы с системами счисления</li>
+                        <li>Практические примеры и задачи</li>
+                        <li>Типичные ошибки и как их избежать</li>
+                    </ul>
+                </div>
+
+                <h2>1. Встроенные функции Python</h2>
+                <p>Python имеет три основные функции для работы с системами счисления: <code>bin()</code>, <code>oct()</code>, <code>hex()</code> и универсальную функцию <code>int()</code>.</p>
+
+                <div class="code-block">
+                    <h4>Перевод из десятичной в другие системы:</h4>
+                    <pre># Двоичная система (основание 2)
+decimal = 42
+binary = bin(decimal)
+print(binary)  # 0b101010
+print(bin(42)[2:])  # 101010 (без префикса)
+
+# Восьмеричная система (основание 8)
+octal = oct(decimal)
+print(octal)  # 0o52
+print(oct(42)[2:])  # 52 (без префикса)
+
+# Шестнадцатеричная система (основание 16)
+hexadecimal = hex(decimal)
+print(hexadecimal)  # 0x2a
+print(hex(42)[2:])  # 2a (без префикса)
+print(hex(42)[2:].upper())  # 2A (заглавные буквы)</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Перевод из других систем в десятичную:</h4>
+                    <pre># Функция int() с указанием основания
+# int(строка, основание)
+
+# Из двоичной
+binary_str = "101010"
+decimal = int(binary_str, 2)
+print(decimal)  # 42
+
+# Из восьмеричной
+octal_str = "52"
+decimal = int(octal_str, 8)
+print(decimal)  # 42
+
+# Из шестнадцатеричной
+hex_str = "2A"
+decimal = int(hex_str, 16)
+print(decimal)  # 42
+
+# Регистр букв не важен
+print(int("2a", 16))  # 42
+print(int("2A", 16))  # 42</pre>
+                </div>
+
+                <h2>2. Форматирование чисел</h2>
+                <p>Функция <code>format()</code> позволяет форматировать числа в различных системах счисления с дополнительными опциями.</p>
+
+                <div class="code-block">
+                    <h4>Базовое форматирование:</h4>
+                    <pre>number = 42
+
+# Двоичная система
+print(format(number, 'b'))   # 101010
+print(format(number, '08b')) # 00101010 (8 бит с ведущими нулями)
+print(format(number, '016b')) # 0000000000101010 (16 бит)
+
+# Восьмеричная система
+print(format(number, 'o'))   # 52
+print(format(number, '04o'))  # 0052 (4 цифры с ведущими нулями)
+
+# Шестнадцатеричная система
+print(format(number, 'x'))   # 2a (строчные буквы)
+print(format(number, 'X'))   # 2A (заглавные буквы)
+print(format(number, '04x'))  # 002a (4 цифры, строчные)
+print(format(number, '04X'))  # 002A (4 цифры, заглавные)</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Форматирование с префиксами:</h4>
+                    <pre>number = 42
+
+# С префиксами
+print(format(number, '#b'))  # 0b101010
+print(format(number, '#o'))   # 0o52
+print(format(number, '#x'))   # 0x2a
+print(format(number, '#X'))   # 0x2A
+
+# Комбинация префикса и ширины
+print(format(number, '#08b')) # 0b101010 (минимум 8 символов)
+print(format(number, '#04x'))  # 0x2a (минимум 4 символа)</pre>
+                </div>
+
+                <h2>3. Создание собственных функций</h2>
+                <p>Можно создать универсальные функции для работы с любыми системами счисления.</p>
+
+                <div class="code-block">
+                    <h4>Универсальная функция перевода в любую систему:</h4>
+                    <pre>def decimal_to_base(n, base):
+    """Переводит десятичное число в систему с основанием base"""
+    if n == 0:
+        return "0"
+    
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    result = ""
+    
+    while n > 0:
+        result = digits[n % base] + result
+        n //= base
+    
+    return result
+
+# Примеры
+print(decimal_to_base(42, 2))   # 101010
+print(decimal_to_base(42, 8))   # 52
+print(decimal_to_base(42, 16))  # 2A
+print(decimal_to_base(100, 5))  # 400 (пятеричная система)
+print(decimal_to_base(255, 36)) # 73 (тридцатишестиричная система)</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Универсальная функция перевода из любой системы:</h4>
+                    <pre>def base_to_decimal(number_str, base):
+    """Переводит число из системы с основанием base в десятичную"""
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    number_str = number_str.upper()  # Приводим к верхнему регистру
+    
+    decimal = 0
+    for digit in number_str:
+        decimal = decimal * base + digits.index(digit)
+    
+    return decimal
+
+# Примеры
+print(base_to_decimal("101010", 2))  # 42
+print(base_to_decimal("52", 8))      # 42
+print(base_to_decimal("2A", 16))     # 42
+print(base_to_decimal("400", 5))     # 100
+print(base_to_decimal("73", 36))     # 255</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Функция перевода между любыми системами:</h4>
+                    <pre>def convert_base(number_str, from_base, to_base):
+    """Переводит число из одной системы счисления в другую"""
+    # Сначала переводим в десятичную
+    decimal = base_to_decimal(number_str, from_base)
+    # Затем переводим в целевую систему
+    return decimal_to_base(decimal, to_base)
+
+# Примеры
+print(convert_base("101010", 2, 16))   # 2A (из двоичной в шестнадцатеричную)
+print(convert_base("2A", 16, 2))       # 101010 (из шестнадцатеричной в двоичную)
+print(convert_base("52", 8, 2))        # 101010 (из восьмеричной в двоичную)
+print(convert_base("101010", 2, 8))    # 52 (из двоичной в восьмеричную)</pre>
+                </div>
+
+                <h2>4. Работа с байтами и битами</h2>
+                <p>Системы счисления особенно полезны при работе с байтами и битами.</p>
+
+                <div class="code-block">
+                    <h4>Работа с байтами:</h4>
+                    <pre># Представление байта в разных системах
+byte_value = 170  # 10101010 в двоичной
+
+print(f"Десятичное: {byte_value}")
+print(f"Двоичное: {bin(byte_value)[2:].zfill(8)}")  # 10101010
+print(f"Восьмеричное: {oct(byte_value)[2:].zfill(3)}")  # 252
+print(f"Шестнадцатеричное: {hex(byte_value)[2:].upper().zfill(2)}")  # AA
+
+# Проверка отдельных битов
+def get_bit(byte, position):
+    """Возвращает значение бита в позиции position (0-7)"""
+    return (byte >> position) & 1
+
+byte = 170  # 10101010
+for i in range(8):
+    print(f"Бит {i}: {get_bit(byte, i)}")
+
+# Установка бита
+def set_bit(byte, position, value):
+    """Устанавливает бит в позиции position в значение value (0 или 1)"""
+    if value:
+        return byte | (1 << position)
+    else:
+        return byte & ~(1 << position)
+
+byte = 170
+byte = set_bit(byte, 0, 1)  # Установить младший бит в 1
+print(f"После установки: {bin(byte)[2:].zfill(8)}")</pre>
+                </div>
+
+                <h2>5. Практические примеры</h2>
+
+                <div class="code-block">
+                    <h4>Пример 1: Калькулятор систем счисления</h4>
+                    <pre>def number_calculator(num1_str, base1, num2_str, base2, operation, result_base):
+    """Выполняет арифметическую операцию над числами в разных системах"""
+    # Переводим в десятичную
+    num1 = int(num1_str, base1)
+    num2 = int(num2_str, base2)
+    
+    # Выполняем операцию
+    if operation == '+':
+        result = num1 + num2
+    elif operation == '-':
+        result = num1 - num2
+    elif operation == '*':
+        result = num1 * num2
+    elif operation == '/':
+        result = num1 // num2  # Целочисленное деление
+    else:
+        return "Неизвестная операция"
+    
+    # Переводим результат
+    if result_base == 2:
+        return bin(result)[2:]
+    elif result_base == 8:
+        return oct(result)[2:]
+    elif result_base == 16:
+        return hex(result)[2:].upper()
+    else:
+        return str(result)
+
+# Примеры
+print(number_calculator("1011", 2, "1101", 2, "+", 2))  # 11000
+print(number_calculator("175", 8, "246", 8, "+", 8))   # 443
+print(number_calculator("1A5", 16, "2B3", 16, "+", 16)) # 458</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Пример 2: Проверка палиндрома в разных системах</h4>
+                    <pre>def is_palindrome_in_base(n, base):
+    """Проверяет, является ли число палиндромом в заданной системе счисления"""
+    if base == 2:
+        num_str = bin(n)[2:]
+    elif base == 8:
+        num_str = oct(n)[2:]
+    elif base == 16:
+        num_str = hex(n)[2:].upper()
+    else:
+        num_str = decimal_to_base(n, base)
+    
+    return num_str == num_str[::-1]
+
+# Примеры
+print(is_palindrome_in_base(9, 2))   # True (9 = 1001₂ - палиндром)
+print(is_palindrome_in_base(17, 16)) # True (17 = 11₁₆ - палиндром)
+print(is_palindrome_in_base(10, 2))  # False (10 = 1010₂ - не палиндром)</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй поработать с системами счисления в Python:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Работа с системами счисления в Python
+
+# 1. Базовые функции перевода
+print("=== Базовые функции ===")
+number = 255
+print(f"Число {number}₁₀:")
+print(f"  Двоичное: {bin(number)[2:]}₂")
+print(f"  Восьмеричное: {oct(number)[2:]}₈")
+print(f"  Шестнадцатеричное: {hex(number)[2:].upper()}₁₆")
+
+# 2. Обратный перевод
+print("\n=== Обратный перевод ===")
+binary = "11111111"
+octal = "377"
+hexadecimal = "FF"
+print(f"{binary}₂ = {int(binary, 2)}₁₀")
+print(f"{octal}₈ = {int(octal, 8)}₁₀")
+print(f"{hexadecimal}₁₆ = {int(hexadecimal, 16)}₁₀")
+
+# 3. Форматирование
+print("\n=== Форматирование ===")
+num = 42
+print(f"8-битное двоичное: {format(num, '08b')}")
+print(f"4-значное восьмеричное: {format(num, '04o')}")
+print(f"4-значное шестнадцатеричное: {format(num, '04X')}")
+
+# 4. Арифметика в разных системах
+print("\n=== Арифметика ===")
+a = int("1011", 2)
+b = int("1101", 2)
+result = a + b
+print(f"1011₂ + 1101₂ = {bin(result)[2:]}₂")
+print(f"Проверка: {a}₁₀ + {b}₁₀ = {result}₁₀")
+
+# 5. Работа с байтами
+print("\n=== Работа с байтами ===")
+byte = 170  # 10101010
+print(f"Байт {byte}₁₀:")
+print(f"  Двоичное: {format(byte, '08b')}")
+print(f"  Шестнадцатеричное: {format(byte, '02X')}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Универсальный конвертер</h4>
+                    <p>Напиши функцию <code>convert_number(number, from_base, to_base)</code>, которая переводит число из одной системы счисления в другую. Функция должна работать с любыми основаниями от 2 до 36.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй промежуточный перевод через десятичную систему: сначала переведи в десятичную, затем в целевую систему.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Калькулятор систем счисления</h4>
+                    <p>Создай функцию, которая принимает два числа в разных системах счисления, выполняет над ними операцию (+, -, *, /) и возвращает результат в указанной системе счисления.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Переведи оба числа в десятичную, выполни операцию, затем переведи результат в нужную систему.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Поиск палиндромов</h4>
+                    <p>Найди все числа от 1 до 1000, которые являются палиндромами одновременно в двоичной и десятичной системах счисления.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Проверь каждое число: является ли оно палиндромом в десятичной системе и в двоичной системе.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 4: Работа с битами</h4>
+                    <p>Напиши функции для работы с битами числа:</p>
+                    <ul>
+                        <li><code>get_bit(number, position)</code> - получить значение бита</li>
+                        <li><code>set_bit(number, position, value)</code> - установить бит</li>
+                        <li><code>toggle_bit(number, position)</code> - инвертировать бит</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй битовые операции: & (AND), | (OR), ^ (XOR), << (сдвиг влево), >> (сдвиг вправо).</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли убрать префикс</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО
+binary = bin(42)
+print(binary)  # Выведет "0b101010" - с префиксом!
+
+# ПРАВИЛЬНО
+binary = bin(42)[2:]  # Убираем первые 2 символа
+print(binary)  # Выведет "101010"
+
+# Или используй format()
+binary = format(42, 'b')
+print(binary)  # "101010" (без префикса)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Не указали основание в int()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО
+binary = "101010"
+decimal = int(binary)  # Будет интерпретировано как десятичное!
+print(decimal)  # 101010 (неправильно!)
+
+# ПРАВИЛЬНО
+binary = "101010"
+decimal = int(binary, 2)  # Указываем основание 2
+print(decimal)  # 42 (правильно!)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Использование неправильных символов</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО
+hex_num = "1G5"  # G не существует в шестнадцатеричной системе!
+# int(hex_num, 16) выдаст ошибку ValueError
+
+# ПРАВИЛЬНО
+hex_num = "1A5"  # Используем только 0-9 и A-F
+decimal = int(hex_num, 16)
+print(decimal)  # 421
+
+# Python не различает регистр
+print(int("1a5", 16))  # 421
+print(int("1A5", 16))  # 421</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Путаница с форматом format()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильный формат
+number = 42
+print(format(number, 'binary'))  # Ошибка!
+
+# ПРАВИЛЬНО - используй правильные коды формата
+number = 42
+print(format(number, 'b'))   # Двоичная
+print(format(number, 'o'))   # Восьмеричная
+print(format(number, 'x'))   # Шестнадцатеричная (строчные)
+print(format(number, 'X'))   # Шестнадцатеричная (заглавные)
+print(format(number, 'd'))   # Десятичная (по умолчанию)</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Что выведет код: print(bin(42)[2:])?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Это результат с префиксом 0b.">0b101010</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! [2:] убирает первые 2 символа (префикс 0b), остается только двоичное число.">101010</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Это десятичное число 42.">42</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это неправильный формат.">42b</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Как правильно перевести строку "1A5" из шестнадцатеричной в десятичную?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Без указания основания 16, int() будет интерпретировать строку как десятичное число.">int("1A5")</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! Второй аргумент 16 указывает, что число в шестнадцатеричной системе счисления.">int("1A5", 16)</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. hex() переводит из десятичной в шестнадцатеричную, а не наоборот.">hex("1A5")</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это неправильный синтаксис.">int("1A5", base=10)</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что выведет код: print(format(42, '08b'))?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Это без ведущих нулей.">101010</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! '08b' означает: двоичное число (b), минимум 8 символов (08), с ведущими нулями.">00101010</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Это неправильный формат.">0b101010</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Это восьмеричное представление.">00000052</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Какая функция позволяет перевести число в систему с любым основанием (не только 2, 8, 16)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. bin(), oct(), hex() работают только с основаниями 2, 8, 16 соответственно.">bin(), oct(), hex()</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-explanation="Неверно. int() переводит из любой системы в десятичную, но не наоборот.">int()</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-correct="true" data-explanation="Правильно! Нужно создать собственную функцию, используя алгоритм деления на основание. Встроенные функции работают только с 2, 8, 16.">Собственная функция (встроенных нет)</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. format() работает только с основаниями 2, 8, 16, 10.">format()</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что произойдет при выполнении int("1G5", 16)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Символ G не существует в шестнадцатеричной системе (только 0-9 и A-F).">Вернется число 421</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! Символ G недопустим в шестнадцатеричной системе (максимум F=15), поэтому возникнет ошибка ValueError.">Возникнет ошибка ValueError</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Python не игнорирует недопустимые символы, а выдает ошибку.">Символ G будет проигнорирован, вернется int("15", 16)</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это неверный результат.">Вернется 0</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>bin()</strong> - перевод в двоичную систему (возвращает строку с префиксом 0b)</li>
+                    <li><strong>oct()</strong> - перевод в восьмеричную систему (возвращает строку с префиксом 0o)</li>
+                    <li><strong>hex()</strong> - перевод в шестнадцатеричную систему (возвращает строку с префиксом 0x)</li>
+                    <li><strong>int(строка, основание)</strong> - перевод из любой системы в десятичную</li>
+                    <li><strong>format(число, код)</strong> - форматирование: 'b' (двоичная), 'o' (восьмеричная), 'x'/'X' (шестнадцатеричная)</li>
+                    <li><strong>Префиксы</strong> - всегда убирай [2:] при использовании bin(), oct(), hex()</li>
+                    <li><strong>Основание в int()</strong> - всегда указывай вторым аргументом (2, 8, 16 и т.д.)</li>
+                    <li><strong>Регистр букв</strong> - в шестнадцатеричной системе не важен для int(), но важен для format()</li>
+                    <li><strong>Собственные функции</strong> - для систем с основаниями, отличными от 2, 8, 16, нужно создавать свои функции</li>
+                    <li><strong>Форматирование с шириной</strong> - '08b' означает 8 символов с ведущими нулями в двоичной системе</li>
+                </ul>
+
+                <p>Отлично! Ты изучил все основные способы работы с системами счисления в Python. Эти знания очень важны для решения задач ЕГЭ и практического программирования. В следующем уроке мы решим задачи ЕГЭ по системам счисления!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-30.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-32.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

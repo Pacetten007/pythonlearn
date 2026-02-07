@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ: Программирование простое - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="ege-01">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ЕГЭ: Программирование простое</h1>
+                <div class="lesson-meta">Подготовка к ЕГЭ • 50 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы разберем простые задачи ЕГЭ по программированию. Это типичные задания №8-10, где нужно написать программу для решения конкретной задачи. Эти задачи проверяют базовые навыки программирования: работу с циклами, условиями, списками и строками.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Задачи на перебор и поиск</li>
+                        <li>Задачи на подсчет элементов</li>
+                        <li>Задачи на работу со списками</li>
+                        <li>Задачи на работу со строками</li>
+                        <li>Типичные задачи ЕГЭ</li>
+                    </ul>
+                </div>
+
+                <h2>1. Задачи на перебор и поиск</h2>
+                <p>В таких задачах нужно перебрать элементы и найти те, которые удовлетворяют условию.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 1: Поиск максимального элемента</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит максимальный элемент в списке.
+Список: [5, 2, 8, 1, 9, 3]
+
+Решение:
+a = [5, 2, 8, 1, 9, 3]
+max_value = a[0]
+for i in range(1, len(a)):
+    if a[i] > max_value:
+        max_value = a[i]
+print(max_value)
+
+Ответ: 9
+
+Проверка в Python:
+a = [5, 2, 8, 1, 9, 3]
+max_value = a[0]
+for i in range(1, len(a)):
+    if a[i] > max_value:
+        max_value = a[i]
+    print(f"i={i}, a[{i}]={a[i]}, max_value={max_value}")
+print(f"Максимальный элемент: {max_value}")  # 9</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 2: Поиск элемента по условию</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит первое число, большее 10.
+Список: [5, 12, 8, 15, 3, 20]
+
+Решение:
+a = [5, 12, 8, 15, 3, 20]
+result = None
+for i in range(len(a)):
+    if a[i] > 10:
+        result = a[i]
+        break
+print(result)
+
+Ответ: 12
+
+Проверка в Python:
+a = [5, 12, 8, 15, 3, 20]
+result = None
+for i in range(len(a)):
+    if a[i] > 10:
+        result = a[i]
+        print(f"Найдено число {result} на позиции {i}")
+        break
+print(f"Результат: {result}")  # 12</pre>
+                </div>
+
+                <h2>2. Задачи на подсчет элементов</h2>
+                <p>В таких задачах нужно подсчитать количество элементов, удовлетворяющих условию.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 3: Подсчет четных чисел</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая подсчитывает количество четных чисел.
+Список: [1, 2, 3, 4, 5, 6, 7, 8]
+
+Решение:
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+count = 0
+for i in range(len(a)):
+    if a[i] % 2 == 0:
+        count = count + 1
+print(count)
+
+Ответ: 4
+
+Проверка в Python:
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+count = 0
+for i in range(len(a)):
+    if a[i] % 2 == 0:
+        count = count + 1
+        print(f"Найдено четное: a[{i}]={a[i]}, всего: {count}")
+print(f"Итого четных чисел: {count}")  # 4</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 4: Подсчет элементов в диапазоне</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая подсчитывает количество чисел в диапазоне от 10 до 20.
+Список: [5, 15, 8, 12, 25, 18, 3, 11]
+
+Решение:
+a = [5, 15, 8, 12, 25, 18, 3, 11]
+count = 0
+for i in range(len(a)):
+    if 10 <= a[i] <= 20:
+        count = count + 1
+print(count)
+
+Ответ: 4
+
+Проверка в Python:
+a = [5, 15, 8, 12, 25, 18, 3, 11]
+count = 0
+for i in range(len(a)):
+    if 10 <= a[i] <= 20:
+        count = count + 1
+        print(f"Найдено число в диапазоне: a[{i}]={a[i]}, всего: {count}")
+print(f"Итого чисел в диапазоне [10, 20]: {count}")  # 4</pre>
+                </div>
+
+                <h2>3. Задачи на работу со списками</h2>
+                <p>В таких задачах нужно обработать список: найти сумму, среднее, изменить элементы.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 5: Сумма элементов списка</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая вычисляет сумму всех элементов.
+Список: [10, 20, 30, 40]
+
+Решение:
+a = [10, 20, 30, 40]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+print(s)
+
+Ответ: 100
+
+Проверка в Python:
+a = [10, 20, 30, 40]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+    print(f"i={i}, a[{i}]={a[i]}, s={s}")
+print(f"Итоговая сумма: {s}")  # 100</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 6: Среднее арифметическое</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая вычисляет среднее арифметическое.
+Список: [10, 20, 30, 40]
+
+Решение:
+a = [10, 20, 30, 40]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+average = s / len(a)
+print(average)
+
+Ответ: 25.0
+
+Проверка в Python:
+a = [10, 20, 30, 40]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+average = s / len(a)
+print(f"Сумма: {s}, количество: {len(a)}")
+print(f"Среднее арифметическое: {average}")  # 25.0</pre>
+                </div>
+
+                <h2>4. Задачи на работу со строками</h2>
+                <p>В таких задачах нужно обработать строку: найти символы, подсчитать их, изменить строку.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 7: Подсчет символов в строке</h4>
+                    <pre>Условие: Дана строка. Напишите программу, которая подсчитывает количество букв 'a' в строке.
+Строка: "banana"
+
+Решение:
+s = "banana"
+count = 0
+for i in range(len(s)):
+    if s[i] == 'a':
+        count = count + 1
+print(count)
+
+Ответ: 3
+
+Проверка в Python:
+s = "banana"
+count = 0
+for i in range(len(s)):
+    if s[i] == 'a':
+        count = count + 1
+        print(f"Найдена 'a' на позиции {i}, всего: {count}")
+print(f"Итого букв 'a': {count}")  # 3</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 8: Проверка строки</h4>
+                    <pre>Условие: Дана строка. Напишите программу, которая проверяет, содержит ли строка только цифры.
+Строка: "12345"
+
+Решение:
+s = "12345"
+only_digits = True
+for i in range(len(s)):
+    if not s[i].isdigit():
+        only_digits = False
+        break
+print(only_digits)
+
+Ответ: True
+
+Проверка в Python:
+s = "12345"
+only_digits = True
+for i in range(len(s)):
+    if not s[i].isdigit():
+        only_digits = False
+        print(f"Найден не-цифровой символ '{s[i]}' на позиции {i}")
+        break
+print(f"Только цифры: {only_digits}")  # True</pre>
+                </div>
+
+                <h2>5. Комплексные задачи</h2>
+                <p>Задачи, сочетающие несколько элементов.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 9: Поиск и подсчет</h4>
+                    <pre>Условие: Дан список чисел. Напишите программу, которая находит количество чисел, больших среднего арифметического.
+Список: [10, 20, 30, 40, 50]
+
+Решение:
+a = [10, 20, 30, 40, 50]
+# Сначала находим среднее
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+average = s / len(a)
+
+# Затем считаем числа, большие среднего
+count = 0
+for i in range(len(a)):
+    if a[i] > average:
+        count = count + 1
+print(count)
+
+Решение:
+1. Среднее: (10+20+30+40+50)/5 = 30
+2. Числа больше 30: 40, 50
+3. Количество: 2
+
+Ответ: 2
+
+Проверка в Python:
+a = [10, 20, 30, 40, 50]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+average = s / len(a)
+print(f"Среднее арифметическое: {average}")
+
+count = 0
+for i in range(len(a)):
+    if a[i] > average:
+        count = count + 1
+        print(f"Число {a[i]} больше среднего, всего: {count}")
+print(f"Итого чисел больше среднего: {count}")  # 2</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 10: Работа с двумя списками</h4>
+                    <pre>Условие: Даны два списка одинаковой длины. Напишите программу, которая находит количество позиций, где элементы совпадают.
+Списки: [1, 2, 3, 4, 5] и [1, 2, 5, 4, 5]
+
+Решение:
+a = [1, 2, 3, 4, 5]
+b = [1, 2, 5, 4, 5]
+count = 0
+for i in range(len(a)):
+    if a[i] == b[i]:
+        count = count + 1
+print(count)
+
+Решение:
+Позиции, где элементы совпадают:
+- i=0: a[0]=1, b[0]=1, совпадают
+- i=1: a[1]=2, b[1]=2, совпадают
+- i=2: a[2]=3, b[2]=5, не совпадают
+- i=3: a[3]=4, b[3]=4, совпадают
+- i=4: a[4]=5, b[4]=5, совпадают
+
+Ответ: 4
+
+Проверка в Python:
+a = [1, 2, 3, 4, 5]
+b = [1, 2, 5, 4, 5]
+count = 0
+for i in range(len(a)):
+    if a[i] == b[i]:
+        count = count + 1
+        print(f"Позиция {i}: a[{i}]={a[i]}, b[{i}]={b[i]}, совпадают, всего: {count}")
+print(f"Итого совпадений: {count}")  # 4</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить простые задачи ЕГЭ:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Простые задачи ЕГЭ по программированию
+
+# Задача 1: Максимальный элемент
+print("=== Задача 1: Максимальный элемент ===")
+a = [5, 2, 8, 1, 9, 3]
+max_value = a[0]
+for i in range(1, len(a)):
+    if a[i] > max_value:
+        max_value = a[i]
+print(f"Максимальный элемент: {max_value}")
+
+# Задача 2: Подсчет четных
+print("\n=== Задача 2: Подсчет четных ===")
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+count = 0
+for i in range(len(a)):
+    if a[i] % 2 == 0:
+        count = count + 1
+print(f"Четных чисел: {count}")
+
+# Задача 3: Сумма элементов
+print("\n=== Задача 3: Сумма элементов ===")
+a = [10, 20, 30, 40]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+print(f"Сумма: {s}")
+
+# Задача 4: Среднее арифметическое
+print("\n=== Задача 4: Среднее арифметическое ===")
+a = [10, 20, 30, 40]
+s = 0
+for i in range(len(a)):
+    s = s + a[i]
+average = s / len(a)
+print(f"Среднее: {average}")
+
+# Задача 5: Подсчет символов
+print("\n=== Задача 5: Подсчет 'a' в строке ===")
+s = "banana"
+count = 0
+for i in range(len(s)):
+    if s[i] == 'a':
+        count = count + 1
+print(f"Букв 'a' в '{s}': {count}")
+
+# Задача 6: Сравнение списков
+print("\n=== Задача 6: Сравнение списков ===")
+a = [1, 2, 3, 4, 5]
+b = [1, 2, 5, 4, 5]
+count = 0
+for i in range(len(a)):
+    if a[i] == b[i]:
+        count = count + 1
+print(f"Совпадений: {count}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Поиск минимального</h4>
+                    <p>Напиши программу, которая находит минимальный элемент в списке [7, 3, 9, 1, 5].</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй алгоритм поиска максимума, но измени условие на < вместо >.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Подсчет положительных</h4>
+                    <p>Напиши программу, которая подсчитывает количество положительных чисел в списке [5, -3, 2, -1, 4].</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй условие if a[i] > 0 для проверки положительности.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Подсчет заглавных букв</h4>
+                    <p>Напиши программу, которая подсчитывает количество заглавных букв в строке "Hello World".</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй метод isupper() для проверки, является ли символ заглавной буквой.</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неправильная инициализация для поиска максимума</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - инициализация нулем
+a = [5, 2, 8, 1, 9]
+max_value = 0  # Если все элементы отрицательные, это даст неправильный результат!
+
+# ПРАВИЛЬНО - инициализируй первым элементом
+a = [5, 2, 8, 1, 9]
+max_value = a[0]  # Используй первый элемент как начальное значение
+for i in range(1, len(a)):
+    if a[i] > max_value:
+        max_value = a[i]</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Забыли инициализировать счетчик</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - счетчик не инициализирован
+a = [1, 2, 3, 4, 5]
+for i in range(len(a)):
+    count = count + 1  # Ошибка! count не определена
+
+# ПРАВИЛЬНО - инициализируй счетчик перед циклом
+a = [1, 2, 3, 4, 5]
+count = 0
+for i in range(len(a)):
+    count = count + 1</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Неправильное условие для диапазона</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильная логика
+a = [15]
+if a[i] > 10 and a[i] < 20:  # Это правильно, но можно проще
+
+# ПРАВИЛЬНО - используй цепочку сравнений
+a = [15]
+if 10 <= a[i] <= 20:  # Более читаемо и понятно</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Что выведет программа: a=[5,2,8,1]; max=a[0]; for i in range(1,len(a)): if a[i]>max: max=a[i]; print(max)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Проверь алгоритм поиска максимума.">5</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! Алгоритм находит максимальный элемент: 8.">8</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Это неправильный расчет.">1</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Проверь все элементы списка.">4</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что выведет программа: a=[1,2,3,4,5,6]; count=0; for i in range(len(a)): if a[i]%2==0: count+=1; print(count)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Проверь четные числа: 2, 4, 6 - это 3 числа.">2</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! Четные числа: 2, 4, 6 - всего 3.">3</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. Это общее количество элементов, а не четных.">6</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Проверь определение четности.">1</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что выведет программа: s="hello"; count=0; for i in range(len(s)): if s[i]=='l': count+=1; print(count)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. В 'hello' есть две буквы 'l'.">1</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! В 'hello' есть две буквы 'l' на позициях 2 и 3.">2</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Проверь все символы строки.">3</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Это длина строки, а не количество 'l'.">5</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что выведет программа: a=[10,20,30]; s=0; for i in range(len(a)): s=s+a[i]; print(s)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Проверь сумму: 10+20+30.">50</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-explanation="Неверно. Проверь сумму всех элементов.">40</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-correct="true" data-explanation="Правильно! 10 + 20 + 30 = 60.">60</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Это неправильный расчет.">30</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что выведет программа: a=[1,2,3]; b=[1,2,4]; count=0; for i in range(len(a)): if a[i]==b[i]: count+=1; print(count)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Проверь все позиции: 0 и 1 совпадают.">1</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! Позиции 0 и 1 совпадают (1==1, 2==2), позиция 2 не совпадает (3!=4).">2</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Проверь все позиции.">3</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это неправильный расчет.">0</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Поиск максимума/минимума</strong> - инициализируй первым элементом, сравнивай с остальными</li>
+                    <li><strong>Подсчет элементов</strong> - используй счетчик и условие в цикле</li>
+                    <li><strong>Сумма элементов</strong> - накапливай сумму в переменной, проходя по всем элементам</li>
+                    <li><strong>Среднее арифметическое</strong> - сумма / количество элементов</li>
+                    <li><strong>Работа со строками</strong> - используй индексацию s[i] и методы isdigit(), isupper() и др.</li>
+                    <li><strong>Сравнение списков</strong> - сравнивай элементы на одинаковых позициях</li>
+                    <li><strong>Инициализация</strong> - всегда инициализируй переменные перед использованием</li>
+                    <li><strong>Условия</strong> - используй правильные операторы сравнения (==, !=, <, >, <=, >=)</li>
+                    <li><strong>Практика</strong> - решай задачи пошагово, проверяй на разных входных данных</li>
+                </ul>
+
+                <p>Отлично! Ты изучил простые задачи ЕГЭ по программированию. Эти навыки очень важны для успешной сдачи экзамена. В следующем уроке мы изучим задачи среднего уровня сложности!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="oge-04.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="ege-02.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

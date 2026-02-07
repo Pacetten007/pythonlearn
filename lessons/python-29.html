@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 39: Восьмеричная и шестнадцатеричная системы - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="python-29">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Урок 39: Восьмеричная и шестнадцатеричная системы счисления</h1>
+                <div class="lesson-meta">Системы счисления • 40 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>Помимо двоичной системы, в программировании широко используются восьмеричная (основание 8) и шестнадцатеричная (основание 16) системы счисления. Они удобны для работы с байтами и упрощают запись больших двоичных чисел.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Восьмеричная система счисления (основание 8)</li>
+                        <li>Шестнадцатеричная система счисления (основание 16)</li>
+                        <li>Перевод между системами счисления</li>
+                        <li>Связь с двоичной системой</li>
+                        <li>Работа с восьмеричными и шестнадцатеричными числами в Python</li>
+                        <li>Практические применения</li>
+                    </ul>
+                </div>
+
+                <h2>1. Восьмеричная система счисления</h2>
+                <p>Восьмеричная система использует 8 цифр: <strong>0, 1, 2, 3, 4, 5, 6, 7</strong>. Каждая позиция представляет степень восьмерки.</p>
+
+                <div class="code-block">
+                    <h4>Разряды в восьмеричном числе:</h4>
+                    <pre>Позиция:  3  2  1  0
+Степень: 8³ 8² 8¹ 8⁰
+Значение: 512 64  8  1
+
+Пример: 175₈
+        1  7  5
+        ↓  ↓  ↓
+        64+56+5 = 125₁₀</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Перевод из восьмеричной в десятичную:</h4>
+                    <pre>175₈ = 1×8² + 7×8¹ + 5×8⁰
+    = 1×64 + 7×8 + 5×1
+    = 64 + 56 + 5
+    = 125₁₀</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Перевод из десятичной в восьмеричную (деление на 8):</h4>
+                    <pre>Переведем 125₁₀ в восьмеричную:
+
+125 ÷ 8 = 15 (остаток 5) ← младший разряд
+ 15 ÷ 8 =  1 (остаток 7)
+  1 ÷ 8 =  0 (остаток 1) ← старший разряд
+
+Читаем остатки снизу вверх: 175₈
+
+Проверка: 1×8² + 7×8¹ + 5×8⁰ = 64 + 56 + 5 = 125 ✓</pre>
+                </div>
+
+                <h2>2. Шестнадцатеричная система счисления</h2>
+                <p>Шестнадцатеричная система использует 16 символов: <strong>0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F</strong>. Буквы A-F представляют числа 10-15.</p>
+
+                <div class="code-block">
+                    <h4>Цифры шестнадцатеричной системы:</h4>
+                    <pre>0-9: обычные цифры
+A = 10, B = 11, C = 12, D = 13, E = 14, F = 15</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Разряды в шестнадцатеричном числе:</h4>
+                    <pre>Позиция:  3  2  1  0
+Степень: 16³ 16² 16¹ 16⁰
+Значение: 4096 256 16  1
+
+Пример: 1A5₁₆
+        1  A  5
+        ↓  ↓  ↓
+        256+160+5 = 421₁₀</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Перевод из шестнадцатеричной в десятичную:</h4>
+                    <pre>1A5₁₆ = 1×16² + A×16¹ + 5×16⁰
+     = 1×256 + 10×16 + 5×1
+     = 256 + 160 + 5
+     = 421₁₀</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Перевод из десятичной в шестнадцатеричную (деление на 16):</h4>
+                    <pre>Переведем 421₁₀ в шестнадцатеричную:
+
+421 ÷ 16 = 26 (остаток 5) ← младший разряд
+ 26 ÷ 16 =  1 (остаток 10 = A)
+  1 ÷ 16 =  0 (остаток 1) ← старший разряд
+
+Читаем остатки снизу вверх: 1A5₁₆
+
+Проверка: 1×16² + 10×16¹ + 5×16⁰ = 256 + 160 + 5 = 421 ✓</pre>
+                </div>
+
+                <h2>3. Связь с двоичной системой</h2>
+                <p>Восьмеричная и шестнадцатеричная системы тесно связаны с двоичной, что делает их удобными для работы с байтами.</p>
+
+                <div class="code-block">
+                    <h4>Восьмеричная ↔ Двоичная:</h4>
+                    <pre>Каждая восьмеричная цифра соответствует 3 двоичным битам:
+
+0₈ = 000₂    4₈ = 100₂
+1₈ = 001₂    5₈ = 101₂
+2₈ = 010₂    6₈ = 110₂
+3₈ = 011₂    7₈ = 111₂
+
+Пример: 175₈ → 001 111 101₂ = 1111101₂
+        1111101₂ → 001 111 101 → 175₈</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Шестнадцатеричная ↔ Двоичная:</h4>
+                    <pre>Каждая шестнадцатеричная цифра соответствует 4 двоичным битам:
+
+0₁₆ = 0000₂    8₁₆ = 1000₂
+1₁₆ = 0001₂    9₁₆ = 1001₂
+2₁₆ = 0010₂    A₁₆ = 1010₂
+3₁₆ = 0011₂    B₁₆ = 1011₂
+4₁₆ = 0100₂    C₁₆ = 1100₂
+5₁₆ = 0101₂    D₁₆ = 1101₂
+6₁₆ = 0110₂    E₁₆ = 1110₂
+7₁₆ = 0111₂    F₁₆ = 1111₂
+
+Пример: 1A5₁₆ → 0001 1010 0101₂ = 110100101₂
+        110100101₂ → 0001 1010 0101 → 1A5₁₆</pre>
+                </div>
+
+                <div class="note">
+                    <h4>💡 Почему это удобно?</h4>
+                    <p>Один байт = 8 бит = 2 шестнадцатеричные цифры. Это делает шестнадцатеричную систему идеальной для работы с байтами в программировании!</p>
+                </div>
+
+                <h2>4. Работа в Python</h2>
+                <p>Python предоставляет встроенные функции для работы с восьмеричными и шестнадцатеричными числами.</p>
+
+                <div class="code-block">
+                    <h4>Восьмеричные числа в Python:</h4>
+                    <pre># Перевод из десятичной в восьмеричную
+decimal = 125
+octal = oct(decimal)
+print(octal)  # 0o175 (префикс 0o означает восьмеричное)
+
+# Убрать префикс
+octal_str = oct(decimal)[2:]
+print(octal_str)  # 175
+
+# Перевод из восьмеричной в десятичную
+octal_str = "175"
+decimal = int(octal_str, 8)  # второй аргумент - основание
+print(decimal)  # 125
+
+# Форматирование с ведущими нулями
+octal_8bit = format(125, '04o')  # 4 цифры с ведущими нулями
+print(octal_8bit)  # 0175</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Шестнадцатеричные числа в Python:</h4>
+                    <pre># Перевод из десятичной в шестнадцатеричную
+decimal = 421
+hexadecimal = hex(decimal)
+print(hexadecimal)  # 0x1a5 (префикс 0x означает шестнадцатеричное)
+
+# Убрать префикс
+hex_str = hex(decimal)[2:]
+print(hex_str)  # 1a5
+
+# Перевод из шестнадцатеричной в десятичную
+hex_str = "1A5"
+decimal = int(hex_str, 16)  # второй аргумент - основание
+print(decimal)  # 421
+
+# Форматирование с ведущими нулями (заглавные буквы)
+hex_upper = format(421, '04X')  # 4 цифры, заглавные буквы
+print(hex_upper)  # 01A5
+
+# Форматирование (строчные буквы)
+hex_lower = format(421, '04x')  # 4 цифры, строчные буквы
+print(hex_lower)  # 01a5</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Полезные функции для перевода:</h4>
+                    <pre>def decimal_to_octal(n):
+    """Переводит десятичное число в восьмеричное (без префикса)"""
+    if n == 0:
+        return "0"
+    octal = ""
+    while n > 0:
+        octal = str(n % 8) + octal
+        n //= 8
+    return octal
+
+def decimal_to_hex(n, uppercase=True):
+    """Переводит десятичное число в шестнадцатеричное (без префикса)"""
+    if n == 0:
+        return "0"
+    hex_digits = "0123456789ABCDEF" if uppercase else "0123456789abcdef"
+    hex_str = ""
+    while n > 0:
+        hex_str = hex_digits[n % 16] + hex_str
+        n //= 16
+    return hex_str
+
+def octal_to_binary(octal_str):
+    """Переводит восьмеричное число в двоичное"""
+    decimal = int(octal_str, 8)
+    return bin(decimal)[2:]
+
+def hex_to_binary(hex_str):
+    """Переводит шестнадцатеричное число в двоичное"""
+    decimal = int(hex_str, 16)
+    return bin(decimal)[2:]
+
+# Примеры
+print(decimal_to_octal(125))      # 175
+print(decimal_to_hex(421))         # 1A5
+print(octal_to_binary("175"))      # 1111101
+print(hex_to_binary("1A5"))        # 110100101</pre>
+                </div>
+
+                <h2>5. Интерактивный редактор</h2>
+                <p>Попробуй поработать с восьмеричными и шестнадцатеричными числами:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Восьмеричная система
+print("=== Восьмеричная система ===")
+numbers = [64, 125, 255, 512]
+for num in numbers:
+    octal = oct(num)[2:]  # Убираем префикс 0o
+    print(f"{num}₁₀ = {octal}₈")
+
+# Шестнадцатеричная система
+print("\n=== Шестнадцатеричная система ===")
+numbers = [10, 255, 421, 4095]
+for num in numbers:
+    hex_lower = hex(num)[2:]  # Строчные буквы
+    hex_upper = format(num, 'X')  # Заглавные буквы
+    print(f"{num}₁₀ = {hex_lower}₁₆ (или {hex_upper}₁₆)")
+
+# Перевод из восьмеричной и шестнадцатеричной в десятичную
+print("\n=== Обратный перевод ===")
+octal_num = "175"
+decimal_from_octal = int(octal_num, 8)
+print(f"{octal_num}₈ = {decimal_from_octal}₁₀")
+
+hex_num = "1A5"
+decimal_from_hex = int(hex_num, 16)
+print(f"{hex_num}₁₆ = {decimal_from_hex}₁₀")
+
+# Связь с двоичной системой
+print("\n=== Связь с двоичной системой ===")
+num = 255
+binary = bin(num)[2:]
+octal = oct(num)[2:]
+hexadecimal = hex(num)[2:]
+print(f"{num}₁₀ = {binary}₂ = {octal}₈ = {hexadecimal}₁₆")
+
+# Работа с байтами
+print("\n=== Работа с байтами ===")
+byte_value = 170  # 10101010 в двоичной
+print(f"Байт {byte_value}₁₀:")
+print(f"  Двоичная: {bin(byte_value)[2:].zfill(8)}")
+print(f"  Восьмеричная: {oct(byte_value)[2:].zfill(3)}")
+print(f"  Шестнадцатеричная: {hex(byte_value)[2:].upper().zfill(2)}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>6. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Перевод в восьмеричную систему</h4>
+                    <p>Переведи следующие числа из десятичной в восьмеричную систему:</p>
+                    <ul>
+                        <li>64₁₀ = ?₈</li>
+                        <li>255₁₀ = ?₈</li>
+                        <li>512₁₀ = ?₈</li>
+                        <li>1000₁₀ = ?₈</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй метод деления на 8 или функцию <code>oct()</code> в Python.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Перевод в шестнадцатеричную систему</h4>
+                    <p>Переведи следующие числа из десятичной в шестнадцатеричную систему:</p>
+                    <ul>
+                        <li>10₁₀ = ?₁₆</li>
+                        <li>255₁₀ = ?₁₆</li>
+                        <li>1000₁₀ = ?₁₆</li>
+                        <li>4095₁₀ = ?₁₆</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй метод деления на 16 или функцию <code>hex()</code> в Python. Не забудь про буквы A-F!</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Обратный перевод</h4>
+                    <p>Переведи следующие числа в десятичную систему:</p>
+                    <ul>
+                        <li>777₈ = ?₁₀</li>
+                        <li>FF₁₆ = ?₁₀</li>
+                        <li>1A5₁₆ = ?₁₀</li>
+                        <li>1234₈ = ?₁₀</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй функцию <code>int(number, base)</code>, где base - основание системы (8 или 16).</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 4: Связь с двоичной системой</h4>
+                    <p>Переведи следующие числа через двоичную систему:</p>
+                    <ul>
+                        <li>175₈ → ?₂ → ?₁₆</li>
+                        <li>1A5₁₆ → ?₂ → ?₈</li>
+                    </ul>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Восьмеричная цифра = 3 бита, шестнадцатеричная цифра = 4 бита. Используй это для быстрого перевода!</p>
+                    </details>
+                </div>
+
+                <h2>7. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Забыли про префиксы</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО
+octal = oct(125)
+print(octal)  # Выведет "0o175" - с префиксом!
+
+# ПРАВИЛЬНО
+octal = oct(125)[2:]  # Убираем первые 2 символа
+print(octal)  # Выведет "175"
+
+# Аналогично для hex()
+hex_num = hex(421)[2:]  # Убираем "0x"</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильное основание в int()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - забыли указать основание
+octal = "175"
+decimal = int(octal)  # Будет интерпретировано как десятичное!
+print(decimal)  # 175 (неправильно!)
+
+# ПРАВИЛЬНО - указываем основание
+octal = "175"
+decimal = int(octal, 8)  # Второй аргумент - основание системы
+print(decimal)  # 125 (правильно!)
+
+# Для шестнадцатеричной - основание 16
+hex_num = "1A5"
+decimal = int(hex_num, 16)  # Основание 16
+print(decimal)  # 421</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Путаница с буквами в шестнадцатеричной системе</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - использовали неправильные символы
+hex_num = "1G5"  # G не существует в шестнадцатеричной системе!
+# int(hex_num, 16) выдаст ошибку
+
+# ПРАВИЛЬНО - используем только 0-9 и A-F
+hex_num = "1A5"  # A = 10
+decimal = int(hex_num, 16)
+print(decimal)  # 421
+
+# Python не различает регистр букв
+hex_lower = int("1a5", 16)  # Строчные буквы
+hex_upper = int("1A5", 16)  # Заглавные буквы
+print(hex_lower == hex_upper)  # True</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неправильный перевод через двоичную систему</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильное разбиение на группы
+octal = "175"
+# Неправильно: разбили на 1, 7, 5 (по 1 биту)
+# Правильно: разбить на 001, 111, 101 (по 3 бита)
+
+# ПРАВИЛЬНО - правильное разбиение
+# 175₈ → каждая цифра = 3 бита
+# 1₈ = 001₂, 7₈ = 111₂, 5₈ = 101₂
+# Результат: 001111101₂ = 1111101₂
+
+# Для шестнадцатеричной - по 4 бита
+# 1A5₁₆ → 1₁₆ = 0001₂, A₁₆ = 1010₂, 5₁₆ = 0101₂
+# Результат: 000110100101₂ = 110100101₂</pre>
+                    </div>
+                </div>
+
+                <h2>8. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Чему равно число 175₈ в десятичной системе?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Это 175₁₀, а не результат перевода.">175</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! 1×8² + 7×8¹ + 5×8⁰ = 64 + 56 + 5 = 125.">125</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Проверь расчет: 1×8² + 7×8¹ + 5×8⁰.">117</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Это 1×8² + 7×8¹ + 5×8⁰ = 125.">135</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Чему равно число 1A5₁₆ в десятичной системе?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Это неправильный расчет.">305</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-correct="true" data-explanation="Правильно! 1×16² + 10×16¹ + 5×16⁰ = 256 + 160 + 5 = 421.">421</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-explanation="Неверно. Не забывай, что A = 10.">181</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Проверь расчет: 1×16² + A×16¹ + 5×16⁰.">445</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько бит соответствует одной восьмеричной цифре?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Это для шестнадцатеричной системы.">4 бита</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! Каждая восьмеричная цифра (0-7) может быть представлена 3 битами (000-111).">3 бита</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Это слишком много.">8 бит</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Это для двоичной системы.">1 бит</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что выведет код: print(hex(255))?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Функция hex() всегда возвращает строку с префиксом 0x.">ff</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! Функция hex() возвращает строку с префиксом 0x, означающим шестнадцатеричное число.">0xff</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Это десятичное число 255, а не результат hex().">255</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Это неправильный формат.">FF</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Как правильно перевести восьмеричную строку в десятичное число?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Без указания основания 8, int() будет интерпретировать строку как десятичное число.">int("175")</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! Второй аргумент 8 указывает, что число в восьмеричной системе счисления.">int("175", 8)</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Это неправильный синтаксис.">int("175", base=10)</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. oct() переводит из десятичной в восьмеричную, а не наоборот.">oct("175")</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>9. Резюме урока</h2>
+                <ul>
+                    <li><strong>Восьмеричная система</strong> использует цифры 0-7 (основание 8)</li>
+                    <li><strong>Шестнадцатеричная система</strong> использует 0-9 и A-F (основание 16)</li>
+                    <li><strong>Перевод из 10 в 8/16</strong>: метод деления на основание или функции <code>oct()</code>/<code>hex()</code></li>
+                    <li><strong>Перевод из 8/16 в 10</strong>: <code>int(number, 8)</code> или <code>int(number, 16)</code></li>
+                    <li><strong>Связь с двоичной</strong>: 1 восьмеричная цифра = 3 бита, 1 шестнадцатеричная цифра = 4 бита</li>
+                    <li><strong>Префиксы</strong>: <code>oct()</code> возвращает с префиксом 0o, <code>hex()</code> - с префиксом 0x</li>
+                    <li><strong>Форматирование</strong>: <code>format(num, 'o')</code> для восьмеричной, <code>format(num, 'x')</code> или <code>format(num, 'X')</code> для шестнадцатеричной</li>
+                    <li><strong>Буквы в hex</strong>: A=10, B=11, C=12, D=13, E=14, F=15</li>
+                    <li><strong>Байты</strong>: 1 байт = 8 бит = 2 шестнадцатеричные цифры</li>
+                </ul>
+
+                <p>Отлично! Ты изучил восьмеричную и шестнадцатеричную системы счисления. Эти знания очень важны для понимания работы компьютера и решения задач ЕГЭ. В следующем уроке мы изучим арифметику в системах счисления!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="python-28.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="python-30.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

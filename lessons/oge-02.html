@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОГЭ: Простые задачи - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="oge-02">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ОГЭ: Простые задачи</h1>
+                <div class="lesson-meta">Подготовка к ОГЭ • 45 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы разберем простые задачи ОГЭ по программированию. Это типичные задания, где нужно написать программу для решения конкретной задачи: вычисления, проверки условий, работы с числами и строками.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Задачи на вычисления</li>
+                        <li>Задачи с условиями</li>
+                        <li>Задачи с циклами</li>
+                        <li>Задачи на работу с числами</li>
+                        <li>Типичные задачи ОГЭ</li>
+                    </ul>
+                </div>
+
+                <h2>1. Задачи на вычисления</h2>
+                <p>Самые простые задачи - это вычисления по формулам.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 1: Вычисление площади</h4>
+                    <pre>Условие: Напишите программу, которая вычисляет площадь прямоугольника.
+Длина = 5, ширина = 3.
+
+Решение:
+a = 5
+b = 3
+s = a * b
+print(s)
+
+Ответ: 15
+
+Проверка в Python:
+a = 5
+b = 3
+s = a * b
+print(f"Площадь прямоугольника: {s}")  # 15</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 2: Среднее арифметическое</h4>
+                    <pre>Условие: Напишите программу, которая вычисляет среднее арифметическое трех чисел: 10, 20, 30.
+
+Решение:
+a = 10
+b = 20
+c = 30
+average = (a + b + c) / 3
+print(average)
+
+Ответ: 20.0
+
+Проверка в Python:
+a = 10
+b = 20
+c = 30
+average = (a + b + c) / 3
+print(f"Среднее арифметическое: {average}")  # 20.0</pre>
+                </div>
+
+                <h2>2. Задачи с условиями</h2>
+                <p>Задачи, где нужно проверить условие и выполнить разные действия.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 3: Проверка четности</h4>
+                    <pre>Условие: Напишите программу, которая проверяет, является ли число четным.
+Число = 8.
+
+Решение:
+n = 8
+if n % 2 == 0:
+    print("Четное")
+else:
+    print("Нечетное")
+
+Ответ: Четное
+
+Проверка в Python:
+n = 8
+if n % 2 == 0:
+    print("Четное")
+else:
+    print("Нечетное")  # Четное</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 4: Максимум из двух чисел</h4>
+                    <pre>Условие: Напишите программу, которая находит максимальное из двух чисел: 15 и 23.
+
+Решение:
+a = 15
+b = 23
+if a > b:
+    print(a)
+else:
+    print(b)
+
+Ответ: 23
+
+Проверка в Python:
+a = 15
+b = 23
+if a > b:
+    print(f"Максимум: {a}")
+else:
+    print(f"Максимум: {b}")  # Максимум: 23</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 5: Проверка диапазона</h4>
+                    <pre>Условие: Напишите программу, которая проверяет, находится ли число в диапазоне от 10 до 20.
+Число = 15.
+
+Решение:
+n = 15
+if 10 <= n <= 20:
+    print("В диапазоне")
+else:
+    print("Не в диапазоне")
+
+Ответ: В диапазоне
+
+Проверка в Python:
+n = 15
+if 10 <= n <= 20:
+    print("В диапазоне")
+else:
+    print("Не в диапазоне")  # В диапазоне</pre>
+                </div>
+
+                <h2>3. Задачи с циклами</h2>
+                <p>Задачи, где нужно использовать циклы для обработки данных.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 6: Сумма чисел</h4>
+                    <pre>Условие: Напишите программу, которая вычисляет сумму чисел от 1 до 5.
+
+Решение:
+s = 0
+for i in range(1, 6):
+    s = s + i
+print(s)
+
+Ответ: 15
+
+Проверка в Python:
+s = 0
+for i in range(1, 6):
+    s = s + i
+    print(f"i={i}, s={s}")
+print(f"Итоговая сумма: {s}")  # 15</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 7: Подсчет четных чисел</h4>
+                    <pre>Условие: Напишите программу, которая подсчитывает количество четных чисел от 1 до 10.
+
+Решение:
+count = 0
+for i in range(1, 11):
+    if i % 2 == 0:
+        count = count + 1
+print(count)
+
+Ответ: 5
+
+Проверка в Python:
+count = 0
+for i in range(1, 11):
+    if i % 2 == 0:
+        count = count + 1
+        print(f"Найдено четное: {i}, всего: {count}")
+print(f"Итого четных чисел: {count}")  # 5</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 8: Факториал</h4>
+                    <pre>Условие: Напишите программу, которая вычисляет факториал числа 5.
+Факториал n = 1 × 2 × 3 × ... × n
+
+Решение:
+n = 5
+factorial = 1
+for i in range(1, n + 1):
+    factorial = factorial * i
+print(factorial)
+
+Ответ: 120
+
+Проверка в Python:
+n = 5
+factorial = 1
+for i in range(1, n + 1):
+    factorial = factorial * i
+    print(f"i={i}, factorial={factorial}")
+print(f"Факториал {n} = {factorial}")  # 120</pre>
+                </div>
+
+                <h2>4. Задачи на работу с числами</h2>
+                <p>Задачи, где нужно работать с цифрами числа, проверять свойства чисел.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 9: Сумма цифр числа</h4>
+                    <pre>Условие: Напишите программу, которая вычисляет сумму цифр числа 123.
+
+Решение:
+n = 123
+s = 0
+while n > 0:
+    s = s + n % 10
+    n = n // 10
+print(s)
+
+Решение пошагово:
+1. n = 123, s = 0
+2. n % 10 = 3, s = 0 + 3 = 3, n = 123 // 10 = 12
+3. n % 10 = 2, s = 3 + 2 = 5, n = 12 // 10 = 1
+4. n % 10 = 1, s = 5 + 1 = 6, n = 1 // 10 = 0
+5. n = 0, цикл завершается
+
+Ответ: 6
+
+Проверка в Python:
+n = 123
+s = 0
+while n > 0:
+    digit = n % 10
+    s = s + digit
+    n = n // 10
+    print(f"Цифра: {digit}, сумма: {s}, осталось: {n}")
+print(f"Итоговая сумма цифр: {s}")  # 6</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 10: Проверка на простое число</h4>
+                    <pre>Условие: Напишите программу, которая проверяет, является ли число 7 простым.
+
+Решение:
+n = 7
+is_prime = True
+if n < 2:
+    is_prime = False
+else:
+    for i in range(2, n):
+        if n % i == 0:
+            is_prime = False
+            break
+
+if is_prime:
+    print("Простое")
+else:
+    print("Не простое")
+
+Ответ: Простое
+
+Проверка в Python:
+n = 7
+is_prime = True
+if n < 2:
+    is_prime = False
+else:
+    for i in range(2, n):
+        if n % i == 0:
+            is_prime = False
+            break
+        print(f"Проверка делителя {i}: {n} % {i} = {n % i}")
+
+if is_prime:
+    print(f"{n} - простое число")
+else:
+    print(f"{n} - не простое число")  # 7 - простое число</pre>
+                </div>
+
+                <h2>5. Комплексные задачи</h2>
+                <p>Задачи, сочетающие несколько элементов.</p>
+
+                <div class="code-block">
+                    <h4>Задача ОГЭ 11: Сумма четных чисел в диапазоне</h4>
+                    <pre>Условие: Напишите программу, которая вычисляет сумму всех четных чисел от 2 до 10 включительно.
+
+Решение:
+s = 0
+for i in range(2, 11):
+    if i % 2 == 0:
+        s = s + i
+print(s)
+
+Решение пошагово:
+- i = 2: четное, s = 0 + 2 = 2
+- i = 3: нечетное, пропускаем
+- i = 4: четное, s = 2 + 4 = 6
+- i = 5: нечетное, пропускаем
+- i = 6: четное, s = 6 + 6 = 12
+- i = 7: нечетное, пропускаем
+- i = 8: четное, s = 12 + 8 = 20
+- i = 9: нечетное, пропускаем
+- i = 10: четное, s = 20 + 10 = 30
+
+Ответ: 30
+
+Проверка в Python:
+s = 0
+for i in range(2, 11):
+    if i % 2 == 0:
+        s = s + i
+        print(f"Четное число: {i}, сумма: {s}")
+print(f"Итоговая сумма четных: {s}")  # 30</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить простые задачи:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Простые задачи ОГЭ
+
+# Задача 1: Площадь прямоугольника
+print("=== Задача 1: Площадь ===")
+a = 5
+b = 3
+s = a * b
+print(f"Площадь: {s}")
+
+# Задача 2: Среднее арифметическое
+print("\n=== Задача 2: Среднее ===")
+a, b, c = 10, 20, 30
+average = (a + b + c) / 3
+print(f"Среднее: {average}")
+
+# Задача 3: Проверка четности
+print("\n=== Задача 3: Четность ===")
+n = 8
+if n % 2 == 0:
+    print("Четное")
+else:
+    print("Нечетное")
+
+# Задача 4: Максимум
+print("\n=== Задача 4: Максимум ===")
+a, b = 15, 23
+if a > b:
+    print(f"Максимум: {a}")
+else:
+    print(f"Максимум: {b}")
+
+# Задача 5: Сумма чисел
+print("\n=== Задача 5: Сумма ===")
+s = 0
+for i in range(1, 6):
+    s = s + i
+print(f"Сумма от 1 до 5: {s}")
+
+# Задача 6: Подсчет четных
+print("\n=== Задача 6: Подсчет четных ===")
+count = 0
+for i in range(1, 11):
+    if i % 2 == 0:
+        count = count + 1
+print(f"Четных чисел от 1 до 10: {count}")
+
+# Задача 7: Сумма цифр
+print("\n=== Задача 7: Сумма цифр ===")
+n = 123
+s = 0
+while n > 0:
+    s = s + n % 10
+    n = n // 10
+print(f"Сумма цифр 123: {s}")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Вычисление</h4>
+                    <p>Напиши программу, которая вычисляет периметр прямоугольника со сторонами 4 и 6.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Периметр = 2 × (длина + ширина)</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Условие</h4>
+                    <p>Напиши программу, которая проверяет, является ли число положительным. Число = -5.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй условие: if n > 0:</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Цикл</h4>
+                    <p>Напиши программу, которая выводит все числа от 1 до 5 включительно.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй цикл for i in range(1, 6):</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Неправильный range()</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - забыли, что range(1, 5) не включает 5
+for i in range(1, 5):
+    print(i)  # Выведет: 1, 2, 3, 4 (без 5!)
+
+# ПРАВИЛЬНО - используй range(1, 6) для чисел от 1 до 5
+for i in range(1, 6):
+    print(i)  # Выведет: 1, 2, 3, 4, 5</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильное условие для диапазона</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - неправильная логика
+n = 15
+if n > 10 and n < 20:  # Это правильно, но можно проще
+    print("В диапазоне")
+
+# ПРАВИЛЬНО - используй цепочку сравнений
+n = 15
+if 10 <= n <= 20:  # Более читаемо
+    print("В диапазоне")</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Забыли инициализировать переменную</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - переменная s не инициализирована
+for i in range(1, 6):
+    s = s + i  # Ошибка! s не определена
+
+# ПРАВИЛЬНО - инициализируй переменную перед циклом
+s = 0
+for i in range(1, 6):
+    s = s + i
+print(s)</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Что выведет программа: a=5; b=3; print(a*b)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. Это результат сложения.">8</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! 5 × 3 = 15.">15</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Это результат вычитания.">2</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Проверь вычисление.">53</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Что выведет программа: s=0; for i in range(1,4): s=s+i; print(s)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. Это только последнее значение i.">3</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-explanation="Неверно. Проверь сумму: 1+2+3.">5</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-correct="true" data-explanation="Правильно! s = 0+1+2+3 = 6.">6</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это неправильный расчет.">10</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Сколько чисел выведет цикл: for i in range(2, 6)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. range(2, 6) включает 2, 3, 4, 5.">3</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-explanation="Неверно. Проверь границы range.">4</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-correct="true" data-explanation="Правильно! range(2, 6) включает числа 2, 3, 4, 5 - всего 4 числа.">4</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. 6 не включается в range(2, 6).">5</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Что выведет программа: n=8; if n%2==0: print("Да") else: print("Нет")?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-correct="true" data-explanation="Правильно! 8 % 2 = 0, поэтому условие True.">Да</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-explanation="Неверно. 8 четное, поэтому условие True.">Нет</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Это не строка, а логическое значение.">True</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Проверь условие.">8</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Что выведет программа: count=0; for i in range(1,6): if i%2==0: count+=1; print(count)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. Проверь четные числа от 1 до 5: 2, 4.">1</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! Четные числа от 1 до 5: 2 и 4, всего 2.">2</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Проверь количество четных чисел.">3</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Это неправильный расчет.">5</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Вычисления</strong> - используй арифметические операции для вычислений</li>
+                    <li><strong>Условия</strong> - if/else для проверки условий и выполнения разных действий</li>
+                    <li><strong>Циклы</strong> - for для перебора значений, while для повторения до условия</li>
+                    <li><strong>range()</strong> - помни, что range(a, b) включает числа от a до b-1</li>
+                    <li><strong>Инициализация</strong> - всегда инициализируй переменные перед использованием</li>
+                    <li><strong>Работа с числами</strong> - используй % для остатка, // для целочисленного деления</li>
+                    <li><strong>Пошаговое выполнение</strong> - отслеживай изменения переменных на каждом шаге</li>
+                    <li><strong>Проверка</strong> - всегда проверяй программу на разных входных данных</li>
+                </ul>
+
+                <p>Отлично! Ты изучил простые задачи ОГЭ по программированию. Эти навыки очень важны для успешной сдачи экзамена. В следующем уроке мы изучим работу с массивами и списками!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="oge-01.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="oge-03.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

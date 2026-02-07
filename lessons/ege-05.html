@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ: Рекурсия - Python для школьников</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body data-lesson-id="ege-05">
+    <header>
+        <div class="container">
+            <h1>🐍 Python для школьников</h1>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="container">
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>ЕГЭ: Рекурсия</h1>
+                <div class="lesson-meta">Подготовка к ЕГЭ • 60 минут</div>
+            </div>
+
+            <div class="lesson-content">
+                <h2>Введение</h2>
+                <p>В этом уроке мы разберем задачи ЕГЭ по рекурсии. Рекурсия - это техника программирования, когда функция вызывает сама себя. В ЕГЭ часто встречаются задачи на вычисление факториала, чисел Фибоначчи, обход структур данных и другие рекурсивные алгоритмы.</p>
+
+                <div class="info-block">
+                    <h4>📚 Что изучим:</h4>
+                    <ul>
+                        <li>Основы рекурсии</li>
+                        <li>Базовый случай и рекурсивный вызов</li>
+                        <li>Факториал и числа Фибоначчи</li>
+                        <li>Рекурсивный обход данных</li>
+                        <li>Типичные задачи ЕГЭ по рекурсии</li>
+                    </ul>
+                </div>
+
+                <h2>1. Основы рекурсии</h2>
+                <p>Рекурсивная функция должна иметь базовый случай (когда функция не вызывает себя) и рекурсивный вызов (когда функция вызывает сама себя).</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 1: Факториал</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для вычисления факториала числа n.
+Факториал n! = n × (n-1) × (n-2) × ... × 1
+Например: 5! = 5 × 4 × 3 × 2 × 1 = 120
+
+Решение:
+def factorial(n):
+    if n == 0 or n == 1:  # Базовый случай
+        return 1
+    else:  # Рекурсивный вызов
+        return n * factorial(n - 1)
+
+print(factorial(5))
+
+Решение пошагово для factorial(5):
+- factorial(5) = 5 * factorial(4)
+  - factorial(4) = 4 * factorial(3)
+    - factorial(3) = 3 * factorial(2)
+      - factorial(2) = 2 * factorial(1)
+        - factorial(1) = 1 (базовый случай)
+      - factorial(2) = 2 * 1 = 2
+    - factorial(3) = 3 * 2 = 6
+  - factorial(4) = 4 * 6 = 24
+- factorial(5) = 5 * 24 = 120
+
+Ответ: 120
+
+Проверка в Python:
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        result = n * factorial(n - 1)
+        print(f"factorial({n}) = {n} * factorial({n-1}) = {result}")
+        return result
+
+print(f"factorial(5) = {factorial(5)}")  # 120</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 2: Сумма чисел от 1 до n</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для вычисления суммы чисел от 1 до n.
+Например: sum(5) = 1 + 2 + 3 + 4 + 5 = 15
+
+Решение:
+def sum_n(n):
+    if n == 1:  # Базовый случай
+        return 1
+    else:  # Рекурсивный вызов
+        return n + sum_n(n - 1)
+
+print(sum_n(5))
+
+Решение пошагово для sum_n(5):
+- sum_n(5) = 5 + sum_n(4)
+  - sum_n(4) = 4 + sum_n(3)
+    - sum_n(3) = 3 + sum_n(2)
+      - sum_n(2) = 2 + sum_n(1)
+        - sum_n(1) = 1 (базовый случай)
+      - sum_n(2) = 2 + 1 = 3
+    - sum_n(3) = 3 + 3 = 6
+  - sum_n(4) = 4 + 6 = 10
+- sum_n(5) = 5 + 10 = 15
+
+Ответ: 15
+
+Проверка в Python:
+def sum_n(n):
+    if n == 1:
+        return 1
+    else:
+        result = n + sum_n(n - 1)
+        print(f"sum_n({n}) = {n} + sum_n({n-1}) = {result}")
+        return result
+
+print(f"sum_n(5) = {sum_n(5)}")  # 15</pre>
+                </div>
+
+                <h2>2. Числа Фибоначчи</h2>
+                <p>Числа Фибоначчи - это последовательность, где каждое число равно сумме двух предыдущих: F(n) = F(n-1) + F(n-2).</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 3: Числа Фибоначчи</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для вычисления n-го числа Фибоначчи.
+F(0) = 0, F(1) = 1, F(2) = 1, F(3) = 2, F(4) = 3, F(5) = 5, ...
+
+Решение:
+def fibonacci(n):
+    if n == 0:  # Базовый случай
+        return 0
+    elif n == 1:  # Базовый случай
+        return 1
+    else:  # Рекурсивный вызов
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+print(fibonacci(6))
+
+Решение пошагово для fibonacci(6):
+- fibonacci(6) = fibonacci(5) + fibonacci(4)
+  - fibonacci(5) = fibonacci(4) + fibonacci(3)
+    - fibonacci(4) = fibonacci(3) + fibonacci(2)
+      - fibonacci(3) = fibonacci(2) + fibonacci(1)
+        - fibonacci(2) = fibonacci(1) + fibonacci(0) = 1 + 0 = 1
+        - fibonacci(1) = 1
+      - fibonacci(3) = 1 + 1 = 2
+      - fibonacci(2) = 1
+    - fibonacci(4) = 2 + 1 = 3
+    - fibonacci(3) = 2
+  - fibonacci(5) = 3 + 2 = 5
+  - fibonacci(4) = 3
+- fibonacci(6) = 5 + 3 = 8
+
+Ответ: 8
+
+Проверка в Python:
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        result = fibonacci(n - 1) + fibonacci(n - 2)
+        print(f"fibonacci({n}) = fibonacci({n-1}) + fibonacci({n-2}) = {result}")
+        return result
+
+print(f"fibonacci(6) = {fibonacci(6)}")  # 8</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 4: Степень числа</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для вычисления a в степени n.
+Например: power(2, 5) = 2^5 = 32
+
+Решение:
+def power(a, n):
+    if n == 0:  # Базовый случай
+        return 1
+    else:  # Рекурсивный вызов
+        return a * power(a, n - 1)
+
+print(power(2, 5))
+
+Решение пошагово для power(2, 5):
+- power(2, 5) = 2 * power(2, 4)
+  - power(2, 4) = 2 * power(2, 3)
+    - power(2, 3) = 2 * power(2, 2)
+      - power(2, 2) = 2 * power(2, 1)
+        - power(2, 1) = 2 * power(2, 0)
+          - power(2, 0) = 1 (базовый случай)
+        - power(2, 1) = 2 * 1 = 2
+      - power(2, 2) = 2 * 2 = 4
+    - power(2, 3) = 2 * 4 = 8
+  - power(2, 4) = 2 * 8 = 16
+- power(2, 5) = 2 * 16 = 32
+
+Ответ: 32
+
+Проверка в Python:
+def power(a, n):
+    if n == 0:
+        return 1
+    else:
+        result = a * power(a, n - 1)
+        print(f"power({a}, {n}) = {a} * power({a}, {n-1}) = {result}")
+        return result
+
+print(f"power(2, 5) = {power(2, 5)}")  # 32</pre>
+                </div>
+
+                <h2>3. Рекурсивный обход данных</h2>
+                <p>Рекурсия часто используется для обхода списков и других структур данных.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 5: Сумма элементов списка</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для вычисления суммы элементов списка.
+Список: [1, 2, 3, 4, 5]
+
+Решение:
+def sum_list(arr):
+    if len(arr) == 0:  # Базовый случай
+        return 0
+    else:  # Рекурсивный вызов
+        return arr[0] + sum_list(arr[1:])
+
+a = [1, 2, 3, 4, 5]
+print(sum_list(a))
+
+Решение пошагово для sum_list([1, 2, 3, 4, 5]):
+- sum_list([1, 2, 3, 4, 5]) = 1 + sum_list([2, 3, 4, 5])
+  - sum_list([2, 3, 4, 5]) = 2 + sum_list([3, 4, 5])
+    - sum_list([3, 4, 5]) = 3 + sum_list([4, 5])
+      - sum_list([4, 5]) = 4 + sum_list([5])
+        - sum_list([5]) = 5 + sum_list([])
+          - sum_list([]) = 0 (базовый случай)
+        - sum_list([5]) = 5 + 0 = 5
+      - sum_list([4, 5]) = 4 + 5 = 9
+    - sum_list([3, 4, 5]) = 3 + 9 = 12
+  - sum_list([2, 3, 4, 5]) = 2 + 12 = 14
+- sum_list([1, 2, 3, 4, 5]) = 1 + 14 = 15
+
+Ответ: 15
+
+Проверка в Python:
+def sum_list(arr):
+    if len(arr) == 0:
+        return 0
+    else:
+        result = arr[0] + sum_list(arr[1:])
+        print(f"sum_list({arr}) = {arr[0]} + sum_list({arr[1:]}) = {result}")
+        return result
+
+a = [1, 2, 3, 4, 5]
+print(f"sum_list({a}) = {sum_list(a)}")  # 15</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 6: Максимальный элемент списка</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для нахождения максимального элемента списка.
+Список: [3, 7, 2, 9, 1, 5]
+
+Решение:
+def max_list(arr):
+    if len(arr) == 1:  # Базовый случай
+        return arr[0]
+    else:  # Рекурсивный вызов
+        max_rest = max_list(arr[1:])
+        if arr[0] > max_rest:
+            return arr[0]
+        else:
+            return max_rest
+
+a = [3, 7, 2, 9, 1, 5]
+print(max_list(a))
+
+Решение пошагово для max_list([3, 7, 2, 9, 1, 5]):
+- max_list([3, 7, 2, 9, 1, 5]) сравнивает 3 и max_list([7, 2, 9, 1, 5])
+  - max_list([7, 2, 9, 1, 5]) сравнивает 7 и max_list([2, 9, 1, 5])
+    - max_list([2, 9, 1, 5]) сравнивает 2 и max_list([9, 1, 5])
+      - max_list([9, 1, 5]) сравнивает 9 и max_list([1, 5])
+        - max_list([1, 5]) сравнивает 1 и max_list([5])
+          - max_list([5]) = 5 (базовый случай)
+        - max_list([1, 5]) = max(1, 5) = 5
+      - max_list([9, 1, 5]) = max(9, 5) = 9
+    - max_list([2, 9, 1, 5]) = max(2, 9) = 9
+  - max_list([7, 2, 9, 1, 5]) = max(7, 9) = 9
+- max_list([3, 7, 2, 9, 1, 5]) = max(3, 9) = 9
+
+Ответ: 9
+
+Проверка в Python:
+def max_list(arr):
+    if len(arr) == 1:
+        return arr[0]
+    else:
+        max_rest = max_list(arr[1:])
+        result = arr[0] if arr[0] > max_rest else max_rest
+        print(f"max_list({arr}) = max({arr[0]}, max_list({arr[1:]})) = {result}")
+        return result
+
+a = [3, 7, 2, 9, 1, 5]
+print(f"max_list({a}) = {max_list(a)}")  # 9</pre>
+                </div>
+
+                <h2>4. Рекурсивный подсчет</h2>
+                <p>Рекурсия часто используется для подсчета элементов по условию.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 7: Подсчет четных чисел</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для подсчета количества четных чисел в списке.
+Список: [1, 2, 3, 4, 5, 6, 7, 8]
+
+Решение:
+def count_even(arr):
+    if len(arr) == 0:  # Базовый случай
+        return 0
+    else:  # Рекурсивный вызов
+        count = count_even(arr[1:])
+        if arr[0] % 2 == 0:
+            return 1 + count
+        else:
+            return count
+
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+print(count_even(a))
+
+Решение пошагово для count_even([1, 2, 3, 4, 5, 6, 7, 8]):
+- count_even([1, 2, 3, 4, 5, 6, 7, 8]) проверяет 1 (нечетное) + count_even([2, 3, 4, 5, 6, 7, 8])
+  - count_even([2, 3, 4, 5, 6, 7, 8]) проверяет 2 (четное) + count_even([3, 4, 5, 6, 7, 8])
+    - count_even([3, 4, 5, 6, 7, 8]) проверяет 3 (нечетное) + count_even([4, 5, 6, 7, 8])
+      - count_even([4, 5, 6, 7, 8]) проверяет 4 (четное) + count_even([5, 6, 7, 8])
+        - count_even([5, 6, 7, 8]) проверяет 5 (нечетное) + count_even([6, 7, 8])
+          - count_even([6, 7, 8]) проверяет 6 (четное) + count_even([7, 8])
+            - count_even([7, 8]) проверяет 7 (нечетное) + count_even([8])
+              - count_even([8]) проверяет 8 (четное) + count_even([])
+                - count_even([]) = 0 (базовый случай)
+              - count_even([8]) = 1 + 0 = 1
+            - count_even([7, 8]) = 0 + 1 = 1
+          - count_even([6, 7, 8]) = 1 + 1 = 2
+        - count_even([5, 6, 7, 8]) = 0 + 2 = 2
+      - count_even([4, 5, 6, 7, 8]) = 1 + 2 = 3
+    - count_even([3, 4, 5, 6, 7, 8]) = 0 + 3 = 3
+  - count_even([2, 3, 4, 5, 6, 7, 8]) = 1 + 3 = 4
+- count_even([1, 2, 3, 4, 5, 6, 7, 8]) = 0 + 4 = 4
+
+Ответ: 4
+
+Проверка в Python:
+def count_even(arr):
+    if len(arr) == 0:
+        return 0
+    else:
+        count = count_even(arr[1:])
+        if arr[0] % 2 == 0:
+            result = 1 + count
+            print(f"count_even({arr}) = 1 + count_even({arr[1:]}) = {result}")
+            return result
+        else:
+            print(f"count_even({arr}) = count_even({arr[1:]}) = {count}")
+            return count
+
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+print(f"count_even({a}) = {count_even(a)}")  # 4</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 8: Рекурсивный поиск</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для проверки, есть ли элемент в списке.
+Список: [1, 2, 3, 4, 5], элемент: 3
+
+Решение:
+def contains(arr, x):
+    if len(arr) == 0:  # Базовый случай
+        return False
+    elif arr[0] == x:  # Базовый случай
+        return True
+    else:  # Рекурсивный вызов
+        return contains(arr[1:], x)
+
+a = [1, 2, 3, 4, 5]
+print(contains(a, 3))
+
+Решение пошагово для contains([1, 2, 3, 4, 5], 3):
+- contains([1, 2, 3, 4, 5], 3) проверяет arr[0] = 1 != 3 → contains([2, 3, 4, 5], 3)
+  - contains([2, 3, 4, 5], 3) проверяет arr[0] = 2 != 3 → contains([3, 4, 5], 3)
+    - contains([3, 4, 5], 3) проверяет arr[0] = 3 == 3 → True (базовый случай)
+
+Ответ: True
+
+Проверка в Python:
+def contains(arr, x):
+    if len(arr) == 0:
+        return False
+    elif arr[0] == x:
+        print(f"contains({arr}, {x}) = True (найден элемент {x})")
+        return True
+    else:
+        result = contains(arr[1:], x)
+        print(f"contains({arr}, {x}) = contains({arr[1:]}, {x}) = {result}")
+        return result
+
+a = [1, 2, 3, 4, 5]
+print(f"contains({a}, 3) = {contains(a, 3)}")  # True</pre>
+                </div>
+
+                <h2>5. Комплексные задачи</h2>
+                <p>Задачи, требующие комбинации рекурсивных техник.</p>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 9: Рекурсивная сумма цифр</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для вычисления суммы цифр числа.
+Число: 12345
+
+Решение:
+def sum_digits(n):
+    if n < 10:  # Базовый случай (одна цифра)
+        return n
+    else:  # Рекурсивный вызов
+        return n % 10 + sum_digits(n // 10)
+
+print(sum_digits(12345))
+
+Решение пошагово для sum_digits(12345):
+- sum_digits(12345) = 12345 % 10 + sum_digits(12345 // 10) = 5 + sum_digits(1234)
+  - sum_digits(1234) = 1234 % 10 + sum_digits(1234 // 10) = 4 + sum_digits(123)
+    - sum_digits(123) = 123 % 10 + sum_digits(123 // 10) = 3 + sum_digits(12)
+      - sum_digits(12) = 12 % 10 + sum_digits(12 // 10) = 2 + sum_digits(1)
+        - sum_digits(1) = 1 (базовый случай)
+      - sum_digits(12) = 2 + 1 = 3
+    - sum_digits(123) = 3 + 3 = 6
+  - sum_digits(1234) = 4 + 6 = 10
+- sum_digits(12345) = 5 + 10 = 15
+
+Ответ: 15
+
+Проверка в Python:
+def sum_digits(n):
+    if n < 10:
+        return n
+    else:
+        result = n % 10 + sum_digits(n // 10)
+        print(f"sum_digits({n}) = {n % 10} + sum_digits({n // 10}) = {result}")
+        return result
+
+print(f"sum_digits(12345) = {sum_digits(12345)}")  # 15</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Задача ЕГЭ 10: Рекурсивный разворот строки</h4>
+                    <pre>Условие: Напишите рекурсивную функцию для разворота строки.
+Строка: "hello"
+
+Решение:
+def reverse_string(s):
+    if len(s) <= 1:  # Базовый случай
+        return s
+    else:  # Рекурсивный вызов
+        return reverse_string(s[1:]) + s[0]
+
+print(reverse_string("hello"))
+
+Решение пошагово для reverse_string("hello"):
+- reverse_string("hello") = reverse_string("ello") + "h"
+  - reverse_string("ello") = reverse_string("llo") + "e"
+    - reverse_string("llo") = reverse_string("lo") + "l"
+      - reverse_string("lo") = reverse_string("o") + "l"
+        - reverse_string("o") = "o" (базовый случай)
+      - reverse_string("lo") = "o" + "l" = "ol"
+    - reverse_string("llo") = "ol" + "l" = "oll"
+  - reverse_string("ello") = "oll" + "e" = "olle"
+- reverse_string("hello") = "olle" + "h" = "olleh"
+
+Ответ: "olleh"
+
+Проверка в Python:
+def reverse_string(s):
+    if len(s) <= 1:
+        return s
+    else:
+        result = reverse_string(s[1:]) + s[0]
+        print(f"reverse_string('{s}') = reverse_string('{s[1:]}') + '{s[0]}' = '{result}'")
+        return result
+
+print(f"reverse_string('hello') = '{reverse_string('hello')}'")  # "olleh"</pre>
+                </div>
+
+                <h2>6. Интерактивный редактор</h2>
+                <p>Попробуй решить задачи ЕГЭ по рекурсии:</p>
+
+                <div class="python-editor">
+                    <div class="editor-header">
+                        <h3>Python редактор</h3>
+                        <div class="editor-controls">
+                            <button class="run-btn">▶ Запустить</button>
+                            <button class="clear-btn">✕ Очистить</button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor" spellcheck="false"># Задачи ЕГЭ по рекурсии
+
+# Задача 1: Факториал
+print("=== Задача 1: Факториал ===")
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+print(f"factorial(5) = {factorial(5)}")
+
+# Задача 2: Сумма чисел
+print("\n=== Задача 2: Сумма чисел ===")
+def sum_n(n):
+    if n == 1:
+        return 1
+    else:
+        return n + sum_n(n - 1)
+
+print(f"sum_n(5) = {sum_n(5)}")
+
+# Задача 3: Числа Фибоначчи
+print("\n=== Задача 3: Числа Фибоначчи ===")
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+print(f"fibonacci(6) = {fibonacci(6)}")
+
+# Задача 4: Степень числа
+print("\n=== Задача 4: Степень числа ===")
+def power(a, n):
+    if n == 0:
+        return 1
+    else:
+        return a * power(a, n - 1)
+
+print(f"power(2, 5) = {power(2, 5)}")
+
+# Задача 5: Сумма элементов списка
+print("\n=== Задача 5: Сумма элементов списка ===")
+def sum_list(arr):
+    if len(arr) == 0:
+        return 0
+    else:
+        return arr[0] + sum_list(arr[1:])
+
+a = [1, 2, 3, 4, 5]
+print(f"sum_list({a}) = {sum_list(a)}")
+
+# Задача 6: Максимальный элемент
+print("\n=== Задача 6: Максимальный элемент ===")
+def max_list(arr):
+    if len(arr) == 1:
+        return arr[0]
+    else:
+        max_rest = max_list(arr[1:])
+        return arr[0] if arr[0] > max_rest else max_rest
+
+a = [3, 7, 2, 9, 1, 5]
+print(f"max_list({a}) = {max_list(a)}")
+
+# Задача 7: Подсчет четных чисел
+print("\n=== Задача 7: Подсчет четных чисел ===")
+def count_even(arr):
+    if len(arr) == 0:
+        return 0
+    else:
+        count = count_even(arr[1:])
+        return 1 + count if arr[0] % 2 == 0 else count
+
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+print(f"count_even({a}) = {count_even(a)}")
+
+# Задача 8: Сумма цифр
+print("\n=== Задача 8: Сумма цифр ===")
+def sum_digits(n):
+    if n < 10:
+        return n
+    else:
+        return n % 10 + sum_digits(n // 10)
+
+print(f"sum_digits(12345) = {sum_digits(12345)}")
+
+# Задача 9: Разворот строки
+print("\n=== Задача 9: Разворот строки ===")
+def reverse_string(s):
+    if len(s) <= 1:
+        return s
+    else:
+        return reverse_string(s[1:]) + s[0]
+
+print(f"reverse_string('hello') = '{reverse_string('hello')}'")</textarea>
+                    <div class="output-container">
+                        <h4>Результат:</h4>
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <h2>7. Практические задания</h2>
+
+                <div class="practice-block">
+                    <h4>Задание 1: Рекурсивный подсчет элементов</h4>
+                    <p>Напиши рекурсивную функцию, которая подсчитывает количество элементов в списке, больших заданного значения. Список: [1, 5, 3, 8, 2, 7], значение: 4.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Используй базовый случай для пустого списка, затем проверяй первый элемент и рекурсивно обрабатывай остаток списка.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 2: Рекурсивное произведение</h4>
+                    <p>Напиши рекурсивную функцию для вычисления произведения чисел от 1 до n. Например: product(4) = 1 × 2 × 3 × 4 = 24.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Аналогично факториалу, но начинай с n = 1. Базовый случай: если n == 1, верни 1.</p>
+                    </details>
+                </div>
+
+                <div class="practice-block">
+                    <h4>Задание 3: Рекурсивная проверка палиндрома</h4>
+                    <p>Напиши рекурсивную функцию, которая проверяет, является ли строка палиндромом. Например: "radar" - палиндром, "hello" - нет.</p>
+                    <details>
+                        <summary>Подсказка</summary>
+                        <p>Базовый случай: если длина <= 1, верни True. Иначе проверь, равны ли первый и последний символы, и рекурсивно проверь среднюю часть.</p>
+                    </details>
+                </div>
+
+                <h2>8. Типичные ошибки</h2>
+
+                <div class="warning-block">
+                    <h4>Ошибка 1: Отсутствие базового случая</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - нет базового случая, бесконечная рекурсия
+def factorial(n):
+    return n * factorial(n - 1)  # Ошибка! Нет условия остановки
+
+# ПРАВИЛЬНО - есть базовый случай
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 2: Неправильный базовый случай</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - базовый случай не покрывает все случаи
+def sum_n(n):
+    if n == 0:
+        return 0
+    else:
+        return n + sum_n(n - 1)  # Что если n отрицательное?
+
+# ПРАВИЛЬНО - проверяй все граничные случаи
+def sum_n(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return n + sum_n(n - 1)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 3: Забыли вернуть значение в рекурсивном вызове</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - не возвращается результат
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        factorial(n - 1)  # Ошибка! Не возвращается значение
+        return n * factorial(n - 1)  # Двойной вызов!
+
+# ПРАВИЛЬНО - возвращай результат рекурсивного вызова
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)</pre>
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Ошибка 4: Неэффективная рекурсия для чисел Фибоначчи</h4>
+                    <div class="code-block">
+                        <pre># НЕПРАВИЛЬНО - экспоненциальная сложность
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)  # Много повторных вычислений
+
+# ПРАВИЛЬНО - используй мемоизацию или итеративный подход
+def fibonacci(n):
+    if n <= 1:
+        return n
+    a, b = 0, 1
+    for i in range(2, n + 1):
+        a, b = b, a + b
+    return b</pre>
+                    </div>
+                </div>
+
+                <h2>9. Тест к уроку</h2>
+                <div class="quiz-container">
+                    <h3>Проверь свои знания</h3>
+                    
+                    <div class="question active">
+                        <h4>Вопрос 1: Чему равно factorial(4)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q1" value="a" data-explanation="Неверно. factorial(4) = 4 × 3 × 2 × 1 = 24.">12</label></li>
+                            <li><label><input type="radio" name="q1" value="b" data-correct="true" data-explanation="Правильно! factorial(4) = 4 × 3 × 2 × 1 = 24.">24</label></li>
+                            <li><label><input type="radio" name="q1" value="c" data-explanation="Неверно. Это factorial(5).">120</label></li>
+                            <li><label><input type="radio" name="q1" value="d" data-explanation="Неверно. Проверь вычисление факториала.">6</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 2: Чему равно fibonacci(5)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q2" value="a" data-explanation="Неверно. fibonacci(5) = fibonacci(4) + fibonacci(3) = 3 + 2 = 5.">3</label></li>
+                            <li><label><input type="radio" name="q2" value="b" data-explanation="Неверно. Это fibonacci(4).">3</label></li>
+                            <li><label><input type="radio" name="q2" value="c" data-correct="true" data-explanation="Правильно! fibonacci(5) = 5 (последовательность: 0, 1, 1, 2, 3, 5).">5</label></li>
+                            <li><label><input type="radio" name="q2" value="d" data-explanation="Неверно. Это fibonacci(6).">8</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 3: Что произойдет, если в рекурсивной функции нет базового случая?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q3" value="a" data-explanation="Неверно. Программа не завершится нормально.">Функция вернет 0</label></li>
+                            <li><label><input type="radio" name="q3" value="b" data-correct="true" data-explanation="Правильно! Без базового случая функция будет вызывать себя бесконечно, что приведет к переполнению стека.">Бесконечная рекурсия и переполнение стека</label></li>
+                            <li><label><input type="radio" name="q3" value="c" data-explanation="Неверно. Это не произойдет без базового случая.">Функция вернет None</label></li>
+                            <li><label><input type="radio" name="q3" value="d" data-explanation="Неверно. Программа упадет с ошибкой.">Программа завершится успешно</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 4: Чему равно sum_list([1, 2, 3])?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q4" value="a" data-explanation="Неверно. Сумма = 1 + 2 + 3 = 6.">3</label></li>
+                            <li><label><input type="radio" name="q4" value="b" data-correct="true" data-explanation="Правильно! sum_list([1, 2, 3]) = 1 + 2 + 3 = 6.">6</label></li>
+                            <li><label><input type="radio" name="q4" value="c" data-explanation="Неверно. Это количество элементов.">3</label></li>
+                            <li><label><input type="radio" name="q4" value="d" data-explanation="Неверно. Проверь вычисление суммы.">5</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+
+                    <div class="question">
+                        <h4>Вопрос 5: Чему равно sum_digits(123)?</h4>
+                        <ul class="options">
+                            <li><label><input type="radio" name="q5" value="a" data-explanation="Неверно. sum_digits(123) = 3 + 2 + 1 = 6.">5</label></li>
+                            <li><label><input type="radio" name="q5" value="b" data-correct="true" data-explanation="Правильно! sum_digits(123) = 3 + 2 + 1 = 6.">6</label></li>
+                            <li><label><input type="radio" name="q5" value="c" data-explanation="Неверно. Это само число 123.">123</label></li>
+                            <li><label><input type="radio" name="q5" value="d" data-explanation="Неверно. Проверь алгоритм суммирования цифр.">3</label></li>
+                        </ul>
+                        <button class="check-answer-btn">Проверить</button>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <h2>10. Резюме урока</h2>
+                <ul>
+                    <li><strong>Базовый случай</strong> - условие, при котором функция не вызывает себя (остановка рекурсии)</li>
+                    <li><strong>Рекурсивный вызов</strong> - функция вызывает сама себя с упрощенными параметрами</li>
+                    <li><strong>Факториал</strong> - n! = n × (n-1)!, где 0! = 1 и 1! = 1</li>
+                    <li><strong>Числа Фибоначчи</strong> - F(n) = F(n-1) + F(n-2), где F(0) = 0, F(1) = 1</li>
+                    <li><strong>Обход списков</strong> - используй arr[0] и arr[1:] для рекурсивной обработки</li>
+                    <li><strong>Работа с числами</strong> - используй n % 10 и n // 10 для обработки цифр</li>
+                    <li><strong>Важно</strong> - всегда проверяй базовый случай, иначе будет бесконечная рекурсия</li>
+                    <li><strong>Эффективность</strong> - рекурсия может быть неэффективной для больших данных</li>
+                    <li><strong>Практика</strong> - решай задачи пошагово, отслеживай вызовы функции</li>
+                </ul>
+
+                <p>Отлично! Ты изучил рекурсию для ЕГЭ. Эти навыки очень важны для успешной сдачи экзамена. В следующем уроке мы изучим обработку больших данных!</p>
+            </div>
+
+            <div class="lesson-nav">
+                <a href="ege-04.html">← Предыдущий урок</a>
+                <button class="btn-primary" id="mark-complete">Отметить как пройденное</button>
+                <a href="ege-06.html">Следующий урок →</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
